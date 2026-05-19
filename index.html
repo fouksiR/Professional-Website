@@ -20,6 +20,13 @@
     <meta name="ICBM" content="-37.8136, 144.9631">
     <link rel="canonical" href="https://drfouks.com/">
 
+<!-- hreflang: tells search engines about the Italian alternate -->
+<link rel="alternate" hreflang="en-AU" href="https://drfouks.com/" />
+<link rel="alternate" hreflang="en" href="https://drfouks.com/" />
+<link rel="alternate" hreflang="it-IT" href="https://drfouks.com/index-it.html" />
+<link rel="alternate" hreflang="it" href="https://drfouks.com/index-it.html" />
+<link rel="alternate" hreflang="x-default" href="https://drfouks.com/" />
+
     <!-- Favicon (Google search result icon) -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -47,54 +54,170 @@
     <meta name="twitter:image" content="https://drfouks.com/logo.png">
 
     <!-- Structured data: identifies the entity and official logo for Google -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Dr Yuval Fouks",
-      "givenName": "Yuval",
-      "familyName": "Fouks",
-      "honorificPrefix": "Dr",
-      "jobTitle": "Fertility Specialist and Reproductive Endocrinologist",
-      "description": "Melbourne fertility specialist specializing in IVF, egg freezing, endometriosis-related infertility, and complex reproductive endocrinology",
-      "image": "https://drfouks.com/logo.png",
-      "url": "https://drfouks.com/",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Melbourne",
-        "addressRegion": "Victoria",
-        "addressCountry": "Australia"
-      },
-      "worksFor": [
-        {
-          "@type": "MedicalOrganization",
-          "name": "Melbourne IVF",
-          "url": "https://www.mivf.com.au/melbourne-ivf-doctors"
-        },
-        {
-          "@type": "Hospital",
-          "name": "Royal Women's Hospital"
-        }
-      ],
-      "memberOf": {
-        "@type": "Organization",
-        "name": "Italian Consulate Melbourne",
-        "description": "Gynaecologist and fertility doctor for the Italian Consulate"
-      },
-      "knowsLanguage": ["English", "Italian"],
-      "medicalSpecialty": [
-        "Reproductive Endocrinology",
-        "Infertility Treatment",
-        "IVF",
-        "Egg Freezing",
-        "Endometriosis"
-      ],
-      "sameAs": [
-        "https://www.mivf.com.au/melbourne-ivf-doctors",
-        "https://au.linkedin.com/in/yuval-fouks-97369224"
-      ]
-    }
-    </script>
+    <!-- Schema: Yuval as a Person entity (the human, with credentials & publications) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://drfouks.com/#person",
+  "name": "Dr Yuval Fouks",
+  "givenName": "Yuval",
+  "familyName": "Fouks",
+  "honorificPrefix": "Dr",
+  "jobTitle": "Fertility Specialist and Reproductive Endocrinologist",
+  "description": "Melbourne-based fertility specialist and clinician-researcher specialising in IVF, egg freezing, endometriosis-related infertility, and complex reproductive endocrinology. European-trained, Italian-speaking.",
+  "image": "https://drfouks.com/Yuval_Fouks-47.jpg",
+  "url": "https://drfouks.com/",
+  "gender": "Male",
+  "knowsLanguage": [
+    { "@type": "Language", "name": "English", "alternateName": "en" },
+    { "@type": "Language", "name": "Italian", "alternateName": "it" }
+  ],
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "University of Bologna", "sameAs": "https://www.unibo.it/" },
+    { "@type": "CollegeOrUniversity", "name": "Harvard University", "sameAs": "https://www.harvard.edu/" },
+    { "@type": "CollegeOrUniversity", "name": "University of Melbourne", "sameAs": "https://www.unimelb.edu.au/" }
+  ],
+  "worksFor": [
+    { "@type": "MedicalOrganization", "name": "Melbourne IVF", "url": "https://www.mivf.com.au/" },
+    { "@type": "Hospital", "name": "Royal Women's Hospital", "url": "https://www.thewomens.org.au/" }
+  ],
+  "memberOf": [
+    { "@type": "Organization", "name": "American Society for Reproductive Medicine", "url": "https://www.asrm.org/" },
+    { "@type": "Organization", "name": "European Society of Human Reproduction and Embryology", "url": "https://www.eshre.eu/" },
+    { "@type": "Organization", "name": "Italian Consulate Melbourne", "description": "Gynaecologist and fertility doctor for the Italian Consulate in Melbourne" }
+  ],
+  "award": [
+    "ASRM Fertility & Sterility Investigator Achievement Award (2023)",
+    "American Physicians and Friends Research Fellowship"
+  ],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Fertility Specialist and Reproductive Endocrinologist",
+    "occupationLocation": { "@type": "City", "name": "Melbourne" },
+    "skills": "IVF, ICSI, egg freezing, fertility preservation, endometriosis-related infertility, male infertility, complex reproductive endocrinology, menopause, machine learning in reproductive medicine"
+  },
+  "knowsAbout": [
+    "In vitro fertilisation (IVF)",
+    "Intracytoplasmic sperm injection (ICSI)",
+    "Elective egg freezing",
+    "Medical egg freezing and fertility preservation",
+    "Endometriosis-related infertility",
+    "Reproductive endocrinology",
+    "Diminished ovarian reserve",
+    "Anti-Mullerian hormone (AMH)",
+    "Embryo aneuploidy",
+    "Male infertility",
+    "Sperm DNA fragmentation",
+    "Menopause",
+    "Tubo-ovarian abscess",
+    "Reproductive epidemiology",
+    "Machine learning in reproductive medicine"
+  ],
+  "sameAs": [
+    "https://www.mivf.com.au/melbourne-ivf-doctors",
+    "https://au.linkedin.com/in/yuval-fouks-97369224",
+    "https://findanexpert.unimelb.edu.au/profile/1126172-yuval-fouks",
+    "https://www.instagram.com/yuvalfouks/",
+    "https://apfmed.org/person/dr-yuval-fouks/"
+  ]
+}
+</script>
+
+<!-- Schema: Collingwood clinic location -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "@id": "https://drfouks.com/#collingwood",
+  "name": "Dr Yuval Fouks - Melbourne IVF Collingwood",
+  "alternateName": "Dr Yuval Fouks Fertility Specialist Collingwood",
+  "description": "Fertility consultations, IVF, egg freezing, endometriosis-related infertility and reproductive endocrinology with Dr Yuval Fouks at Melbourne IVF Collingwood. English and Italian.",
+  "url": "https://drfouks.com/",
+  "image": "https://drfouks.com/Yuval_Fouks-47.jpg",
+  "telephone": "+61370465670",
+  "email": "drfouks.reception@mivf.com.au",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "36 Wellington Street",
+    "addressLocality": "Collingwood",
+    "addressRegion": "VIC",
+    "postalCode": "3066",
+    "addressCountry": "AU"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -37.8045, "longitude": 144.9939 },
+  "medicalSpecialty": ["Gynecologic", "Obstetric"],
+  "availableService": [
+    { "@type": "MedicalProcedure", "name": "IVF / ICSI" },
+    { "@type": "MedicalProcedure", "name": "Elective Egg Freezing" },
+    { "@type": "MedicalProcedure", "name": "Medical Egg Freezing and Fertility Preservation" },
+    { "@type": "MedicalProcedure", "name": "Reproductive Assessment Before Endometriosis Surgery" },
+    { "@type": "MedicalProcedure", "name": "Male Infertility Assessment and Treatment" },
+    { "@type": "MedicalProcedure", "name": "Complex Reproductive Endocrinology and Menopause" }
+  ],
+  "physician": { "@id": "https://drfouks.com/#person" },
+  "areaServed": [
+    { "@type": "City", "name": "Melbourne" },
+    { "@type": "State", "name": "Victoria" }
+  ],
+  "parentOrganization": { "@type": "MedicalOrganization", "name": "Melbourne IVF", "url": "https://www.mivf.com.au/" }
+}
+</script>
+
+<!-- Schema: Caulfield clinic location -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "@id": "https://drfouks.com/#caulfield",
+  "name": "Dr Yuval Fouks - Melbourne IVF Caulfield",
+  "alternateName": "Dr Yuval Fouks Fertility Specialist Caulfield",
+  "description": "Fertility consultations, IVF, egg freezing, endometriosis-related infertility and reproductive endocrinology with Dr Yuval Fouks at Melbourne IVF Caulfield. English and Italian.",
+  "url": "https://drfouks.com/",
+  "image": "https://drfouks.com/Yuval_Fouks-47.jpg",
+  "telephone": "+61395094000",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "338 Balaclava Road",
+    "addressLocality": "Caulfield North",
+    "addressRegion": "VIC",
+    "postalCode": "3161",
+    "addressCountry": "AU"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -37.8762, "longitude": 145.0291 },
+  "medicalSpecialty": ["Gynecologic", "Obstetric"],
+  "availableService": [
+    { "@type": "MedicalProcedure", "name": "IVF / ICSI" },
+    { "@type": "MedicalProcedure", "name": "Elective Egg Freezing" },
+    { "@type": "MedicalProcedure", "name": "Medical Egg Freezing and Fertility Preservation" },
+    { "@type": "MedicalProcedure", "name": "Reproductive Assessment Before Endometriosis Surgery" },
+    { "@type": "MedicalProcedure", "name": "Male Infertility Assessment and Treatment" },
+    { "@type": "MedicalProcedure", "name": "Complex Reproductive Endocrinology and Menopause" }
+  ],
+  "physician": { "@id": "https://drfouks.com/#person" },
+  "areaServed": [
+    { "@type": "City", "name": "Melbourne" },
+    { "@type": "State", "name": "Victoria" }
+  ],
+  "parentOrganization": { "@type": "MedicalOrganization", "name": "Melbourne IVF", "url": "https://www.mivf.com.au/" }
+}
+</script>
+
+<!-- Schema: WebSite (helps Google understand the EN/IT dual-language structure) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://drfouks.com/#website",
+  "url": "https://drfouks.com/",
+  "name": "Dr Yuval Fouks - Fertility Specialist Melbourne",
+  "description": "Melbourne fertility specialist and reproductive endocrinologist. IVF, egg freezing, endometriosis-related infertility, complex reproductive endocrinology. Italian and English.",
+  "publisher": { "@id": "https://drfouks.com/#person" },
+  "inLanguage": ["en-AU", "it-IT"]
+}
+</script>
 
     <!-- Local Business Structured Data for Melbourne IVF Collingwood -->
     <script type="application/ld+json">
