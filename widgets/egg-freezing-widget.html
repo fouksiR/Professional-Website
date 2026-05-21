@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egg Freezing — Estimated Chances of Conception</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.ef-widget{
+  --primary:#d4567a;--primary-dk:#b8446a;--warm:#e8956a;
+  --grad-hero:linear-gradient(135deg,#d4567a 0%,#e8956a 50%,#f0b87a 100%);
+  --grad-btn:linear-gradient(135deg,#d4567a,#c25838);
+  --grad-soft:linear-gradient(135deg,#fdf0f3,#fef6f0);
+  --bg:#fdf8f6;--surface:#fff;--highlight:#fff5f2;
+  --text:#2d2424;--text2:#5a4a4a;--muted:#8a7a7a;--faint:#b0a0a0;
+  --border:#ece0dc;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',-apple-system,sans-serif;
+  max-width:520px;width:100%;font-family:var(--font-b);color:var(--text);line-height:1.55;background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(45,36,36,.1);border:1.5px solid var(--border);
+}
+.ef-hero{background:var(--grad-hero);padding:28px 28px 24px;text-align:center;position:relative;overflow:hidden}
+.ef-hero::before{content:'';position:absolute;top:-50%;right:-25%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);border-radius:50%}
+.ef-hero__badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);padding:4px 14px;border-radius:16px;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);margin-bottom:12px}
+.ef-hero__title{font-family:var(--font-d);font-size:21px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.3px;margin-bottom:6px}
+.ef-hero__sub{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+
+.ef-body{padding:24px 24px 20px;height:460px;position:relative;overflow:hidden}
+.ef-prog{display:flex;gap:5px;margin-bottom:18px}
+.ef-prog__seg{flex:1;height:4px;border-radius:2px;background:var(--border);transition:all .35s ease}
+.ef-prog__seg.on{background:var(--grad-btn);box-shadow:0 1px 4px rgba(212,86,122,.25)}
+
+.ef-stage{position:absolute;left:24px;right:24px;top:52px;bottom:20px;overflow-y:auto;overflow-x:hidden}
+.ef-stage::-webkit-scrollbar{width:4px}
+.ef-stage::-webkit-scrollbar-thumb{background:#e0d0cc;border-radius:2px}
+
+[data-s]{display:none}
+[data-s].active{display:block;animation:efSlide .25s ease}
+[data-s].active.back{animation:efBack .25s ease}
+@keyframes efSlide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes efBack{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+
+.ef-step{font-size:11px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.ef-q{font-family:var(--font-d);font-size:18px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.25}
+.ef-hint{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.45}
+
+.ef-opts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.ef-opt{padding:10px 18px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:var(--font-b);font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s ease;line-height:1.35}
+.ef-opt:hover{border-color:var(--primary);background:var(--highlight)}
+.ef-opt.on{border-color:var(--primary);background:linear-gradient(135deg,#fdf0f3,#fef0ec);color:var(--text);font-weight:600;box-shadow:0 0 0 2px rgba(212,86,122,.1)}
+
+.ef-slider-wrap{text-align:center;margin-bottom:16px}
+.ef-slider-val{font-family:var(--font-d);font-size:48px;font-weight:700;background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.ef-slider-label{font-size:13px;color:var(--muted);margin-bottom:12px}
+.ef-slider{width:100%;height:6px;border-radius:3px;background:var(--border);outline:none;-webkit-appearance:none;margin:8px 0}
+.ef-slider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--grad-btn);cursor:pointer;box-shadow:0 2px 8px rgba(212,86,122,.35);border:3px solid #fff}
+.ef-slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--grad-btn);cursor:pointer;border:3px solid #fff}
+.ef-slider-ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--faint);font-weight:500}
+
+.ef-nav{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border)}
+.ef-bk{background:none;border:1.5px solid var(--border);border-radius:20px;padding:8px 18px;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s ease}
+.ef-bk:hover{border-color:var(--text2);color:var(--text2)}
+.ef-nx{background:var(--grad-btn);border:none;border-radius:20px;padding:9px 24px;font-family:var(--font-b);font-size:13px;font-weight:600;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(212,86,122,.25);transition:all .15s ease;margin-left:auto}
+.ef-nx:hover:not(:disabled){box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.ef-nx:disabled{background:#d8ccc8;box-shadow:none;cursor:default;pointer-events:none}
+
+#efResult{display:none}
+#efResult.active{display:block;animation:efPop .35s ease}
+@keyframes efPop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+
+.ef-res-main{text-align:center;padding:20px 16px;background:var(--grad-soft);border-radius:14px;margin-bottom:12px;border:1.5px solid var(--border)}
+.ef-res-pct{font-family:var(--font-d);font-size:52px;font-weight:700;background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.ef-res-label{font-size:12.5px;color:var(--muted);margin-top:4px}
+.ef-res-ci{font-size:11px;color:var(--faint);margin-top:2px}
+
+.ef-context{padding:14px 16px;border-radius:12px;margin-bottom:10px;border-left:3px solid}
+.ef-context.good{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-color:#4a8a5a}
+.ef-context.mod{background:linear-gradient(135deg,#fff8e1,#ffecb3);border-color:#e0a020}
+.ef-context.low{background:linear-gradient(135deg,#fdf0f3,#fce4ec);border-color:var(--primary)}
+.ef-context__t{font-size:13px;font-weight:700;margin-bottom:3px;color:var(--text)}
+.ef-context__p{font-size:12px;color:var(--text2);line-height:1.55}
+
+.ef-table-wrap{margin-bottom:10px}
+.ef-table-title{font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.ef-table{width:100%;border-collapse:collapse;font-size:11px;background:var(--surface);border-radius:10px;overflow:hidden;border:1.5px solid var(--border)}
+.ef-table th{background:var(--grad-soft);padding:8px 4px;font-weight:700;color:var(--text2);border-bottom:1.5px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.3px}
+.ef-table td{padding:7px 4px;text-align:center;border-bottom:1px solid #f5ece8;color:var(--text2)}
+.ef-table tr.hl{background:var(--highlight);font-weight:700;color:var(--text)}
+.ef-table tr.hl td{color:var(--text)}
+
+.ef-note{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.ef-note strong{color:var(--text2)}
+
+.ef-ref{font-size:10px;color:var(--faint);text-align:center;line-height:1.5;margin-bottom:12px}
+.ef-actions{display:flex;gap:8px}
+.ef-actions a,.ef-actions button{flex:1;padding:10px;border-radius:20px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s ease}
+.ef-act1{background:var(--grad-btn);color:#fff;border:none;box-shadow:0 3px 12px rgba(212,86,122,.2)}
+.ef-act1:hover{box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.ef-act2{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.ef-act2:hover{background:var(--highlight)}
+
+.ef-disc{font-size:10px;color:var(--faint);text-align:center;padding:12px 24px 16px;line-height:1.5;border-top:1px solid var(--border)}
+</style>
+</head>
+<body style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#fdf8f6,#f0e6e0);padding:20px">
+
+<div class="ef-widget">
+  <div class="ef-hero">
+    <span class="ef-hero__badge">Egg Freezing Calculator</span>
+    <h2 class="ef-hero__title">Estimated Chances of Conception</h2>
+    <p class="ef-hero__sub">Based on real outcomes from 2,891 women who froze and later used their eggs.</p>
+  </div>
+
+  <div class="ef-body">
+    <div class="ef-prog" id="efProg"></div>
+    <div class="ef-stage">
+
+      <!-- Step 1: Age -->
+      <div data-s="1" class="active">
+        <div class="ef-step">Step 1 of 2</div>
+        <div class="ef-q">How old were you (or will you be) when freezing?</div>
+        <div class="ef-opts" data-group="age">
+          <div class="ef-opt" data-v="under35">Under 35</div>
+          <div class="ef-opt" data-v="35-37">35–37</div>
+          <div class="ef-opt" data-v="38-40">38–40</div>
+          <div class="ef-opt" data-v="over40">Over 40</div>
+        </div>
+        <div class="ef-nav">
+          <button class="ef-nx" id="efStep1Next" data-dir="next" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Eggs -->
+      <div data-s="2">
+        <div class="ef-step">Step 2 of 2</div>
+        <div class="ef-q">How many mature eggs were (or might be) frozen?</div>
+        <div class="ef-hint">Move the slider — the number updates as you go.</div>
+        <div class="ef-slider-wrap">
+          <div class="ef-slider-val" id="efEggVal">10</div>
+          <div class="ef-slider-label">mature eggs (MII)</div>
+          <input type="range" class="ef-slider" id="efSlider" min="1" max="30" value="10">
+          <div class="ef-slider-ticks"><span>1</span><span>10</span><span>20</span><span>30</span></div>
+        </div>
+        <div class="ef-nav">
+          <button class="ef-bk" data-dir="back">← Back</button>
+          <button class="ef-nx" id="efSubmitBtn" data-dir="submit">See My Chances →</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div id="efResult"></div>
+
+    </div>
+  </div>
+
+  <div class="ef-disc">Success rates among those who returned to use their eggs. Many who freeze eggs conceive naturally and never need them. For general information only — discuss with a specialist.</div>
+</div>
+
+<script>
+var DATA = {
+  'under35':{'1-9':{rate:47.8,ci:'39.8\u201355.9'},'10-14':{rate:43.5,ci:'35.4\u201352.0'},'15-19':{rate:77.4,ci:'65.0\u201387.1'},'20+':{rate:84.4,ci:'70.5\u201393.5'}},
+  '35-37':{'1-9':{rate:37.0,ci:'32.6\u201341.6'},'10-14':{rate:47.4,ci:'42.3\u201352.5'},'15-19':{rate:53.3,ci:'45.0\u201361.5'},'20+':{rate:72.6,ci:'63.9\u201380.2'}},
+  '38-40':{'1-9':{rate:19.2,ci:'15.9\u201322.8'},'10-14':{rate:41.4,ci:'35.7\u201347.2'},'15-19':{rate:40.6,ci:'32.4\u201349.1'},'20+':{rate:56.5,ci:'45.3\u201367.2'}},
+  'over40':{'1-9':{rate:5.3,ci:'2.5\u20139.8'},'10-14':{rate:25.0,ci:'16.4\u201335.4'},'15-19':{rate:32.1,ci:'15.9\u201352.4'},'20+':{rate:26.7,ci:'12.3\u201345.9'}}
+};
+var TBL = {'under35':['48%','44%','77%','84%'],'35-37':['37%','47%','53%','73%'],'38-40':['19%','41%','41%','57%'],'over40':['5%','25%','32%','27%']};
+var ALBL = {'under35':'Under 35','35-37':'35\u201337','38-40':'38\u201340','over40':'Over 40'};
+
+var efAge = null;
+var efCur = 1;
+
+function efProg() {
+  var h = '';
+  for (var i = 0; i < 2; i++) h += '<div class="ef-prog__seg' + (i < efCur ? ' on' : '') + '"></div>';
+  document.getElementById('efProg').innerHTML = h;
+}
+efProg();
+
+function efGo(n, dir) {
+  var all = document.querySelectorAll('[data-s]');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active', 'back');
+  var el = document.querySelector('[data-s="' + n + '"]');
+  if (dir === 'back') el.classList.add('back');
+  el.classList.add('active');
+  efCur = n;
+  efProg();
+  document.querySelector('.ef-stage').scrollTop = 0;
+}
+
+// Slider
+document.getElementById('efSlider').addEventListener('input', function() {
+  document.getElementById('efEggVal').textContent = this.value;
+});
+
+// All clicks
+document.addEventListener('click', function(e) {
+  // Age options
+  var opt = e.target.closest('.ef-opt');
+  if (opt) {
+    var sibs = opt.parentElement.querySelectorAll('.ef-opt');
+    for (var i = 0; i < sibs.length; i++) sibs[i].classList.remove('on');
+    opt.classList.add('on');
+    efAge = opt.getAttribute('data-v');
+    document.getElementById('efStep1Next').disabled = false;
+    return;
+  }
+
+  // Back button
+  var bk = e.target.closest('[data-dir="back"]');
+  if (bk) { efGo(efCur - 1, 'back'); return; }
+
+  // Next button (step 1 only)
+  var nx = e.target.closest('[data-dir="next"]');
+  if (nx && !nx.disabled) { efGo(efCur + 1, 'forward'); return; }
+
+  // Submit button
+  var sub = e.target.closest('[data-dir="submit"]');
+  if (sub) { efShowResult(); return; }
+});
+
+function eggCat(n) {
+  if (n <= 9) return '1-9';
+  if (n <= 14) return '10-14';
+  if (n <= 19) return '15-19';
+  return '20+';
+}
+
+function efShowResult() {
+  if (!efAge) return; // safety check
+  var all = document.querySelectorAll('[data-s]');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+  document.getElementById('efProg').innerHTML = '<div class="ef-prog__seg on"></div><div class="ef-prog__seg on"></div>';
+
+  var eggs = parseInt(document.getElementById('efSlider').value);
+  var cat = eggCat(eggs);
+  var d = DATA[efAge][cat];
+  var pct = Math.round(d.rate);
+
+  var ctxClass, ctxTitle, ctxText;
+  if (d.rate >= 50) {
+    ctxClass = 'good'; ctxTitle = 'Encouraging';
+    ctxText = 'Among women who froze at this age with this many eggs and later came back to use them, about ' + pct + '% had a baby. More eggs at a younger age gives the best odds.';
+  } else if (d.rate >= 25) {
+    ctxClass = 'mod'; ctxTitle = 'Moderate chances';
+    ctxText = 'About ' + pct + '% of women in this group had a baby from their frozen eggs. Freezing more eggs \u2014 or freezing earlier \u2014 can improve these odds.';
+  } else {
+    ctxClass = 'low'; ctxTitle = 'Numbers are lower here';
+    ctxText = 'About ' + pct + '% of women in this group had a baby from their frozen eggs. This doesn\u2019t mean it\u2019s not worth doing \u2014 but it\u2019s important to discuss your options with a specialist.';
+  }
+
+  var colIdx = cat === '1-9' ? 0 : cat === '10-14' ? 1 : cat === '15-19' ? 2 : 3;
+  var ages = ['under35','35-37','38-40','over40'];
+  var tableRows = '';
+  for (var i = 0; i < ages.length; i++) {
+    var a = ages[i];
+    var isRow = a === efAge;
+    tableRows += '<tr' + (isRow ? ' class="hl"' : '') + '><td>' + ALBL[a] + '</td>';
+    for (var j = 0; j < 4; j++) {
+      var isCell = isRow && j === colIdx;
+      tableRows += '<td' + (isCell ? ' style="font-weight:800;color:var(--primary)"' : '') + '>' + TBL[a][j] + '</td>';
+    }
+    tableRows += '</tr>';
+  }
+
+  var res = document.getElementById('efResult');
+  res.innerHTML =
+    '<div class="ef-res-main"><div class="ef-res-pct">' + pct + '%</div><div class="ef-res-label">live birth rate among those who used their eggs</div><div class="ef-res-ci">95% CI: ' + d.ci + '</div></div>' +
+    '<div class="ef-context ' + ctxClass + '"><div class="ef-context__t">' + ctxTitle + '</div><div class="ef-context__p">' + ctxText + '</div></div>' +
+    '<div class="ef-table-wrap"><div class="ef-table-title">Live birth rates by age &amp; egg count</div><table class="ef-table"><thead><tr><th>Age</th><th>1\u20139</th><th>10\u201314</th><th>15\u201319</th><th>20+</th></tr></thead><tbody>' + tableRows + '</tbody></table></div>' +
+    '<div class="ef-note"><strong>Keep in mind:</strong> These are rates among women who came back to use their eggs. Many who freeze eggs go on to conceive naturally and never need them \u2014 which is actually a good outcome too.</div>' +
+    '<div class="ef-ref">Cobo A et al. <em>Is planned oocyte cryopreservation delivering?</em> RBMO 2025;50(4):104794 (n=2,891)<br>Fouks Y et al. <em>Utilization of Cryopreserved Oocytes.</em> JAMA Netw Open 2023;6(12):e2349722</div>' +
+    '<div class="ef-actions"><a href="https://www.melbourneivf.com.au" target="_blank" class="ef-act1">Book a Consultation</a><button class="ef-act2" onclick="efRestart()">Calculate Again</button></div>';
+  res.classList.add('active');
+  document.querySelector('.ef-stage').scrollTop = 0;
+}
+
+function efRestart() {
+  efAge = null;
+  efCur = 1;
+  var opts = document.querySelectorAll('.ef-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('on');
+  // Only disable step 1 next — submit should always stay enabled
+  document.getElementById('efStep1Next').disabled = true;
+  document.getElementById('efSlider').value = 10;
+  document.getElementById('efEggVal').textContent = '10';
+  document.getElementById('efResult').classList.remove('active');
+  document.getElementById('efResult').innerHTML = '';
+  efGo(1, 'back');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IVF Success Rates in Australia — National Data</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.ivf-w{
+  --primary:#d4567a;--warm:#e8956a;
+  --grad-hero:linear-gradient(135deg,#d4567a 0%,#e8956a 50%,#f0b87a 100%);
+  --grad-btn:linear-gradient(135deg,#d4567a,#c25838);
+  --grad-soft:linear-gradient(135deg,#fdf0f3,#fef6f0);
+  --bg:#fdf8f6;--surface:#fff;--highlight:#fff5f2;
+  --text:#2d2424;--text2:#5a4a4a;--muted:#8a7a7a;--faint:#b0a0a0;
+  --border:#ece0dc;--teal:#3d8b7a;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',-apple-system,sans-serif;
+  max-width:520px;width:100%;font-family:var(--font-b);color:var(--text);line-height:1.55;background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(45,36,36,.1);border:1.5px solid var(--border);
+}
+.ivf-hero{background:var(--grad-hero);padding:26px 28px 22px;text-align:center;position:relative;overflow:hidden}
+.ivf-hero::before{content:'';position:absolute;top:-50%;right:-25%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);border-radius:50%}
+.ivf-hero__badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);padding:4px 14px;border-radius:16px;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);margin-bottom:10px}
+.ivf-hero__title{font-family:var(--font-d);font-size:21px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.3px;margin-bottom:5px}
+.ivf-hero__sub{font-size:12px;color:rgba(255,255,255,.85);line-height:1.45}
+
+.ivf-body{padding:20px 24px 18px;height:490px;position:relative;overflow:hidden}
+.ivf-stage{position:absolute;left:24px;right:24px;top:20px;bottom:18px;overflow-y:auto;overflow-x:hidden}
+.ivf-stage::-webkit-scrollbar{width:4px}
+.ivf-stage::-webkit-scrollbar-thumb{background:#e0d0cc;border-radius:2px}
+
+.ivf-national{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ivf-national__icon{font-size:18px;flex-shrink:0}
+.ivf-national__text{font-size:11px;color:var(--text2);line-height:1.45}
+.ivf-national__text strong{color:var(--text)}
+
+.ivf-box-wrap{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px 8px;margin-bottom:12px}
+.ivf-box-title{font-family:var(--font-d);font-size:15px;font-weight:700;color:var(--text);text-align:center;margin-bottom:2px}
+.ivf-box-sub{font-size:10.5px;color:var(--muted);text-align:center;margin-bottom:10px;line-height:1.4}
+
+.ivf-age-wrap{margin-bottom:12px}
+.ivf-age-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.ivf-age-opts{display:flex;gap:5px;flex-wrap:wrap}
+.ivf-age{padding:8px 12px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-b);font-size:12px;color:var(--text2);cursor:pointer;transition:all .15s;line-height:1.2;text-align:center}
+.ivf-age:hover{border-color:var(--primary);background:var(--highlight)}
+.ivf-age.on{border-color:var(--primary);background:linear-gradient(135deg,#fdf0f3,#fef0ec);color:var(--text);font-weight:600;box-shadow:0 0 0 2px rgba(212,86,122,.1)}
+
+#ivfRes{display:none}
+#ivfRes.active{display:block;animation:ivfPop .3s ease}
+@keyframes ivfPop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.ivf-res-main{background:var(--grad-soft);border:1.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:10px;text-align:center}
+.ivf-res-pct{font-family:var(--font-d);font-size:44px;font-weight:700;background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.ivf-res-label{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+.ivf-ctx{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.ivf-ctx__t{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px}
+.ivf-ctx__p{font-size:11.5px;color:var(--text2);line-height:1.55}
+.ivf-ctx__p strong{color:var(--text)}
+
+.ivf-actions{display:flex;gap:8px;margin-bottom:8px}
+.ivf-actions a,.ivf-actions button{flex:1;padding:10px;border-radius:20px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s}
+.ivf-act1{background:var(--grad-btn);color:#fff;border:none;box-shadow:0 3px 12px rgba(212,86,122,.2)}
+.ivf-act1:hover{box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.ivf-act2{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.ivf-act2:hover{background:var(--highlight)}
+
+.ivf-disc{font-size:9.5px;color:var(--faint);text-align:center;padding:10px 24px 14px;line-height:1.5;border-top:1px solid var(--border)}
+.ivf-disc a{color:var(--primary);text-decoration:none}
+</style>
+</head>
+<body style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#fdf8f6,#f0e6e0);padding:20px">
+
+<div class="ivf-w">
+  <div class="ivf-hero">
+    <span class="ivf-hero__badge">National Data · ANZARD 2023</span>
+    <h2 class="ivf-hero__title">How Often Does IVF Work?</h2>
+    <p class="ivf-hero__sub">Real numbers from 97 Australian &amp; NZ clinics — not one specific clinic.</p>
+  </div>
+
+  <div class="ivf-body">
+    <div class="ivf-stage">
+
+      <div class="ivf-national">
+        <div class="ivf-national__icon">🇦🇺</div>
+        <div class="ivf-national__text"><strong>These are national averages.</strong> Every clinic treats a different mix of patients, so their individual numbers will differ. A clinic with a lower number isn't necessarily worse — it may just treat harder cases.</div>
+      </div>
+
+      <!-- Box plot -->
+      <div class="ivf-box-wrap">
+        <div class="ivf-box-title">Chance of a baby per IVF cycle</div>
+        <div class="ivf-box-sub">How 97 clinics compare — each dot below is one clinic's results for 2023</div>
+        <svg id="ivfBox" viewBox="0 0 470 105" style="width:100%;height:auto;display:block"></svg>
+      </div>
+
+      <!-- Age selector -->
+      <div class="ivf-age-wrap">
+        <div class="ivf-age-label">Tap your age to see what the numbers look like for you:</div>
+        <div class="ivf-age-opts">
+          <div class="ivf-age" data-v="u30">Under 30</div>
+          <div class="ivf-age" data-v="30-34">30–34</div>
+          <div class="ivf-age" data-v="35-37">35–37</div>
+          <div class="ivf-age" data-v="38-39">38–39</div>
+          <div class="ivf-age" data-v="40-42">40–42</div>
+          <div class="ivf-age" data-v="43-44">43–44</div>
+          <div class="ivf-age" data-v="45+">45+</div>
+        </div>
+      </div>
+
+      <div id="ivfRes"></div>
+
+    </div>
+  </div>
+
+  <div class="ivf-disc">Source: ANZARD Annual Report 2023 (UNSW Sydney). National aggregate data across all reporting clinics. For personalised estimates: <a href="https://www.yourivfsuccess.com.au" target="_blank">YourIVFSuccess.com.au</a></div>
+</div>
+
+<script>
+var BOX = {lo:12.9, q1:19.9, med:22.6, q3:26.9, hi:34.6};
+
+// Simulated clinic dots (spread across the distribution, approx 97 points)
+var DOTS = [4.2,5.8,10.5,11.2,12.9,13.5,14.0,14.8,15.2,15.5,15.9,16.2,16.5,16.8,17.1,17.4,17.7,18.0,18.2,18.5,18.7,19.0,19.2,19.4,19.6,19.8,20.0,20.2,20.4,20.6,20.8,21.0,21.2,21.4,21.6,21.8,22.0,22.1,22.3,22.4,22.5,22.6,22.7,22.8,23.0,23.1,23.3,23.5,23.7,23.9,24.1,24.3,24.5,24.7,24.9,25.1,25.3,25.5,25.7,25.9,26.1,26.3,26.5,26.7,26.9,27.1,27.3,27.5,27.8,28.0,28.3,28.5,28.8,29.0,29.3,29.5,29.8,30.0,30.3,30.5,30.8,31.0,31.3,31.5,31.8,32.0,32.5,33.0,33.5,34.0,34.3,34.6,29.2,30.7,32.2,27.6,26.0];
+
+var AGE_DATA = {
+  'u30':   {rate:33, range:'30–36', cum3:'65–75'},
+  '30-34': {rate:30, range:'27–33', cum3:'60–70'},
+  '35-37': {rate:24, range:'21–27', cum3:'50–60'},
+  '38-39': {rate:18, range:'15–21', cum3:'38–48'},
+  '40-42': {rate:11, range:'8–14',  cum3:'25–33'},
+  '43-44': {rate:5,  range:'3–7',   cum3:'12–18'},
+  '45+':   {rate:2,  range:'1–3',   cum3:'4–8'}
+};
+var AGE_LABELS = {'u30':'under 30','30-34':'30–34','35-37':'35–37','38-39':'38–39','40-42':'40–42','43-44':'43–44','45+':'45+'};
+
+var W = 470, PL = 24, PR = 16;
+var pw = W - PL - PR;
+var LO = 0, HI = 40;
+function xv(v) { return PL + ((v - LO) / (HI - LO)) * pw; }
+
+function drawBox(ageRate) {
+  var cy = 48, dotY = 72;
+  var h = '';
+
+  // Grid
+  for (var v = 5; v <= 35; v += 5) {
+    h += '<line x1="'+xv(v)+'" y1="10" x2="'+xv(v)+'" y2="85" stroke="#f5ece8" stroke-width="0.5"/>';
+    h += '<text x="'+xv(v)+'" y="98" text-anchor="middle" font-size="9" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+v+'%</text>';
+  }
+
+  // Dots (clinic scatter)
+  for (var i = 0; i < DOTS.length; i++) {
+    var dx = xv(DOTS[i]);
+    // Jitter y slightly for visual spread
+    var dy = dotY + ((i % 5) - 2) * 2.5;
+    h += '<circle cx="'+dx.toFixed(1)+'" cy="'+dy.toFixed(1)+'" r="2.2" fill="#2d2424" opacity="0.3"/>';
+  }
+
+  // Whiskers
+  h += '<line x1="'+xv(BOX.lo)+'" y1="'+cy+'" x2="'+xv(BOX.q1)+'" y2="'+cy+'" stroke="#2d2424" stroke-width="1.5"/>';
+  h += '<line x1="'+xv(BOX.q3)+'" y1="'+cy+'" x2="'+xv(BOX.hi)+'" y2="'+cy+'" stroke="#2d2424" stroke-width="1.5"/>';
+  h += '<line x1="'+xv(BOX.lo)+'" y1="'+(cy-8)+'" x2="'+xv(BOX.lo)+'" y2="'+(cy+8)+'" stroke="#2d2424" stroke-width="1.5"/>';
+  h += '<line x1="'+xv(BOX.hi)+'" y1="'+(cy-8)+'" x2="'+xv(BOX.hi)+'" y2="'+(cy+8)+'" stroke="#2d2424" stroke-width="1.5"/>';
+
+  // IQR box
+  var bx = xv(BOX.q1), bw = xv(BOX.q3) - bx;
+  h += '<rect x="'+bx+'" y="'+(cy-13)+'" width="'+bw+'" height="26" rx="4" fill="rgba(212,86,122,0.07)" stroke="rgba(212,86,122,0.4)" stroke-width="1.5"/>';
+
+  // Median
+  h += '<line x1="'+xv(BOX.med)+'" y1="'+(cy-13)+'" x2="'+xv(BOX.med)+'" y2="'+(cy+13)+'" stroke="#d4567a" stroke-width="2.5"/>';
+
+  // Labels — plain language
+  h += '<text x="'+xv(BOX.med)+'" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#d4567a" font-family="DM Sans,sans-serif">middle: '+BOX.med+'%</text>';
+  h += '<text x="'+xv(BOX.q1)+'" y="24" text-anchor="middle" font-size="8" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+BOX.q1+'%</text>';
+  h += '<text x="'+xv(BOX.q3)+'" y="24" text-anchor="middle" font-size="8" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+BOX.q3+'%</text>';
+  h += '<text x="'+xv(BOX.lo)+'" y="24" text-anchor="middle" font-size="8" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+BOX.lo+'%</text>';
+  h += '<text x="'+xv(BOX.hi)+'" y="24" text-anchor="middle" font-size="8" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+BOX.hi+'%</text>';
+
+  // Age marker (dynamic)
+  if (ageRate !== null) {
+    var mx = xv(ageRate);
+    // Animated triangle marker above box
+    h += '<polygon points="'+(mx-6)+',30 '+(mx+6)+',30 '+mx+',38" fill="#d4567a" stroke="#fff" stroke-width="1.5" filter="drop-shadow(0 2px 3px rgba(0,0,0,.2))"/>';
+    h += '<text x="'+mx+'" y="26" text-anchor="middle" font-size="10" font-weight="800" fill="#d4567a" font-family="DM Sans,sans-serif">your age: ~'+ageRate+'%</text>';
+
+    // Vertical guide line
+    h += '<line x1="'+mx+'" y1="38" x2="'+mx+'" y2="82" stroke="#d4567a" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>';
+  }
+
+  document.getElementById('ivfBox').innerHTML = h;
+}
+drawBox(null);
+
+// Age click
+document.addEventListener('click', function(e) {
+  var age = e.target.closest('.ivf-age');
+  if (age) {
+    var sibs = document.querySelectorAll('.ivf-age');
+    for (var i = 0; i < sibs.length; i++) sibs[i].classList.remove('on');
+    age.classList.add('on');
+    showAge(age.getAttribute('data-v'));
+  }
+});
+
+function showAge(key) {
+  var d = AGE_DATA[key];
+  var label = AGE_LABELS[key];
+
+  // Update box plot with marker
+  drawBox(d.rate);
+
+  var hundredText;
+  if (d.rate >= 25) {
+    hundredText = 'If <strong>100 women your age</strong> each started one IVF cycle, about <strong>' + d.rate + ' would have a baby</strong> from that cycle. Most cycles don\'t work on the first try — but the chances add up over multiple rounds.';
+  } else if (d.rate >= 10) {
+    hundredText = 'If <strong>100 women your age</strong> each started one IVF cycle, about <strong>' + d.rate + ' would have a baby</strong> from that cycle. Per-cycle rates are modest, but many women succeed over multiple attempts.';
+  } else {
+    hundredText = 'If <strong>100 women your age</strong> each started one IVF cycle, about <strong>' + d.rate + ' would have a baby</strong>. The per-cycle chance is lower at this age — but it\'s not zero. A specialist can help you understand your personal picture.';
+  }
+
+  var res = document.getElementById('ivfRes');
+  res.innerHTML =
+    '<div class="ivf-res-main">' +
+      '<div class="ivf-res-pct">~' + d.rate + '%</div>' +
+      '<div class="ivf-res-label">chance of a baby per IVF cycle · age ' + label + '<br>national range: ' + d.range + '%</div>' +
+    '</div>' +
+
+    '<div class="ivf-ctx">' +
+      '<div class="ivf-ctx__t">What does that actually mean?</div>' +
+      '<div class="ivf-ctx__p">' + hundredText + '</div>' +
+    '</div>' +
+
+    '<div class="ivf-ctx">' +
+      '<div class="ivf-ctx__t">What if I try more than once?</div>' +
+      '<div class="ivf-ctx__p">Over <strong>up to 3 complete cycles</strong>, the chance of at least one baby at age ' + label + ' is around <strong>' + d.cum3 + '%</strong>. The first cycle isn\'t the whole picture — success builds with each round.</div>' +
+    '</div>' +
+
+    '<div class="ivf-ctx">' +
+      '<div class="ivf-ctx__t">Why do clinics show different numbers?</div>' +
+      '<div class="ivf-ctx__p">Some clinics treat more complex cases or older patients, which lowers their average. <strong>A lower number doesn\'t mean a worse clinic</strong> — it may just mean they take on tougher cases. Ask your specialist what the numbers look like for someone like you.</div>' +
+    '</div>' +
+
+    '<div class="ivf-actions">' +
+      '<a href="https://www.melbourneivf.com.au" target="_blank" class="ivf-act1">Book a Consultation</a>' +
+      '<button class="ivf-act2" onclick="ivfReset()">Try Another Age</button>' +
+    '</div>';
+
+  res.classList.add('active');
+}
+
+function ivfReset() {
+  var sibs = document.querySelectorAll('.ivf-age');
+  for (var i = 0; i < sibs.length; i++) sibs[i].classList.remove('on');
+  document.getElementById('ivfRes').classList.remove('active');
+  document.getElementById('ivfRes').innerHTML = '';
+  drawBox(null);
+  document.querySelector('.ivf-stage').scrollTop = 0;
+}
+</script>
+</body>
+</html>

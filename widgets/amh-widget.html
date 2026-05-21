@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Your AMH</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.amh-w{
+  --primary:#d4567a;--warm:#e8956a;
+  --grad-hero:linear-gradient(135deg,#d4567a 0%,#e8956a 50%,#f0b87a 100%);
+  --grad-btn:linear-gradient(135deg,#d4567a,#c25838);
+  --grad-soft:linear-gradient(135deg,#fdf0f3,#fef6f0);
+  --bg:#fdf8f6;--surface:#fff;--highlight:#fff5f2;
+  --text:#2d2424;--text2:#5a4a4a;--muted:#8a7a7a;--faint:#b0a0a0;
+  --border:#ece0dc;--teal:#3d8b7a;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',-apple-system,sans-serif;
+  max-width:520px;width:100%;font-family:var(--font-b);color:var(--text);line-height:1.55;background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(45,36,36,.1);border:1.5px solid var(--border);
+}
+.amh-hero{background:var(--grad-hero);padding:28px 28px 24px;text-align:center;position:relative;overflow:hidden}
+.amh-hero::before{content:'';position:absolute;top:-50%;right:-25%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);border-radius:50%}
+.amh-hero__badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);padding:4px 14px;border-radius:16px;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);margin-bottom:12px}
+.amh-hero__title{font-family:var(--font-d);font-size:22px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.3px;margin-bottom:6px}
+.amh-hero__sub{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+
+.amh-body{padding:24px 24px 20px;height:480px;position:relative;overflow:hidden}
+.amh-stage{position:absolute;left:24px;right:24px;top:24px;bottom:20px;overflow-y:auto;overflow-x:hidden}
+.amh-stage::-webkit-scrollbar{width:4px}
+.amh-stage::-webkit-scrollbar-thumb{background:#e0d0cc;border-radius:2px}
+
+/* Input section */
+.amh-inputs{margin-bottom:16px}
+.amh-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.amh-row{display:flex;gap:10px;margin-bottom:14px;align-items:flex-end}
+.amh-field{flex:1}
+.amh-field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px}
+.amh-field input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font-b);font-size:15px;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s}
+.amh-field input:focus{border-color:var(--primary)}
+.amh-field input::placeholder{color:var(--faint)}
+.amh-go{background:var(--grad-btn);border:none;border-radius:10px;padding:10px 20px;font-family:var(--font-b);font-size:13px;font-weight:600;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(212,86,122,.25);transition:all .15s;white-space:nowrap;height:42px}
+.amh-go:hover{box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+
+/* Chart area */
+.amh-chart-wrap{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:12px}
+.amh-chart-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:12px 16px 0;text-align:center}
+.amh-svg-wrap{padding:4px 8px 0}
+.amh-legend{display:flex;justify-content:center;gap:14px;padding:6px 16px 10px;font-size:10px;color:var(--muted)}
+.amh-legend span{display:flex;align-items:center;gap:4px}
+.amh-leg-line{width:18px;height:2px;border-radius:1px}
+
+/* Result card */
+#amhResult{display:none}
+#amhResult.active{display:block;animation:amhPop .3s ease}
+@keyframes amhPop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.amh-res{background:var(--grad-soft);border:1.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.amh-res__pctile{font-family:var(--font-d);font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.2}
+.amh-res__100{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px}
+.amh-res__100 strong{color:var(--text)}
+.amh-res__refs{font-size:11px;color:var(--faint);line-height:1.4}
+
+.amh-context{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.amh-context__t{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.amh-context__p{font-size:12px;color:var(--text2);line-height:1.55}
+.amh-context__p strong{color:var(--text)}
+
+.amh-actions{display:flex;gap:8px;margin-bottom:10px}
+.amh-actions a,.amh-actions button{flex:1;padding:10px;border-radius:20px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s}
+.amh-act1{background:var(--grad-btn);color:#fff;border:none;box-shadow:0 3px 12px rgba(212,86,122,.2)}
+.amh-act1:hover{box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.amh-act2{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.amh-act2:hover{background:var(--highlight)}
+
+.amh-disc{font-size:10px;color:var(--faint);text-align:center;padding:12px 24px 16px;line-height:1.5;border-top:1px solid var(--border)}
+</style>
+</head>
+<body style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#fdf8f6,#f0e6e0);padding:20px">
+
+<div class="amh-w">
+  <div class="amh-hero">
+    <span class="amh-hero__badge">Ovarian Reserve</span>
+    <h2 class="amh-hero__title">Understanding Your AMH</h2>
+    <p class="amh-hero__sub">See where your result sits compared to other women your age.</p>
+  </div>
+
+  <div class="amh-body">
+    <div class="amh-stage">
+
+      <!-- Inputs -->
+      <div class="amh-inputs">
+        <div class="amh-row">
+          <div class="amh-field">
+            <label>Your age</label>
+            <input type="number" id="amhAge" min="20" max="45" placeholder="e.g. 34">
+          </div>
+          <div class="amh-field">
+            <label>Your AMH (pmol/L)</label>
+            <input type="number" id="amhVal" min="0" max="80" step="0.1" placeholder="e.g. 12.5">
+          </div>
+          <button class="amh-go" onclick="amhCalc()">Show me</button>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="amh-chart-wrap">
+        <div class="amh-chart-title">AMH Normogram — Percentiles by Age</div>
+        <div class="amh-svg-wrap">
+          <svg id="amhSvg" viewBox="0 0 470 200" style="width:100%;height:auto;display:block"></svg>
+        </div>
+        <div class="amh-legend">
+          <span><span class="amh-leg-line" style="background:#d4567a"></span> 10th pctl</span>
+          <span><span class="amh-leg-line" style="background:#2d2424;height:3px"></span> Median</span>
+          <span><span class="amh-leg-line" style="background:#3d8b7a"></span> 90th pctl</span>
+          <span style="gap:3px"><span style="width:10px;height:8px;background:rgba(212,86,122,.12);border-radius:2px;display:inline-block"></span> Low</span>
+        </div>
+      </div>
+
+      <!-- Result (shown after calc) -->
+      <div id="amhResult"></div>
+
+    </div>
+  </div>
+
+  <div class="amh-disc">AMH estimates ovarian reserve — it does not predict your ability to conceive naturally. Discuss your result with a specialist for personalised guidance.</div>
+</div>
+
+<script>
+// Normogram data (pmol/L)
+var AGES = [23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45];
+var P10 =  [8,8.5,9,9.5,10,10,9.5,9,8.5,7.5,6.5,5.5,4.5,3.5,3,2.5,2,1.5,1.2,1,0.8,0.7,0.5];
+var P50 =  [17,18,19,20,21,21,20.5,20,19.5,19,18,17,15.5,14,12.5,11,9.5,8,7,6.5,5.5,5,4];
+var P90 =  [44,45,46,47,47,46.5,46,45,44,42,40,38,35,32,29,26,23,21,18,16,14,12,10];
+
+// SVG chart dimensions
+var CW = 470, CH = 190, PAD_L = 38, PAD_R = 10, PAD_T = 14, PAD_B = 24;
+var PW = CW - PAD_L - PAD_R, PH = CH - PAD_T - PAD_B;
+var AGE_MIN = 22, AGE_MAX = 46, AMH_MAX = 52;
+
+function ax(age) { return PAD_L + ((age - AGE_MIN) / (AGE_MAX - AGE_MIN)) * PW; }
+function ay(amh) { return PAD_T + (1 - amh / AMH_MAX) * PH; }
+
+function pathD(vals) {
+  var pts = [];
+  for (var i = 0; i < AGES.length; i++) pts.push((i === 0 ? 'M' : 'L') + ax(AGES[i]).toFixed(1) + ',' + ay(vals[i]).toFixed(1));
+  return pts.join(' ');
+}
+
+function drawChart(markerAge, markerAMH) {
+  var svg = document.getElementById('amhSvg');
+  var h = '';
+
+  // Low zone fill
+  var lowPath = 'M' + ax(AGES[0]).toFixed(1) + ',' + ay(P10[0]).toFixed(1);
+  for (var i = 1; i < AGES.length; i++) lowPath += 'L' + ax(AGES[i]).toFixed(1) + ',' + ay(P10[i]).toFixed(1);
+  lowPath += 'L' + ax(AGES[AGES.length-1]).toFixed(1) + ',' + ay(0) + 'L' + ax(AGES[0]).toFixed(1) + ',' + ay(0) + 'Z';
+  h += '<path d="' + lowPath + '" fill="rgba(212,86,122,0.08)" stroke="none"/>';
+
+  // Grid lines
+  for (var a = 25; a <= 45; a += 5) {
+    h += '<line x1="'+ax(a)+'" y1="'+PAD_T+'" x2="'+ax(a)+'" y2="'+(CH-PAD_B)+'" stroke="#f0e6e0" stroke-width="0.5"/>';
+    h += '<text x="'+ax(a)+'" y="'+(CH-6)+'" text-anchor="middle" font-size="9" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+a+'</text>';
+  }
+  for (var v = 0; v <= 50; v += 10) {
+    h += '<line x1="'+PAD_L+'" y1="'+ay(v)+'" x2="'+(CW-PAD_R)+'" y2="'+ay(v)+'" stroke="#f0e6e0" stroke-width="0.5"/>';
+    h += '<text x="'+(PAD_L-6)+'" y="'+(ay(v)+3)+'" text-anchor="end" font-size="9" fill="#b0a0a0" font-family="DM Sans,sans-serif">'+v+'</text>';
+  }
+
+  // Axes labels
+  h += '<text x="'+((PAD_L+CW-PAD_R)/2)+'" y="'+(CH-0)+'" text-anchor="middle" font-size="9" fill="#8a7a7a" font-family="DM Sans,sans-serif">Age</text>';
+  h += '<text x="10" y="'+((PAD_T+CH-PAD_B)/2)+'" text-anchor="middle" font-size="9" fill="#8a7a7a" font-family="DM Sans,sans-serif" transform="rotate(-90,10,'+((PAD_T+CH-PAD_B)/2)+')">pmol/L</text>';
+
+  // Curves
+  h += '<path d="' + pathD(P90) + '" fill="none" stroke="#3d8b7a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>';
+  h += '<path d="' + pathD(P50) + '" fill="none" stroke="#2d2424" stroke-width="2.5"/>';
+  h += '<path d="' + pathD(P10) + '" fill="none" stroke="#d4567a" stroke-width="2" stroke-dasharray="4,3"/>';
+
+  // Curve labels
+  h += '<text x="'+(ax(43)+4)+'" y="'+(ay(P90[AGES.length-1])-4)+'" font-size="8" fill="#3d8b7a" font-family="DM Sans,sans-serif" font-weight="600">90th</text>';
+  h += '<text x="'+(ax(43)+4)+'" y="'+(ay(P50[AGES.length-1])-4)+'" font-size="8" fill="#2d2424" font-family="DM Sans,sans-serif" font-weight="600">50th</text>';
+  h += '<text x="'+(ax(43)+4)+'" y="'+(ay(P10[AGES.length-1])-4)+'" font-size="8" fill="#d4567a" font-family="DM Sans,sans-serif" font-weight="600">10th</text>';
+
+  // Marker
+  if (markerAge !== null && markerAMH !== null) {
+    var mx = ax(markerAge), my = ay(Math.min(markerAMH, AMH_MAX - 1));
+    h += '<circle cx="'+mx+'" cy="'+my+'" r="6" fill="#d4567a" stroke="#fff" stroke-width="2.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,.2))"/>';
+    h += '<text x="'+mx+'" y="'+(my-12)+'" text-anchor="middle" font-size="10" font-weight="700" fill="#d4567a" font-family="DM Sans,sans-serif">'+markerAMH.toFixed(1)+'</text>';
+  }
+
+  svg.innerHTML = h;
+}
+
+drawChart(null, null);
+
+// Interpolation helper
+function interp(arr, age) {
+  var a = Math.max(23, Math.min(45, age));
+  var lo = Math.floor(a), hi = Math.ceil(a);
+  var loIdx = AGES.indexOf(lo), hiIdx = AGES.indexOf(hi);
+  if (loIdx < 0) loIdx = 0;
+  if (hiIdx < 0) hiIdx = AGES.length - 1;
+  if (lo === hi) return arr[loIdx];
+  var frac = a - lo;
+  return arr[loIdx] + frac * (arr[hiIdx] - arr[loIdx]);
+}
+
+function amhCalc() {
+  var age = parseFloat(document.getElementById('amhAge').value);
+  var amh = parseFloat(document.getElementById('amhVal').value);
+  if (!age || !amh || age < 20 || age > 46) return;
+
+  var p10 = interp(P10, age);
+  var p50 = interp(P50, age);
+  var p90 = interp(P90, age);
+
+  // Draw chart with marker
+  drawChart(age, amh);
+
+  // Determine percentile zone
+  var pctLabel, hundredText, contextTitle, contextText;
+
+  if (amh <= p10) {
+    // Approximate position within bottom 10%
+    var approxPct = Math.round((amh / p10) * 10);
+    approxPct = Math.max(1, Math.min(10, approxPct));
+    pctLabel = 'Below the 10th percentile for your age';
+    hundredText = 'If we lined up <strong>100 women aged ' + Math.round(age) + '</strong>, roughly <strong>' + (100 - approxPct) + ' of them would have a higher AMH</strong> than yours. Your result is in the lower range for your age.';
+    contextTitle = 'What this means';
+    contextText = 'A lower AMH suggests <strong>fewer eggs remaining than typical for your age</strong> — but it says nothing about the quality of those eggs. Women with low AMH can and do conceive. It does mean that <strong>if you\'re considering having children, it\'s worth having that conversation sooner rather than later</strong> with a fertility specialist.';
+  } else if (amh <= p50) {
+    var approxPct = 10 + Math.round(((amh - p10) / (p50 - p10)) * 40);
+    pctLabel = 'Between the 10th and 50th percentile';
+    hundredText = 'If we lined up <strong>100 women aged ' + Math.round(age) + '</strong>, roughly <strong>' + (100 - approxPct) + ' would have a higher AMH</strong> and <strong>' + approxPct + ' would have a lower one</strong>. You\'re within the normal range.';
+    contextTitle = 'What this means';
+    contextText = 'Your AMH is <strong>within the normal range for your age</strong>. This suggests a typical egg reserve. Remember, AMH tells us about quantity — <strong>no test can measure egg quality</strong>, which matters just as much for conception.';
+  } else if (amh <= p90) {
+    var approxPct = 50 + Math.round(((amh - p50) / (p90 - p50)) * 40);
+    pctLabel = 'Between the 50th and 90th percentile';
+    hundredText = 'If we lined up <strong>100 women aged ' + Math.round(age) + '</strong>, only about <strong>' + (100 - approxPct) + ' would have a higher AMH</strong>. Your reserve is on the higher side of normal.';
+    contextTitle = 'What this means';
+    contextText = 'Your AMH is <strong>in the upper half of the normal range</strong> — a reassuring result in terms of egg numbers. It suggests you\'re likely to respond well to fertility treatment if you ever need it. It does <strong>not</strong> guarantee conception — other factors matter too.';
+  } else {
+    pctLabel = 'Above the 90th percentile — elevated for your age';
+    hundredText = 'If we lined up <strong>100 women aged ' + Math.round(age) + '</strong>, <strong>fewer than 10 would have an AMH this high</strong>. Very high AMH can sometimes be associated with polycystic ovary syndrome (PCOS).';
+    contextTitle = 'Worth knowing';
+    contextText = 'An elevated AMH may point to <strong>PCOS</strong>, which can affect ovulation. PCOS is common and very manageable — but it\'s worth mentioning to your doctor, especially if your periods are irregular. <strong>A high AMH doesn\'t mean you\'re "more fertile"</strong> — it means there are more follicles, which isn\'t always the same thing.';
+  }
+
+  var res = document.getElementById('amhResult');
+  res.innerHTML =
+    '<div class="amh-res">' +
+      '<div class="amh-res__pctile">' + pctLabel + '</div>' +
+      '<div class="amh-res__100">' + hundredText + '</div>' +
+      '<div class="amh-res__refs">Your AMH: <strong>' + amh.toFixed(1) + ' pmol/L</strong> · Age ' + Math.round(age) + ' reference: 10th = ' + p10.toFixed(1) + ', median = ' + p50.toFixed(1) + ', 90th = ' + p90.toFixed(1) + '</div>' +
+    '</div>' +
+    '<div class="amh-context">' +
+      '<div class="amh-context__t">' + contextTitle + '</div>' +
+      '<div class="amh-context__p">' + contextText + '</div>' +
+    '</div>' +
+    '<div class="amh-context">' +
+      '<div class="amh-context__t">What AMH can\'t tell you</div>' +
+      '<div class="amh-context__p">AMH estimates the <strong>number</strong> of eggs remaining — not their quality, not your actual chance of conceiving, and not how quickly things are changing. It\'s one piece of the picture, not the whole story.</div>' +
+    '</div>' +
+    '<div class="amh-actions">' +
+      '<a href="https://www.melbourneivf.com.au" target="_blank" class="amh-act1">Book a Consultation</a>' +
+      '<button class="amh-act2" onclick="amhReset()">Check Again</button>' +
+    '</div>';
+  res.classList.add('active');
+}
+
+function amhReset() {
+  document.getElementById('amhAge').value = '';
+  document.getElementById('amhVal').value = '';
+  document.getElementById('amhResult').classList.remove('active');
+  document.getElementById('amhResult').innerHTML = '';
+  drawChart(null, null);
+}
+</script>
+</body>
+</html>

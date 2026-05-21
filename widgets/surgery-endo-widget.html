@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgery & Endometriosis — What to Expect</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.sw-widget{
+  --primary:#d4567a;--primary-dk:#b8446a;--warm:#e8956a;
+  --grad-hero:linear-gradient(135deg,#d4567a 0%,#e8956a 50%,#f0b87a 100%);
+  --grad-btn:linear-gradient(135deg,#d4567a,#c25838);
+  --grad-soft:linear-gradient(135deg,#fdf0f3,#fef6f0);
+  --bg:#fdf8f6;--surface:#fff;--highlight:#fff5f2;
+  --text:#2d2424;--text2:#5a4a4a;--muted:#8a7a7a;--faint:#b0a0a0;
+  --border:#ece0dc;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',-apple-system,sans-serif;
+  max-width:520px;width:100%;font-family:var(--font-b);color:var(--text);line-height:1.55;background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(45,36,36,.1);border:1.5px solid var(--border);
+}
+
+/* Hero */
+.sw-hero{background:var(--grad-hero);padding:28px 28px 24px;text-align:center;position:relative;overflow:hidden}
+.sw-hero::before{content:'';position:absolute;top:-50%;right:-25%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);border-radius:50%}
+.sw-hero__badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);padding:4px 14px;border-radius:16px;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);margin-bottom:12px}
+.sw-hero__title{font-family:var(--font-d);font-size:21px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.3px;margin-bottom:6px}
+.sw-hero__sub{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+
+/* Body — FIXED HEIGHT */
+.sw-body{padding:24px 24px 20px;height:460px;position:relative;overflow:hidden}
+
+/* Progress */
+.sw-prog{display:flex;gap:5px;margin-bottom:18px}
+.sw-prog__seg{flex:1;height:4px;border-radius:2px;background:var(--border);transition:all .35s ease}
+.sw-prog__seg.on{background:var(--grad-btn);box-shadow:0 1px 4px rgba(212,86,122,.25)}
+
+/* Screen wrapper — fills remaining height, scrolls internally */
+.sw-stage{position:absolute;left:24px;right:24px;top:52px;bottom:20px;overflow-y:auto;overflow-x:hidden}
+.sw-stage::-webkit-scrollbar{width:4px}
+.sw-stage::-webkit-scrollbar-thumb{background:#e0d0cc;border-radius:2px}
+
+/* Screens */
+[data-q]{display:none}
+[data-q].active{display:block;animation:swSlide .25s ease}
+[data-q].active.back{animation:swBack .25s ease}
+@keyframes swSlide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes swBack{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+
+.sw-step{font-size:11px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.sw-q{font-family:var(--font-d);font-size:18px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.25}
+.sw-hint{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.45}
+
+/* Single-select pills */
+.sw-opts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.sw-opt{padding:9px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:var(--font-b);font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s ease;line-height:1.35}
+.sw-opt:hover{border-color:var(--primary);background:var(--highlight)}
+.sw-opt.on{border-color:var(--primary);background:linear-gradient(135deg,#fdf0f3,#fef0ec);color:var(--text);font-weight:600;box-shadow:0 0 0 2px rgba(212,86,122,.1)}
+
+/* Multi-select checkboxes */
+.sw-checks{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.sw-chk{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s ease;line-height:1.35}
+.sw-chk:hover{border-color:var(--primary);background:var(--highlight)}
+.sw-chk.on{border-color:var(--primary);background:var(--highlight);color:var(--text)}
+.sw-chk__box{width:16px;height:16px;min-width:16px;border-radius:4px;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;transition:all .15s ease}
+.sw-chk.on .sw-chk__box{border-color:var(--primary);background:var(--primary)}
+.sw-chk__tick{display:none}.sw-chk.on .sw-chk__tick{display:block}
+
+/* Nav */
+.sw-nav{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border)}
+.sw-bk{background:none;border:1.5px solid var(--border);border-radius:20px;padding:8px 18px;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s ease}
+.sw-bk:hover{border-color:var(--text2);color:var(--text2)}
+.sw-nx{background:var(--grad-btn);border:none;border-radius:20px;padding:9px 24px;font-family:var(--font-b);font-size:13px;font-weight:600;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(212,86,122,.25);transition:all .15s ease;margin-left:auto}
+.sw-nx:hover:not(:disabled){box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.sw-nx:disabled{background:#d8ccc8;box-shadow:none;cursor:default}
+
+/* Result */
+#swResult{display:none}
+#swResult.active{display:block;animation:swPop .35s ease}
+@keyframes swPop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+
+.sw-res__title{font-family:var(--font-d);font-size:19px;font-weight:700;text-align:center;margin-bottom:4px;line-height:1.25}
+.sw-res__sub{text-align:center;color:var(--muted);margin-bottom:14px;font-size:12px;line-height:1.5}
+
+/* Spectrum cards */
+.sp-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.sp-card__title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.sp-bar__ends{display:flex;justify-content:space-between;font-size:10px;color:var(--faint);font-weight:600;margin-bottom:3px}
+.sp-bar{position:relative;height:22px;border-radius:11px;overflow:visible;margin-bottom:6px}
+.sp-bar__bg{position:absolute;inset:0;border-radius:11px}
+.sp-bar__bg.benefit{background:linear-gradient(90deg,#e8e0dc 0%,#fcd34d 28%,#67e8f9 52%,#6ee7b7 78%,#22c55e 100%)}
+.sp-bar__bg.risk{background:linear-gradient(90deg,#86efac 0%,#fcd34d 32%,#fda4af 62%,#f87171 85%,#dc2626 100%)}
+.sp-bar__range{position:absolute;top:2px;bottom:2px;border-radius:9px;background:rgba(255,255,255,.55);border:1.5px solid rgba(255,255,255,.8);z-index:2;transition:left .7s cubic-bezier(.4,0,.2,1),width .7s cubic-bezier(.4,0,.2,1)}
+.sp-bar__marker{position:absolute;top:50%;width:14px;height:14px;background:#2d2424;border:2.5px solid #fff;border-radius:3px;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 2px 6px rgba(0,0,0,.25);z-index:4;transition:left .8s cubic-bezier(.4,0,.2,1)}
+.sp-card__note{font-size:11.5px;color:var(--text2);line-height:1.55;margin-top:4px}
+.sp-card__note strong{color:var(--text);font-weight:600}
+
+.sw-summary{background:var(--grad-soft);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.sw-summary__title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.sw-summary__text{font-size:12.5px;color:var(--text2);line-height:1.55}
+.sw-summary__text strong{color:var(--text)}
+
+.sw-ref{font-size:10.5px;color:var(--faint);text-align:center;line-height:1.5;margin-bottom:12px}
+.sw-actions{display:flex;gap:8px}
+.sw-actions a,.sw-actions button{flex:1;padding:10px;border-radius:20px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s ease}
+.sw-act1{background:var(--grad-btn);color:#fff;border:none;box-shadow:0 3px 12px rgba(212,86,122,.2)}
+.sw-act1:hover{box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.sw-act2{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.sw-act2:hover{background:var(--highlight)}
+
+.sw-disc{font-size:10px;color:var(--faint);text-align:center;padding:12px 24px 16px;line-height:1.5;border-top:1px solid var(--border)}
+</style>
+</head>
+<body style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#fdf8f6,#f0e6e0);padding:20px">
+
+<div class="sw-widget">
+  <div class="sw-hero">
+    <span class="sw-hero__badge">Understanding Your Options</span>
+    <h2 class="sw-hero__title">Surgery & Endometriosis</h2>
+    <p class="sw-hero__sub">A few questions to help you understand how surgery might help in your situation.</p>
+  </div>
+
+  <div class="sw-body">
+    <div class="sw-prog" id="swProg"></div>
+    <div class="sw-stage">
+
+      <!-- Q1: Age (single) -->
+      <div data-q="1" class="active">
+        <div class="sw-step">Question 1 of 4</div>
+        <div class="sw-q">How old are you?</div>
+        <div class="sw-opts" data-group="q1">
+          <div class="sw-opt" data-v="under30">Under 30</div>
+          <div class="sw-opt" data-v="30-35">30–35</div>
+          <div class="sw-opt" data-v="over35">Over 35</div>
+        </div>
+        <div class="sw-nav">
+          <button class="sw-nx" data-dir="next" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Q2: What's been found (MULTI-SELECT) -->
+      <div data-q="2">
+        <div class="sw-step">Question 2 of 4</div>
+        <div class="sw-q">What has been found?</div>
+        <div class="sw-hint">Tick everything that applies — you can select more than one.</div>
+        <div class="sw-checks" data-group="q2">
+          <div class="sw-chk" data-v="suspected"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Suspected endo (not confirmed on imaging)</div>
+          <div class="sw-chk" data-v="oma-one"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Endometrioma on one ovary</div>
+          <div class="sw-chk" data-v="oma-both"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Endometriomas on both ovaries</div>
+          <div class="sw-chk" data-v="die"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Deep endometriosis (bowel, bladder, ligaments)</div>
+          <div class="sw-chk" data-v="hydro"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fluid in the fallopian tube(s) (hydrosalpinx)</div>
+          <div class="sw-chk" data-v="lowamh"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Low ovarian reserve (low AMH)</div>
+          <div class="sw-chk" data-v="unsure"><span class="sw-chk__box"><svg class="sw-chk__tick" width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>I'm not sure</div>
+        </div>
+        <div class="sw-nav">
+          <button class="sw-bk" data-dir="back">← Back</button>
+          <button class="sw-nx" data-dir="next">Next →</button>
+        </div>
+      </div>
+
+      <!-- Q3: Prior surgery (single) -->
+      <div data-q="3">
+        <div class="sw-step">Question 3 of 4</div>
+        <div class="sw-q">Have you had surgery for endo before?</div>
+        <div class="sw-opts" data-group="q3">
+          <div class="sw-opt" data-v="no">No, this would be a first</div>
+          <div class="sw-opt" data-v="once">Yes, once</div>
+          <div class="sw-opt" data-v="multiple">Yes, more than once</div>
+        </div>
+        <div class="sw-nav">
+          <button class="sw-bk" data-dir="back">← Back</button>
+          <button class="sw-nx" data-dir="next" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Q4: Priority (single) -->
+      <div data-q="4">
+        <div class="sw-step">Question 4 of 4</div>
+        <div class="sw-q">What matters most to you right now?</div>
+        <div class="sw-opts" data-group="q4">
+          <div class="sw-opt" data-v="pain">Getting on top of my pain</div>
+          <div class="sw-opt" data-v="fertility">Getting pregnant or protecting fertility</div>
+          <div class="sw-opt" data-v="both">Both — pain and fertility</div>
+        </div>
+        <div class="sw-nav">
+          <button class="sw-bk" data-dir="back">← Back</button>
+          <button class="sw-nx" data-dir="submit" disabled>See What the Evidence Says →</button>
+        </div>
+      </div>
+
+      <!-- Result fills this same scrollable area -->
+      <div id="swResult"></div>
+
+    </div><!-- /sw-stage -->
+  </div>
+
+  <div class="sw-disc">For general information only — not medical advice. Spectrums show the general direction of evidence; individual outcomes vary. Discuss with your specialist.</div>
+</div>
+
+<script>
+var swA = {};
+var swCur = 1;
+
+function swProg() {
+  var h = '';
+  for (var i = 0; i < 4; i++) h += '<div class="sw-prog__seg' + (i < swCur ? ' on' : '') + '"></div>';
+  document.getElementById('swProg').innerHTML = h;
+}
+swProg();
+
+function swGo(n, dir) {
+  var all = document.querySelectorAll('[data-q]');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active', 'back');
+  var el = document.querySelector('[data-q="' + n + '"]');
+  if (dir === 'back') el.classList.add('back');
+  el.classList.add('active');
+  swCur = n;
+  swProg();
+  // scroll stage to top
+  document.querySelector('.sw-stage').scrollTop = 0;
+}
+
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+// All clicks via delegation
+document.addEventListener('click', function(e) {
+
+  // Single-select option
+  var opt = e.target.closest('.sw-opt');
+  if (opt) {
+    var siblings = opt.parentElement.querySelectorAll('.sw-opt');
+    for (var i = 0; i < siblings.length; i++) siblings[i].classList.remove('on');
+    opt.classList.add('on');
+    swA[opt.parentElement.getAttribute('data-group')] = opt.getAttribute('data-v');
+    var scr = opt.closest('[data-q]');
+    var nx = scr.querySelector('.sw-nx');
+    if (nx) nx.disabled = false;
+    return;
+  }
+
+  // Multi-select checkbox
+  var chk = e.target.closest('.sw-chk');
+  if (chk) {
+    var v = chk.getAttribute('data-v');
+    var grid = chk.parentElement;
+    // "unsure" clears everything else
+    if (v === 'unsure') {
+      var all = grid.querySelectorAll('.sw-chk');
+      for (var i = 0; i < all.length; i++) { if (all[i] !== chk) all[i].classList.remove('on'); }
+    } else {
+      // deselect "unsure" if something specific is picked
+      var uns = grid.querySelector('.sw-chk[data-v="unsure"]');
+      if (uns) uns.classList.remove('on');
+    }
+    chk.classList.toggle('on');
+    return;
+  }
+
+  // Nav buttons
+  var btn = e.target.closest('[data-dir]');
+  if (btn) {
+    var dir = btn.getAttribute('data-dir');
+    if (dir === 'back') { swGo(swCur - 1, 'back'); }
+    else if (dir === 'next') { if (!btn.disabled) swGo(swCur + 1, 'forward'); }
+    else if (dir === 'submit') { if (!btn.disabled) swShowResult(); }
+    return;
+  }
+});
+
+function getChecked(group) {
+  var el = document.querySelector('.sw-checks[data-group="' + group + '"]');
+  if (!el) return [];
+  var on = el.querySelectorAll('.sw-chk.on');
+  var out = [];
+  for (var i = 0; i < on.length; i++) out.push(on[i].getAttribute('data-v'));
+  return out;
+}
+
+function swShowResult() {
+  // Hide question screens
+  var all = document.querySelectorAll('[data-q]');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+  // Full progress
+  var ph = '';
+  for (var i = 0; i < 4; i++) ph += '<div class="sw-prog__seg on"></div>';
+  document.getElementById('swProg').innerHTML = ph;
+
+  var age = swA.q1, prior = swA.q3, goal = swA.q4;
+  var findings = getChecked('q2');
+
+  var older = age === 'over35', mid = age === '30-35';
+  var bilateral = findings.indexOf('oma-both') >= 0;
+  var hasOma = findings.indexOf('oma-one') >= 0 || bilateral;
+  var die = findings.indexOf('die') >= 0;
+  var hydro = findings.indexOf('hydro') >= 0;
+  var lowAMH = findings.indexOf('lowamh') >= 0;
+  var advanced = hasOma || die;
+  var repeat = prior === 'once' || prior === 'multiple';
+  var multi = prior === 'multiple';
+  var wantsFert = goal === 'fertility' || goal === 'both';
+  var wantsPain = goal === 'pain' || goal === 'both';
+
+  // ── PAIN ──
+  var painV = die ? 68 : advanced ? 60 : 65;
+  if (multi) painV -= 10;
+  painV = clamp(painV, 20, 90);
+  var painLo = clamp(painV - 18, 5, 85), painHi = clamp(painV + 15, 25, 95);
+  var painNote = die
+    ? 'Most women with deep endo report meaningful pain improvement after surgery — but <strong>outcomes can vary</strong> and some get partial or temporary relief.'
+    : advanced
+      ? 'Surgery can help with pain from endometriomas, though <strong>the benefit is more variable</strong> than for superficial disease.'
+      : 'For earlier-stage disease, there is <strong>good evidence that surgery reduces pain</strong>. Most women report improvement.';
+  if (multi) painNote += ' With repeat surgery, <strong>the pain benefit tends to be smaller each time</strong>.';
+
+  // ── FERTILITY ──
+  var fertV = advanced ? (repeat ? 25 : 42) : (repeat ? 40 : 55);
+  if (older) fertV -= 8;
+  if (die) fertV -= 5;
+  if (hydro) fertV = Math.round(fertV * 0.55); // hydrosalpinx substantially reduces
+  fertV = clamp(fertV, 10, 80);
+  var fertLo = clamp(fertV - 16, 5, 70), fertHi = clamp(fertV + 14, 20, 90);
+  var fertNote;
+  if (!advanced && !hydro) {
+    fertNote = 'For earlier-stage endo, <strong>surgery can improve your chances of conceiving naturally</strong>. This has strong research support.';
+  } else if (die) {
+    fertNote = 'For deep endometriosis, <strong>surgery doesn\'t clearly improve fertility</strong>. Your specialist may suggest IVF as an equally or more effective option.';
+  } else {
+    fertNote = 'With endometriomas, the fertility picture depends on your situation. <strong>Your specialist can help weigh surgery vs IVF</strong> — in many cases, IVF without surgery is just as effective.';
+  }
+  if (hydro) fertNote += ' <strong>Fluid in the tube(s) significantly reduces pregnancy chances</strong>, including IVF success. Removing the affected tube (salpingectomy) before IVF is recommended by NICE.';
+  if (multi) fertNote += ' Each additional surgery tends to have <strong>diminishing fertility benefit</strong>.';
+
+  // ── OVARIAN RESERVE RISK ──
+  var riskV = 18;
+  if (hasOma) riskV += 15;
+  if (bilateral) riskV += 18;
+  if (repeat) riskV += 16;
+  if (multi) riskV += 10;
+  if (older) riskV += 5;
+  if (lowAMH) riskV += 12;
+  riskV = clamp(riskV, 10, 92);
+  var riskLo = clamp(riskV - 14, 5, 82), riskHi = clamp(riskV + 12, 20, 95);
+  var riskNote = 'Every ovarian surgery removes some healthy tissue along with the disease. ';
+  if (bilateral) riskNote += 'With <strong>both ovaries affected, the risk to your egg reserve is higher</strong>. ';
+  if (lowAMH) riskNote += 'Your ovarian reserve is already lower, which <strong>increases the stakes of any further surgery</strong>. ';
+  if (repeat) riskNote += '<strong>Each additional surgery increases this risk further</strong>. ';
+  if (riskV >= 50) riskNote += 'For your profile, <strong>discussing fertility preservation before surgery</strong> would be a good idea.';
+  else riskNote += 'For your profile, the risk is <strong>more modest — but still worth discussing</strong> with your specialist.';
+
+  // ── SUMMARY ──
+  var summary = '';
+  if (wantsFert && riskV >= 50) {
+    summary = '<strong>Given your situation, it\'s worth having a conversation about fertility preservation before any surgery.</strong> Your specialist can also discuss whether IVF without surgery might achieve the same goal with less impact on your egg reserve.';
+  } else if (wantsFert && hydro) {
+    summary = '<strong>Fluid in the tube(s) has a significant impact on fertility.</strong> Removing the affected tube before IVF is a well-supported recommendation. Your specialist can talk you through the timing and options.';
+  } else if (wantsFert && advanced) {
+    summary = '<strong>With endometriomas or deep endo, the decision between surgery and IVF is nuanced.</strong> In many cases, going straight to IVF is just as effective for fertility — and avoids the risk to your ovarian reserve.';
+  } else if (wantsPain && !wantsFert) {
+    summary = '<strong>Surgery is one of the most effective options for endo-related pain.</strong> ' + (multi ? 'With your surgical history, your specialist will carefully weigh the likely benefit against the risks.' : 'Your specialist can discuss the best approach for your specific type of disease.');
+  } else if (!advanced) {
+    summary = '<strong>For earlier-stage endometriosis, surgery can help with both pain and fertility.</strong> ' + (repeat ? 'Since you\'ve had surgery before, the focus will be on whether another procedure is likely to offer meaningful benefit.' : 'The evidence supports a good chance of improvement.');
+  } else {
+    summary = '<strong>With your profile, a specialist conversation is important</strong> to weigh the potential benefits of surgery against the risks — particularly for your egg reserve.';
+  }
+
+  // ── BUILD CARDS ──
+  var cards = '';
+  if (wantsPain) cards += specCard('How likely is surgery to help with pain?', 'benefit', painV, painLo, painHi, painNote);
+  if (wantsFert) cards += specCard('How might surgery affect my chances of getting pregnant?', 'benefit', fertV, fertLo, fertHi, fertNote);
+  cards += specCard('What\'s the risk to my egg reserve?', 'risk', riskV, riskLo, riskHi, riskNote);
+
+  var res = document.getElementById('swResult');
+  res.innerHTML =
+    '<div class="sw-res__title">What the evidence suggests</div>' +
+    '<div class="sw-res__sub">Based on your answers — direction and magnitude, not a precise prediction.</div>' +
+    cards +
+    '<div class="sw-summary"><div class="sw-summary__title">In a nutshell</div><div class="sw-summary__text">' + summary + '</div></div>' +
+    '<div class="sw-ref">Based on: ESHRE Endometriosis Guideline 2022 · NICE NG73 2024 · Australian CPG 2024 · La Marca <em>Hum Reprod Open</em> 2025 · Duffy <em>Cochrane</em> 2014</div>' +
+    '<div class="sw-actions"><a href="https://www.melbourneivf.com.au" target="_blank" class="sw-act1">Book a Consultation</a><button class="sw-act2" onclick="swRestart()">Start Over</button></div>';
+  res.classList.add('active');
+  document.querySelector('.sw-stage').scrollTop = 0;
+
+  // Animate spectrum bars
+  setTimeout(function() {
+    var bars = res.querySelectorAll('.sp-bar');
+    for (var i = 0; i < bars.length; i++) {
+      var bar = bars[i];
+      var v = parseInt(bar.getAttribute('data-v'));
+      var lo = parseInt(bar.getAttribute('data-lo'));
+      var hi = parseInt(bar.getAttribute('data-hi'));
+      bar.querySelector('.sp-bar__range').style.cssText = 'left:' + lo + '%;width:' + (hi - lo) + '%';
+      bar.querySelector('.sp-bar__marker').style.left = Math.max(8, Math.min(92, v)) + '%';
+    }
+  }, 80);
+}
+
+function specCard(title, type, val, lo, hi, note) {
+  var leftL = type === 'risk' ? 'Lower risk' : 'Less likely';
+  var rightL = type === 'risk' ? 'Higher risk' : 'More likely';
+  return '<div class="sp-card">' +
+    '<div class="sp-card__title">' + title + '</div>' +
+    '<div class="sp-bar__ends"><span>' + leftL + '</span><span>' + rightL + '</span></div>' +
+    '<div class="sp-bar" data-v="' + val + '" data-lo="' + lo + '" data-hi="' + hi + '">' +
+      '<div class="sp-bar__bg ' + type + '"></div>' +
+      '<div class="sp-bar__range" style="left:0;width:0"></div>' +
+      '<div class="sp-bar__marker" style="left:0"></div>' +
+    '</div>' +
+    '<div class="sp-card__note">' + note + '</div>' +
+  '</div>';
+}
+
+function swRestart() {
+  swA = {};
+  swCur = 1;
+  var opts = document.querySelectorAll('.sw-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('on');
+  var chks = document.querySelectorAll('.sw-chk');
+  for (var i = 0; i < chks.length; i++) chks[i].classList.remove('on');
+  var nxs = document.querySelectorAll('.sw-nx');
+  for (var i = 0; i < nxs.length; i++) nxs[i].disabled = true;
+  // Q2 next stays enabled (checkboxes, no required)
+  document.querySelector('[data-q="2"] .sw-nx').disabled = false;
+  document.getElementById('swResult').classList.remove('active');
+  document.getElementById('swResult').innerHTML = '';
+  swGo(1, 'back');
+}
+</script>
+</body>
+</html>

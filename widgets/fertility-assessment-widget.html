@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Should I See a Fertility Specialist?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+.fa-widget{
+  --primary:#d4567a;--primary-dk:#b8446a;--warm:#e8956a;
+  --grad-hero:linear-gradient(135deg,#d4567a 0%,#e8956a 50%,#f0b87a 100%);
+  --grad-btn:linear-gradient(135deg,#d4567a,#c25838);
+  --grad-soft:linear-gradient(135deg,#fdf0f3,#fef6f0);
+  --bg:#fdf8f6;--surface:#fff;--highlight:#fff5f2;
+  --text:#2d2424;--text2:#5a4a4a;--muted:#8a7a7a;--faint:#b0a0a0;
+  --border:#ece0dc;--teal:#3d8b7a;--teal-lt:#edf7f4;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',-apple-system,sans-serif;
+  --r:14px;
+
+  max-width:520px;width:100%;font-family:var(--font-b);color:var(--text);line-height:1.55;background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(45,36,36,.1);border:1.5px solid var(--border);
+}
+
+/* Hero */
+.fa-hero{background:var(--grad-hero);padding:28px 28px 24px;text-align:center;position:relative;overflow:hidden}
+.fa-hero::before{content:'';position:absolute;top:-50%;right:-25%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);border-radius:50%}
+.fa-hero__badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);padding:4px 14px;border-radius:16px;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);margin-bottom:12px}
+.fa-hero__title{font-family:var(--font-d);font-size:22px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.3px;margin-bottom:6px}
+.fa-hero__sub{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+
+/* Body — fixed height so pages don't jump */
+.fa-body{padding:24px 24px 20px;min-height:420px;display:flex;flex-direction:column}
+
+/* Progress */
+.fa-prog{display:flex;gap:5px;margin-bottom:20px;flex-shrink:0}
+.fa-prog__seg{flex:1;height:4px;border-radius:2px;background:var(--border);transition:all .35s ease}
+.fa-prog__seg.on{background:var(--grad-btn);box-shadow:0 1px 4px rgba(212,86,122,.25)}
+
+/* Screens — fill available space */
+.fa-screen{display:none;animation:faSlide .25s ease;flex:1;flex-direction:column}
+.fa-screen.active{display:flex}
+@keyframes faSlide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes faSlideBack{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+.fa-screen.back{animation:faSlideBack .25s ease}
+
+.fa-step{font-size:11px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;flex-shrink:0}
+.fa-q{font-family:var(--font-d);font-size:18px;font-weight:600;color:var(--text);margin-bottom:14px;line-height:1.25;flex-shrink:0}
+
+/* Content area scrolls if needed */
+.fa-content{flex:1;overflow-y:auto;margin-bottom:4px}
+
+/* Options */
+.fa-opts{display:flex;flex-wrap:wrap;gap:6px}
+.fa-opt{padding:9px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:var(--font-b);font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s ease;line-height:1.35}
+.fa-opt:hover{border-color:var(--primary);background:var(--highlight)}
+.fa-opt.on{border-color:var(--primary);background:linear-gradient(135deg,#fdf0f3,#fef0ec);color:var(--text);font-weight:600;box-shadow:0 0 0 2px rgba(212,86,122,.1)}
+
+/* Checkboxes */
+.fa-checks{display:flex;flex-direction:column;gap:5px}
+.fa-chk{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s ease;line-height:1.35}
+.fa-chk:hover{border-color:var(--primary);background:var(--highlight)}
+.fa-chk.on{border-color:var(--primary);background:var(--highlight);color:var(--text)}
+.fa-chk input{display:none}
+.fa-chk__box{width:16px;height:16px;min-width:16px;border-radius:4px;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;transition:all .15s ease}
+.fa-chk.on .fa-chk__box{border-color:var(--primary);background:var(--primary)}
+.fa-chk__box svg{display:none}.fa-chk.on .fa-chk__box svg{display:block}
+
+/* Nav — always at bottom */
+.fa-nav{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid var(--border);flex-shrink:0}
+.fa-back{background:none;border:1.5px solid var(--border);border-radius:20px;padding:8px 18px;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s ease}
+.fa-back:hover{border-color:var(--text2);color:var(--text2)}
+.fa-next{background:var(--grad-btn);border:none;border-radius:20px;padding:9px 24px;font-family:var(--font-b);font-size:13px;font-weight:600;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(212,86,122,.25);transition:all .15s ease;margin-left:auto}
+.fa-next:hover:not(:disabled){box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.fa-next:disabled{background:#d8ccc8;box-shadow:none;cursor:default}
+
+/* Result */
+.fa-result{display:none;animation:faPop .35s ease;flex:1;flex-direction:column}
+.fa-result.active{display:flex}
+@keyframes faPop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+
+.fa-result__title{font-family:var(--font-d);font-size:20px;font-weight:700;text-align:center;margin-bottom:4px;line-height:1.25}
+.fa-result__sub{text-align:center;color:var(--muted);margin-bottom:16px;font-size:13px;line-height:1.5}
+
+.fa-advice{padding:16px;border-radius:12px;margin-bottom:12px;background:var(--grad-soft);border:1.5px solid var(--border)}
+.fa-advice__t{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.fa-advice ul{margin:0;padding-left:18px;font-size:12.5px;color:var(--text2);line-height:1.65}
+.fa-advice li{margin-bottom:3px}
+
+.fa-msg{background:var(--surface);border:1px solid var(--border);padding:12px 14px;border-radius:10px;font-size:12px;color:var(--muted);text-align:center;line-height:1.5;margin-bottom:12px;font-style:italic}
+.fa-ref{font-size:10.5px;color:var(--faint);text-align:center;line-height:1.5;margin-bottom:14px}
+.fa-ref a{color:var(--primary);text-decoration:none}
+
+.fa-actions{display:flex;gap:8px;margin-top:auto}
+.fa-actions a,.fa-actions button{flex:1;padding:10px;border-radius:20px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s ease}
+.fa-act-primary{background:var(--grad-btn);color:#fff;border:none;box-shadow:0 3px 12px rgba(212,86,122,.2)}
+.fa-act-primary:hover{box-shadow:0 4px 18px rgba(212,86,122,.35);transform:translateY(-1px)}
+.fa-act-secondary{background:transparent;color:var(--primary);border:1.5px solid var(--primary)}
+.fa-act-secondary:hover{background:var(--highlight)}
+
+.fa-disc{font-size:10px;color:var(--faint);text-align:center;padding:12px 24px 16px;line-height:1.5;border-top:1px solid var(--border)}
+</style>
+</head>
+<body style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#fdf8f6,#f0e6e0);padding:20px">
+
+<div class="fa-widget">
+  <div class="fa-hero">
+    <span class="fa-hero__badge">Quick Check</span>
+    <h2 class="fa-hero__title">Should I See a Fertility Specialist?</h2>
+    <p class="fa-hero__sub">Six quick questions to help you understand where you stand.</p>
+  </div>
+
+  <div class="fa-body">
+    <div class="fa-prog" id="faProg"></div>
+
+    <!-- Q1: Age -->
+    <div class="fa-screen active" data-q="1">
+      <div class="fa-step">Question 1 of 6</div>
+      <div class="fa-q">How old are you?</div>
+      <div class="fa-content">
+        <div class="fa-opts" data-group="q1">
+          <div class="fa-opt" data-v="under30">Under 30</div>
+          <div class="fa-opt" data-v="30-34">30–34</div>
+          <div class="fa-opt" data-v="35-37">35–37</div>
+          <div class="fa-opt" data-v="38-40">38–40</div>
+          <div class="fa-opt" data-v="over40">Over 40</div>
+        </div>
+      </div>
+      <div class="fa-nav">
+        <button class="fa-next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Q2: Duration -->
+    <div class="fa-screen" data-q="2">
+      <div class="fa-step">Question 2 of 6</div>
+      <div class="fa-q">How long have you been trying?</div>
+      <div class="fa-content">
+        <div class="fa-opts" data-group="q2">
+          <div class="fa-opt" data-v="not-yet">Not yet trying</div>
+          <div class="fa-opt" data-v="less3">Less than 3 months</div>
+          <div class="fa-opt" data-v="3-6">3–6 months</div>
+          <div class="fa-opt" data-v="6-12">6–12 months</div>
+          <div class="fa-opt" data-v="12plus">Over 12 months</div>
+        </div>
+      </div>
+      <div class="fa-nav">
+        <button class="fa-back">← Back</button>
+        <button class="fa-next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Q3: Cycles -->
+    <div class="fa-screen" data-q="3">
+      <div class="fa-step">Question 3 of 6</div>
+      <div class="fa-q">Are your periods regular?</div>
+      <div class="fa-content">
+        <div class="fa-opts" data-group="q3">
+          <div class="fa-opt" data-v="regular">Yes, regular (21–35 days)</div>
+          <div class="fa-opt" data-v="irregular">Irregular</div>
+          <div class="fa-opt" data-v="absent">Absent</div>
+          <div class="fa-opt" data-v="unsure">Not sure</div>
+        </div>
+      </div>
+      <div class="fa-nav">
+        <button class="fa-back">← Back</button>
+        <button class="fa-next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Q4: Red Flags -->
+    <div class="fa-screen" data-q="4">
+      <div class="fa-step">Question 4 of 6</div>
+      <div class="fa-q">Do any of these apply to you?</div>
+      <div class="fa-content">
+        <div class="fa-checks" data-group="q4">
+          <label class="fa-chk" data-v="genetic"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Genetic condition (e.g. Fragile X)</label>
+          <label class="fa-chk" data-v="lowamh"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Low AMH or diminished ovarian reserve</label>
+          <label class="fa-chk" data-v="endo"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Endometriosis or severe pelvic pain</label>
+          <label class="fa-chk" data-v="pcos"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>PCOS</label>
+          <label class="fa-chk" data-v="surgery"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Prior pelvic surgery or cancer treatment</label>
+          <label class="fa-chk" data-v="malefactor"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Known male-factor concerns</label>
+          <label class="fa-chk" data-v="miscarriage"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Recurrent miscarriage (2 or more)</label>
+          <label class="fa-chk" data-v="none"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>None of the above</label>
+        </div>
+      </div>
+      <div class="fa-nav">
+        <button class="fa-back">← Back</button>
+        <button class="fa-next">Next →</button>
+      </div>
+    </div>
+
+    <!-- Q5: Tracking -->
+    <div class="fa-screen" data-q="5">
+      <div class="fa-step">Question 5 of 6</div>
+      <div class="fa-q">Do you track ovulation?</div>
+      <div class="fa-content">
+        <div class="fa-opts" data-group="q5">
+          <div class="fa-opt" data-v="no">No</div>
+          <div class="fa-opt" data-v="app">App or calendar</div>
+          <div class="fa-opt" data-v="opk">Ovulation kits</div>
+          <div class="fa-opt" data-v="other">Other method</div>
+        </div>
+      </div>
+      <div class="fa-nav">
+        <button class="fa-back">← Back</button>
+        <button class="fa-next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Q6: Lifestyle -->
+    <div class="fa-screen" data-q="6">
+      <div class="fa-step">Question 6 of 6</div>
+      <div class="fa-q">Any lifestyle factors?</div>
+      <div class="fa-content">
+        <div class="fa-checks" data-group="q6">
+          <label class="fa-chk" data-v="smoking"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Smoking or vaping</label>
+          <label class="fa-chk" data-v="alcohol"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>More than 7 drinks per week</label>
+          <label class="fa-chk" data-v="bmi"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>BMI under 18 or over 30</label>
+          <label class="fa-chk" data-v="nofolic"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Not taking folic acid</label>
+          <label class="fa-chk" data-v="none"><input type="checkbox"><span class="fa-chk__box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>None of the above</label>
+        </div>
+      </div>
+      <div class="fa-nav">
+        <button class="fa-back">← Back</button>
+        <button class="fa-next" id="faSubmit">See Results →</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="fa-result" id="faResult">
+      <h3 class="fa-result__title" id="faTitle"></h3>
+      <p class="fa-result__sub" id="faSub"></p>
+      <div id="faAdvice"></div>
+      <div class="fa-msg">Natural conception is often possible — but for some, the reproductive window may be shorter than expected. An earlier conversation means more informed choices, not rushed ones.</div>
+      <div class="fa-ref">Based on: <a href="https://doi.org/10.1016/j.fertnstert.2021.10.038" target="_blank">ASRM Committee Opinion — Optimizing Natural Fertility, <em>Fertil Steril</em> 2022;117:53–63</a></div>
+      <div class="fa-actions">
+        <a href="https://www.melbourneivf.com.au" target="_blank" class="fa-act-primary">Book a Consultation</a>
+        <button class="fa-act-secondary" onclick="faRestart()">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="fa-disc">This tool is for general information only and does not replace medical advice. Please discuss your individual situation with a qualified healthcare professional.</div>
+</div>
+
+<script>
+(function(){
+  const A={};
+  let cur=1;
+  const total=6;
+
+  function prog(){
+    const el=document.getElementById('faProg');
+    el.innerHTML=Array.from({length:total},(_,i)=>`<div class="fa-prog__seg${i<cur?' on':''}"></div>`).join('');
+  }
+  prog();
+
+  function go(n,dir){
+    document.querySelectorAll('.fa-screen').forEach(s=>s.classList.remove('active','back'));
+    const s=document.querySelector(`.fa-screen[data-q="${n}"]`);
+    if(dir==='back')s.classList.add('back');
+    s.classList.add('active');
+    cur=n;prog();
+  }
+
+  document.querySelectorAll('.fa-opt').forEach(o=>{
+    o.addEventListener('click',function(){
+      const grp=this.parentElement.dataset.group;
+      this.parentElement.querySelectorAll('.fa-opt').forEach(x=>x.classList.remove('on'));
+      this.classList.add('on');
+      A[grp]=this.dataset.v;
+      const next=this.closest('.fa-screen').querySelector('.fa-next');
+      if(next)next.disabled=false;
+    });
+  });
+
+  document.querySelectorAll('.fa-chk').forEach(c=>{
+    c.addEventListener('click',function(e){
+      e.preventDefault();
+      const v=this.dataset.v;
+      const grid=this.parentElement;
+      if(v==='none'){
+        grid.querySelectorAll('.fa-chk').forEach(x=>{if(x!==this){x.classList.remove('on');x.querySelector('input').checked=false}});
+      }else{
+        const none=grid.querySelector('.fa-chk[data-v="none"]');
+        if(none){none.classList.remove('on');none.querySelector('input').checked=false}
+      }
+      this.classList.toggle('on');
+      this.querySelector('input').checked=this.classList.contains('on');
+    });
+  });
+
+  document.querySelectorAll('.fa-next').forEach(b=>{
+    b.addEventListener('click',function(){
+      if(this.id==='faSubmit'){showResult();return}
+      go(cur+1,'forward');
+    });
+  });
+  document.querySelectorAll('.fa-back').forEach(b=>{
+    b.addEventListener('click',()=>go(cur-1,'back'));
+  });
+
+  function getChecked(q){
+    const el=document.querySelector(`.fa-screen[data-q="${q}"] .fa-checks`);
+    if(!el)return[];
+    return Array.from(el.querySelectorAll('.fa-chk.on')).map(c=>c.dataset.v);
+  }
+
+  function showResult(){
+    A.q4=getChecked(4);
+    A.q6=getChecked(6);
+
+    const r=calc();
+    document.querySelectorAll('.fa-screen').forEach(s=>s.classList.remove('active'));
+    const res=document.getElementById('faResult');
+    res.classList.add('active');
+
+    document.getElementById('faTitle').textContent=r.title;
+    document.getElementById('faSub').textContent=r.subtitle;
+    document.getElementById('faAdvice').innerHTML=`<div class="fa-advice"><div class="fa-advice__t">${r.heading}</div><ul>${r.advice.map(a=>`<li>${a}</li>`).join('')}</ul></div>`;
+
+    document.getElementById('faProg').innerHTML=Array.from({length:total},()=>`<div class="fa-prog__seg on"></div>`).join('');
+  }
+
+  function calc(){
+    let score=0;
+    const age=A.q1,dur=A.q2,cyc=A.q3,rf=A.q4||[],trk=A.q5,lf=A.q6||[];
+
+    if(age==='over40')score+=4;
+    else if(age==='38-40')score+=3;
+    else if(age==='35-37')score+=2;
+
+    if(dur==='12plus')score+=4;
+    else if(dur==='6-12'){score+=2;if(['35-37','38-40','over40'].includes(age))score+=1}
+    else if(dur==='3-6'&&['38-40','over40'].includes(age))score+=2;
+
+    if(cyc==='absent')score+=3;
+    else if(cyc==='irregular')score+=2;
+
+    if(!rf.includes('none')&&rf.length>0){
+      if(rf.some(f=>['genetic','lowamh','surgery'].includes(f)))score+=4;
+      if(rf.some(f=>['endo','malefactor','miscarriage'].includes(f)))score+=2;
+      if(rf.includes('pcos'))score+=1;
+    }
+
+    if(score>=6)return{
+      title:'It would be worth seeing a fertility specialist',
+      subtitle:'Based on your answers, a conversation with a specialist could give you real clarity about your options.',
+      heading:'What you could do next',
+      advice:[
+        'Ask your GP for a referral to a fertility specialist',
+        'A specialist can review your situation and talk through a personalised plan',
+        'This might include discussing natural conception, fertility preservation, or assisted reproduction'
+      ]
+    };
+    if(score>=3)return{
+      title:'A check-in with your GP would be a good idea',
+      subtitle:'A few simple tests could give you helpful information about where things stand.',
+      heading:'Worth discussing with your GP',
+      advice:[
+        'Basic blood work and a cycle assessment',
+        'AMH testing (a simple blood test for ovarian reserve)',
+        'A semen analysis for your partner',
+        'Your GP can arrange a specialist referral if anything needs a closer look'
+      ]
+    };
+
+    const tips=['Intercourse every 1–2 days around your fertile window gives you the best chance'];
+    if(trk==='no')tips.push('Consider tracking ovulation — even a simple app can help');
+    if(!lf.includes('none')&&lf.length>0)tips.push('Small lifestyle changes can make a real difference');
+    tips.push('If no pregnancy after 6–12 months, it\'s worth checking in with your GP');
+    return{
+      title:'Natural conception is a reasonable path',
+      subtitle:'The odds are in your favour — here are a few things that can help.',
+      heading:'Tips to optimise your chances',
+      advice:tips
+    };
+  }
+
+  window.faRestart=function(){
+    Object.keys(A).forEach(k=>delete A[k]);
+    cur=1;
+    document.querySelectorAll('.fa-opt').forEach(o=>o.classList.remove('on'));
+    document.querySelectorAll('.fa-chk').forEach(c=>{c.classList.remove('on');c.querySelector('input').checked=false});
+    document.querySelectorAll('.fa-next').forEach(b=>b.disabled=true);
+    document.querySelector('.fa-screen[data-q="4"] .fa-next').disabled=false;
+    document.getElementById('faResult').classList.remove('active');
+    go(1,'back');
+  };
+})();
+</script>
+</body>
+</html>
