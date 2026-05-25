@@ -394,6 +394,44 @@
                 gap: 0.75rem;
             }
         }
+
+        /* FAQ link blocks at the foot of each category — for inbound linking to fertility-questions.html */
+        .treatment-faq-link {
+            grid-column: 1 / -1;
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: rgba(255, 255, 255, 0.45);
+            border-left: 3px solid #8b7355;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #4a4a4a;
+        }
+        .treatment-faq-link strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: #8b7355;
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        .treatment-faq-link a {
+            color: #2c2c2c;
+            text-decoration: underline;
+            text-decoration-color: rgba(139, 115, 85, 0.4);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.3s ease;
+        }
+        .treatment-faq-link a:hover {
+            text-decoration-color: #8b7355;
+            color: #8b7355;
+        }
+        .treatment-faq-link .sep {
+            color: #c4b8a8;
+            margin: 0 0.4rem;
+        }
     </style>
 </head>
 <body>
@@ -453,6 +491,13 @@
                     <h3>Intrauterine Insemination</h3>
                     <p>A minimally invasive procedure placing prepared sperm directly into the uterus at ovulation. Often combined with ovulation induction to improve success rates.</p>
                 </div>
+                <div class="treatment-faq-link">
+                    <strong>Common questions before your first visit</strong>
+                    <a href="fertility-questions.html#when-to-see">when to see a fertility specialist</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#first-appointment">what happens at the first appointment</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#medicare">does Medicare cover fertility treatment</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#amh-meaning">what your AMH result means</a>
+                </div>
             </div>
         </section>
 
@@ -468,6 +513,13 @@
                     <h3>Sperm Freezing</h3>
                     <p>Sperm cryopreservation before medical treatment, surgery, or for personal planning. Frozen sperm can be used in IUI or IVF when you're ready.</p>
                 </div>
+                <div class="treatment-faq-link">
+                    <strong>Common questions about egg freezing</strong>
+                    <a href="fertility-questions.html#when-to-freeze">at what age to freeze</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#how-many-eggs">how many eggs to freeze</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#egg-freezing-cost">cost in Melbourne</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#egg-success">success rate of frozen eggs</a>
+                </div>
             </div>
         </section>
 
@@ -482,6 +534,13 @@
                 <div id="donor" class="service-card">
                     <h3>Donor Conception & Surrogacy</h3>
                     <p>Inclusive pathways to parenthood using donor sperm, donor eggs, or surrogacy. Individualised care for single individuals, same-sex couples, and transgender patients.</p>
+                </div>
+                <div class="treatment-faq-link">
+                    <strong>Common questions about IVF</strong>
+                    <a href="fertility-questions.html#ivf-process">how the IVF process actually works</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#ivf-success">your chance of a live birth with IVF</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#low-amh">is low AMH a reason to panic</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#medicare">Medicare and IVF costs</a>
                 </div>
             </div>
         </section>
@@ -505,6 +564,12 @@
                 <div id="menopause" class="service-card">
                     <h3>Menopause</h3>
                     <p>Symptom management and long-term health planning through perimenopause and menopause. Personalised hormonal and non-hormonal treatment options.</p>
+                </div>
+                <div class="treatment-faq-link">
+                    <strong>Common questions about endometriosis and fertility</strong>
+                    <a href="fertility-questions.html#endo-surgery">should I have endometriosis surgery before IVF</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#endo-ivf">does endometriosis affect IVF success</a><span class="sep">·</span>
+                    <a href="fertility-questions.html#endo-eggs">endometrioma and egg freezing</a>
                 </div>
             </div>
         </section>
@@ -597,5 +662,8 @@
             });
         });
     </script>
+
+    <!-- Let's Talk floating widget -->
+    <script src="lets-talk-widget.js" defer></script>
 </body>
 </html>
