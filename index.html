@@ -119,8 +119,51 @@
     "https://au.linkedin.com/in/yuval-fouks-97369224",
     "https://findanexpert.unimelb.edu.au/profile/1126172-yuval-fouks",
     "https://www.instagram.com/yuvalfouks/",
-    "https://apfmed.org/person/dr-yuval-fouks/"
+    "https://apfmed.org/person/dr-yuval-fouks/",
+    "https://pubmed.ncbi.nlm.nih.gov/?term=Fouks+Y&cauthor_id=26942347",
+    "https://academic.oup.com/humrep"
   ]
+}
+</script>
+
+<!-- Schema: Editorial role and research portfolio (Person augmentation) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://drfouks.com/#person",
+  "hasOccupation": [
+    {
+      "@type": "Occupation",
+      "name": "Associate Editor, Human Reproduction",
+      "occupationalCategory": "Academic Editorial Role",
+      "description": "Associate Editor for Human Reproduction (Oxford University Press), a leading international peer-reviewed journal in reproductive medicine."
+    },
+    {
+      "@type": "Occupation",
+      "name": "Peer Reviewer",
+      "occupationalCategory": "Academic Peer Review",
+      "description": "Peer reviewer for leading international journals in reproductive medicine including Fertility and Sterility, Human Reproduction, and Reproductive BioMedicine Online (RBMO)."
+    }
+  ],
+  "subjectOf": {
+    "@type": "CollectionPage",
+    "@id": "https://drfouks.com/research.html",
+    "url": "https://drfouks.com/research.html",
+    "name": "Research and Publications - Dr Yuval Fouks",
+    "description": "Peer-reviewed publications and ongoing research by Dr Yuval Fouks in reproductive medicine, IVF outcomes, endometriosis, fertility preservation, and AI applications in reproductive health.",
+    "about": [
+      "IVF outcomes and embryo aneuploidy",
+      "FMR1 premutation and ovarian reserve",
+      "Immature oocyte ICSI outcomes",
+      "Endometriosis-related infertility",
+      "Fertility preservation",
+      "Machine learning in reproductive medicine"
+    ],
+    "mainEntity": {
+      "@id": "https://drfouks.com/#person"
+    }
+  }
 }
 </script>
 
@@ -1146,9 +1189,11 @@
         .service-card h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
-            font-weight: 500;
+            font-weight: 700;
             margin-bottom: 0;
-            color: #2c2c2c;
+            color: #1a1a1a;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.01em;
         }
 
         .service-card p {
@@ -2230,14 +2275,8 @@
             <ul class="nav-links" id="desktop-nav">
                 <li><a href="#about">ABOUT</a></li>
                 <li><a href="#services">SERVICES</a></li>
-                <li><a href="#scientific">RESEARCH</a></li>
-                <li class="dropdown">
-<a href="#" class="nav-highlight dropdown-toggle">PATIENTS ▾</a>
-<div class="dropdown-menu">
-<a href="fertility-assessment.html">Family Planning Assessment</a>
-<a href="egg-freezing-calculator.html">Egg Freezing Calculator</a>
-</div>
-</li>
+                <li><a href="research.html">RESEARCH</a></li>
+                <li><a href="fertility-questions.html" class="nav-highlight">PATIENT QUESTIONS</a></li>
 <li class="dropdown">
 <a href="#" class="nav-highlight dropdown-toggle">PROVIDERS ▾</a>
 <div class="dropdown-menu">
@@ -2306,9 +2345,9 @@
         <ul>
             <li><a href="#about" class="mobile-link">ABOUT</a></li>
             <li><a href="#services" class="mobile-link">SERVICES</a></li>
-            <li><a href="#scientific" class="mobile-link">RESEARCH</a></li>
-            <li><a href="fertility-assessment.html" class="nav-highlight-mobile">Family Planning Assessment</a></li>
-            <li><a href="egg-freezing-calculator.html" class="nav-highlight-mobile">Egg Freezing Calculator</a></li>
+            <li><a href="research.html" class="mobile-link">RESEARCH</a></li>
+            <li><a href="fertility-questions.html" class="nav-highlight-mobile">PATIENT QUESTIONS</a></li>
+            <li><a href="https://fouksir.github.io/Fertool/index.html" target="_blank" rel="noopener" class="nav-highlight-mobile">PROVIDERS</a></li>
             <li><a href="#contact" class="mobile-link">CONTACT</a></li>
             <li class="mobile-lang-switcher">
                 <a href="index.html" aria-label="English" title="English" class="mobile-lang-active">
@@ -2429,7 +2468,20 @@
                 <!-- Research & Academic Section -->
                 <div class="story-section">
                     <p>
-                        Alongside my clinical work, I'm actively involved in research and serve on editorial boards and as a reviewer for <strong>leading international journals</strong> in reproduction and infertility. This allows me to remain at the forefront of reproductive medicine and to translate the latest advances directly into patient care.
+                        Alongside my clinical work, I am an active clinician-researcher. I serve as <strong>Associate Editor at <em>Human Reproduction</em></strong> (Oxford University Press) and as a peer reviewer for <strong><em>Fertility and Sterility</em></strong>, <strong><em>Human Reproduction</em></strong>, and <strong><em>Reproductive BioMedicine Online</em></strong>.
+                    </p>
+                    <p>
+                        My published research spans IVF outcomes, embryo aneuploidy, the impact of FMR1 premutation on ovarian reserve, immature oocyte ICSI outcomes, endometriosis-related infertility, and applications of machine learning in reproductive medicine. This editorial and research work keeps me at the leading edge of evidence-based fertility care and means the latest advances are translated directly into how I look after my patients.
+                    </p>
+                    <p>
+                        You can view my full publication list on <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Fouks+Y&cauthor_id=26942347" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;"><strong>PubMed</strong></a> or visit my <a href="research.html" style="color: inherit; text-decoration: underline;"><strong>Research page</strong></a> for selected publications and ongoing studies.
+                    </p>
+                </div>
+
+                <!-- Patient Questions Section -->
+                <div class="story-section">
+                    <p>
+                        Patients tend to ask me the same questions on first visit, so I've answered the most common ones in detail in <a href="fertility-questions.html" style="color: inherit; text-decoration: underline;"><strong>fertility questions, answered</strong></a>: when to <a href="fertility-questions.html#when-to-see" style="color: inherit; text-decoration: underline;">see a fertility specialist</a>, what your <a href="fertility-questions.html#amh-meaning" style="color: inherit; text-decoration: underline;">AMH result means</a>, <a href="fertility-questions.html#how-many-eggs" style="color: inherit; text-decoration: underline;">how many eggs to freeze</a>, your <a href="fertility-questions.html#ivf-success" style="color: inherit; text-decoration: underline;">chance of a live birth with IVF</a>, and whether to <a href="fertility-questions.html#endo-surgery" style="color: inherit; text-decoration: underline;">have endometriosis surgery before IVF</a>.
                     </p>
                 </div>
 
@@ -2523,143 +2575,8 @@
         </div>
         
         <!-- Scroll Indicator -->
-        <div class="scroll-indicator" onclick="document.getElementById('scientific').scrollIntoView({behavior: 'smooth'});">
+        <div class="scroll-indicator" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'});">
             <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- Scientific Contribution Section -->
-    <section id="scientific" class="content-section">
-        <video id="scientific-video-bg" autoplay muted loop playsinline>
-            <source src="Media1.mp4" type="video/mp4">
-        </video>
-        <div class="content-container">
-            <!-- Page Header -->
-            <div class="section-header">
-                <h1>Scientific Contribution</h1>
-            </div>
-
-            <!-- Media & Recognition Section -->
-            <h2 class="section-title">Media & Recognition</h2>
-            <p style="margin-bottom: 3rem; font-size: 1rem; line-height: 1.8; max-width: 900px;">
-                Contributing to public discourse on reproductive medicine through expert commentary, research dissemination, and professional education.
-            </p>
-
-            <div class="cards-grid">
-                <div class="card">
-                    <div style="height: 80px; display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #c1272d; font-size: 1.3rem;">Fertility and Sterility</span>
-                    </div>
-                    <h3>Fertility and Sterility On Air Podcast</h3>
-                    <p>Guest expert discussing advanced reproductive technologies and clinical innovations.</p>
-                    <a href="https://www.youtube.com/watch?v=O498mTDgpXk" target="_blank" class="card-link">Watch Episode →</a>
-                </div>
-
-                <div class="card">
-                    <div style="height: 80px; display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #c1272d; font-size: 1.3rem;">ASRM Journal Club</span>
-                    </div>
-                    <h3>ASRM Journal Club Global Debate</h3>
-                    <p>Panelist discussing ovarian reserve and embryo aneuploidy research findings.</p>
-                    <a href="https://www.asrm.org/journals/fertility-and-sterility/journal-club-global/jcg-association-of-ovarian-reserve-embryo-aneuploidy/" target="_blank" class="card-link">View Session →</a>
-                </div>
-
-                <div class="card">
-                    <div style="height: 80px; display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <span style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #000; font-size: 1.8rem;">The Boston Globe</span>
-                    </div>
-                    <h3>The Boston Globe</h3>
-                    <p>"The elusive promise of egg freezing" - Expert commentary on fertility preservation trends (February 2024).</p>
-                    <a href="https://www.bostonglobe.com/2024/02/06/magazine/the-elusive-promise-of-egg-freezing/" target="_blank" class="card-link">Read Article →</a>
-                </div>
-
-                <div class="card">
-                    <div style="height: 80px; display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #4a7c8e; font-size: 1.3rem;">APF</span>
-                    </div>
-                    <h3>Research Fellow Recipient</h3>
-                    <p>American Physicians and Friends research fellowship recognition.</p>
-                    <a href="https://apfmed.org/person/dr-yuval-fouks/" target="_blank" class="card-link">View Profile →</a>
-                </div>
-            </div>
-
-            <!-- Research & Innovation Section -->
-            <h2 class="section-title">Research & Innovation</h2>
-
-            <!-- Academic Profile -->
-            <div class="profile-card">
-                <h3>Academic Profile</h3>
-                
-                <!-- Grid with highlight box and content -->
-                <div class="academic-grid">
-                    <div class="academic-highlight">
-                        <div class="academic-highlight-number">50+</div>
-                        <div class="academic-highlight-text">Peer-reviewed publications in leading journals</div>
-                    </div>
-                    
-                    <div class="academic-content">
-                        <p>Author of publications in <em>Human Reproduction</em>, <em>Fertility and Sterility</em>, <em>Reproductive BioMedicine Online</em>, and <em>Journal of Minimally Invasive Gynecology</em>.</p>
-                    </div>
-                </div>
-                
-                <!-- Full width highlighted section -->
-                <div class="academic-full-width">
-                    <p>Associate Editor for <em>Human Reproduction</em> and <em>Scientific Reports</em> (Nature Portfolio). Recipient of the ASRM Fertility & Sterility Investigator Achievement Award (2023).</p>
-                </div>
-                
-                <!-- Two-column layout with different widths -->
-                <div class="academic-columns">
-                    <p>My research portfolio spans clinical outcomes analysis, environmental epidemiology, machine learning applications, and health systems innovation in reproductive medicine.</p>
-                    <p></p>
-                </div>
-                
-                <div class="profile-links">
-                    <a href="https://findanexpert.unimelb.edu.au/profile/1126172-yuval-fouks" target="_blank" class="profile-link">
-                        <svg width="40" height="40" viewBox="0 0 100 100" style="flex-shrink: 0;">
-                            <circle cx="50" cy="50" r="48" fill="#00247d"/>
-                            <text x="50" y="70" text-anchor="middle" fill="white" font-size="24" font-family="serif" font-weight="bold">UM</text>
-                        </svg>
-                        <span>University of Melbourne Expert Profile</span>
-                    </a>
-                    <a href="https://au.linkedin.com/in/yuval-fouks-97369224" target="_blank" class="profile-link">
-                        <svg width="40" height="40" viewBox="0 0 100 100" style="flex-shrink: 0;">
-                            <rect width="100" height="100" fill="#0077b5" rx="8"/>
-                            <text x="50" y="70" text-anchor="middle" fill="white" font-size="48" font-family="Arial, sans-serif" font-weight="bold">in</text>
-                        </svg>
-                        <span>LinkedIn Professional Profile</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Research Cards -->
-            <div class="research-narrative">
-                <h3>Research Portfolio</h3>
-                <div class="research-narrative-content">
-                    <p>
-                        My research addresses central questions in reproductive medicine, developed in close collaboration with international and Australian groups. I led an <span class="research-highlight">analysis on diminished ovarian reserve</span> showing that reduced AMH does not increase embryo aneuploidy or compromise live birth rates, findings that have helped refine counselling for patients with reduced ovarian reserve <span class="research-publication">(Fertility and Sterility, 2022)</span><span class="research-award-badge">ASRM Investigator Achievement Award 2023</span>
-                    </p>
-                    
-                    <p>
-                        Working at the intersection of environmental health and reproductive medicine, I led the development of the first <span class="research-highlight">high-resolution, AI-enabled exposure model</span> linking satellite-derived PM2.5 and census geospatial data to sperm DNA fragmentation, contributing to precision environmental risk assessment in andrology <span class="research-publication">(Human Reproduction, 2025)</span>. The work offers a new lens on how environmental factors may influence male fertility at a population scale.
-                    </p>
-                    
-                    <p>
-                        The <span class="research-highlight">Fouks Score</span>, an externally validated clinical risk score I developed, supports surgical decision-making in tubo-ovarian abscess and complicated pelvic inflammatory disease <span class="research-publication">(Journal of Minimally Invasive Gynecology, 2019)</span>. Originally designed for acute gynaecology, it has been adopted as a practical decision-support tool in a number of institutions internationally.
-                    </p>
-                    
-                    <p>
-                        <span class="research-highlight">Machine learning</span> runs as a thread across my research. Together with colleagues across reproductive medicine and obstetrics, I've developed US-validated predictive models for the utilisation of cryopreserved oocytes and return-to-care algorithms that inform prognostication and cryostorage policy <span class="research-publication">(Reproductive BioMedicine Online, 2024)</span>. My ongoing work in real-time AI for fetal monitoring focuses on cardiotocography analysis during labour, with prospective validation in Australian and international delivery rooms, predicting fetal decelerations 2 to 3 minutes in advance using hybrid global-local models <span class="research-publication">(ongoing prospective clinical trials)</span>.
-                    </p>
-                    
-                    <p>
-                        Beyond clinical research, I'm committed to <span class="research-highlight">health systems innovation</span>, developing remote-cycle management frameworks and resource allocation models to address accessibility challenges in publicly funded fertility services. This work, presented at FSANZ 2025, focuses on equity and access in reproductive care <span class="research-publication">(health systems research and policy translation)</span>.
-                    </p>
-                </div>
-            </div>
-
-            <p style="margin-top: 2rem; font-size: 1rem; line-height: 1.8; font-style: italic;">
-                For a complete list of publications, presentations, and ongoing research projects, please visit my University of Melbourne research portfolio.
-            </p>
         </div>
     </section>
 
