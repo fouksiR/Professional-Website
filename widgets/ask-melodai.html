@@ -113,6 +113,14 @@
 // ─────────────────────────────────────────────────────────────
 const API_BASE = "https://ivf-companion-532857641879.australia-southeast1.run.app";
 // ─────────────────────────────────────────────────────────────
+// When embedded inside the launcher panel (an iframe), hide the page hero so
+// the panel's own header isn't duplicated. Standalone (Instagram link) keeps it.
+if (window.self !== window.top) {
+  try {
+    var _hero = document.querySelector('.hero'); if (_hero) _hero.style.display = 'none';
+    var _ct = document.querySelector('.container'); if (_ct) _ct.style.padding = '1.25rem 1.5rem 4rem';
+  } catch (e) {}
+}
 const answers=document.getElementById('answers');
 const q=document.getElementById('q');
 const send=document.getElementById('send');
