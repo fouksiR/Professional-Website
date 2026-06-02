@@ -99,6 +99,12 @@
 .ef-act2:hover{background:var(--highlight)}
 
 .ef-disc{font-size:10px;color:var(--faint);text-align:center;padding:12px 24px 16px;line-height:1.5;border-top:1px solid var(--border)}
+
+/* Mobile: flow naturally instead of fixed-height inner scroll */
+@media (max-width:560px){
+  .ef-body{height:auto;overflow:visible}
+  .ef-stage{position:static;left:auto;right:auto;top:auto;bottom:auto;overflow:visible}
+}
 </style>
 </head>
 <body style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#fdf8f6,#f0e6e0);padding:20px">
@@ -286,6 +292,36 @@ function efRestart() {
   document.getElementById('efResult').innerHTML = '';
   efGo(1, 'back');
 }
+</script>
+
+<script>
+/* Tell the embedding page our true height so the iframe grows to fit.
+   Fixes mobile cut-off and out-of-reach navigation buttons. Added 2026-06. */
+(function(){
+  var FILE = (location.pathname.split('/').pop() || '').trim();
+  var root = document.body && document.body.children[0];
+  function measure(){
+    var h = root ? root.getBoundingClientRect().height
+                  : document.documentElement.scrollHeight;
+    return Math.ceil(h) + 40; /* + body vertical padding */
+  }
+  var last = 0;
+  function report(){
+    var h = measure();
+    if (Math.abs(h - last) < 2) return;
+    last = h;
+    try { parent.postMessage({ type:'widget-height', height:h, src:FILE }, '*'); } catch(e){}
+  }
+  window.addEventListener('load', report);
+  window.addEventListener('resize', report);
+  document.addEventListener('click', function(){ requestAnimationFrame(function(){ setTimeout(report, 70); }); }, true);
+  document.addEventListener('input', function(){ requestAnimationFrame(report); }, true);
+  document.addEventListener('transitionend', report, true);
+  document.addEventListener('animationend', report, true);
+  if (window.ResizeObserver && root){ try { new ResizeObserver(report).observe(root); } catch(e){} }
+  setTimeout(report, 120); setTimeout(report, 400); setTimeout(report, 900);
+  report();
+})();
 </script>
 </body>
 </html>
