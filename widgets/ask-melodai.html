@@ -131,7 +131,33 @@ function formatText(s){return escHtml(s).replace(/\n/g,'<br>')}
 function renderChartKey(key){
   if(key==='amh_normogram') return _renderAmhNormogram();
   if(key==='egg_freeze_table') return _renderEggFreezeTable();
+  if(key==='eggs_by_age') return renderEggsByAge();
+  if(key==='return_rates') return renderReturnRates();
+  if(key==='low_responder') return renderLowResponder();
   return renderAnzardChart(key);
+}
+
+// ═══ AUTO-CHARTS — attach the most relevant chart(s) by topic, client-side ═══
+// Ordered most-specific first; returns up to 2 keys.
+function autoCharts(query,answer){
+  var s=((query||'')+' '+(answer||'')).toLowerCase();
+  var rules=[
+    [/poor respond|fewer eggs|few eggs|low number|not many eggs|low responder|only got \d/,'low_responder'],
+    [/how many eggs|number of eggs|enough eggs|eggs (do|should) i|should i freeze|how many.*freeze/,'eggs_by_age'],
+    [/\breturn|come back|use them|use their|actually use|utiliz|go back|warm/,'return_rates'],
+    [/\bamh\b|ovarian reserve|antral|egg reserve|how many eggs.*left|low reserve/,'amh_normogram'],
+    [/egg freez|oocyte|freeze (my |her |your )?eggs|social freez|freezing eggs|preserv/,'egg_freeze_table'],
+    [/cumulative|how many cycles|more than one cycle|second cycle|multiple cycles|keep trying|persist|worth continuing/,'cumulative'],
+    [/\bfresh\b|frozen embryo|frozen transfer|fresh or frozen|fresh vs|\bfet\b|vitrif|thaw/,'fresh_vs_frozen'],
+    [/chance|success|odds|likelihood|by age|at \d\d\b|live birth/,'age_outcomes'],
+    [/cause|why.*infertil|unexplained|diagnos|reason we|reason for/,'causes'],
+    [/healthy|baby outcome|birthweight|preterm|multiple birth|is ivf safe|safe for/,'baby_outcomes'],
+    [/trend|improv|over time|better now|getting better|year on year/,'trends'],
+    [/how common|how many people|surging|growing|popular|statistic|how many women/,'egg_freezing_stats']
+  ];
+  var hits=[];
+  rules.forEach(function(r){ if(hits.length<2 && r[0].test(s) && hits.indexOf(r[1])<0) hits.push(r[1]); });
+  return hits;
 }
 
 // ═══ ANZARD CHARTS (ported from index.html) ═══
@@ -252,6 +278,34 @@ function _renderEggFreezeTable(){
   return w;
 }
 
+// ═══ NEW: EGG-FREEZING CHARTS (from Dr Fouks's research) ═══
+function _barRow(label,pct,scaleMax,valText,color){
+  var w=Math.max(3,Math.round(pct/scaleMax*100));
+  return '<div style="display:flex;align-items:center;gap:10px;margin:7px 0">'
+    +'<div style="width:96px;font-size:12px;font-weight:600;color:#3d5636">'+label+'</div>'
+    +'<div style="flex:1;height:22px;background:#f3f6f1;border-radius:7px;overflow:hidden"><div style="width:'+w+'%;height:100%;background:'+color+';border-radius:7px"></div></div>'
+    +'<div style="width:64px;text-align:right;font-size:13px;font-weight:800;color:'+color+'">'+valText+'</div></div>';
+}
+function renderEggsByAge(){
+  var body=_barRow('Age 34',10,61,'10 eggs','#4a6741')
+    +_barRow('Age 37',20,61,'20 eggs','#5a7d50')
+    +_barRow('Age 42',61,61,'61 eggs','#c8a45e');
+  body+='<div class="ft-result" style="margin-top:8px">For about a <strong>75% chance</strong> of one baby: roughly <strong>10 eggs at 34</strong>, 20 at 37, and 61 at 42. Freezing younger means far fewer eggs for the same chance.</div>';
+  return _anzardCard('How many eggs should I freeze?','Mature eggs needed for about a 75% chance of a live birth',body,'Source: Goldman RH et al., Hum Reprod 2017');
+}
+function renderReturnRates(){
+  var body=_barRow('5\u20137 yr',5.7,40,'5.7%','#8ba888')
+    +_barRow('10\u201315 yr',38.1,40,'38.1%','#4a6741');
+  body+='<div class="ft-result" style="margin-top:8px">Most women don\u2019t come back soon. But the picture changes with time: by <strong>10\u201315 years</strong>, about <strong>38%</strong> had returned to use their eggs.</div>';
+  return _anzardCard('Do people actually use frozen eggs?','Return to use eggs, by length of follow-up',body,'Source: SART-CORS 2025; Blakemore & Grifo, Fertil Steril 2021');
+}
+function renderLowResponder(){
+  var body=_barRow('Normal',2.3,5,'2.3%','#8ba888')
+    +_barRow('Poor (under 5)',4.0,5,'4.0%','#c8a45e');
+  body+='<div class="ft-result" style="margin-top:8px">Counter-intuitively, women who froze the <strong>fewest</strong> eggs returned most often, about <strong>1.7\u00d7</strong> the rate of strong responders. A low number is still worth using.</div>';
+  return _anzardCard('Does freezing a low number make return more likely?','Return rate by ovarian response',body,'Source: Fouks Y et al., JAMA Netw Open 2024');
+}
+
 // ═══ ASK FLOW ═══
 let busy=false;
 async function ask(text){
@@ -269,6 +323,10 @@ async function ask(text){
     else{const d=await r.json(); text2=d.response||'Sorry, please try again.'; crisis=!!d.crisis; charts=Array.isArray(d.charts)?d.charts:[];}
     if(crisis) card.classList.add('crisis');
     card.innerHTML='<div class="ans">'+formatText(text2)+'</div>';
+    if(!crisis){
+      autoCharts(message,text2).forEach(function(k){ if(charts.indexOf(k)<0) charts.push(k); });
+      charts=charts.slice(0,3);
+    } else { charts=[]; }
     charts.forEach(function(k){try{var el=renderChartKey(k); if(el) card.appendChild(el);}catch(e){}});
   }catch(err){
     card.innerHTML='<div class="ans">I couldn\'t reach the service just now. Please try again in a moment \u2014 and remember this is general information, not medical advice.</div>';
