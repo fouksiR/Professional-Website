@@ -261,7 +261,8 @@
             font-size: clamp(1.7rem, 5.2vw, 2.5rem); font-weight: 600;
             letter-spacing: 0.6px; line-height: 1.22; color: var(--coral);
             max-width: 720px; margin: 0.4rem auto 0;
-            animation: heroFloat 6s ease-in-out infinite;
+            animation: heroFloat 11s ease-in-out infinite, heroGlow 9s ease-in-out infinite;
+            will-change: transform, color, opacity;
         }
         .hero-care {
             font-size: 1.02rem; font-weight: 400; color: #4a4453; line-height: 1.6;
@@ -272,9 +273,14 @@
             font-size: 1.25rem; color: var(--coral); line-height: 1.4; margin-bottom: 1rem;
         }
         @keyframes heroFloat {
-            0%, 100% { transform: translate(0, 0); }
-            33%      { transform: translate(-3px, -5px); }
-            66%      { transform: translate(3px, 3px); }
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-2px); }
+        }
+        @keyframes heroGlow {
+            0%, 100% { color: #df7a6a; opacity: 1; }
+            30%      { color: #e8917f; opacity: 0.94; }
+            60%      { color: #d98793; opacity: 1; }
+            80%      { color: #e58a78; opacity: 0.97; }
         }
         @media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } }
 
@@ -414,7 +420,7 @@
             color: #fff; border-color: transparent; box-shadow: 0 3px 10px rgba(107, 91, 149, 0.3);
         }
         .est-bar { transition: height 0.6s cubic-bezier(.2,.7,.2,1), y 0.6s cubic-bezier(.2,.7,.2,1); }
-        .est-val, .est-ci { transition: all 0.6s cubic-bezier(.2,.7,.2,1); }
+        .est-val.est-ci { transition: all 0.6s cubic-bezier(.2,.7,.2,1); }
         .est-note { font-size: 0.8rem; color: #6a6a6a; margin-top: 0.9rem; line-height: 1.5; }
         .est-note a { color: var(--purple); }
 
@@ -546,28 +552,22 @@
         }
         .qcard__face--back {
             position: absolute; inset: 0; transform: rotateX(180deg);
-            background: linear-gradient(150deg, var(--lilac), var(--lilac-2));
+            background: linear-gradient(145deg, #e98a78 0%, #df7a6a 52%, #d56a63 100%);
             color: #fff; border: 1px solid transparent;
-            box-shadow: 0 18px 46px -18px rgba(74,58,99,0.55);
+            box-shadow: 0 18px 46px -18px rgba(160,70,70,0.6), inset 0 1px 0 rgba(255,255,255,0.18);
         }
         .qcard__num {
             flex: 0 0 auto; align-self: flex-start;
-            display: inline-flex; align-items: baseline; gap: 0.4rem;
-            font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700;
             line-height: 1; letter-spacing: 0.5px;
         }
-        .qcard__num::after {
-            content: ""; width: 22px; height: 2px; border-radius: 2px;
-            background: var(--coral); align-self: center;
-        }
         .qcard__face--front .qcard__num { color: var(--coral); }
-        .qcard__face--back .qcard__num { color: #fff; }
-        .qcard__face--back .qcard__num::after { background: rgba(255,255,255,0.8); }
+        .qcard__face--back .qcard__num { color: rgba(255,255,255,0.92); }
         .qcard__q {
-            display: block; font-family: 'Cormorant Garamond', serif; font-weight: 600;
-            font-size: clamp(1.6rem, 5vw, 2.15rem); line-height: 1.13; color: var(--ink); letter-spacing: 0.2px;
+            display: block; font-family: 'Cormorant Garamond', serif; font-weight: 700;
+            font-size: clamp(1.65rem, 5vw, 2.2rem); line-height: 1.12; color: var(--ink); letter-spacing: 0.2px;
         }
-        .qcard__face--back .qcard__q { color: #fff; }
+        .qcard__face--back .qcard__q { color: #fff; text-shadow: 0 1px 10px rgba(150,55,55,0.35); }
 
         /* explicit flip affordance on the front */
         .qcard__flipcue {
@@ -724,7 +724,7 @@
             .indications { grid-template-columns: 1fr; }
             .profile { grid-template-columns: 1fr; text-align: center; }
             .profile__photo { max-width: 260px; margin: 0 auto; }
-            .profile__pn, .profile .links { justify-content: center; }
+            .profile__pn.profile .links { justify-content: center; }
             .final-cta { grid-template-columns: 1fr; }
             .final-cta__media { min-height: 200px; }
             .final-cta__media::after { background: linear-gradient(180deg, rgba(74,58,99,0) 50%, rgba(74,58,99,0.7) 100%); }
@@ -745,7 +745,7 @@
             section.block { margin: 2.4rem auto; }
             .section-lead { font-size: 1.05rem; }
             .qcard { perspective: 1100px; }
-            .qcard__flip, .qcard__face { min-height: 150px; }
+            .qcard__flip.qcard__face { min-height: 150px; }
             .qcard__face { padding: 1.3rem 1.25rem; gap: 0.8rem; }
             .qcard__inner { padding: 1.4rem 1.15rem 1.6rem; }
             .qcard__q { font-size: 1.72rem; line-height: 1.15; }
@@ -863,8 +863,8 @@
         <div class="hero-inner">
             <p class="hero-eyebrow">Egg Freezing &nbsp;|&nbsp; Melbourne</p>
             <h1>Egg Freezing in Melbourne</h1>
-            <p class="hero-tagline">Your future is yours to shape &mdash; we're here to offer you time.</p>
-            <p class="hero-care">Egg freezing is a gentle step toward preserving possibilities, and we'll guide you with compassion, clarity, and care&mdash;every step of the way.</p>
+            <p class="hero-tagline">Your future is yours to shape, we're here to offer you time.</p>
+            <p class="hero-care">Egg freezing is a gentle step toward preserving possibilities, and we'll guide you with compassion, clarity, and care, every step of the way.</p>
             <div class="byline">
                 <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks, fertility specialist, Melbourne">
                 <span><strong>Dr Yuval Fouks</strong>, Fertility Specialist and Reproductive Endocrinologist, Melbourne.</span>
@@ -903,7 +903,7 @@
           </button>
           <div class="qcard__reveal" id="card1-body" role="region" aria-label="What actually happens during egg freezing?">
             <div><div class="qcard__inner">
-              <p class="qcard__answer lede">Egg freezing pauses the clock on a set of your eggs at today's age &mdash; roughly two weeks, start to finish.</p>
+              <p class="qcard__answer lede">Egg freezing pauses the clock on a set of your eggs at today's age, roughly two weeks, start to finish.</p>
               <ul class="qcard__steps">
                 <li>Initial consultation and fertility assessment</li>
                 <li>Approximately 10 to 12 days of hormone stimulation</li>
@@ -911,7 +911,7 @@
                 <li>Egg collection under light sedation</li>
                 <li>Egg freezing using vitrification technology</li>
               </ul>
-              <p class="random-start"><span class="random-start__tag">Flexible start</span>You don't have to wait for a particular day of your cycle. With a <strong>random start</strong>, stimulation can begin at almost any point &mdash; useful when timing matters or you want to start right away.</p>
+              <p class="random-start"><span class="random-start__tag">Flexible start</span>You don't have to wait for a particular day of your cycle. With a <strong>random start</strong>, stimulation can begin at almost any point, useful when timing matters or you want to start right away.</p>
               <section class="efc" tabindex="0" aria-label="Interactive egg freezing cycle">
                             <style>
                               @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
@@ -1036,8 +1036,22 @@
                               .efc__note{margin:clamp(26px,4vw,34px) 0 0;font-size:.72rem;line-height:1.6;color:var(--mute);font-weight:300;font-style:italic;max-width:72ch;}
 
                               @media (max-width:760px){
-                                .efc__stage{grid-template-columns:1fr;}
-                                .efc__panel{min-height:0;}
+                                /* Cluster the interactive parts so the scan + stepper + meds are
+                                   visible together; the long description drops below. */
+                                .efc{display:flex;flex-direction:column;}
+                                .efc__eyebrow{order:1;} .efc__title{order:2;} .efc__lede{order:3;}
+                                .efc__stage{display:contents;}
+                                .efc__stage>div:first-child{order:4;margin:0 0 4px;}      /* scan */
+                                .efc__nav{order:5;margin-top:8px;}                          /* stepper */
+                                .efc__meds{order:6;margin-top:18px;}                        /* medications */
+                                .efc__panel{order:7;min-height:0;margin-top:18px;padding-top:16px;border-top:1px solid var(--lav-line);}
+                                .efc__after{order:8;}
+                                .efc__note{order:9;}
+                                /* compact, fixed-height scan so it stays on screen while you step */
+                                .efc__scope{max-width:440px;margin:0 auto;}
+                                .efc__screen{max-height:208px;}
+                                .efc__vid{height:208px;width:100%;object-fit:cover;}
+                                .efc__cap{margin-top:.5rem;}
                                 .efc__cards{grid-template-columns:1fr;}
                                 .efc__med-row,.efc__med-scale{grid-template-columns:124px 1fr;gap:12px;}
                               }
@@ -1072,7 +1086,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <p class="efc__cap">Example follicular tracking scan, illustrative.<br>Use footage you have the rights to before publishing.</p>
+                                <p class="efc__cap">Example follicular tracking scan (illustrative).</p>
                               </div>
 
                               <div class="efc__panel is-anim" aria-live="polite">
@@ -1476,7 +1490,7 @@
         <!-- ========== PRACTICAL ========== -->
         <section class="block" id="practical">
             <h2 class="section-title">Practical, in brief</h2>
-            <p class="section-lead" style="margin-bottom:0.5rem;">The quick version &mdash; walked through by Melod.</p>
+            <p class="section-lead" style="margin-bottom:0.5rem;">The quick version, walked through by Melod.</p>
             <button class="pract-launch" type="button" id="pract-launch">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg>
                 Hear the quick version
@@ -1484,7 +1498,7 @@
             <!-- accessible &amp; crawlable source of truth; also feeds the popup sequence -->
             <ul class="sr-only" id="pract-data">
                 <li><b>Time.</b> About two weeks from the first injection to retrieval.</li>
-                <li><b>Flexible start.</b> We can begin at almost any point in your cycle &mdash; a random start &mdash; so you don't have to wait for a particular day.</li>
+                <li><b>Flexible start.</b> We can begin at almost any point in your cycle, a random start, so you don't have to wait for a particular day.</li>
                 <li><b>The procedure.</b> Day case, light sedation, home the same morning.</li>
                 <li><b>How many cycles.</b> Depends on your age and what we collect; the chart above sets the target.</li>
                 <li><b>Cost and Medicare.</b> Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</li>
@@ -1675,7 +1689,7 @@
           <button class="ps-btn ps-prev hide" type="button" id="ps-prev">Back</button>
           <button class="ps-btn ps-next" type="button" id="ps-next">Next</button>
         </div>
-        <p class="ps-fine">General information &mdash; not a substitute for personalised medical advice.</p>
+        <p class="ps-fine">General information, not a substitute for personalised medical advice.</p>
       </div>
     </div>
     <script>
@@ -1841,7 +1855,7 @@
       </button>
 
       <div id="mw-nudge" class="mw-nudge" role="button" tabindex="0" aria-label="Ask Melod·AI anything">
-        Hi, I'm Melod &mdash; I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class="mw-nudge-fine">Support, not a substitute for medical care.</span>
+        Hi, I'm Melod, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class="mw-nudge-fine">Support, not a substitute for medical care.</span>
       </div>
 
       <div id="mw-panel" class="mw-panel" role="dialog" aria-label="Ask Melod·AI" aria-hidden="true">
@@ -1959,9 +1973,9 @@
 
       var nudge=document.getElementById('mw-nudge');
       var nudged=false, hideTimer=null, busy=false, queue=[];
-      var GREET="Hi, I'm Melod &mdash; I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class=\"mw-nudge-fine\">Support, not a substitute for medical care.</span>";
-      var USS="This part is the heart of it &mdash; about <strong>10 to 12 days</strong> of quick ultrasound check-ins and daily injections at home.";
-      var KEYM="Two key moments coming up: a <strong>trigger injection</strong> to ripen the eggs, then <strong>egg collection</strong> &mdash; a short, minor surgical procedure.";
+      var GREET="Hi, I'm Melod, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class=\"mw-nudge-fine\">Support, not a substitute for medical care.</span>";
+      var USS="This part is the heart of it, about <strong>10 to 12 days</strong> of quick ultrasound check-ins and daily injections at home.";
+      var KEYM="Two key moments coming up: a <strong>trigger injection</strong> to ripen the eggs, then <strong>egg collection</strong>, a short, minor surgical procedure.";
       var CARDS="There's a step-by-step process and the questions patients ask most just below.<br><strong>Tap a card to flip it open.</strong>";
       var shownAt=0;
       function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
