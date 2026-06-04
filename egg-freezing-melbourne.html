@@ -36,13 +36,13 @@
       "url": "https://drfouks.com/egg-freezing-melbourne.html",
       "description": "What egg freezing involves, how many eggs you actually need at your age, and how often people return to use them.",
       "inLanguage": "en",
-      "lastReviewed": "2026-06-03",
+      "lastReviewed": "2026-06-04",
       "reviewedBy": { "@id": "https://drfouks.com/#physician" },
       "author": { "@id": "https://drfouks.com/#physician" },
       "about": { "@id": "https://drfouks.com/egg-freezing-melbourne.html#procedure" },
       "speakable": {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".answer-block"]
+        "cssSelector": [".answer-block", ".qcard__answer"]
       }
     }
     </script>
@@ -61,7 +61,7 @@
     }
     </script>
 
-    <!-- FAQPage: text must match the visible accordion word for word -->
+    <!-- FAQPage: text matches the visible card answers word for word -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -70,26 +70,42 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How many eggs should I freeze?",
+          "name": "What actually happens during egg freezing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends almost entirely on your age. A widely used counselling model (Goldman 2017) estimates that women aged 34, 37 and 42 would need to freeze roughly 10, 20 and more than 60 mature eggs to reach about a 75 percent chance of at least one live birth. The younger you freeze, the fewer eggs you need for the same chance."
+            "text": "Egg freezing takes about two weeks from the first injection to collection. Daily hormone injections encourage a group of follicles to grow together. The mature eggs are then collected in a short day procedure under light sedation and flash frozen by vitrification, and stored until you need them."
           }
         },
         {
           "@type": "Question",
-          "name": "Do most women actually use their frozen eggs?",
+          "name": "How many eggs do I need to freeze?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. In a national US cohort published in JAMA Network Open in 2024, only about 2.5 percent of women who froze eggs electively returned to use them in the years studied. Return rates rise with longer follow-up and are different for medical (cancer) freezing, but in the first several years return is low."
+            "text": "Egg freezing is a numbers game. Not every frozen egg will survive thawing, fertilise, develop into an embryo, or result in a live birth, so the total number of eggs frozen matters. The likelihood of a future live birth generally increases as more eggs are stored."
           }
         },
         {
           "@type": "Question",
-          "name": "How long does egg freezing take?",
+          "name": "How many eggs are recommended at my age?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "About two weeks from the first injection to egg collection. The collection itself is a day procedure under light sedation, and most people go home the same morning."
+            "text": "Age has a major impact on egg quality, so the older you are, the more eggs it may take to reach the same future chance of pregnancy. At 34 about 10 mature eggs reach roughly a 75 percent chance of at least one baby, but by 42 it takes around 61."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I ever use my frozen eggs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Many women never return to use their frozen eggs, often because they later conceive naturally or with fresh IVF treatment. Egg freezing is primarily about preserving future reproductive options. Return rates are low in the first several years and rise with longer follow-up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I only freeze a small number of eggs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A lower egg yield does not mean the cycle was unsuccessful. In a national cohort, women who froze the fewest eggs returned to use them more often than strong responders did. Some women choose to undertake an additional cycle to increase the total number of eggs stored and improve cumulative future chances."
           }
         },
         {
@@ -157,18 +173,27 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
-        /* Page background matched to the banner illustration */
-        html { background: #FFE6E0; }
+        /* Fresh, serene gradient-mesh background. Resolution-independent and vivid,
+           tuned for a younger 25-37 audience rather than a clinical look.
+           To use a hosted photographic background instead, supply a >=2400px image and
+           re-enable the url() layer below. */
+        html { background: #fff4f0; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             color: #2c2c2c;
             line-height: 1.7;
             background:
-                linear-gradient(rgba(255, 250, 248, 0.35), rgba(255, 250, 248, 0.35)),
-                url('images/women-collage.png') center top / cover fixed no-repeat,
-                #FFE6E0;
+                radial-gradient(120% 90% at 8% -8%, #ffd9cf 0%, rgba(255,217,207,0) 46%),
+                radial-gradient(120% 100% at 96% 4%, #e4dcff 0%, rgba(228,220,255,0) 48%),
+                radial-gradient(120% 110% at 4% 102%, #d5f1e6 0%, rgba(213,241,230,0) 50%),
+                radial-gradient(130% 120% at 100% 100%, #ffdfe8 0%, rgba(255,223,232,0) 52%),
+                linear-gradient(160deg, #fff7f4 0%, #fdf4fb 52%, #f4fbf7 100%);
+            background-attachment: fixed;
+            background-color: #fff4f0;
+            min-height: 100vh;
         }
+        @media (max-width: 680px) { body { background-attachment: scroll; } }
 
         /* Brand tokens. Warm sand = site accent; purple = data + your research; green = positive notes */
         :root {
@@ -179,6 +204,11 @@
             --purple-2: #8b7db5;
             --green: #4a6741;
             --line: rgba(139, 115, 85, 0.2);
+            /* fresh accents for a younger, brighter feel */
+            --lilac: #8b6ed6;
+            --lilac-2: #a98cf0;
+            --coral: #f48a86;
+            --mint: #57c2a0;
         }
 
         /* Nav */
@@ -214,10 +244,10 @@
         }
         .hero-inner {
             max-width: 760px; margin: 0 auto;
-            background: rgba(255, 250, 248, 0.82);
+            background: rgba(255, 252, 251, 0.78);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 18px; padding: 1.75rem 1.5rem;
-            box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 18px 50px -22px rgba(74, 58, 99, 0.28);
         }
         .hero-eyebrow {
             font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
@@ -243,10 +273,10 @@
         /* Layout container */
         .wrap {
             max-width: 880px; margin: 2rem auto; padding: 1.5rem 5% 2.5rem;
-            background: rgba(255, 250, 248, 0.86);
+            background: rgba(255, 252, 251, 0.8);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 22px;
-            box-shadow: 0 12px 44px rgba(0, 0, 0, 0.14);
+            box-shadow: 0 22px 60px -28px rgba(74, 58, 99, 0.26);
         }
         section.block { margin: 3.5rem auto; }
 
@@ -411,7 +441,7 @@
 
         .page-footer {
             max-width: 860px; margin: 0 auto 2rem; padding: 1.25rem 1.5rem;
-            background: rgba(255, 250, 248, 0.82);
+            background: rgba(255, 252, 251, 0.78);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 16px;
             text-align: center; font-size: 0.75rem; color: #6e6e6e; line-height: 1.6;
@@ -428,11 +458,233 @@
             .creds { flex-direction: column; align-items: center; text-align: center; }
             .bottom-cta { padding: 2rem 1rem; }
         }
+
+        /* ============ FLIP-CARD EXPERIENCE ============ */
+        .cards { display: flex; flex-direction: column; gap: 1.4rem; margin: 2.5rem auto 0; }
+        .qcard {
+            position: relative; border-radius: 24px;
+            perspective: 1700px;
+            scroll-margin-top: 90px;
+        }
+        /* the flipping question tile */
+        .qcard__flip {
+            position: relative; width: 100%; border: none; padding: 0; cursor: pointer;
+            background: none; text-align: left; font-family: inherit;
+            transform-style: preserve-3d; transition: transform .62s cubic-bezier(.22,.61,.36,1);
+            min-height: 172px; z-index: 1; -webkit-tap-highlight-color: transparent;
+        }
+        .qcard.is-open .qcard__flip { transform: rotateX(180deg); }
+        /* stacked-card hint behind each card: telegraphs there is a back to flip to */
+        .qcard::before {
+            content: ""; position: absolute; left: 12px; right: 12px; bottom: -7px; height: 36px;
+            border-radius: 22px; background: #ffffff; opacity: 0.5;
+            box-shadow: 0 12px 26px -18px rgba(53,42,74,0.5); z-index: 0; transition: opacity .3s;
+        }
+        .qcard.is-open::before { opacity: 0; }
+
+        .qcard__face {
+            position: relative; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+            display: flex; flex-direction: column; justify-content: center; gap: 0.95rem;
+            min-height: 172px; padding: 1.7rem 1.9rem; border-radius: 24px;
+        }
+        .qcard__face--front {
+            background: linear-gradient(150deg, #ffffff 0%, #fdf7ff 58%, #f5fbf9 100%);
+            border: 1px solid rgba(139,110,214,0.14);
+            box-shadow: 0 14px 36px -20px rgba(53,42,74,0.34);
+            transition: box-shadow .3s, border-color .3s;
+        }
+        .qcard:not(.is-open) .qcard__flip:hover .qcard__face--front {
+            box-shadow: 0 22px 50px -22px rgba(139,110,214,0.5); border-color: rgba(139,110,214,0.32);
+        }
+        .qcard__face--back {
+            position: absolute; inset: 0; transform: rotateX(180deg);
+            background: linear-gradient(150deg, var(--lilac), var(--lilac-2));
+            color: #fff; border: 1px solid transparent;
+            box-shadow: 0 18px 46px -18px rgba(74,58,99,0.55);
+        }
+        .qcard__num {
+            flex: 0 0 auto; align-self: flex-start;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: grid; place-items: center; font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem; font-weight: 600;
+        }
+        .qcard__face--front .qcard__num {
+            background: linear-gradient(135deg, var(--lilac), var(--lilac-2)); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(139,110,214,0.6);
+        }
+        .qcard__face--back .qcard__num { background: rgba(255,255,255,0.2); color: #fff; }
+        .qcard__q {
+            display: block; font-family: 'Cormorant Garamond', serif; font-weight: 600;
+            font-size: clamp(1.6rem, 5vw, 2.15rem); line-height: 1.13; color: var(--ink); letter-spacing: 0.2px;
+        }
+        .qcard__face--back .qcard__q { color: #fff; }
+
+        /* explicit flip affordance on the front */
+        .qcard__flipcue {
+            align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1.1rem; border-radius: 22px;
+            background: rgba(139,110,214,0.1); color: var(--lilac);
+            font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.4px;
+            transition: background .3s, color .3s;
+        }
+        .qcard__flipcue svg { width: 16px; height: 16px; display: block; }
+        .qcard:not(.is-open) .qcard__flip:hover .qcard__flipcue { background: var(--lilac); color: #fff; }
+        .qcard:not(.is-open) .qcard__flip:hover .qcard__flipcue svg { animation: qSpin .6s ease; }
+        @keyframes qSpin { from { transform: rotate(0); } to { transform: rotate(-180deg); } }
+        .qcard__backcue {
+            align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.4px;
+            color: rgba(255,255,255,0.92);
+        }
+        .qcard__backcue svg { width: 16px; height: 16px; display: block; }
+
+        /* hover preview tilt + one-time teaching wiggle on the first card */
+        .qcard:not(.is-open) .qcard__flip:hover { transform: rotateX(8deg); }
+        .qcard.hint .qcard__flip { animation: flipHint 1.9s ease 1; }
+        @keyframes flipHint {
+            0%, 100% { transform: rotateX(0); }
+            20% { transform: rotateX(-13deg); }
+            42% { transform: rotateX(-2deg); }
+            60% { transform: rotateX(-9deg); }
+            78% { transform: rotateX(-1deg); }
+        }
+
+        /* the answer drawer: grid-rows trick = clip-free, full natural height, stays in DOM */
+        .qcard__reveal { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
+        .qcard.is-open .qcard__reveal { grid-template-rows: 1fr; }
+        .qcard__reveal > div { overflow: hidden; min-height: 0; }
+        .qcard__inner {
+            margin-top: 0.85rem; padding: 1.75rem 1.6rem 1.9rem;
+            background: rgba(255,255,255,0.94); border: 1px solid rgba(139,110,214,0.16);
+            border-left: 4px solid var(--lilac); border-radius: 18px;
+            box-shadow: 0 6px 26px -16px rgba(53,42,74,0.22);
+        }
+        .qcard__answer { font-size: 1.06rem; color: var(--ink); margin-bottom: 1.4rem; }
+        .qcard__answer.lede {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.32rem; line-height: 1.4;
+            font-weight: 500; margin-bottom: 0.9rem;
+        }
+        .qcard__steps { list-style: none; margin: 0 0 0.4rem; padding: 0; }
+        .qcard__steps li {
+            position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem;
+            font-size: 0.95rem; color: #3a3a3a;
+        }
+        .qcard__steps li::before {
+            content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px;
+            border-radius: 50%; background: linear-gradient(135deg, var(--lilac), var(--lilac-2));
+        }
+        .qcard__inner .viz-row,
+        .qcard__inner .viz-card,
+        .qcard__inner .estimator { margin-top: 1.4rem; }
+        .qcard__inner .viz-card:first-of-type { margin-top: 0; }
+        .qcard__inner > .qcard__answer + .viz-row,
+        .qcard__inner > .qcard__answer + .viz-card { margin-top: 0; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .qcard__flip { transition: none; }
+            .qcard.is-open .qcard__flip { transform: none; }
+            .qcard:not(.is-open) .qcard__flip:hover { transform: none; }
+            .qcard.hint .qcard__flip { animation: none; }
+            .qcard__face--back { position: absolute; inset: 0; transform: none; opacity: 0; pointer-events: none; }
+            .qcard.is-open .qcard__face--front { opacity: 0; }
+            .qcard.is-open .qcard__face--back { opacity: 1; }
+            .qcard__reveal { transition: none; }
+        }
+
+        /* ============ INDICATIONS ICON GRID (Card 6) ============ */
+        .indications { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1.4rem; }
+        .indication {
+            display: flex; align-items: center; gap: 0.85rem; padding: 0.95rem 1rem;
+            background: linear-gradient(135deg, #f8f5ff, #f1ecfa);
+            border: 1px solid rgba(107,91,149,0.16); border-radius: 13px;
+        }
+        .indication__ico {
+            flex: 0 0 auto; width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+            background: #fff; border: 1px solid rgba(107,91,149,0.18); color: var(--purple);
+        }
+        .indication__ico svg { width: 20px; height: 20px; }
+        .indication span { font-size: 0.9rem; font-weight: 500; color: var(--ink); line-height: 1.35; }
+
+        /* ============ PREMIUM PROFILE ============ */
+        .profile {
+            display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 2rem; align-items: center;
+            background: rgba(255,255,255,0.94); border: 1px solid var(--line);
+            border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px -16px rgba(53,42,74,0.32);
+        }
+        .profile__photo {
+            width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px;
+            box-shadow: 0 16px 40px -18px rgba(53,42,74,0.55);
+        }
+        .profile__eyebrow {
+            font-size: 0.74rem; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--sand); font-weight: 500; margin-bottom: 0.5rem;
+        }
+        .profile h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; margin-bottom: 0.7rem; }
+        .profile p { font-size: 0.96rem; color: #3a3a3a; margin-bottom: 1.1rem; }
+        .profile__pn { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .profile__pn span {
+            font-size: 0.74rem; letter-spacing: 0.6px; color: var(--purple); font-weight: 600;
+            border: 1px solid rgba(107,91,149,0.3); background: #faf9fc; border-radius: 18px; padding: 0.35rem 0.85rem;
+        }
+        .profile__cta {
+            display: inline-block; padding: 0.78rem 1.9rem; margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--sand), var(--sand-2)); color: #fff;
+            text-decoration: none; border-radius: 26px; font-size: 0.82rem; font-weight: 500;
+            letter-spacing: 1.4px; text-transform: uppercase; transition: all .3s;
+            box-shadow: 0 4px 14px rgba(139,115,85,0.25);
+        }
+        .profile__cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(139,115,85,0.35); }
+        .profile .links { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+        .profile .links a {
+            font-size: 0.76rem; letter-spacing: 0.4px; color: var(--sand); text-decoration: none;
+            border: 1px solid var(--line); border-radius: 20px; padding: 0.32rem 0.85rem;
+        }
+        .profile .links a:hover { background: var(--sand); color: #fff; }
+
+        /* ============ FINAL CTA BANNER ============ */
+        .final-cta {
+            position: relative; overflow: hidden; margin: 4rem auto 2rem; max-width: 880px;
+            border-radius: 22px; border: 1px solid var(--line);
+            background: linear-gradient(135deg, #4a3a63, #6b5b95);
+            box-shadow: 0 20px 56px -24px rgba(53,42,74,0.7);
+            display: grid; grid-template-columns: 0.6fr 1fr; align-items: stretch;
+        }
+        .final-cta__media { position: relative; min-height: 260px; }
+        .final-cta__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+        .final-cta__media::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(90deg, rgba(74,58,99,0) 55%, rgba(74,58,99,0.85) 100%);
+        }
+        .final-cta__body { padding: 2.6rem 2.4rem; color: #fff; align-self: center; }
+        .final-cta__body h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 500; margin-bottom: 0.6rem; line-height: 1.2; }
+        .final-cta__body p { font-size: 1rem; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; }
+        .final-cta__body a {
+            display: inline-block; margin: 0.25rem 0.5rem 0.25rem 0; padding: 0.8rem 1.9rem;
+            border-radius: 28px; font-size: 0.82rem; font-weight: 500; letter-spacing: 1.4px;
+            text-transform: uppercase; text-decoration: none; transition: all .3s;
+        }
+        .final-cta__body a.primary { background: #fff; color: var(--purple); box-shadow: 0 6px 18px -6px rgba(0,0,0,0.4); }
+        .final-cta__body a.primary:hover { transform: translateY(-2px); }
+        .final-cta__body a.ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.6); }
+        .final-cta__body a.ghost:hover { background: rgba(255,255,255,0.12); }
+
+        @media (max-width: 680px) {
+            .qcard__face { padding: 1.15rem 1.15rem; }
+            .qcard__inner { padding: 1.4rem 1.1rem 1.5rem; }
+            .indications { grid-template-columns: 1fr; }
+            .profile { grid-template-columns: 1fr; text-align: center; }
+            .profile__photo { max-width: 260px; margin: 0 auto; }
+            .profile__pn, .profile .links { justify-content: center; }
+            .final-cta { grid-template-columns: 1fr; }
+            .final-cta__media { min-height: 200px; }
+            .final-cta__media::after { background: linear-gradient(180deg, rgba(74,58,99,0) 50%, rgba(74,58,99,0.7) 100%); }
+            .final-cta__body { padding: 1.8rem 1.4rem; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
-    <nav class="top-bar">
+<nav class="top-bar">
         <div class="top-bar-inner">
             <a href="/" class="logo">Dr. Yuval Fouks</a>
             <a href="/" class="back-link">&larr; Back to Home</a>
@@ -455,7 +707,7 @@
 
     <div class="wrap">
 
-        <!-- ========== 0.5 ANSWER BLOCK ========== -->
+        <!-- intro answer block: keeps a crawlable, speakable definition above the cards -->
         <div class="answer-block">
             <h2 class="section-title">Egg Freezing</h2>
             <p class="lede">Egg freezing offers the opportunity to preserve fertility and keep future reproductive options open.</p>
@@ -464,485 +716,595 @@
             <p>You will be guided through each step with a focus on safety, realistic expectations, and helping you make an informed decision about your reproductive future.</p>
         </div>
 
-        <!-- ========== SECTION 1: PROCESS ========== -->
-        <section class="block">
-            <h2 class="section-title">What we actually do</h2>
-            <p class="section-lead">Egg freezing pauses the clock on a set of your eggs at today's age. The eggs are collected in a short procedure, flash frozen, and stored until you need them. Roughly two weeks, start to finish.</p>
+        <p class="section-lead" style="margin-top:2rem;text-align:center;">These are the questions people actually ask, in the order they usually come up. <strong>Tap a card to flip it open.</strong></p>
 
-            <!-- Egg freezing cycle: interactive scan timeline. follicular-scan.mp4 must sit in the same folder as this page. -->
-            <section class="efc" tabindex="0" aria-label="Interactive egg freezing cycle">
-              <style>
-                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+        <!-- ========== INTERACTIVE QUESTION CARDS ========== -->
+        <div class="cards">
+        <article class="qcard" id="card1">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card1-body">
+            <span class="qcard__face qcard__face--front">
+              <span class="qcard__num">1</span>
+              <span class="qcard__q">What actually happens during egg freezing?</span>
+              <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to see the process</span>
+            </span>
+            <span class="qcard__face qcard__face--back" aria-hidden="true">
+              <span class="qcard__num">1</span>
+              <span class="qcard__q">What actually happens during egg freezing?</span>
+              <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
+            </span>
+          </button>
+          <div class="qcard__reveal" id="card1-body" role="region" aria-label="What actually happens during egg freezing?">
+            <div><div class="qcard__inner">
+              <p class="qcard__answer lede">Egg freezing pauses the clock on a set of your eggs at today's age &mdash; roughly two weeks, start to finish.</p>
+              <ul class="qcard__steps">
+                <li>Initial consultation and fertility assessment</li>
+                <li>Approximately 10 to 12 days of hormone stimulation</li>
+                <li>Monitoring scans and blood tests</li>
+                <li>Egg collection under light sedation</li>
+                <li>Egg freezing using vitrification technology</li>
+              </ul>
+              <section class="efc" tabindex="0" aria-label="Interactive egg freezing cycle">
+                            <style>
+                              @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
 
-                .efc{
-                  --plum:#4a3a63; --plum-deep:#352a4a; --plum-soft:#6f5c97;
-                  --lav:#f3eff9; --lav-line:#e6def2;
-                  --gold:#a98f5f; --gold-soft:#cbb486;
-                  --blush:#bd7d8c;
-                  --ivory:#faf8f3; --ink:#46414c; --mute:#8f8898;
-                  --uss-amber:#f0d9a0;
-                  --shadow:0 30px 70px -34px rgba(53,42,74,.5);
-                  font-family:'Montserrat',system-ui,sans-serif; color:var(--ink);
-                  background:radial-gradient(130% 100% at 8% -10%, #fdfcf9 0%, var(--ivory) 44%, #f3efe7 100%);
-                  border:1px solid #ece6db; border-radius:24px;
-                  padding:clamp(24px,4.4vw,56px); max-width:1100px; margin:0 auto;
-                  box-sizing:border-box; position:relative; overflow:hidden; outline:none;
-                }
-                .efc *{box-sizing:border-box;}
-                .efc::before{content:"";position:absolute;inset:11px;border:1px solid rgba(169,143,95,.22);border-radius:16px;pointer-events:none;}
+                              .efc{
+                                --plum:#4a3a63; --plum-deep:#352a4a; --plum-soft:#6f5c97;
+                                --lav:#f3eff9; --lav-line:#e6def2;
+                                --gold:#a98f5f; --gold-soft:#cbb486;
+                                --blush:#bd7d8c;
+                                --ivory:#faf8f3; --ink:#46414c; --mute:#8f8898;
+                                --uss-amber:#f0d9a0;
+                                --shadow:0 30px 70px -34px rgba(53,42,74,.5);
+                                font-family:'Montserrat',system-ui,sans-serif; color:var(--ink);
+                                background:radial-gradient(130% 100% at 8% -10%, #fdfcf9 0%, var(--ivory) 44%, #f3efe7 100%);
+                                border:1px solid #ece6db; border-radius:24px;
+                                padding:clamp(24px,4.4vw,56px); max-width:1100px; margin:0 auto;
+                                box-sizing:border-box; position:relative; overflow:hidden; outline:none;
+                              }
+                              .efc *{box-sizing:border-box;}
+                              .efc::before{content:"";position:absolute;inset:11px;border:1px solid rgba(169,143,95,.22);border-radius:16px;pointer-events:none;}
 
-                .efc__eyebrow{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 .55rem;}
-                .efc__title{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.04;color:var(--plum-deep);margin:0 0 .5rem;}
-                .efc__lede{max-width:48ch;margin:0;font-weight:300;font-size:.98rem;line-height:1.6;color:var(--mute);}
+                              .efc__eyebrow{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 .55rem;}
+                              .efc__title{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.04;color:var(--plum-deep);margin:0 0 .5rem;}
+                              .efc__lede{max-width:48ch;margin:0;font-weight:300;font-size:.98rem;line-height:1.6;color:var(--mute);}
 
-                .efc__stage{display:grid;grid-template-columns:minmax(0,1.12fr) 1fr;gap:clamp(24px,4vw,48px);align-items:center;margin:clamp(28px,4vw,42px) 0 clamp(20px,3vw,28px);}
+                              .efc__stage{display:grid;grid-template-columns:minmax(0,1.12fr) 1fr;gap:clamp(24px,4vw,48px);align-items:center;margin:clamp(28px,4vw,42px) 0 clamp(20px,3vw,28px);}
 
-                .efc__scope{position:relative;border-radius:14px;overflow:hidden;background:#070708;padding:9px;box-shadow:var(--shadow), inset 0 0 0 1px rgba(255,255,255,.05);}
-                .efc__screen{position:relative;border-radius:8px;overflow:hidden;background:#000;line-height:0;}
-                .efc__vid{display:block;width:100%;height:auto;transition:filter .7s ease;}
-                .efc__screen[data-clar="low"] .efc__vid{filter:brightness(.64) contrast(.9) blur(.8px);}
-                .efc__screen[data-clar="mid"] .efc__vid{filter:brightness(.85) contrast(.98);}
-                .efc__screen[data-clar="full"] .efc__vid{filter:none;}
-                .efc__ovl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-                .efc__caliper{opacity:0;transition:opacity .55s ease;}
-                .efc[data-trig="true"] .efc__caliper{opacity:1;}
+                              .efc__scope{position:relative;border-radius:14px;overflow:hidden;background:#070708;padding:9px;box-shadow:var(--shadow), inset 0 0 0 1px rgba(255,255,255,.05);}
+                              .efc__screen{position:relative;border-radius:8px;overflow:hidden;background:#000;line-height:0;}
+                              .efc__vid{display:block;width:100%;height:auto;transition:filter .7s ease;}
+                              .efc__screen[data-clar="low"] .efc__vid{filter:brightness(.64) contrast(.9) blur(.8px);}
+                              .efc__screen[data-clar="mid"] .efc__vid{filter:brightness(.85) contrast(.98);}
+                              .efc__screen[data-clar="full"] .efc__vid{filter:none;}
+                              .efc__ovl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+                              .efc__caliper{opacity:0;transition:opacity .55s ease;}
+                              .efc[data-trig="true"] .efc__caliper{opacity:1;}
 
-                .efc__scope-ui{position:absolute;inset:9px;pointer-events:none;font-family:'Montserrat',sans-serif;}
-                .efc__ui{position:absolute;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;}
-                .efc__ui--tl{top:12px;left:14px;color:rgba(228,228,232,.62);}
-                .efc__ui--tr{top:12px;right:14px;color:var(--uss-amber);}
-                .efc__ui--bl{bottom:12px;left:14px;color:rgba(228,228,232,.42);}
-                .efc__ui--br{bottom:12px;right:14px;color:rgba(228,228,232,.42);}
-                .efc__ui b{font-weight:600;}
-                .efc__cap{text-align:center;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:.8rem 0 0;line-height:1.5;}
+                              .efc__scope-ui{position:absolute;inset:9px;pointer-events:none;font-family:'Montserrat',sans-serif;}
+                              .efc__ui{position:absolute;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;}
+                              .efc__ui--tl{top:12px;left:14px;color:rgba(228,228,232,.62);}
+                              .efc__ui--tr{top:12px;right:14px;color:var(--uss-amber);}
+                              .efc__ui--bl{bottom:12px;left:14px;color:rgba(228,228,232,.42);}
+                              .efc__ui--br{bottom:12px;right:14px;color:rgba(228,228,232,.42);}
+                              .efc__ui b{font-weight:600;}
+                              .efc__cap{text-align:center;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:.8rem 0 0;line-height:1.5;}
 
-                .efc__panel{min-height:210px;}
-                .efc__daytag{display:flex;align-items:baseline;gap:.55rem;margin:0 0 .8rem;}
-                .efc__daytag b{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:600;color:var(--plum);line-height:1;}
-                .efc__daytag span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);}
-                .efc__phase-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.55rem,3vw,2rem);color:var(--plum-deep);margin:0 0 .55rem;line-height:1.08;}
-                .efc__phase-body{font-weight:300;font-size:1rem;line-height:1.66;margin:0 0 1.1rem;color:var(--ink);}
-                .efc__metric{display:inline-flex;align-items:center;gap:.6rem;padding:.5rem .9rem;border:1px solid var(--lav-line);border-radius:999px;background:rgba(255,255,255,.55);}
-                .efc__metric .dot{width:8px;height:8px;border-radius:50%;background:var(--plum-soft);box-shadow:0 0 0 4px rgba(111,92,151,.15);}
-                .efc__metric .lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);}
-                .efc__metric .val{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--plum);line-height:1;}
-                .efc__panel.is-anim .efc__daytag,.efc__panel.is-anim .efc__phase-title,.efc__panel.is-anim .efc__phase-body,.efc__panel.is-anim .efc__metric{animation:efc-rise .55s cubic-bezier(.22,.61,.36,1) both;}
-                .efc__panel.is-anim .efc__phase-body{animation-delay:.05s;}
-                .efc__panel.is-anim .efc__metric{animation-delay:.1s;}
-                @keyframes efc-rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+                              .efc__panel{min-height:210px;}
+                              .efc__daytag{display:flex;align-items:baseline;gap:.55rem;margin:0 0 .8rem;}
+                              .efc__daytag b{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:600;color:var(--plum);line-height:1;}
+                              .efc__daytag span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);}
+                              .efc__phase-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.55rem,3vw,2rem);color:var(--plum-deep);margin:0 0 .55rem;line-height:1.08;}
+                              .efc__phase-body{font-weight:300;font-size:1rem;line-height:1.66;margin:0 0 1.1rem;color:var(--ink);}
+                              .efc__metric{display:inline-flex;align-items:center;gap:.6rem;padding:.5rem .9rem;border:1px solid var(--lav-line);border-radius:999px;background:rgba(255,255,255,.55);}
+                              .efc__metric .dot{width:8px;height:8px;border-radius:50%;background:var(--plum-soft);box-shadow:0 0 0 4px rgba(111,92,151,.15);}
+                              .efc__metric .lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);}
+                              .efc__metric .val{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--plum);line-height:1;}
+                              .efc__panel.is-anim .efc__daytag,.efc__panel.is-anim .efc__phase-title,.efc__panel.is-anim .efc__phase-body,.efc__panel.is-anim .efc__metric{animation:efc-rise .55s cubic-bezier(.22,.61,.36,1) both;}
+                              .efc__panel.is-anim .efc__phase-body{animation-delay:.05s;}
+                              .efc__panel.is-anim .efc__metric{animation-delay:.1s;}
+                              @keyframes efc-rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 
-                .efc__nav{display:flex;align-items:center;gap:14px;margin-top:6px;}
-                .efc__arrow{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--lav-line);background:#fff;color:var(--plum-soft);cursor:pointer;display:grid;place-items:center;transition:.25s;}
-                .efc__arrow:hover:not(:disabled){border-color:var(--plum-soft);color:var(--plum);transform:translateY(-1px);box-shadow:0 8px 20px -10px rgba(74,58,99,.4);}
-                .efc__arrow:disabled{opacity:.3;cursor:default;}
-                .efc__arrow svg{width:16px;height:16px;}
-                .efc__track-wrap{flex:1 1 auto;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-                .efc__track-wrap::-webkit-scrollbar{display:none;}
-                .efc__track{position:relative;display:flex;justify-content:space-between;min-width:480px;padding:20px 8px 4px;}
-                .efc__track::before{content:"";position:absolute;left:20px;right:20px;top:26px;height:2px;background:var(--lav-line);border-radius:2px;}
-                .efc__fill{position:absolute;left:20px;top:26px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--plum-soft),var(--gold));transition:width .6s cubic-bezier(.22,.61,.36,1);box-shadow:0 0 10px rgba(169,143,95,.5);}
-                .efc__node{position:relative;background:none;border:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1 1 0;z-index:1;}
-                .efc__dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--lav-line);transition:.3s;box-shadow:0 0 0 5px var(--ivory);}
-                .efc__node:hover .efc__dot{border-color:var(--gold);}
-                .efc__node[aria-selected="true"] .efc__dot{background:var(--plum);border-color:var(--plum);transform:scale(1.25);box-shadow:0 0 0 5px var(--ivory),0 0 0 9px rgba(74,58,99,.12);}
-                .efc__node-label{font-size:.62rem;letter-spacing:.05em;color:var(--mute);text-transform:uppercase;font-weight:500;white-space:nowrap;transition:.3s;}
-                .efc__node[aria-selected="true"] .efc__node-label{color:var(--plum);font-weight:600;}
+                              .efc__nav{display:flex;align-items:center;gap:14px;margin-top:6px;}
+                              .efc__arrow{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--lav-line);background:#fff;color:var(--plum-soft);cursor:pointer;display:grid;place-items:center;transition:.25s;}
+                              .efc__arrow:hover:not(:disabled){border-color:var(--plum-soft);color:var(--plum);transform:translateY(-1px);box-shadow:0 8px 20px -10px rgba(74,58,99,.4);}
+                              .efc__arrow:disabled{opacity:.3;cursor:default;}
+                              .efc__arrow svg{width:16px;height:16px;}
+                              .efc__track-wrap{flex:1 1 auto;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+                              .efc__track-wrap::-webkit-scrollbar{display:none;}
+                              .efc__track{position:relative;display:flex;justify-content:space-between;min-width:480px;padding:20px 8px 4px;}
+                              .efc__track::before{content:"";position:absolute;left:20px;right:20px;top:26px;height:2px;background:var(--lav-line);border-radius:2px;}
+                              .efc__fill{position:absolute;left:20px;top:26px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--plum-soft),var(--gold));transition:width .6s cubic-bezier(.22,.61,.36,1);box-shadow:0 0 10px rgba(169,143,95,.5);}
+                              .efc__node{position:relative;background:none;border:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1 1 0;z-index:1;}
+                              .efc__dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--lav-line);transition:.3s;box-shadow:0 0 0 5px var(--ivory);}
+                              .efc__node:hover .efc__dot{border-color:var(--gold);}
+                              .efc__node[aria-selected="true"] .efc__dot{background:var(--plum);border-color:var(--plum);transform:scale(1.25);box-shadow:0 0 0 5px var(--ivory),0 0 0 9px rgba(74,58,99,.12);}
+                              .efc__node-label{font-size:.62rem;letter-spacing:.05em;color:var(--mute);text-transform:uppercase;font-weight:500;white-space:nowrap;transition:.3s;}
+                              .efc__node[aria-selected="true"] .efc__node-label{color:var(--plum);font-weight:600;}
 
-                .efc__meds{margin-top:clamp(28px,4vw,40px);border-top:1px solid var(--lav-line);padding-top:24px;}
-                .efc__meds-h{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 18px;}
-                .efc__med-row{display:grid;grid-template-columns:176px 1fr;align-items:center;gap:16px;margin-bottom:12px;}
-                .efc__med-name{display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:500;color:var(--plum-deep);}
-                .efc__med-name small{display:block;font-weight:300;font-size:.68rem;color:var(--mute);}
-                .efc__med-ico{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:var(--lav);border:1px solid var(--lav-line);}
-                .efc__med-ico svg{width:16px;height:16px;}
-                .efc__med-ico.fsh{color:var(--plum-soft);}
-                .efc__med-ico.ant{color:var(--gold);}
-                .efc__med-ico.key{color:var(--blush);}
-                .efc__med-txt{display:flex;flex-direction:column;line-height:1.18;min-width:0;}
-                .efc__med-bartrack{position:relative;height:14px;}
-                .efc__med-bar{position:absolute;top:0;height:14px;border-radius:8px;opacity:.3;transition:opacity .4s,box-shadow .4s;}
-                .efc__med-bar.fsh{left:2%;right:24%;background:linear-gradient(90deg,var(--plum-soft),#8a76b4);}
-                .efc__med-bar.ant{left:42%;right:24%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));}
-                .efc__med-bar.is-on{opacity:1;}
-                .efc__med-bar.fsh.is-on{box-shadow:0 6px 18px -6px var(--plum-soft);}
-                .efc__med-bar.ant.is-on{box-shadow:0 6px 18px -6px var(--gold);}
-                .efc__med-pt{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;border:2px solid #fff;opacity:.4;transition:.4s;}
-                .efc__med-pt.trig{left:78%;background:var(--blush);}
-                .efc__med-pt.coll{left:97%;background:var(--plum-deep);}
-                .efc__med-pt.is-on{opacity:1;transform:translate(-50%,-50%) scale(1.35);}
-                .efc__med-pt.trig.is-on{box-shadow:0 0 0 5px rgba(189,125,140,.2);}
-                .efc__med-pt.coll.is-on{box-shadow:0 0 0 5px rgba(53,42,74,.16);}
-                .efc__med-here{position:absolute;top:-7px;width:2px;height:28px;background:var(--plum);border-radius:2px;transform:translateX(-50%);transition:left .6s cubic-bezier(.22,.61,.36,1);}
-                .efc__med-here::after{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--plum);box-shadow:0 0 0 4px rgba(74,58,99,.12);}
-                .efc__med-scale{display:grid;grid-template-columns:176px 1fr;gap:16px;margin-top:8px;}
-                .efc__med-scale .marks{display:flex;justify-content:space-between;}
-                .efc__med-scale span{font-size:.6rem;color:var(--mute);letter-spacing:.05em;}
+                              .efc__meds{margin-top:clamp(28px,4vw,40px);border-top:1px solid var(--lav-line);padding-top:24px;}
+                              .efc__meds-h{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 18px;}
+                              .efc__med-row{display:grid;grid-template-columns:176px 1fr;align-items:center;gap:16px;margin-bottom:12px;}
+                              .efc__med-name{display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:500;color:var(--plum-deep);}
+                              .efc__med-name small{display:block;font-weight:300;font-size:.68rem;color:var(--mute);}
+                              .efc__med-ico{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:var(--lav);border:1px solid var(--lav-line);}
+                              .efc__med-ico svg{width:16px;height:16px;}
+                              .efc__med-ico.fsh{color:var(--plum-soft);}
+                              .efc__med-ico.ant{color:var(--gold);}
+                              .efc__med-ico.key{color:var(--blush);}
+                              .efc__med-txt{display:flex;flex-direction:column;line-height:1.18;min-width:0;}
+                              .efc__med-bartrack{position:relative;height:14px;}
+                              .efc__med-bar{position:absolute;top:0;height:14px;border-radius:8px;opacity:.3;transition:opacity .4s,box-shadow .4s;}
+                              .efc__med-bar.fsh{left:2%;right:24%;background:linear-gradient(90deg,var(--plum-soft),#8a76b4);}
+                              .efc__med-bar.ant{left:42%;right:24%;background:linear-gradient(90deg,var(--gold),var(--gold-soft));}
+                              .efc__med-bar.is-on{opacity:1;}
+                              .efc__med-bar.fsh.is-on{box-shadow:0 6px 18px -6px var(--plum-soft);}
+                              .efc__med-bar.ant.is-on{box-shadow:0 6px 18px -6px var(--gold);}
+                              .efc__med-pt{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;border:2px solid #fff;opacity:.4;transition:.4s;}
+                              .efc__med-pt.trig{left:78%;background:var(--blush);}
+                              .efc__med-pt.coll{left:97%;background:var(--plum-deep);}
+                              .efc__med-pt.is-on{opacity:1;transform:translate(-50%,-50%) scale(1.35);}
+                              .efc__med-pt.trig.is-on{box-shadow:0 0 0 5px rgba(189,125,140,.2);}
+                              .efc__med-pt.coll.is-on{box-shadow:0 0 0 5px rgba(53,42,74,.16);}
+                              .efc__med-here{position:absolute;top:-7px;width:2px;height:28px;background:var(--plum);border-radius:2px;transform:translateX(-50%);transition:left .6s cubic-bezier(.22,.61,.36,1);}
+                              .efc__med-here::after{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--plum);box-shadow:0 0 0 4px rgba(74,58,99,.12);}
+                              .efc__med-scale{display:grid;grid-template-columns:176px 1fr;gap:16px;margin-top:8px;}
+                              .efc__med-scale .marks{display:flex;justify-content:space-between;}
+                              .efc__med-scale span{font-size:.6rem;color:var(--mute);letter-spacing:.05em;}
 
-                .efc__after{margin-top:clamp(28px,4vw,40px);}
-                .efc__after-h{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
-                .efc__after-h span{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--plum-deep);font-style:italic;}
-                .efc__after-h::after{content:"";flex:1;height:1px;background:var(--lav-line);}
-                .efc__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-                .efc__card{position:relative;background:#fff;border:1px solid var(--lav-line);border-radius:15px;padding:22px 20px;overflow:hidden;transition:.3s;}
-                .efc__card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-soft);opacity:0;transition:.3s;}
-                .efc__card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#d8cdec;}
-                .efc__card:hover::before{opacity:1;}
-                .efc__card .efc__step{font-size:.58rem;letter-spacing:.22em;color:var(--gold);font-weight:600;display:block;margin-bottom:.7rem;}
-                .efc__card h4{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:var(--plum);margin:0 0 .45rem;}
-                .efc__card p{font-weight:300;font-size:.85rem;line-height:1.58;margin:0;color:var(--ink);}
+                              .efc__after{margin-top:clamp(28px,4vw,40px);}
+                              .efc__after-h{display:flex;align-items:center;gap:14px;margin:0 0 18px;}
+                              .efc__after-h span{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--plum-deep);font-style:italic;}
+                              .efc__after-h::after{content:"";flex:1;height:1px;background:var(--lav-line);}
+                              .efc__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+                              .efc__card{position:relative;background:#fff;border:1px solid var(--lav-line);border-radius:15px;padding:22px 20px;overflow:hidden;transition:.3s;}
+                              .efc__card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-soft);opacity:0;transition:.3s;}
+                              .efc__card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#d8cdec;}
+                              .efc__card:hover::before{opacity:1;}
+                              .efc__card .efc__step{font-size:.58rem;letter-spacing:.22em;color:var(--gold);font-weight:600;display:block;margin-bottom:.7rem;}
+                              .efc__card h4{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:var(--plum);margin:0 0 .45rem;}
+                              .efc__card p{font-weight:300;font-size:.85rem;line-height:1.58;margin:0;color:var(--ink);}
 
-                .efc__note{margin:clamp(26px,4vw,34px) 0 0;font-size:.72rem;line-height:1.6;color:var(--mute);font-weight:300;font-style:italic;max-width:72ch;}
+                              .efc__note{margin:clamp(26px,4vw,34px) 0 0;font-size:.72rem;line-height:1.6;color:var(--mute);font-weight:300;font-style:italic;max-width:72ch;}
 
-                @media (max-width:760px){
-                  .efc__stage{grid-template-columns:1fr;}
-                  .efc__panel{min-height:0;}
-                  .efc__cards{grid-template-columns:1fr;}
-                  .efc__med-row,.efc__med-scale{grid-template-columns:124px 1fr;gap:12px;}
-                }
-                @media (prefers-reduced-motion:reduce){ .efc *{animation:none!important;} }
-              </style>
+                              @media (max-width:760px){
+                                .efc__stage{grid-template-columns:1fr;}
+                                .efc__panel{min-height:0;}
+                                .efc__cards{grid-template-columns:1fr;}
+                                .efc__med-row,.efc__med-scale{grid-template-columns:124px 1fr;gap:12px;}
+                              }
+                              @media (prefers-reduced-motion:reduce){ .efc *{animation:none!important;} }
+                            </style>
 
-              <p class="efc__eyebrow">The stimulation cycle</p>
-              <h2 class="efc__title">What happens, day by day</h2>
-              <p class="efc__lede">Egg freezing follows a short, carefully timed hormone cycle. Step through the days alongside a live follicular tracking scan.</p>
+                            <p class="efc__eyebrow">The stimulation cycle</p>
+                            <h2 class="efc__title">What happens, day by day</h2>
+                            <p class="efc__lede">Egg freezing follows a short, carefully timed hormone cycle. Step through the days alongside a live follicular tracking scan.</p>
 
-              <div class="efc__stage">
-                <div>
-                  <div class="efc__scope">
-                    <div class="efc__screen" data-clar="low">
-                      <video class="efc__vid" id="efcVid" autoplay muted loop playsinline preload="metadata" aria-label="Live ultrasound of an ovary during follicular tracking">
-                        <source src="follicular-scan1.mp4" type="video/mp4">
-                      </video>
-                      <svg class="efc__ovl" viewBox="0 0 960 540" preserveAspectRatio="none" aria-hidden="true">
-                        <!-- optional measurement annotation at trigger. Nudge x/y to your clip, or delete this group. -->
-                        <g class="efc__caliper" stroke="#f0d9a0" stroke-width="1.6" fill="none">
-                          <line x1="402" y1="250" x2="558" y2="250" stroke-dasharray="5 5"/>
-                          <path d="M398 244 l8 12 M406 244 l-8 12"/>
-                          <path d="M554 244 l8 12 M562 244 l-8 12"/>
-                          <text x="480" y="232" text-anchor="middle" stroke="none" fill="#f6e6bc" font-family="Montserrat,sans-serif" font-size="16" font-weight="600" letter-spacing="0.5">20.0 mm</text>
-                        </g>
-                      </svg>
-                      <div class="efc__scope-ui">
-                        <div class="efc__ui efc__ui--tl">Ovary &middot; follicular tracking</div>
-                        <div class="efc__ui efc__ui--tr" id="efcScopeDay"><b>Day 0</b></div>
-                        <div class="efc__ui efc__ui--bl">TV 7.5 MHz</div>
-                        <div class="efc__ui efc__ui--br" id="efcScopeCount">baseline</div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="efc__cap">Example follicular tracking scan, illustrative.<br>Use footage you have the rights to before publishing.</p>
-                </div>
+                            <div class="efc__stage">
+                              <div>
+                                <div class="efc__scope">
+                                  <div class="efc__screen" data-clar="low">
+                                    <video class="efc__vid" id="efcVid" autoplay muted loop playsinline preload="metadata" aria-label="Live ultrasound of an ovary during follicular tracking">
+                                      <source src="follicular-scan1.mp4" type="video/mp4">
+                                    </video>
+                                    <svg class="efc__ovl" viewBox="0 0 960 540" preserveAspectRatio="none" aria-hidden="true">
+                                      <!-- optional measurement annotation at trigger. Nudge x/y to your clip, or delete this group. -->
+                                      <g class="efc__caliper" stroke="#f0d9a0" stroke-width="1.6" fill="none">
+                                        <line x1="402" y1="250" x2="558" y2="250" stroke-dasharray="5 5"/>
+                                        <path d="M398 244 l8 12 M406 244 l-8 12"/>
+                                        <path d="M554 244 l8 12 M562 244 l-8 12"/>
+                                        <text x="480" y="232" text-anchor="middle" stroke="none" fill="#f6e6bc" font-family="Montserrat,sans-serif" font-size="16" font-weight="600" letter-spacing="0.5">20.0 mm</text>
+                                      </g>
+                                    </svg>
+                                    <div class="efc__scope-ui">
+                                      <div class="efc__ui efc__ui--tl">Ovary &middot; follicular tracking</div>
+                                      <div class="efc__ui efc__ui--tr" id="efcScopeDay"><b>Day 0</b></div>
+                                      <div class="efc__ui efc__ui--bl">TV 7.5 MHz</div>
+                                      <div class="efc__ui efc__ui--br" id="efcScopeCount">baseline</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <p class="efc__cap">Example follicular tracking scan, illustrative.<br>Use footage you have the rights to before publishing.</p>
+                              </div>
 
-                <div class="efc__panel is-anim" aria-live="polite">
-                  <p class="efc__daytag"><b id="efcDay">Day 0</b><span id="efcDaySub">start</span></p>
-                  <h3 class="efc__phase-title" id="efcPhaseTitle">Stimulation begins</h3>
-                  <p class="efc__phase-body" id="efcPhaseBody">After a baseline scan and blood test, daily hormone injections (follicle stimulating hormone) start at home. They encourage a group of follicles to grow together, rather than the single follicle of a natural month.</p>
-                  <span class="efc__metric"><span class="dot"></span><span class="lbl">Leading follicle</span><span class="val" id="efcMetric">&#8776; 5 mm</span></span>
-                </div>
+                              <div class="efc__panel is-anim" aria-live="polite">
+                                <p class="efc__daytag"><b id="efcDay">Day 0</b><span id="efcDaySub">start</span></p>
+                                <h3 class="efc__phase-title" id="efcPhaseTitle">Stimulation begins</h3>
+                                <p class="efc__phase-body" id="efcPhaseBody">After a baseline scan and blood test, daily hormone injections (follicle stimulating hormone) start at home. They encourage a group of follicles to grow together, rather than the single follicle of a natural month.</p>
+                                <span class="efc__metric"><span class="dot"></span><span class="lbl">Leading follicle</span><span class="val" id="efcMetric">&#8776; 5 mm</span></span>
+                              </div>
+                            </div>
+
+                            <div class="efc__nav">
+                              <button class="efc__arrow" id="efcPrev" aria-label="Previous step" disabled>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                              </button>
+                              <div class="efc__track-wrap"><div class="efc__track" id="efcTrack" role="tablist"><div class="efc__fill" id="efcFill" style="width:0"></div></div></div>
+                              <button class="efc__arrow" id="efcNext" aria-label="Next step">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                              </button>
+                            </div>
+
+                            <div class="efc__meds">
+                              <p class="efc__meds-h">What you take, and when</p>
+                              <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico fsh" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4"/><rect x="6" y="9" width="10" height="6" rx="1.4"/><path d="M9.3 9v6M12.3 9v6"/><path d="M16 12h2"/><path d="M18 8.3v7.4"/></svg></span><span class="efc__med-txt">Daily injections<small>follicle recruitment (FSH)</small></span></div><div class="efc__med-bartrack"><div class="efc__med-bar fsh is-on" id="medFsh"></div><div class="efc__med-here" id="medHere" style="left:4%"></div></div></div>
+                              <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico ant" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="18" height="7" rx="3.5"/><path d="M12 8.5v7"/></svg></span><span class="efc__med-txt">Antagonist or pill<small>holds eggs back until trigger</small></span></div><div class="efc__med-bartrack"><div class="efc__med-bar ant" id="medAnt"></div></div></div>
+                              <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></span><span class="efc__med-txt">Key moments<small>trigger, then collection</small></span></div><div class="efc__med-bartrack"><div class="efc__med-pt trig" id="medTrig"></div><div class="efc__med-pt coll" id="medColl"></div></div></div>
+                              <div class="efc__med-scale"><span></span><div class="marks"><span>Day 0</span><span>Day 5</span><span>Trigger</span><span>+36h</span></div></div>
+                            </div>
+
+                            <div class="efc__after">
+                              <p class="efc__after-h"><span>After collection</span></p>
+                              <div class="efc__cards">
+                                <div class="efc__card"><span class="efc__step">Step 1</span><h4>Vitrification</h4><p>Mature eggs are flash frozen within hours using vitrification, a rapid method that avoids ice crystal damage.</p></div>
+                                <div class="efc__card"><span class="efc__step">Step 2</span><h4>Storage</h4><p>Frozen eggs are held safely and do not age while frozen. They can be stored for years.</p></div>
+                                <div class="efc__card"><span class="efc__step">Step 3</span><h4>Future use</h4><p>When the time is right, eggs are thawed, fertilised with sperm by ICSI, and the embryo is transferred.</p></div>
+                              </div>
+                            </div>
+
+                            <p class="efc__note">This illustrates a typical antagonist cycle for egg freezing. The scan shown is an example for illustration. Timing and protocols vary between people and clinics, and a plan is always tailored to the individual. The days shown are a guide, not a fixed schedule.</p>
+
+                            <script>
+                            (function(){
+                              var root = document.currentScript.closest('.efc');
+                              var screen = root.querySelector('.efc__screen');
+                              var phases = [
+                                { day:"Day 0", sub:"start", scopeDay:"Day 0", clar:"low", title:"Stimulation begins", vid:"follicular-scan1.mp4",
+                                  body:"After a baseline scan and blood test, daily hormone injections (follicle stimulating hormone) start at home. They encourage a group of follicles to grow together, rather than the single follicle of a natural month.",
+                                  node:"Day 0", mm:"&#8776; 5 mm", count:"baseline", fsh:true, ant:false, trig:false, coll:false, here:4 },
+                                { day:"Days 1 to 4", sub:"early growth", scopeDay:"Day 3", clar:"low", title:"The follicles begin to grow", vid:"follicular-scan1.mp4",
+                                  body:"Injections continue each day. The follicles are still small in this early window, so there is little to see on a scan yet and monitoring stays light.",
+                                  node:"Days 1-4", mm:"&#8776; 9 mm", count:"early", fsh:true, ant:false, trig:false, coll:false, here:22 },
+                                { day:"Day 5", sub:"antagonist", scopeDay:"Day 5", clar:"mid", title:"A second injection is added", vid:"follicular-scan1.mp4",
+                                  body:"From around day 5 a second medication (a GnRH antagonist) is usually added. It holds the eggs back so they release at the planned time, not early. This is also when monitoring becomes most useful.",
+                                  node:"Day 5", mm:"&#8776; 12 mm", count:"monitoring", fsh:true, ant:true, trig:false, coll:false, here:40 },
+                                { day:"Days 8 to 10", sub:"monitoring", scopeDay:"Day 9", clar:"full", title:"Tracking the response", vid:"follicular-scan2.mp4",
+                                  body:"Short ultrasound scans and blood tests follow how the follicles are growing and let the dose be adjusted. Most people need only a few scans across the cycle. Published research suggests the scans from around day 5 onward carry the most information for timing the next step.",
+                                  node:"Days 8-10", mm:"&#8776; 16 mm", count:"monitoring", fsh:true, ant:true, trig:false, coll:false, here:58 },
+                                { day:"Days 11 to 12", sub:"trigger", scopeDay:"Trigger", clar:"full", title:"The trigger injection", vid:"follicular-scan3.mp4",
+                                  body:"When enough follicles reach maturity (the leading follicle is usually around 18 to 20mm), a trigger injection is given at a precise time, often in the evening. On average this falls after about nine days of injections, though the range is wide and individual.",
+                                  node:"Trigger", mm:"&#8776; 20 mm", count:"trigger", fsh:true, ant:true, trig:true, coll:false, here:78 },
+                                { day:"About 36h later", sub:"collection", scopeDay:"Pickup", clar:"full", title:"Egg collection", vid:"follicular-scan3.mp4",
+                                  body:"Collection is timed for roughly 36 hours after the trigger. It is a short procedure, around 20 minutes, under light sedation. A fine needle guided by ultrasound gently draws the fluid from each follicle, and the eggs are found within it.",
+                                  node:"Collection", mm:"collected", count:"collected", fsh:false, ant:false, trig:false, coll:true, here:97 }
+                              ];
+
+                              var el = {
+                                day:root.querySelector('#efcDay'), sub:root.querySelector('#efcDaySub'),
+                                title:root.querySelector('#efcPhaseTitle'), body:root.querySelector('#efcPhaseBody'),
+                                metric:root.querySelector('#efcMetric'),
+                                scopeDay:root.querySelector('#efcScopeDay'), scopeCount:root.querySelector('#efcScopeCount'),
+                                panel:root.querySelector('.efc__panel'),
+                                vid:root.querySelector('#efcVid'),
+                                track:root.querySelector('#efcTrack'), fill:root.querySelector('#efcFill'),
+                                prev:root.querySelector('#efcPrev'), next:root.querySelector('#efcNext'),
+                                fsh:root.querySelector('#medFsh'), ant:root.querySelector('#medAnt'),
+                                trig:root.querySelector('#medTrig'), coll:root.querySelector('#medColl'),
+                                here:root.querySelector('#medHere')
+                              };
+
+                              var nodes=[];
+                              phases.forEach(function(p,i){
+                                var b=document.createElement('button');
+                                b.className='efc__node'; b.setAttribute('role','tab'); b.setAttribute('aria-selected','false');
+                                b.innerHTML='<span class="efc__dot"></span><span class="efc__node-label">'+p.node+'</span>';
+                                b.addEventListener('click',function(){ go(i,true); });
+                                el.track.appendChild(b); nodes.push(b);
+                              });
+
+                              var current=0;
+                              var currentVid="follicular-scan1.mp4";
+                              function go(i, userAction){
+                                i=Math.max(0,Math.min(phases.length-1,i)); current=i;
+                                var p=phases[i];
+                                if(p.vid && p.vid!==currentVid && el.vid){
+                                  currentVid=p.vid; el.vid.src=p.vid; el.vid.load();
+                                  var pr=el.vid.play(); if(pr&&pr.catch){ pr.catch(function(){}); }
+                                }
+                                el.day.textContent=p.day; el.sub.textContent=p.sub;
+                                el.title.textContent=p.title; el.body.textContent=p.body;
+                                el.metric.innerHTML=p.mm; el.scopeDay.innerHTML='<b>'+p.scopeDay+'</b>';
+                                el.scopeCount.textContent=p.count;
+                                el.panel.classList.remove('is-anim'); void el.panel.offsetWidth; el.panel.classList.add('is-anim');
+
+                                screen.setAttribute('data-clar', p.clar);
+                                root.setAttribute('data-trig', p.trig?'true':'false');
+
+                                el.fsh.classList.toggle('is-on',p.fsh); el.ant.classList.toggle('is-on',p.ant);
+                                el.trig.classList.toggle('is-on',p.trig); el.coll.classList.toggle('is-on',p.coll);
+                                el.here.style.left=p.here+'%';
+                                el.fill.style.width=(i/(phases.length-1)*100)+'%';
+
+                                nodes.forEach(function(n,k){ n.setAttribute('aria-selected',k===i?'true':'false'); });
+                                el.prev.disabled=(i===0); el.next.disabled=(i===phases.length-1);
+                                if(userAction){ nodes[i].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}); }
+                              }
+
+                              el.prev.addEventListener('click',function(){ go(current-1,true); });
+                              el.next.addEventListener('click',function(){ go(current+1,true); });
+                              root.addEventListener('keydown',function(e){
+                                if(e.key==='ArrowRight'){ go(current+1,true); }
+                                if(e.key==='ArrowLeft'){ go(current-1,true); }
+                              });
+                              go(0,false);
+                            })();
+                            </script>
+                          </section>
+            </div></div>
+          </div>
+        </article>
+        <article class="qcard" id="card2">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card2-body">
+            <span class="qcard__face qcard__face--front">
+              <span class="qcard__num">2</span>
+              <span class="qcard__q">How many eggs do I need?</span>
+              <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to reveal the numbers</span>
+            </span>
+            <span class="qcard__face qcard__face--back" aria-hidden="true">
+              <span class="qcard__num">2</span>
+              <span class="qcard__q">How many eggs do I need?</span>
+              <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
+            </span>
+          </button>
+          <div class="qcard__reveal" id="card2-body" role="region" aria-label="How many eggs do I need?">
+            <div><div class="qcard__inner">
+              <p class="qcard__answer">Egg freezing is a numbers game. Not every frozen egg will survive thawing, fertilise, develop into an embryo, or result in a live birth, so the total number of eggs frozen matters. The likelihood of a future live birth generally increases as more eggs are stored.</p>
+              <div class="viz-row">
+                              <!-- VISUAL 2 primary: eggs-by-age pictograph -->
+                              <div class="viz-card viz">
+                                  <div class="viz-title">Eggs to freeze for ~75% chance of at least one baby</div>
+                                  <svg viewBox="0 0 480 250" role="img" aria-label="Mature eggs to freeze by age for about a 75 percent live birth chance (Goldman 2017): 10 eggs at 34, 20 at 37, 61 at 42. Each dot is one egg.">
+                                      <defs>
+                                          <linearGradient id="barP" x1="0" y1="0" x2="0" y2="1">
+                                              <stop offset="0%" stop-color="#8b7db5"/>
+                                              <stop offset="100%" stop-color="#6b5b95"/>
+                                          </linearGradient>
+                                      </defs>
+                                      <text x="44" y="62" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 34</text>
+                                      <ellipse cx="120" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="58" rx="4" ry="5" fill="url(#barP)"/>
+                                      <text x="468" y="66" text-anchor="end" font-family="Montserrat" font-size="22" font-weight="700" fill="#6b5b95">10</text>
+                                      <text x="44" y="110" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 37</text>
+                                      <ellipse cx="120" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="106" rx="4" ry="5" fill="url(#barP)"/>
+                                      <text x="468" y="114" text-anchor="end" font-family="Montserrat" font-size="22" font-weight="700" fill="#6b5b95">20</text>
+                                      <text x="44" y="178" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 42</text>
+                                      <ellipse cx="120" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="120" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="120" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="120" cy="198" rx="4" ry="5" fill="url(#barP)"/>
+                                      <text x="468" y="182" text-anchor="end" font-family="Montserrat" font-size="22" font-weight="700" fill="#6b5b95">61</text>
+                                      <text x="120" y="234" font-family="Montserrat" font-size="11" fill="#9a9a9a">Each dot is one mature egg</text>
+                                  </svg>
+                                  <p class="viz-source">At 34 about 10 mature eggs reach a roughly 75% chance of a baby; by 42 it takes around 61. Source: Goldman RH et al., Human Reproduction, 2017.</p>
+                              </div>
+
+                              <!-- VISUAL 2 companion: odds rings -->
+                              <div class="viz-card viz">
+                                  <div class="viz-title">Same 20 eggs, different odds by age</div>
+                                  <svg viewBox="0 0 340 250" role="img" aria-label="Chance of at least one live birth with 20 mature eggs frozen, by age (Goldman 2017): 90 percent at 34, 75 percent at 37, 37 percent at 42.">
+                                      <circle cx="70" cy="100" r="40" fill="none" stroke="#ece5d8" stroke-width="11"/><circle cx="70" cy="100" r="40" fill="none" stroke="#4a6741" stroke-width="11" stroke-linecap="round" stroke-dasharray="226.2 25.1" transform="rotate(-90 70 100)"/><text x="70" y="106" text-anchor="middle" font-family="Montserrat" font-size="18" font-weight="700" fill="#3a3a3a">90%</text><circle cx="170" cy="100" r="40" fill="none" stroke="#ece5d8" stroke-width="11"/><circle cx="170" cy="100" r="40" fill="none" stroke="#5e8a52" stroke-width="11" stroke-linecap="round" stroke-dasharray="188.5 62.8" transform="rotate(-90 170 100)"/><text x="170" y="106" text-anchor="middle" font-family="Montserrat" font-size="18" font-weight="700" fill="#3a3a3a">75%</text><circle cx="270" cy="100" r="40" fill="none" stroke="#ece5d8" stroke-width="11"/><circle cx="270" cy="100" r="40" fill="none" stroke="#c8a45e" stroke-width="11" stroke-linecap="round" stroke-dasharray="93.0 158.3" transform="rotate(-90 270 100)"/><text x="270" y="106" text-anchor="middle" font-family="Montserrat" font-size="18" font-weight="700" fill="#3a3a3a">37%</text>
+                                      <text x="70" y="162" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 34</text>
+                                      <text x="170" y="162" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 37</text>
+                                      <text x="270" y="162" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 42</text>
+                                      <text x="170" y="210" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#9a9a9a">Chance of a baby with 20 eggs frozen</text>
+                                  </svg>
+                                  <p class="viz-source">With 20 eggs frozen, the chance of a baby falls from about 90% at 34 to 37% at 42. Source: Goldman RH et al., Human Reproduction, 2017.</p>
+                              </div>
+                          </div>
+              <p class="pull">This is why I encourage younger patients not to wait, and why I am cautious about over-promising to patients who start later.</p>
+
+                          <!-- VISUAL 2c: interactive estimator, shares the model behind the egg-freezing calculator -->
+            </div></div>
+          </div>
+        </article>
+        <article class="qcard" id="card3">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card3-body">
+            <span class="qcard__face qcard__face--front">
+              <span class="qcard__num">3</span>
+              <span class="qcard__q">How many eggs are recommended at my age?</span>
+              <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip for your age estimate</span>
+            </span>
+            <span class="qcard__face qcard__face--back" aria-hidden="true">
+              <span class="qcard__num">3</span>
+              <span class="qcard__q">How many eggs are recommended at my age?</span>
+              <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
+            </span>
+          </button>
+          <div class="qcard__reveal" id="card3-body" role="region" aria-label="How many eggs are recommended at my age?">
+            <div><div class="qcard__inner">
+              <p class="qcard__answer">Age has a major impact on egg quality, so the older you are, the more eggs it may take to reach the same future chance of pregnancy. At 34 about 10 mature eggs reach roughly a 75 percent chance of at least one baby, but by 42 it takes around 61.</p>
+              <div class="viz-card estimator">
+                              <div class="est-head">
+                                  <span class="est-q">Estimate your own number. Pick your age:</span>
+                                  <div class="age-tabs" id="ageTabs">
+                                      <button class="age-tab active" data-band="under35">Under 35</button>
+                                      <button class="age-tab" data-band="35-37">35 to 37</button>
+                                      <button class="age-tab" data-band="38-40">38 to 40</button>
+                                      <button class="age-tab" data-band="over40">Over 40</button>
+                                  </div>
+                              </div>
+                              <svg id="estChart" viewBox="0 0 640 340" role="img" aria-label="Estimated chance of at least one live birth by number of eggs frozen, for the selected age band">
+                                  <!-- y axis -->
+                                  <g font-family="Montserrat" font-size="11" fill="#9a9a9a">
+                                      <line x1="60" y1="40" x2="60" y2="280" stroke="#eee"/>
+                                      <line x1="60" y1="40" x2="620" y2="40" stroke="#f4f4f4"/><text x="52" y="44" text-anchor="end">100%</text>
+                                      <line x1="60" y1="100" x2="620" y2="100" stroke="#f4f4f4"/><text x="52" y="104" text-anchor="end">75%</text>
+                                      <line x1="60" y1="160" x2="620" y2="160" stroke="#f4f4f4"/><text x="52" y="164" text-anchor="end">50%</text>
+                                      <line x1="60" y1="220" x2="620" y2="220" stroke="#f4f4f4"/><text x="52" y="224" text-anchor="end">25%</text>
+                                      <line x1="60" y1="280" x2="620" y2="280" stroke="#d8d2c4"/><text x="52" y="284" text-anchor="end">0</text>
+                                  </g>
+                                  <!-- 4 category groups, populated by JS. centres at x=140,260,380,500 -->
+                                  <g id="estBars"></g>
+                                  <g font-family="Montserrat" font-size="12.5" fill="#3a3a3a" font-weight="500">
+                                      <text x="140" y="302" text-anchor="middle">1 to 9</text>
+                                      <text x="260" y="302" text-anchor="middle">10 to 14</text>
+                                      <text x="380" y="302" text-anchor="middle">15 to 19</text>
+                                      <text x="500" y="302" text-anchor="middle">20+</text>
+                                  </g>
+                                  <text x="340" y="326" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#9a9a9a">Mature eggs frozen</text>
+                              </svg>
+                              <p class="est-note">Estimated cumulative chance of at least one live birth, by the number of mature eggs frozen. Whiskers show the 95% confidence interval, which is why a small dip between groups is normal in a real cohort. Source: Cobo A et al., Reproductive BioMedicine Online, 2025 (n = 2,891, IVIRMA Spain and NYU Langone). For an estimate that also uses your AMH and antral follicle count, try the <a href="egg-freezing-calculator.html">full calculator</a>.</p>
+                          </div>
+            </div></div>
+          </div>
+        </article>
+        <article class="qcard" id="card4">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card4-body">
+            <span class="qcard__face qcard__face--front">
+              <span class="qcard__num">4</span>
+              <span class="qcard__q">Will I ever use my frozen eggs?</span>
+              <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to see the evidence</span>
+            </span>
+            <span class="qcard__face qcard__face--back" aria-hidden="true">
+              <span class="qcard__num">4</span>
+              <span class="qcard__q">Will I ever use my frozen eggs?</span>
+              <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
+            </span>
+          </button>
+          <div class="qcard__reveal" id="card4-body" role="region" aria-label="Will I ever use my frozen eggs?">
+            <div><div class="qcard__inner">
+              <p class="qcard__answer">Many women never return to use their frozen eggs, often because they later conceive naturally or with fresh IVF treatment. Egg freezing is primarily about preserving future reproductive options. Return rates are low in the first several years and rise with longer follow-up.</p>
+              <div class="viz-card viz">
+                              <div class="viz-title">Return to use frozen eggs, by cohort</div>
+                              <svg viewBox="0 0 700 300" role="img" aria-label="Return to use frozen eggs rises with follow-up time: 5.7 percent at 5 to 7 years (SART-CORS 2025) climbing to 38.1 percent at 10 to 15 years (Blakemore and Grifo 2021); medical or oncofertility return stays about 4.5 to 8 percent.">
+                                  <defs>
+                                      <marker id="up" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                          <path d="M2 1L8 5L2 9" fill="none" stroke="#4a6741" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </marker>
+                                  </defs>
+                                  <g font-family="Montserrat" font-size="10" fill="#b0b0b0">
+                                      <line x1="110" y1="250" x2="640" y2="250" stroke="#e6e6e6"/><text x="100" y="254" text-anchor="end">0</text>
+                                      <line x1="110" y1="200" x2="640" y2="200" stroke="#f2f2f2"/><text x="100" y="204" text-anchor="end">10%</text>
+                                      <line x1="110" y1="150" x2="640" y2="150" stroke="#f2f2f2"/><text x="100" y="154" text-anchor="end">20%</text>
+                                      <line x1="110" y1="100" x2="640" y2="100" stroke="#f2f2f2"/><text x="100" y="104" text-anchor="end">30%</text>
+                                      <line x1="110" y1="50" x2="640" y2="50" stroke="#f2f2f2"/><text x="100" y="54" text-anchor="end">40%</text>
+                                  </g>
+                                  <rect x="110" y="210" width="530" height="17.5" fill="#d8d0bb" opacity="0.5"/>
+                                  <text x="420" y="223" font-family="Montserrat" font-size="11" font-weight="600" fill="#7a6f55">Medical / oncofertility, 4.5 to 8%</text>
+                                  <line x1="230" y1="221.5" x2="560" y2="59.5" stroke="#4a6741" stroke-width="3" marker-end="url(#up)"/>
+                                  <circle cx="230" cy="221.5" r="6" fill="#4a6741" stroke="#fff" stroke-width="2"/>
+                                  <circle cx="560" cy="59.5" r="6" fill="#4a6741" stroke="#fff" stroke-width="2"/>
+                                  <text x="230" y="208" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="600" fill="#4a6741">5.7%</text>
+                                  <text x="560" y="47" text-anchor="middle" font-family="Montserrat" font-size="15" font-weight="700" fill="#4a6741">38.1%</text>
+                                  <text x="230" y="272" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="500" fill="#2c2c2c">5 to 7 yr</text>
+                                  <text x="230" y="286" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">SART-CORS 2025</text>
+                                  <text x="560" y="272" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="500" fill="#2c2c2c">10 to 15 yr</text>
+                                  <text x="560" y="286" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">Blakemore &amp; Grifo 2021</text>
+                              </svg>
+                              <p class="viz-source">Follow-up time is the whole story here. Within the first few years return is low, but in a cohort followed 10 to 15 years, nearly 4 in 10 had come back. Medical (cancer) freezing also behaves differently from social freezing. Sources: SART-CORS cohort, 2025; Blakemore &amp; Grifo, Fertility and Sterility, 2021.</p>
+                          </div>
+              <div class="callout">
+                              <h4>Who actually returns?</h4>
+                              <p>In follow-up work, our group built a model that predicts return from a handful of factors: age at freezing, whether you have a partner, ethnicity, location, and your reason for freezing. The model reached a balanced accuracy of 0.83. It is a step toward counselling each patient on her own likely path, rather than quoting a single national average.</p>
+                              <p class="src">Source: Fouks et al., Reproductive BioMedicine Online, 2025 (machine learning return-rate model).</p>
+                          </div>
+            </div></div>
+          </div>
+        </article>
+        <article class="qcard" id="card5">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card5-body">
+            <span class="qcard__face qcard__face--front">
+              <span class="qcard__num">5</span>
+              <span class="qcard__q">What if I only freeze a small number of eggs?</span>
+              <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to reveal</span>
+            </span>
+            <span class="qcard__face qcard__face--back" aria-hidden="true">
+              <span class="qcard__num">5</span>
+              <span class="qcard__q">What if I only freeze a small number of eggs?</span>
+              <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
+            </span>
+          </button>
+          <div class="qcard__reveal" id="card5-body" role="region" aria-label="What if I only freeze a small number of eggs?">
+            <div><div class="qcard__inner">
+              <p class="qcard__answer">A lower egg yield does not mean the cycle was unsuccessful. In a national cohort, women who froze the fewest eggs returned to use them more often than strong responders did. Some women choose to undertake an additional cycle to increase the total number of eggs stored and improve cumulative future chances.</p>
+              <div class="viz-card compare-card viz">
+                              <div class="viz-title">Does freezing a low number make return more likely?</div>
+                              <svg viewBox="0 0 480 340" role="img" aria-label="Return rate by ovarian response in Fouks JAMA Network Open 2024: poor responders with fewer than 5 eggs returned at 4.0 percent, nearly 1.7 times the 2.3 percent rate for normal responders">
+                                  <defs>
+                                      <linearGradient id="barPor" x1="0" y1="0" x2="0" y2="1">
+                                          <stop offset="0%" stop-color="#a47bf2"/>
+                                          <stop offset="50%" stop-color="#7d4fdb"/>
+                                          <stop offset="100%" stop-color="#5a35ad"/>
+                                      </linearGradient>
+                                      <linearGradient id="barNorm" x1="0" y1="0" x2="0" y2="1">
+                                          <stop offset="0%" stop-color="#c2cddc"/>
+                                          <stop offset="100%" stop-color="#9aaabf"/>
+                                      </linearGradient>
+                                      <linearGradient id="cmpBg" x1="0" y1="0" x2="0" y2="1">
+                                          <stop offset="0%" stop-color="#7d4fdb" stop-opacity="0.07"/>
+                                          <stop offset="100%" stop-color="#7d4fdb" stop-opacity="0"/>
+                                      </linearGradient>
+                                      <filter id="cmpGlow" x="-70%" y="-70%" width="240%" height="240%">
+                                          <feGaussianBlur stdDeviation="7" result="b"/>
+                                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                      </filter>
+                                  </defs>
+
+                                  <!-- plot backdrop -->
+                                  <rect x="74" y="44" width="352" height="226" rx="14" fill="url(#cmpBg)"/>
+                                  <!-- y axis -->
+                                  <g font-family="Montserrat" font-size="11" fill="#9a9a9a">
+                                      <line x1="74" y1="270" x2="426" y2="270" stroke="#d8d2c4"/>
+                                      <line x1="74" y1="160" x2="426" y2="160" stroke="#eee"/><text x="66" y="164" text-anchor="end">2.5%</text>
+                                      <line x1="74" y1="50" x2="426" y2="50" stroke="#eee"/><text x="66" y="54" text-anchor="end">5%</text>
+                                      <text x="66" y="274" text-anchor="end">0</text>
+                                  </g>
+
+                                  <!-- Normal responders 2.3% -> h=101 (recessed) -->
+                                  <ellipse cx="155" cy="272" rx="52" ry="5" fill="#5a35ad" opacity="0.10"/>
+                                  <rect x="100" y="169" width="110" height="101" rx="6" fill="url(#barNorm)"/>
+                                  <text x="155" y="158" text-anchor="middle" font-family="Montserrat" font-size="17" font-weight="600" fill="#7d8aa0">2.3%</text>
+                                  <text x="155" y="290" text-anchor="middle" font-family="Montserrat" font-size="12.5" font-weight="500" fill="#3a3a3a">Normal response</text>
+                                  <text x="155" y="306" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">5 or more eggs</text>
+
+                                  <!-- Poor responders 4.0% -> h=176 (vivid highlight) -->
+                                  <ellipse cx="335" cy="272" rx="56" ry="6" fill="#5a35ad" opacity="0.22"/>
+                                  <rect x="280" y="94" width="110" height="176" rx="6" fill="url(#barPor)" filter="url(#cmpGlow)"/>
+                                  <rect x="280" y="94" width="110" height="4" rx="2" fill="#ffffff" opacity="0.55"/>
+                                  <text x="335" y="82" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#5a35ad">4.0%</text>
+                                  <text x="335" y="290" text-anchor="middle" font-family="Montserrat" font-size="12.5" font-weight="600" fill="#3a2c20">Poor response</text>
+                                  <text x="335" y="306" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">fewer than 5 eggs</text>
+
+                                  <!-- delta dimension between bar tops -->
+                                  <line x1="245" y1="167" x2="245" y2="100" stroke="#7d4fdb" stroke-width="1.4" stroke-dasharray="3 3" opacity="0.7"/>
+                                  <path d="M245 96 l-4 7 8 0 z" fill="#7d4fdb"/>
+                                  <path d="M245 171 l-4 -7 8 0 z" fill="#7d4fdb"/>
+                                  <rect x="210" y="116" width="70" height="32" rx="16" fill="#ffffff" stroke="#7d4fdb" stroke-width="1.3"/>
+                                  <text x="245" y="137" text-anchor="middle" font-family="Montserrat" font-size="14" font-weight="700" fill="#5a35ad">&#8776;1.7&#215;</text>
+                              </svg>
+                              <p class="viz-source">In this national cohort, the women who froze the fewest eggs returned at nearly twice the rate of strong responders (4.0% vs 2.3%; adjusted odds ratio 1.52, P &lt; 0.001). Source: Fouks et al., JAMA Network Open, 2024.</p>
+                              <p class="est-note">A caveat the numbers cannot capture: these rates count only women who came back to the clinic. Many who never returned will have conceived naturally, which no registry records. So the share of women who simply never needed their frozen eggs is almost certainly higher than any return rate suggests.</p>
+                          </div>
+              <p class="section-lead" style="margin-top:1.5rem;">So is it worth freezing if the numbers are low? The data say something counterintuitive. Women who banked only a handful of eggs returned to use them more often than strong responders did, most likely because they had less in reserve to fall back on. A low yield is not a reason to walk away from the eggs you have. But it does change the conversation: as the age chart above shows, the chance of a live birth still rises with the number of eggs, so a low count usually means setting realistic expectations and often planning a second cycle, rather than relying on one.</p>
+            </div></div>
+          </div>
+        </article>
+        <article class="qcard" id="card6">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card6-body">
+            <span class="qcard__face qcard__face--front">
+              <span class="qcard__num">6</span>
+              <span class="qcard__q">Who should consider egg freezing?</span>
+              <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to reveal</span>
+            </span>
+            <span class="qcard__face qcard__face--back" aria-hidden="true">
+              <span class="qcard__num">6</span>
+              <span class="qcard__q">Who should consider egg freezing?</span>
+              <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
+            </span>
+          </button>
+          <div class="qcard__reveal" id="card6-body" role="region" aria-label="Who should consider egg freezing?">
+            <div><div class="qcard__inner">
+              <p class="qcard__answer">Egg freezing may be worth considering if you are not ready for children yet, face medical treatment that can affect fertility, or have a condition that may reduce ovarian reserve.</p>
+              <div class="indications">
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></span><span>Not ready for children yet</span></div>
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15.5 8.5 11 11 8.5 15.5 13 13 15.5 8.5"/></svg></span><span>Career or life circumstances</span></div>
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a3 3 0 1 1 3 3 5 5 0 0 1-5-5 7 7 0 0 1 7-7"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></span><span>Endometriosis</span></div>
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-6"/><circle cx="12" cy="8" r="5"/><path d="M9 8h6M12 5v6"/></svg></span><span>Family history of early menopause</span></div>
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9.2 12l2 2 3.6-4"/></svg></span><span>Before cancer treatment</span></div>
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l8-8 3 3-8 8H5z"/><path d="M13 11l5-5a1.4 1.4 0 0 0-2-2l-5 5"/></svg></span><span>Before ovarian surgery</span></div>
+                <div class="indication"><span class="indication__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-12 14-12 0 9-5 14-12 14a5 5 0 0 1-2-2z"/><path d="M9 15c2-2 4-3 7-4"/></svg></span><span>Other fertility preservation indications</span></div>
               </div>
+            </div></div>
+          </div>
+        </article>
+        </div>
 
-              <div class="efc__nav">
-                <button class="efc__arrow" id="efcPrev" aria-label="Previous step" disabled>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <div class="efc__track-wrap"><div class="efc__track" id="efcTrack" role="tablist"><div class="efc__fill" id="efcFill" style="width:0"></div></div></div>
-                <button class="efc__arrow" id="efcNext" aria-label="Next step">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
-              </div>
-
-              <div class="efc__meds">
-                <p class="efc__meds-h">What you take, and when</p>
-                <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico fsh" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4"/><rect x="6" y="9" width="10" height="6" rx="1.4"/><path d="M9.3 9v6M12.3 9v6"/><path d="M16 12h2"/><path d="M18 8.3v7.4"/></svg></span><span class="efc__med-txt">Daily injections<small>follicle recruitment (FSH)</small></span></div><div class="efc__med-bartrack"><div class="efc__med-bar fsh is-on" id="medFsh"></div><div class="efc__med-here" id="medHere" style="left:4%"></div></div></div>
-                <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico ant" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="18" height="7" rx="3.5"/><path d="M12 8.5v7"/></svg></span><span class="efc__med-txt">Antagonist or pill<small>holds eggs back until trigger</small></span></div><div class="efc__med-bartrack"><div class="efc__med-bar ant" id="medAnt"></div></div></div>
-                <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></span><span class="efc__med-txt">Key moments<small>trigger, then collection</small></span></div><div class="efc__med-bartrack"><div class="efc__med-pt trig" id="medTrig"></div><div class="efc__med-pt coll" id="medColl"></div></div></div>
-                <div class="efc__med-scale"><span></span><div class="marks"><span>Day 0</span><span>Day 5</span><span>Trigger</span><span>+36h</span></div></div>
-              </div>
-
-              <div class="efc__after">
-                <p class="efc__after-h"><span>After collection</span></p>
-                <div class="efc__cards">
-                  <div class="efc__card"><span class="efc__step">Step 1</span><h4>Vitrification</h4><p>Mature eggs are flash frozen within hours using vitrification, a rapid method that avoids ice crystal damage.</p></div>
-                  <div class="efc__card"><span class="efc__step">Step 2</span><h4>Storage</h4><p>Frozen eggs are held safely and do not age while frozen. They can be stored for years.</p></div>
-                  <div class="efc__card"><span class="efc__step">Step 3</span><h4>Future use</h4><p>When the time is right, eggs are thawed, fertilised with sperm by ICSI, and the embryo is transferred.</p></div>
-                </div>
-              </div>
-
-              <p class="efc__note">This illustrates a typical antagonist cycle for egg freezing. The scan shown is an example for illustration. Timing and protocols vary between people and clinics, and a plan is always tailored to the individual. The days shown are a guide, not a fixed schedule.</p>
-
-              <script>
-              (function(){
-                var root = document.currentScript.closest('.efc');
-                var screen = root.querySelector('.efc__screen');
-                var phases = [
-                  { day:"Day 0", sub:"start", scopeDay:"Day 0", clar:"low", title:"Stimulation begins", vid:"follicular-scan1.mp4",
-                    body:"After a baseline scan and blood test, daily hormone injections (follicle stimulating hormone) start at home. They encourage a group of follicles to grow together, rather than the single follicle of a natural month.",
-                    node:"Day 0", mm:"&#8776; 5 mm", count:"baseline", fsh:true, ant:false, trig:false, coll:false, here:4 },
-                  { day:"Days 1 to 4", sub:"early growth", scopeDay:"Day 3", clar:"low", title:"The follicles begin to grow", vid:"follicular-scan1.mp4",
-                    body:"Injections continue each day. The follicles are still small in this early window, so there is little to see on a scan yet and monitoring stays light.",
-                    node:"Days 1-4", mm:"&#8776; 9 mm", count:"early", fsh:true, ant:false, trig:false, coll:false, here:22 },
-                  { day:"Day 5", sub:"antagonist", scopeDay:"Day 5", clar:"mid", title:"A second injection is added", vid:"follicular-scan1.mp4",
-                    body:"From around day 5 a second medication (a GnRH antagonist) is usually added. It holds the eggs back so they release at the planned time, not early. This is also when monitoring becomes most useful.",
-                    node:"Day 5", mm:"&#8776; 12 mm", count:"monitoring", fsh:true, ant:true, trig:false, coll:false, here:40 },
-                  { day:"Days 8 to 10", sub:"monitoring", scopeDay:"Day 9", clar:"full", title:"Tracking the response", vid:"follicular-scan2.mp4",
-                    body:"Short ultrasound scans and blood tests follow how the follicles are growing and let the dose be adjusted. Most people need only a few scans across the cycle. Published research suggests the scans from around day 5 onward carry the most information for timing the next step.",
-                    node:"Days 8-10", mm:"&#8776; 16 mm", count:"monitoring", fsh:true, ant:true, trig:false, coll:false, here:58 },
-                  { day:"Days 11 to 12", sub:"trigger", scopeDay:"Trigger", clar:"full", title:"The trigger injection", vid:"follicular-scan3.mp4",
-                    body:"When enough follicles reach maturity (the leading follicle is usually around 18 to 20mm), a trigger injection is given at a precise time, often in the evening. On average this falls after about nine days of injections, though the range is wide and individual.",
-                    node:"Trigger", mm:"&#8776; 20 mm", count:"trigger", fsh:true, ant:true, trig:true, coll:false, here:78 },
-                  { day:"About 36h later", sub:"collection", scopeDay:"Pickup", clar:"full", title:"Egg collection", vid:"follicular-scan3.mp4",
-                    body:"Collection is timed for roughly 36 hours after the trigger. It is a short procedure, around 20 minutes, under light sedation. A fine needle guided by ultrasound gently draws the fluid from each follicle, and the eggs are found within it.",
-                    node:"Collection", mm:"collected", count:"collected", fsh:false, ant:false, trig:false, coll:true, here:97 }
-                ];
-
-                var el = {
-                  day:root.querySelector('#efcDay'), sub:root.querySelector('#efcDaySub'),
-                  title:root.querySelector('#efcPhaseTitle'), body:root.querySelector('#efcPhaseBody'),
-                  metric:root.querySelector('#efcMetric'),
-                  scopeDay:root.querySelector('#efcScopeDay'), scopeCount:root.querySelector('#efcScopeCount'),
-                  panel:root.querySelector('.efc__panel'),
-                  vid:root.querySelector('#efcVid'),
-                  track:root.querySelector('#efcTrack'), fill:root.querySelector('#efcFill'),
-                  prev:root.querySelector('#efcPrev'), next:root.querySelector('#efcNext'),
-                  fsh:root.querySelector('#medFsh'), ant:root.querySelector('#medAnt'),
-                  trig:root.querySelector('#medTrig'), coll:root.querySelector('#medColl'),
-                  here:root.querySelector('#medHere')
-                };
-
-                var nodes=[];
-                phases.forEach(function(p,i){
-                  var b=document.createElement('button');
-                  b.className='efc__node'; b.setAttribute('role','tab'); b.setAttribute('aria-selected','false');
-                  b.innerHTML='<span class="efc__dot"></span><span class="efc__node-label">'+p.node+'</span>';
-                  b.addEventListener('click',function(){ go(i,true); });
-                  el.track.appendChild(b); nodes.push(b);
-                });
-
-                var current=0;
-                var currentVid="follicular-scan1.mp4";
-                function go(i, userAction){
-                  i=Math.max(0,Math.min(phases.length-1,i)); current=i;
-                  var p=phases[i];
-                  if(p.vid && p.vid!==currentVid && el.vid){
-                    currentVid=p.vid; el.vid.src=p.vid; el.vid.load();
-                    var pr=el.vid.play(); if(pr&&pr.catch){ pr.catch(function(){}); }
-                  }
-                  el.day.textContent=p.day; el.sub.textContent=p.sub;
-                  el.title.textContent=p.title; el.body.textContent=p.body;
-                  el.metric.innerHTML=p.mm; el.scopeDay.innerHTML='<b>'+p.scopeDay+'</b>';
-                  el.scopeCount.textContent=p.count;
-                  el.panel.classList.remove('is-anim'); void el.panel.offsetWidth; el.panel.classList.add('is-anim');
-
-                  screen.setAttribute('data-clar', p.clar);
-                  root.setAttribute('data-trig', p.trig?'true':'false');
-
-                  el.fsh.classList.toggle('is-on',p.fsh); el.ant.classList.toggle('is-on',p.ant);
-                  el.trig.classList.toggle('is-on',p.trig); el.coll.classList.toggle('is-on',p.coll);
-                  el.here.style.left=p.here+'%';
-                  el.fill.style.width=(i/(phases.length-1)*100)+'%';
-
-                  nodes.forEach(function(n,k){ n.setAttribute('aria-selected',k===i?'true':'false'); });
-                  el.prev.disabled=(i===0); el.next.disabled=(i===phases.length-1);
-                  if(userAction){ nodes[i].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}); }
-                }
-
-                el.prev.addEventListener('click',function(){ go(current-1,true); });
-                el.next.addEventListener('click',function(){ go(current+1,true); });
-                root.addEventListener('keydown',function(e){
-                  if(e.key==='ArrowRight'){ go(current+1,true); }
-                  if(e.key==='ArrowLeft'){ go(current-1,true); }
-                });
-                go(0,false);
-              })();
-              </script>
-            </section>
-        </section>
-
-        <!-- ========== SECTION 2: HOW MANY EGGS ========== -->
-        <section class="block">
-            <h2 class="section-title">How many eggs, and why age is the whole story</h2>
-            <p class="section-lead">The number of eggs is not the goal. The number of eggs for your age is. A 34 year old and a 42 year old freezing the same ten eggs are not in the same position, because the chance each egg becomes a baby falls with age. The chart below is the single most useful thing to understand before you start.</p>
-
-            <div class="viz-row">
-                <!-- VISUAL 2 primary: eggs-by-age pictograph -->
-                <div class="viz-card viz">
-                    <div class="viz-title">Eggs to freeze for ~75% chance of at least one baby</div>
-                    <svg viewBox="0 0 480 250" role="img" aria-label="Mature eggs to freeze by age for about a 75 percent live birth chance (Goldman 2017): 10 eggs at 34, 20 at 37, 61 at 42. Each dot is one egg.">
-                        <defs>
-                            <linearGradient id="barP" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#8b7db5"/>
-                                <stop offset="100%" stop-color="#6b5b95"/>
-                            </linearGradient>
-                        </defs>
-                        <text x="44" y="62" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 34</text>
-                        <ellipse cx="120" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="58" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="58" rx="4" ry="5" fill="url(#barP)"/>
-                        <text x="468" y="66" text-anchor="end" font-family="Montserrat" font-size="22" font-weight="700" fill="#6b5b95">10</text>
-                        <text x="44" y="110" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 37</text>
-                        <ellipse cx="120" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="106" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="106" rx="4" ry="5" fill="url(#barP)"/>
-                        <text x="468" y="114" text-anchor="end" font-family="Montserrat" font-size="22" font-weight="700" fill="#6b5b95">20</text>
-                        <text x="44" y="178" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 42</text>
-                        <ellipse cx="120" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="150" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="120" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="166" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="120" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="135" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="150" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="165" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="180" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="195" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="210" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="225" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="240" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="255" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="270" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="285" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="300" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="315" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="330" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="345" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="360" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="375" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="390" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="405" cy="182" rx="4" ry="5" fill="url(#barP)"/><ellipse cx="120" cy="198" rx="4" ry="5" fill="url(#barP)"/>
-                        <text x="468" y="182" text-anchor="end" font-family="Montserrat" font-size="22" font-weight="700" fill="#6b5b95">61</text>
-                        <text x="120" y="234" font-family="Montserrat" font-size="11" fill="#9a9a9a">Each dot is one mature egg</text>
-                    </svg>
-                    <p class="viz-source">At 34 about 10 mature eggs reach a roughly 75% chance of a baby; by 42 it takes around 61. Source: Goldman RH et al., Human Reproduction, 2017.</p>
-                </div>
-
-                <!-- VISUAL 2 companion: odds rings -->
-                <div class="viz-card viz">
-                    <div class="viz-title">Same 20 eggs, different odds by age</div>
-                    <svg viewBox="0 0 340 250" role="img" aria-label="Chance of at least one live birth with 20 mature eggs frozen, by age (Goldman 2017): 90 percent at 34, 75 percent at 37, 37 percent at 42.">
-                        <circle cx="70" cy="100" r="40" fill="none" stroke="#ece5d8" stroke-width="11"/><circle cx="70" cy="100" r="40" fill="none" stroke="#4a6741" stroke-width="11" stroke-linecap="round" stroke-dasharray="226.2 25.1" transform="rotate(-90 70 100)"/><text x="70" y="106" text-anchor="middle" font-family="Montserrat" font-size="18" font-weight="700" fill="#3a3a3a">90%</text><circle cx="170" cy="100" r="40" fill="none" stroke="#ece5d8" stroke-width="11"/><circle cx="170" cy="100" r="40" fill="none" stroke="#5e8a52" stroke-width="11" stroke-linecap="round" stroke-dasharray="188.5 62.8" transform="rotate(-90 170 100)"/><text x="170" y="106" text-anchor="middle" font-family="Montserrat" font-size="18" font-weight="700" fill="#3a3a3a">75%</text><circle cx="270" cy="100" r="40" fill="none" stroke="#ece5d8" stroke-width="11"/><circle cx="270" cy="100" r="40" fill="none" stroke="#c8a45e" stroke-width="11" stroke-linecap="round" stroke-dasharray="93.0 158.3" transform="rotate(-90 270 100)"/><text x="270" y="106" text-anchor="middle" font-family="Montserrat" font-size="18" font-weight="700" fill="#3a3a3a">37%</text>
-                        <text x="70" y="162" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 34</text>
-                        <text x="170" y="162" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 37</text>
-                        <text x="270" y="162" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="500" fill="#3a3a3a">Age 42</text>
-                        <text x="170" y="210" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#9a9a9a">Chance of a baby with 20 eggs frozen</text>
-                    </svg>
-                    <p class="viz-source">With 20 eggs frozen, the chance of a baby falls from about 90% at 34 to 37% at 42. Source: Goldman RH et al., Human Reproduction, 2017.</p>
-                </div>
-            </div>
-
-            <p class="pull">This is why I encourage younger patients not to wait, and why I am cautious about over-promising to patients who start later.</p>
-
-            <!-- VISUAL 2c: interactive estimator, shares the model behind the egg-freezing calculator -->
-            <div class="viz-card estimator">
-                <div class="est-head">
-                    <span class="est-q">Estimate your own number. Pick your age:</span>
-                    <div class="age-tabs" id="ageTabs">
-                        <button class="age-tab active" data-band="under35">Under 35</button>
-                        <button class="age-tab" data-band="35-37">35 to 37</button>
-                        <button class="age-tab" data-band="38-40">38 to 40</button>
-                        <button class="age-tab" data-band="over40">Over 40</button>
-                    </div>
-                </div>
-                <svg id="estChart" viewBox="0 0 640 340" role="img" aria-label="Estimated chance of at least one live birth by number of eggs frozen, for the selected age band">
-                    <!-- y axis -->
-                    <g font-family="Montserrat" font-size="11" fill="#9a9a9a">
-                        <line x1="60" y1="40" x2="60" y2="280" stroke="#eee"/>
-                        <line x1="60" y1="40" x2="620" y2="40" stroke="#f4f4f4"/><text x="52" y="44" text-anchor="end">100%</text>
-                        <line x1="60" y1="100" x2="620" y2="100" stroke="#f4f4f4"/><text x="52" y="104" text-anchor="end">75%</text>
-                        <line x1="60" y1="160" x2="620" y2="160" stroke="#f4f4f4"/><text x="52" y="164" text-anchor="end">50%</text>
-                        <line x1="60" y1="220" x2="620" y2="220" stroke="#f4f4f4"/><text x="52" y="224" text-anchor="end">25%</text>
-                        <line x1="60" y1="280" x2="620" y2="280" stroke="#d8d2c4"/><text x="52" y="284" text-anchor="end">0</text>
-                    </g>
-                    <!-- 4 category groups, populated by JS. centres at x=140,260,380,500 -->
-                    <g id="estBars"></g>
-                    <g font-family="Montserrat" font-size="12.5" fill="#3a3a3a" font-weight="500">
-                        <text x="140" y="302" text-anchor="middle">1 to 9</text>
-                        <text x="260" y="302" text-anchor="middle">10 to 14</text>
-                        <text x="380" y="302" text-anchor="middle">15 to 19</text>
-                        <text x="500" y="302" text-anchor="middle">20+</text>
-                    </g>
-                    <text x="340" y="326" text-anchor="middle" font-family="Montserrat" font-size="11" fill="#9a9a9a">Mature eggs frozen</text>
-                </svg>
-                <p class="est-note">Estimated cumulative chance of at least one live birth, by the number of mature eggs frozen. Whiskers show the 95% confidence interval, which is why a small dip between groups is normal in a real cohort. Source: Cobo A et al., Reproductive BioMedicine Online, 2025 (n = 2,891, IVIRMA Spain and NYU Langone). For an estimate that also uses your AMH and antral follicle count, try the <a href="egg-freezing-calculator.html">full calculator</a>.</p>
-            </div>
-        </section>
-
-        <!-- ========== SECTION 3: WILL YOU USE THEM (research) ========== -->
-        <section class="block">
-            <h2 class="section-title">Will you ever use them?</h2>
-            <p class="section-lead">Most women who freeze their eggs never come back for them. That is not a failure; for many it means life worked out another way. But it changes how you should think about the decision, and the real numbers are lower than most people expect. This is the part built on data from Dr Fouks's own research.</p>
-
-            <div class="viz-card viz">
-                <div class="viz-title">Return to use frozen eggs, by cohort</div>
-                <svg viewBox="0 0 700 300" role="img" aria-label="Return to use frozen eggs rises with follow-up time: 5.7 percent at 5 to 7 years (SART-CORS 2025) climbing to 38.1 percent at 10 to 15 years (Blakemore and Grifo 2021); medical or oncofertility return stays about 4.5 to 8 percent.">
-                    <defs>
-                        <marker id="up" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                            <path d="M2 1L8 5L2 9" fill="none" stroke="#4a6741" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        </marker>
-                    </defs>
-                    <g font-family="Montserrat" font-size="10" fill="#b0b0b0">
-                        <line x1="110" y1="250" x2="640" y2="250" stroke="#e6e6e6"/><text x="100" y="254" text-anchor="end">0</text>
-                        <line x1="110" y1="200" x2="640" y2="200" stroke="#f2f2f2"/><text x="100" y="204" text-anchor="end">10%</text>
-                        <line x1="110" y1="150" x2="640" y2="150" stroke="#f2f2f2"/><text x="100" y="154" text-anchor="end">20%</text>
-                        <line x1="110" y1="100" x2="640" y2="100" stroke="#f2f2f2"/><text x="100" y="104" text-anchor="end">30%</text>
-                        <line x1="110" y1="50" x2="640" y2="50" stroke="#f2f2f2"/><text x="100" y="54" text-anchor="end">40%</text>
-                    </g>
-                    <rect x="110" y="210" width="530" height="17.5" fill="#d8d0bb" opacity="0.5"/>
-                    <text x="420" y="223" font-family="Montserrat" font-size="11" font-weight="600" fill="#7a6f55">Medical / oncofertility, 4.5 to 8%</text>
-                    <line x1="230" y1="221.5" x2="560" y2="59.5" stroke="#4a6741" stroke-width="3" marker-end="url(#up)"/>
-                    <circle cx="230" cy="221.5" r="6" fill="#4a6741" stroke="#fff" stroke-width="2"/>
-                    <circle cx="560" cy="59.5" r="6" fill="#4a6741" stroke="#fff" stroke-width="2"/>
-                    <text x="230" y="208" text-anchor="middle" font-family="Montserrat" font-size="13" font-weight="600" fill="#4a6741">5.7%</text>
-                    <text x="560" y="47" text-anchor="middle" font-family="Montserrat" font-size="15" font-weight="700" fill="#4a6741">38.1%</text>
-                    <text x="230" y="272" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="500" fill="#2c2c2c">5 to 7 yr</text>
-                    <text x="230" y="286" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">SART-CORS 2025</text>
-                    <text x="560" y="272" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="500" fill="#2c2c2c">10 to 15 yr</text>
-                    <text x="560" y="286" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">Blakemore &amp; Grifo 2021</text>
-                </svg>
-                <p class="viz-source">Follow-up time is the whole story here. Within the first few years return is low, but in a cohort followed 10 to 15 years, nearly 4 in 10 had come back. Medical (cancer) freezing also behaves differently from social freezing. Sources: SART-CORS cohort, 2025; Blakemore &amp; Grifo, Fertility and Sterility, 2021.</p>
-            </div>
-
-            <div class="viz-card compare-card viz">
-                <div class="viz-title">Does freezing a low number make return more likely?</div>
-                <svg viewBox="0 0 480 340" role="img" aria-label="Return rate by ovarian response in Fouks JAMA Network Open 2024: poor responders with fewer than 5 eggs returned at 4.0 percent, nearly 1.7 times the 2.3 percent rate for normal responders">
-                    <defs>
-                        <linearGradient id="barPor" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#a47bf2"/>
-                            <stop offset="50%" stop-color="#7d4fdb"/>
-                            <stop offset="100%" stop-color="#5a35ad"/>
-                        </linearGradient>
-                        <linearGradient id="barNorm" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#c2cddc"/>
-                            <stop offset="100%" stop-color="#9aaabf"/>
-                        </linearGradient>
-                        <linearGradient id="cmpBg" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#7d4fdb" stop-opacity="0.07"/>
-                            <stop offset="100%" stop-color="#7d4fdb" stop-opacity="0"/>
-                        </linearGradient>
-                        <filter id="cmpGlow" x="-70%" y="-70%" width="240%" height="240%">
-                            <feGaussianBlur stdDeviation="7" result="b"/>
-                            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                    </defs>
-
-                    <!-- plot backdrop -->
-                    <rect x="74" y="44" width="352" height="226" rx="14" fill="url(#cmpBg)"/>
-                    <!-- y axis -->
-                    <g font-family="Montserrat" font-size="11" fill="#9a9a9a">
-                        <line x1="74" y1="270" x2="426" y2="270" stroke="#d8d2c4"/>
-                        <line x1="74" y1="160" x2="426" y2="160" stroke="#eee"/><text x="66" y="164" text-anchor="end">2.5%</text>
-                        <line x1="74" y1="50" x2="426" y2="50" stroke="#eee"/><text x="66" y="54" text-anchor="end">5%</text>
-                        <text x="66" y="274" text-anchor="end">0</text>
-                    </g>
-
-                    <!-- Normal responders 2.3% -> h=101 (recessed) -->
-                    <ellipse cx="155" cy="272" rx="52" ry="5" fill="#5a35ad" opacity="0.10"/>
-                    <rect x="100" y="169" width="110" height="101" rx="6" fill="url(#barNorm)"/>
-                    <text x="155" y="158" text-anchor="middle" font-family="Montserrat" font-size="17" font-weight="600" fill="#7d8aa0">2.3%</text>
-                    <text x="155" y="290" text-anchor="middle" font-family="Montserrat" font-size="12.5" font-weight="500" fill="#3a3a3a">Normal response</text>
-                    <text x="155" y="306" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">5 or more eggs</text>
-
-                    <!-- Poor responders 4.0% -> h=176 (vivid highlight) -->
-                    <ellipse cx="335" cy="272" rx="56" ry="6" fill="#5a35ad" opacity="0.22"/>
-                    <rect x="280" y="94" width="110" height="176" rx="6" fill="url(#barPor)" filter="url(#cmpGlow)"/>
-                    <rect x="280" y="94" width="110" height="4" rx="2" fill="#ffffff" opacity="0.55"/>
-                    <text x="335" y="82" text-anchor="middle" font-family="Montserrat" font-size="20" font-weight="700" fill="#5a35ad">4.0%</text>
-                    <text x="335" y="290" text-anchor="middle" font-family="Montserrat" font-size="12.5" font-weight="600" fill="#3a2c20">Poor response</text>
-                    <text x="335" y="306" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">fewer than 5 eggs</text>
-
-                    <!-- delta dimension between bar tops -->
-                    <line x1="245" y1="167" x2="245" y2="100" stroke="#7d4fdb" stroke-width="1.4" stroke-dasharray="3 3" opacity="0.7"/>
-                    <path d="M245 96 l-4 7 8 0 z" fill="#7d4fdb"/>
-                    <path d="M245 171 l-4 -7 8 0 z" fill="#7d4fdb"/>
-                    <rect x="210" y="116" width="70" height="32" rx="16" fill="#ffffff" stroke="#7d4fdb" stroke-width="1.3"/>
-                    <text x="245" y="137" text-anchor="middle" font-family="Montserrat" font-size="14" font-weight="700" fill="#5a35ad">&#8776;1.7&#215;</text>
-                </svg>
-                <p class="viz-source">In this national cohort, the women who froze the fewest eggs returned at nearly twice the rate of strong responders (4.0% vs 2.3%; adjusted odds ratio 1.52, P &lt; 0.001). Source: Fouks et al., JAMA Network Open, 2024.</p>
-                <p class="est-note">A caveat the numbers cannot capture: these rates count only women who came back to the clinic. Many who never returned will have conceived naturally, which no registry records. So the share of women who simply never needed their frozen eggs is almost certainly higher than any return rate suggests.</p>
-            </div>
-
-            <p class="section-lead" style="margin-top:1.5rem;">So is it worth freezing if the numbers are low? The data say something counterintuitive. Women who banked only a handful of eggs returned to use them more often than strong responders did, most likely because they had less in reserve to fall back on. A low yield is not a reason to walk away from the eggs you have. But it does change the conversation: as the age chart above shows, the chance of a live birth still rises with the number of eggs, so a low count usually means setting realistic expectations and often planning a second cycle, rather than relying on one.</p>
-
-            <div class="callout">
-                <h4>Who actually returns?</h4>
-                <p>In follow-up work, our group built a model that predicts return from a handful of factors: age at freezing, whether you have a partner, ethnicity, location, and your reason for freezing. The model reached a balanced accuracy of 0.83. It is a step toward counselling each patient on her own likely path, rather than quoting a single national average.</p>
-                <p class="src">Source: Fouks et al., Reproductive BioMedicine Online, 2025 (machine learning return-rate model).</p>
-            </div>
-        </section>
-
-        <!-- ========== SECTION 4: PRACTICAL ========== -->
+        <!-- ========== PRACTICAL ========== -->
         <section class="block">
             <h2 class="section-title">Practical, in brief</h2>
             <div class="practical">
@@ -961,15 +1323,21 @@
             </div>
         </section>
 
-        <!-- ========== SECTION 6: CREDENTIALS ========== -->
+        <!-- ========== ABOUT DR YUVAL FOUKS ========== -->
         <section class="block">
-            <div class="creds">
-                <!-- TODO: confirm hosted headshot URL -->
-                <img src="headshot.jpg" alt="Dr Yuval Fouks, fertility specialist and reproductive endocrinologist, Melbourne">
+            <div class="profile">
+                <!-- swap in a dedicated portrait (e.g. portrait.jpg) when available -->
+                <img class="profile__photo" src="headshot.jpg" alt="Dr Yuval Fouks, fertility specialist and reproductive endocrinologist, Melbourne">
                 <div>
-                    <h3>Dr Yuval Fouks</h3>
-                    <p>Dr Yuval Fouks is a fertility specialist and reproductive endocrinologist practising at Melbourne IVF, Collingwood, and the Royal Women's Hospital. His research focuses on egg freezing and fertility preservation, including outcomes and return rates after planned oocyte cryopreservation, published in JAMA Network Open and Reproductive BioMedicine Online. He trained in reproductive medicine and public health at Harvard (Boston IVF and the Harvard T.H. Chan School of Public Health), at the University of Bologna, and at Tel Aviv University. He consults in English and Italian and is gynaecologist to the Italian Consulate in Melbourne.</p>
-                    <!-- TODO: confirm post-nominals / fellowship (FRANZCOG, CREI) and current University of Melbourne title -->
+                    <p class="profile__eyebrow">Your specialist</p>
+                    <h2>Meet Dr Yuval Fouks</h2>
+                    <p>Dr Yuval Fouks is a fertility specialist at Melbourne IVF and The Royal Women's Hospital. He combines clinical expertise with research experience from leading international fertility centres, including Harvard University and Boston IVF.</p>
+                    <div class="profile__pn">
+                        <span>MD</span>
+                        <span>MPH (Quantitative Methods)</span>
+                        <span>FRANZCOG</span>
+                    </div>
+                    <a class="profile__cta" href="/#contact">Book a Consultation</a>
                     <div class="links">
                         <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Fouks+Y" target="_blank" rel="noopener">Publications on PubMed</a>
                         <!-- TODO: real URLs -->
@@ -981,8 +1349,7 @@
             </div>
         </section>
 
-        <!-- ========== SECTION 5: REFERENCES ========== -->
-        <section class="block refs">
+<section class="block refs">
             <h2>References</h2>
             <ol>
                 <li>Goldman RH, Racowsky C, Farland LV, Munn&eacute; S, Ribustello L, Fox JH. Predicting the likelihood of live birth for elective oocyte cryopreservation: a counseling tool for physicians and patients. <em>Hum Reprod.</em> 2017;32(4):853-859. doi:10.1093/humrep/dex008</li>
@@ -995,12 +1362,18 @@
             </ol>
         </section>
 
-        <!-- ========== BOTTOM CTA ========== -->
-        <section class="bottom-cta">
-            <h2>The right answer depends on your numbers.</h2>
-            <p>It depends on your age, your goals, and your ovarian reserve. Let's map them.</p>
-            <a href="/#contact">Book a Consultation</a>
-            <a href="/#contact" class="secondary">Send a Question</a>
+        <!-- ========== FINAL CTA BANNER ========== -->
+        <section class="final-cta">
+            <div class="final-cta__media">
+                <!-- second crop of the portrait; swap in a banner crop when available -->
+                <img src="headshot.jpg" alt="Dr Yuval Fouks">
+            </div>
+            <div class="final-cta__body">
+                <h2>Considering Egg Freezing?</h2>
+                <p>Receive a personalised assessment of your ovarian reserve, expected egg numbers, and future fertility options.</p>
+                <a class="primary" href="/#contact">Book Consultation</a>
+                <a class="ghost" href="/#contact">Contact Us</a>
+            </div>
         </section>
 
     </div>
@@ -1008,7 +1381,8 @@
     <footer class="page-footer">
         <p>The information on this page is general in nature and is not a substitute for personalised medical advice from a registered specialist. Always speak with a fertility specialist about your individual circumstances before making treatment decisions.</p>
     </footer>
-    <script>
+
+<script>
     (function () {
         // Cumulative live birth rate (%) by eggs frozen and age band, with 95% CI.
         // Source: Cobo A et al., Reproductive BioMedicine Online, 2025 (n=2,891).
@@ -1090,6 +1464,40 @@
     <!-- Let's Talk floating widget -->
     <script src="lets-talk-widget.js" defer></script>
 
+    <!-- flip-card interaction -->
+    <script>
+    (function(){
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.qcard'));
+      var interacted = false;
+      cards.forEach(function(card){
+        var btn = card.querySelector('.qcard__flip');
+        btn.addEventListener('click', function(){
+          interacted = true;
+          card.classList.remove('hint');
+          var open = card.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+      // one-time teaching wiggle on the first card so the flip is discoverable
+      var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if(cards.length && !reduce){
+        var first = cards[0];
+        function hint(){
+          if(interacted) return;
+          var r = first.getBoundingClientRect();
+          if(r.top < window.innerHeight*0.85 && r.bottom > 0){
+            first.classList.add('hint');
+            first.addEventListener('animationend', function(){ first.classList.remove('hint'); }, {once:true});
+            window.removeEventListener('scroll', onScroll);
+          }
+        }
+        function onScroll(){ hint(); }
+        setTimeout(hint, 1400);
+        window.addEventListener('scroll', onScroll, {passive:true});
+      }
+    })();
+    </script>
+
     <!-- MELOD-AI LAUNCHER START
          Set MW_WIDGET_URL below to your hosted melod-public-ask.html. -->
     <div id="mw-root" aria-live="polite">
@@ -1152,7 +1560,7 @@
       </button>
 
       <div id="mw-nudge" class="mw-nudge" role="button" tabindex="0" aria-label="Ask Melod·AI anything">
-        Have a fertility question?<br><strong>Ask me anything — free &amp; private.</strong>
+        Hi, I'm Melod &mdash; I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class="mw-nudge-fine">Support, not a substitute for medical care.</span>
       </div>
 
       <div id="mw-panel" class="mw-panel" role="dialog" aria-label="Ask Melod·AI" aria-hidden="true">
@@ -1216,13 +1624,14 @@
         transform:translate(-50%,-50%);border-radius:50%;background:#fffdfb;
         box-shadow:0 10px 26px -6px rgba(43,51,64,.45),0 0 0 1px rgba(74,103,65,.08);z-index:0}
       .mw-stage,.mw-trail{z-index:1}
-      .mw-nudge{position:fixed;right:26px;bottom:128px;max-width:226px;background:#fff;color:#3d5636;
-        font-family:Inter,system-ui,sans-serif;font-size:13px;line-height:1.45;padding:11px 15px;
+      .mw-nudge{position:fixed;right:26px;bottom:128px;max-width:248px;background:#fff;color:#3d5636;
+        font-family:Inter,system-ui,sans-serif;font-size:13px;line-height:1.45;padding:12px 15px;
         border-radius:18px 18px 4px 18px;border:1px solid rgba(74,103,65,.14);
         box-shadow:0 14px 34px -12px rgba(43,51,64,.42);z-index:2147483000;cursor:pointer;
         opacity:0;transform:translateY(8px) scale(.95);transform-origin:bottom right;pointer-events:none;
         transition:opacity .32s ease,transform .32s cubic-bezier(.34,1.56,.64,1)}
       .mw-nudge strong{color:#4a6741;font-weight:600}
+      .mw-nudge .mw-nudge-fine{display:block;margin-top:4px;font-size:11px;color:#8a9786;line-height:1.35}
       .mw-nudge.show{opacity:1;transform:none;pointer-events:auto}
       .mw-nudge::after{content:"";position:absolute;right:30px;bottom:-7px;width:14px;height:14px;background:#fff;
         border-right:1px solid rgba(74,103,65,.14);border-bottom:1px solid rgba(74,103,65,.14);transform:rotate(45deg)}
@@ -1268,14 +1677,38 @@
       document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 
       var nudge=document.getElementById('mw-nudge');
-      var nudged=false;
+      var nudged=false, hideTimer=null;
+      var GREET="Hi, I'm Melod &mdash; I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class=\"mw-nudge-fine\">Support, not a substitute for medical care.</span>";
+      var CARDS="There's a step-by-step process and the questions patients ask most just below.<br><strong>Tap a card to flip it open.</strong>";
       function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
-      function showNudge(){ if(nudge && !panel.classList.contains('open') && !nudged){ nudge.classList.add('show'); } }
+      function showNudge(html){
+        if(!nudge || nudged || panel.classList.contains('open')) return;
+        nudge.innerHTML = html;
+        nudge.classList.add('show');
+        bounce();                                 // mascot gives a little nod
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(hideNudge, 9000);
+      }
       if(nudge){
         nudge.addEventListener('click', function(){ nudged=true; hideNudge(); open(); });
         nudge.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); nudge.click(); } });
-        setTimeout(showNudge, 3200);
-        setTimeout(hideNudge, 13000);
+
+        var greeted=false, cardHinted=false;
+        function watch(sel, cb){
+          var node=document.querySelector(sel); if(!node) return;
+          if('IntersectionObserver' in window){
+            var io=new IntersectionObserver(function(es){
+              es.forEach(function(e){ if(e.isIntersecting){ cb(); io.disconnect(); } });
+            }, {threshold:0.4});
+            io.observe(node);
+          }
+        }
+        // Melod notices you at the intro box and says hello...
+        watch('.answer-block', function(){ greeted=true; setTimeout(function(){ showNudge(GREET); }, 700); });
+        // ...then points to the process + questions as they scroll in.
+        watch('.cards', function(){ cardHinted=true; setTimeout(function(){ showNudge(CARDS); }, greeted?1600:400); });
+        // graceful fallback if nothing fired (e.g. very short viewport / no IO)
+        setTimeout(function(){ if(!greeted && !cardHinted) showNudge(GREET); }, 4500);
       }
 
       /* orbit + swim + shimmer trail */
