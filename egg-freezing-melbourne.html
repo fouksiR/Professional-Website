@@ -714,6 +714,92 @@
             .final-cta__media::after { background: linear-gradient(180deg, rgba(74,58,99,0) 50%, rgba(74,58,99,0.7) 100%); }
             .final-cta__body { padding: 1.8rem 1.4rem; text-align: center; }
         }
+
+        /* ===== Mobile: wider, lighter, less dense ===== */
+        @media (max-width: 680px) {
+            .top-bar { padding: 0.85rem 4%; }
+            .hero { padding: 2.25rem 3% 1.25rem; }
+            .hero-inner { padding: 1.4rem 1.15rem; border-radius: 16px; }
+            .hero h1 { font-size: 2.15rem; }
+            /* let the content column use almost the full screen width */
+            .wrap {
+                max-width: 100%; margin: 0.75rem 0 1rem; padding: 1.25rem 18px 1.75rem;
+                border-radius: 16px;
+            }
+            section.block { margin: 2.4rem auto; }
+            .section-lead { font-size: 1.05rem; }
+            .qcard { perspective: 1100px; }
+            .qcard__flip, .qcard__face { min-height: 150px; }
+            .qcard__face { padding: 1.3rem 1.25rem; gap: 0.8rem; }
+            .qcard__inner { padding: 1.4rem 1.15rem 1.6rem; }
+            .qcard__q { font-size: 1.72rem; line-height: 1.15; }
+            /* charts and cards breathe more */
+            .viz-card { padding: 1.35rem 1.1rem; }
+            .answer-block { padding: 1.5rem 1.25rem; }
+            .pract-item { padding: 1.15rem 1.2rem; }
+        }
+        @media (max-width: 420px) {
+            .wrap { padding: 1.1rem 12px 1.6rem; }
+            .hero h1 { font-size: 1.95rem; }
+        }
+
+        /* ===== Practical presenter (mascot comes to centre) ===== */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        .pract-launch {
+            display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;
+            padding: 0.8rem 1.6rem; border: none; border-radius: 26px;
+            background: linear-gradient(135deg, var(--lilac), var(--lilac-2)); color: #fff;
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 600;
+            letter-spacing: 0.6px; text-transform: uppercase; cursor: pointer;
+            box-shadow: 0 6px 18px -6px rgba(139,110,214,0.6); transition: transform .25s, box-shadow .25s;
+        }
+        .pract-launch:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(139,110,214,0.7); }
+
+        #pract-stage {
+            position: fixed; inset: 0; z-index: 2147483600; display: flex;
+            align-items: center; justify-content: center; padding: 1rem;
+            opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s;
+        }
+        #pract-stage.open { opacity: 1; visibility: visible; }
+        .ps-scrim { position: absolute; inset: 0; background: rgba(46,34,58,0.42); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+        .ps-card {
+            position: relative; width: min(440px, 92vw); background: #fff; border-radius: 24px;
+            padding: 2rem 1.9rem 1.5rem; text-align: center;
+            box-shadow: 0 30px 80px -30px rgba(46,34,58,0.7);
+            transform: translateY(16px) scale(.96); transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+        }
+        #pract-stage.open .ps-card { transform: none; }
+        .ps-close { position: absolute; top: 12px; right: 14px; border: none; background: none; font-size: 1.7rem; line-height: 1; color: #b3a9bd; cursor: pointer; }
+        .ps-close:hover { color: var(--purple); }
+        .ps-egg { width: 84px; height: 84px; margin: 0 auto 0.5rem; }
+        .ps-egg svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 8px 16px rgba(120,70,80,0.28)); }
+        #pract-stage.open .ps-egg { animation: psFlyIn .62s cubic-bezier(.34,1.56,.64,1); }
+        @keyframes psFlyIn { from { transform: translate(38vw, 40vh) scale(.35); opacity: 0; } to { transform: none; opacity: 1; } }
+        .ps-breathe { transform-box: fill-box; transform-origin: center; animation: psBreathe 4.4s ease-in-out infinite; }
+        @keyframes psBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .ps-k { display: block; font-size: 0.74rem; letter-spacing: 2px; text-transform: uppercase; color: var(--lilac); font-weight: 700; margin-bottom: 0.5rem; }
+        .ps-t {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.4; color: var(--ink);
+            min-height: 4.4em; display: flex; align-items: center; justify-content: center; margin: 0 auto; max-width: 34ch;
+        }
+        .ps-t.is-anim { animation: psRise .45s ease; }
+        @keyframes psRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .ps-dots { display: flex; gap: 7px; justify-content: center; margin: 0.9rem 0 0.3rem; }
+        .ps-dot { width: 8px; height: 8px; border-radius: 50%; background: #e3dcef; transition: .3s; cursor: pointer; border: none; padding: 0; }
+        .ps-dot.on { background: var(--lilac); transform: scale(1.3); }
+        .ps-nav { display: flex; justify-content: center; gap: 0.6rem; margin-top: 0.5rem; }
+        .ps-btn { border: 1px solid rgba(139,110,214,0.3); background: #faf9fc; color: var(--lilac); border-radius: 22px; padding: 0.5rem 1.4rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: .25s; }
+        .ps-btn:hover { background: var(--lilac); color: #fff; border-color: transparent; }
+        .ps-btn:disabled { opacity: .4; cursor: default; }
+        .ps-prev.hide { display: none; }
+        .ps-fine { font-size: 0.72rem; color: #9a93a4; margin-top: 1rem; line-height: 1.4; }
+        /* hide the corner mascot while the presenter is on stage */
+        body.stage-open #mw-root { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+        @media (max-width: 480px) { .ps-t { font-size: 1.28rem; min-height: 5em; } .ps-card { padding: 1.8rem 1.3rem 1.3rem; } }
+        @media (prefers-reduced-motion: reduce) {
+            #pract-stage.open .ps-egg { animation: none; }
+            .ps-breathe { animation: none; } .ps-t.is-anim { animation: none; } .ps-card { transition: none; }
+        }
     </style>
 </head>
 <body>
@@ -1340,13 +1426,19 @@
         <!-- ========== PRACTICAL ========== -->
         <section class="block" id="practical">
             <h2 class="section-title">Practical, in brief</h2>
-            <div class="pract-grid">
-                <div class="pract-item"><span class="pract-label">Time</span><span class="pract-val">About two weeks from the first injection to retrieval.</span></div>
-                <div class="pract-item"><span class="pract-label">The procedure</span><span class="pract-val">Day case, light sedation, home the same morning.</span></div>
-                <div class="pract-item"><span class="pract-label">How many cycles</span><span class="pract-val">Depends on your age and what we collect; the chart above sets the target.</span></div>
-                <div class="pract-item"><span class="pract-label">Storage</span><span class="pract-val">Eggs do not age while frozen; storage fees apply per year.</span></div>
-                <div class="pract-item pract-item--wide"><span class="pract-label">Cost and Medicare</span><span class="pract-val">Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</span></div>
-            </div>
+            <p class="section-lead" style="margin-bottom:0.5rem;">The quick version &mdash; walked through by Melod.</p>
+            <button class="pract-launch" type="button" id="pract-launch">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                Hear the quick version
+            </button>
+            <!-- accessible &amp; crawlable source of truth; also feeds the popup sequence -->
+            <ul class="sr-only" id="pract-data">
+                <li><b>Time.</b> About two weeks from the first injection to retrieval.</li>
+                <li><b>The procedure.</b> Day case, light sedation, home the same morning.</li>
+                <li><b>How many cycles.</b> Depends on your age and what we collect; the chart above sets the target.</li>
+                <li><b>Cost and Medicare.</b> Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</li>
+                <li><b>Storage.</b> Eggs do not age while frozen; storage fees apply per year.</li>
+            </ul>
         </section>
 
         <!-- ========== ABOUT DR YUVAL FOUKS ========== -->
@@ -1513,6 +1605,128 @@
         function onScroll(){ hint(); }
         setTimeout(hint, 1400);
         window.addEventListener('scroll', onScroll, {passive:true});
+      }
+    })();
+    </script>
+
+    <!-- ===== Practical presenter: Melod comes to centre and walks through it ===== -->
+    <div id="pract-stage" aria-hidden="true">
+      <div class="ps-scrim" data-ps-close></div>
+      <div class="ps-card" role="dialog" aria-modal="true" aria-label="Practical, in brief">
+        <button class="ps-close" type="button" aria-label="Close" data-ps-close>&times;</button>
+        <div class="ps-egg" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="psBody" cx="36%" cy="31%" r="72%">
+                <stop offset="0%" stop-color="#ffffff"/><stop offset="16%" stop-color="#fff2ee"/>
+                <stop offset="42%" stop-color="#fdd2cf"/><stop offset="70%" stop-color="#f6aaa9"/>
+                <stop offset="88%" stop-color="#ee9298"/><stop offset="100%" stop-color="#df7d8a"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="50" cy="92" rx="22" ry="5" fill="#7a5b66" opacity=".16"/>
+            <g class="ps-breathe">
+              <circle cx="50" cy="48" r="33" fill="url(#psBody)"/>
+              <ellipse cx="38" cy="33" rx="10" ry="7" fill="#ffffff" opacity=".55"/>
+              <ellipse cx="34" cy="56" rx="6" ry="4" fill="#f78f8f" opacity=".5"/>
+              <ellipse cx="66" cy="56" rx="6" ry="4" fill="#f78f8f" opacity=".5"/>
+              <g fill="#5b4a52"><ellipse cx="42" cy="48" rx="2.7" ry="3.4"/><ellipse cx="58" cy="48" rx="2.7" ry="3.4"/></g>
+              <path d="M44 57 q6 5.5 12 0" fill="none" stroke="#5b4a52" stroke-width="2.4" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <span class="ps-k" id="ps-k"></span>
+        <p class="ps-t" id="ps-t" aria-live="polite"></p>
+        <div class="ps-dots" id="ps-dots"></div>
+        <div class="ps-nav">
+          <button class="ps-btn ps-prev hide" type="button" id="ps-prev">Back</button>
+          <button class="ps-btn ps-next" type="button" id="ps-next">Next</button>
+        </div>
+        <p class="ps-fine">General information &mdash; not a substitute for personalised medical advice.</p>
+      </div>
+    </div>
+    <script>
+    (function(){
+      var stage=document.getElementById('pract-stage');
+      var data=document.getElementById('pract-data');
+      if(!stage||!data) return;
+      // build points from the crawlable source list
+      var points=[].slice.call(data.querySelectorAll('li')).map(function(li){
+        var b=li.querySelector('b');
+        var k=b?b.textContent.replace(/\.\s*$/,''):'';
+        var t=li.textContent.replace(b?b.textContent:'','').trim();
+        return {k:k, t:t};
+      });
+      var kEl=document.getElementById('ps-k'), tEl=document.getElementById('ps-t');
+      var dotsEl=document.getElementById('ps-dots');
+      var prevB=document.getElementById('ps-prev'), nextB=document.getElementById('ps-next');
+      var i=0, timer=null, opened=false;
+      points.forEach(function(_,idx){
+        var d=document.createElement('button'); d.className='ps-dot'; d.type='button';
+        d.setAttribute('aria-label','Point '+(idx+1));
+        d.addEventListener('click',function(){ go(idx,true); });
+        dotsEl.appendChild(d);
+      });
+      var dots=[].slice.call(dotsEl.children);
+      var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+      function render(){
+        var p=points[i];
+        kEl.textContent=p.k;
+        tEl.textContent=p.t;
+        if(!reduce){ tEl.classList.remove('is-anim'); void tEl.offsetWidth; tEl.classList.add('is-anim'); }
+        dots.forEach(function(d,k){ d.classList.toggle('on',k===i); });
+        prevB.classList.toggle('hide', i===0);
+        nextB.textContent = (i===points.length-1) ? 'Done' : 'Next';
+      }
+      function go(n, user){
+        i=Math.max(0,Math.min(points.length-1,n)); render();
+        if(user) stopAuto();
+      }
+      function startAuto(){
+        stopAuto();
+        timer=setInterval(function(){
+          if(i<points.length-1){ go(i+1,false); } else { stopAuto(); }
+        }, 4800);
+      }
+      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+
+      function openStage(){
+        i=0; render();
+        stage.classList.add('open'); stage.setAttribute('aria-hidden','false');
+        document.body.classList.add('stage-open');
+        if(!reduce) startAuto();
+      }
+      function closeStage(){
+        stopAuto();
+        stage.classList.remove('open'); stage.setAttribute('aria-hidden','true');
+        document.body.classList.remove('stage-open');
+      }
+
+      nextB.addEventListener('click',function(){
+        if(i===points.length-1){ closeStage(); } else { go(i+1,true); }
+      });
+      prevB.addEventListener('click',function(){ go(i-1,true); });
+      stage.querySelectorAll('[data-ps-close]').forEach(function(el){ el.addEventListener('click',closeStage); });
+      document.addEventListener('keydown',function(e){
+        if(!stage.classList.contains('open')) return;
+        if(e.key==='Escape') closeStage();
+        if(e.key==='ArrowRight') go(i+1,true);
+        if(e.key==='ArrowLeft') go(i-1,true);
+      });
+      // pause auto-advance while interacting
+      stage.querySelector('.ps-card').addEventListener('mouseenter', stopAuto);
+
+      // manual launch button
+      var launch=document.getElementById('pract-launch');
+      if(launch) launch.addEventListener('click', openStage);
+
+      // auto-open once when the practical section scrolls into view
+      var sec=document.getElementById('practical');
+      if(sec && 'IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(e){ if(e.isIntersecting && !opened){ opened=true; setTimeout(openStage,350); io.disconnect(); } });
+        }, {threshold:0.5});
+        io.observe(sec);
       }
     })();
     </script>
@@ -1701,16 +1915,9 @@
       var USS="This part is the heart of it &mdash; about <strong>10 to 12 days</strong> of quick ultrasound check-ins and daily injections at home.";
       var KEYM="Two key moments coming up: a <strong>trigger injection</strong> to ripen the eggs, then <strong>egg collection</strong> &mdash; a short, minor surgical procedure.";
       var CARDS="There's a step-by-step process and the questions patients ask most just below.<br><strong>Tap a card to flip it open.</strong>";
-      var PRACT=[
-        "The quick practical version &mdash; <strong>about two weeks</strong>, from the first injection to egg collection.",
-        "Collection is a <strong>day case under light sedation</strong>. Most people are home the same morning.",
-        "How many cycles? It depends on your age and what we collect &mdash; the age chart sets the target.",
-        "Costs: planned freezing is usually out-of-pocket; medical (e.g. before cancer treatment) may attract Medicare/PBS. Confirmed at your consult."
-      ];
-
       function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
       function pump(){
-        if(busy || nudged || !queue.length || panel.classList.contains('open')) return;
+        if(busy || nudged || !queue.length || panel.classList.contains('open') || document.body.classList.contains('stage-open')) return;
         busy=true;
         var item=queue.shift();
         nudge.innerHTML=item.html;
@@ -1745,10 +1952,9 @@
         watch('.efc', function(){ say(USS, 8000); }, 0.08);
         // ...gets closer for the trigger + collection...
         watch('.efc__meds', function(){ say(KEYM, 8000); }, 0.3);
-        // ...points to the question cards...
+        // ...points to the question cards.
         watch('.cards', function(){ say(CARDS, 8000); }, 0.12);
-        // ...and walks through the practical brief as a short popup sequence.
-        watch('#practical', function(){ sayMany(PRACT, 6500); }, 0.25);
+        // (the practical brief is handled by the centred presenter below)
 
         // graceful fallback if IntersectionObserver is unavailable
         setTimeout(function(){ if(!Object.keys(fired).length) say(GREET, 9000); }, 4500);
