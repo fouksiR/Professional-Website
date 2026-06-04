@@ -130,7 +130,7 @@
       "honorificPrefix": "Dr",
       "jobTitle": "Fertility Specialist and Reproductive Endocrinologist",
       "medicalSpecialty": "https://schema.org/Gynecologic",
-      "image": "https://drfouks.com/headshot.jpg",
+      "image": "https://drfouks.com/Yuval%20Fouks-48%20(2).jpg",
       "url": "https://drfouks.com/",
       "knowsLanguage": ["English", "Italian"],
       "knowsAbout": [
@@ -173,27 +173,24 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
-        /* Fresh, serene gradient-mesh background. Resolution-independent and vivid,
-           tuned for a younger 25-37 audience rather than a clinical look.
-           To use a hosted photographic background instead, supply a >=2400px image and
-           re-enable the url() layer below. */
-        html { background: #fff4f0; }
+        /* Page background: women collage illustration (high-resolution).
+           Light wash kept low so the illustration stays vivid; text sits on
+           translucent white panels for legibility. */
+        html { background: #FFE6E0; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             color: #2c2c2c;
             line-height: 1.7;
             background:
-                radial-gradient(120% 90% at 8% -8%, #ffd9cf 0%, rgba(255,217,207,0) 46%),
-                radial-gradient(120% 100% at 96% 4%, #e4dcff 0%, rgba(228,220,255,0) 48%),
-                radial-gradient(120% 110% at 4% 102%, #d5f1e6 0%, rgba(213,241,230,0) 50%),
-                radial-gradient(130% 120% at 100% 100%, #ffdfe8 0%, rgba(255,223,232,0) 52%),
-                linear-gradient(160deg, #fff7f4 0%, #fdf4fb 52%, #f4fbf7 100%);
-            background-attachment: fixed;
-            background-color: #fff4f0;
+                linear-gradient(rgba(255, 248, 245, 0.26), rgba(255, 248, 245, 0.26)),
+                url('images/women-collage.png') center top / cover no-repeat fixed,
+                #FFE6E0;
             min-height: 100vh;
         }
-        @media (max-width: 680px) { body { background-attachment: scroll; } }
+        @media (max-width: 680px) {
+            body { background-attachment: scroll; }
+        }
 
         /* Brand tokens. Warm sand = site accent; purple = data + your research; green = positive notes */
         :root {
@@ -244,7 +241,7 @@
         }
         .hero-inner {
             max-width: 760px; margin: 0 auto;
-            background: rgba(255, 252, 251, 0.78);
+            background: rgba(255, 252, 251, 0.86);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 18px; padding: 1.75rem 1.5rem;
             box-shadow: 0 18px 50px -22px rgba(74, 58, 99, 0.28);
@@ -257,7 +254,44 @@
             font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 500;
             line-height: 1.2; margin-bottom: 1rem; color: var(--ink);
         }
-        .hero p.sub { font-size: 1.1rem; color: #4a4a4a; max-width: 680px; margin: 0 auto; }
+        .hero p.sub {
+            font-size: 1.4rem; font-weight: 500; color: #3a3340; max-width: 680px; margin: 0 auto;
+            line-height: 1.4; animation: heroFloat 6s ease-in-out infinite;
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0); }
+            33%      { transform: translate(-3px, -5px); }
+            66%      { transform: translate(3px, 3px); }
+        }
+        @media (prefers-reduced-motion: reduce) { .hero p.sub { animation: none; } }
+
+        /* Step 2 storage card rendered as a photo tile (scoped to win over .efc__card) */
+        .efc .efc__card--photo {
+            position: relative; overflow: hidden; border: none; color: #fff;
+            background-image:
+                linear-gradient(to top, rgba(38,26,50,0.88) 0%, rgba(38,26,50,0.52) 48%, rgba(38,26,50,0.34) 100%),
+                url('storage.png');
+            background-size: cover; background-position: center;
+            box-shadow: 0 10px 28px -14px rgba(38,26,50,0.6);
+        }
+        .efc .efc__card--photo h4 { color: #fff; }
+        .efc .efc__card--photo p { color: rgba(255,255,255,0.92); }
+        .efc .efc__card--photo .efc__step { color: #f1d6a3; }
+        .efc .efc__card--photo:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -16px rgba(38,26,50,0.7); }
+
+        /* Practical, in brief - compact cards */
+        .pract-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1.4rem; }
+        .pract-item {
+            background: rgba(255,255,255,0.92); border: 1px solid rgba(139,110,214,0.16);
+            border-radius: 14px; padding: 1.1rem 1.25rem; box-shadow: 0 4px 18px -12px rgba(53,42,74,0.25);
+        }
+        .pract-item--wide { grid-column: 1 / -1; }
+        .pract-label {
+            display: block; font-size: 0.72rem; letter-spacing: 1.6px; text-transform: uppercase;
+            color: var(--lilac); font-weight: 600; margin-bottom: 0.35rem;
+        }
+        .pract-val { display: block; font-size: 0.95rem; color: #3a3a3a; line-height: 1.55; }
+        @media (max-width: 680px) { .pract-grid { grid-template-columns: 1fr; } }
 
         /* Byline + small headshot */
         .byline {
@@ -273,7 +307,7 @@
         /* Layout container */
         .wrap {
             max-width: 880px; margin: 2rem auto; padding: 1.5rem 5% 2.5rem;
-            background: rgba(255, 252, 251, 0.8);
+            background: rgba(255, 252, 251, 0.88);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 22px;
             box-shadow: 0 22px 60px -28px rgba(74, 58, 99, 0.26);
@@ -441,7 +475,7 @@
 
         .page-footer {
             max-width: 860px; margin: 0 auto 2rem; padding: 1.25rem 1.5rem;
-            background: rgba(255, 252, 251, 0.78);
+            background: rgba(255, 252, 251, 0.86);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 16px;
             text-align: center; font-size: 0.75rem; color: #6e6e6e; line-height: 1.6;
@@ -450,7 +484,7 @@
         /* Mobile */
         @media (max-width: 680px) {
             .hero h1 { font-size: 2rem; }
-            .hero p.sub { font-size: 0.95rem; }
+            .hero p.sub { font-size: 1.12rem; }
             .flow { flex-direction: column; }
             .viz-row { grid-template-columns: 1fr; }
             .practical dl { grid-template-columns: 1fr; gap: 0.15rem 0; }
@@ -698,9 +732,8 @@
             <h1>Egg Freezing in Melbourne</h1>
             <p class="sub">What it is, how many eggs you actually need, and how often they get used. The honest version.</p>
             <div class="byline">
-                <!-- TODO: confirm hosted headshot URL -->
-                <img src="headshot.jpg" alt="Dr Yuval Fouks, fertility specialist, Melbourne">
-                <span>Written and medically reviewed by <strong>Dr Yuval Fouks, MD, MPH</strong>, fertility specialist and reproductive endocrinologist, Melbourne.</span>
+                <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks, fertility specialist, Melbourne">
+                <span><strong>Dr Yuval Fouks</strong>, Fertility Specialist and Reproductive Endocrinologist, Melbourne.</span>
             </div>
         </div>
     </section>
@@ -929,14 +962,14 @@
                               <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico fsh" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4"/><rect x="6" y="9" width="10" height="6" rx="1.4"/><path d="M9.3 9v6M12.3 9v6"/><path d="M16 12h2"/><path d="M18 8.3v7.4"/></svg></span><span class="efc__med-txt">Daily injections<small>follicle recruitment (FSH)</small></span></div><div class="efc__med-bartrack"><div class="efc__med-bar fsh is-on" id="medFsh"></div><div class="efc__med-here" id="medHere" style="left:4%"></div></div></div>
                               <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico ant" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="18" height="7" rx="3.5"/><path d="M12 8.5v7"/></svg></span><span class="efc__med-txt">Antagonist or pill<small>holds eggs back until trigger</small></span></div><div class="efc__med-bartrack"><div class="efc__med-bar ant" id="medAnt"></div></div></div>
                               <div class="efc__med-row"><div class="efc__med-name"><span class="efc__med-ico key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></span><span class="efc__med-txt">Key moments<small>trigger, then collection</small></span></div><div class="efc__med-bartrack"><div class="efc__med-pt trig" id="medTrig"></div><div class="efc__med-pt coll" id="medColl"></div></div></div>
-                              <div class="efc__med-scale"><span></span><div class="marks"><span>Day 0</span><span>Day 5</span><span>Trigger</span><span>+36h</span></div></div>
+                              <div class="efc__med-scale"><span></span><div class="marks"><span>Day 0</span><span>Trigger</span><span>+36h</span></div></div>
                             </div>
 
                             <div class="efc__after">
                               <p class="efc__after-h"><span>After collection</span></p>
                               <div class="efc__cards">
                                 <div class="efc__card"><span class="efc__step">Step 1</span><h4>Vitrification</h4><p>Mature eggs are flash frozen within hours using vitrification, a rapid method that avoids ice crystal damage.</p></div>
-                                <div class="efc__card"><span class="efc__step">Step 2</span><h4>Storage</h4><p>Frozen eggs are held safely and do not age while frozen. They can be stored for years.</p></div>
+                                <div class="efc__card efc__card--photo"><span class="efc__step">Step 2</span><h4>Storage</h4><p>Frozen eggs are held safely and do not age while frozen. They can be stored for years.</p></div>
                                 <div class="efc__card"><span class="efc__step">Step 3</span><h4>Future use</h4><p>When the time is right, eggs are thawed, fertilised with sperm by ICSI, and the embryo is transferred.</p></div>
                               </div>
                             </div>
@@ -1305,38 +1338,25 @@
         </div>
 
         <!-- ========== PRACTICAL ========== -->
-        <section class="block">
+        <section class="block" id="practical">
             <h2 class="section-title">Practical, in brief</h2>
-            <div class="practical">
-                <dl>
-                    <dt>Time</dt>
-                    <dd>About two weeks from the first injection to retrieval.</dd>
-                    <dt>The procedure</dt>
-                    <dd>Day case, light sedation, home the same morning.</dd>
-                    <dt>How many cycles</dt>
-                    <dd>Depends on your age and what we collect; the chart above sets the target.</dd>
-                    <dt>Cost and Medicare</dt>
-                    <dd>Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</dd>
-                    <dt>Storage</dt>
-                    <dd>Eggs do not age while frozen; storage fees apply per year.</dd>
-                </dl>
+            <div class="pract-grid">
+                <div class="pract-item"><span class="pract-label">Time</span><span class="pract-val">About two weeks from the first injection to retrieval.</span></div>
+                <div class="pract-item"><span class="pract-label">The procedure</span><span class="pract-val">Day case, light sedation, home the same morning.</span></div>
+                <div class="pract-item"><span class="pract-label">How many cycles</span><span class="pract-val">Depends on your age and what we collect; the chart above sets the target.</span></div>
+                <div class="pract-item"><span class="pract-label">Storage</span><span class="pract-val">Eggs do not age while frozen; storage fees apply per year.</span></div>
+                <div class="pract-item pract-item--wide"><span class="pract-label">Cost and Medicare</span><span class="pract-val">Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</span></div>
             </div>
         </section>
 
         <!-- ========== ABOUT DR YUVAL FOUKS ========== -->
         <section class="block">
             <div class="profile">
-                <!-- swap in a dedicated portrait (e.g. portrait.jpg) when available -->
-                <img class="profile__photo" src="headshot.jpg" alt="Dr Yuval Fouks, fertility specialist and reproductive endocrinologist, Melbourne">
+                <img class="profile__photo" src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks, fertility specialist and reproductive endocrinologist, Melbourne">
                 <div>
                     <p class="profile__eyebrow">Your specialist</p>
                     <h2>Meet Dr Yuval Fouks</h2>
                     <p>Dr Yuval Fouks is a fertility specialist at Melbourne IVF and The Royal Women's Hospital. He combines clinical expertise with research experience from leading international fertility centres, including Harvard University and Boston IVF.</p>
-                    <div class="profile__pn">
-                        <span>MD</span>
-                        <span>MPH (Quantitative Methods)</span>
-                        <span>FRANZCOG</span>
-                    </div>
                     <a class="profile__cta" href="/#contact">Book a Consultation</a>
                     <div class="links">
                         <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Fouks+Y" target="_blank" rel="noopener">Publications on PubMed</a>
@@ -1365,8 +1385,7 @@
         <!-- ========== FINAL CTA BANNER ========== -->
         <section class="final-cta">
             <div class="final-cta__media">
-                <!-- second crop of the portrait; swap in a banner crop when available -->
-                <img src="headshot.jpg" alt="Dr Yuval Fouks">
+                <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks">
             </div>
             <div class="final-cta__body">
                 <h2>Considering Egg Freezing?</h2>
@@ -1677,38 +1696,62 @@
       document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 
       var nudge=document.getElementById('mw-nudge');
-      var nudged=false, hideTimer=null;
+      var nudged=false, hideTimer=null, busy=false, queue=[];
       var GREET="Hi, I'm Melod &mdash; I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class=\"mw-nudge-fine\">Support, not a substitute for medical care.</span>";
+      var USS="This part is the heart of it &mdash; about <strong>10 to 12 days</strong> of quick ultrasound check-ins and daily injections at home.";
+      var KEYM="Two key moments coming up: a <strong>trigger injection</strong> to ripen the eggs, then <strong>egg collection</strong> &mdash; a short, minor surgical procedure.";
       var CARDS="There's a step-by-step process and the questions patients ask most just below.<br><strong>Tap a card to flip it open.</strong>";
+      var PRACT=[
+        "The quick practical version &mdash; <strong>about two weeks</strong>, from the first injection to egg collection.",
+        "Collection is a <strong>day case under light sedation</strong>. Most people are home the same morning.",
+        "How many cycles? It depends on your age and what we collect &mdash; the age chart sets the target.",
+        "Costs: planned freezing is usually out-of-pocket; medical (e.g. before cancer treatment) may attract Medicare/PBS. Confirmed at your consult."
+      ];
+
       function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
-      function showNudge(html){
-        if(!nudge || nudged || panel.classList.contains('open')) return;
-        nudge.innerHTML = html;
+      function pump(){
+        if(busy || nudged || !queue.length || panel.classList.contains('open')) return;
+        busy=true;
+        var item=queue.shift();
+        nudge.innerHTML=item.html;
         nudge.classList.add('show');
-        bounce();                                 // mascot gives a little nod
+        bounce();                                   // mascot gives a little nod
         clearTimeout(hideTimer);
-        hideTimer = setTimeout(hideNudge, 9000);
+        hideTimer=setTimeout(function(){
+          hideNudge();
+          setTimeout(function(){ busy=false; pump(); }, 550);   // gap between bubbles
+        }, item.dur||8000);
       }
+      function say(html, dur){ if(nudged) return; queue.push({html:html,dur:dur}); pump(); }
+      function sayMany(arr, dur){ arr.forEach(function(h){ say(h,dur); }); }
+
       if(nudge){
-        nudge.addEventListener('click', function(){ nudged=true; hideNudge(); open(); });
+        nudge.addEventListener('click', function(){ nudged=true; queue=[]; hideNudge(); open(); });
         nudge.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); nudge.click(); } });
 
-        var greeted=false, cardHinted=false;
-        function watch(sel, cb){
+        var fired={};
+        function watch(sel, cb, thr){
           var node=document.querySelector(sel); if(!node) return;
-          if('IntersectionObserver' in window){
-            var io=new IntersectionObserver(function(es){
-              es.forEach(function(e){ if(e.isIntersecting){ cb(); io.disconnect(); } });
-            }, {threshold:0.4});
-            io.observe(node);
-          }
+          if(!('IntersectionObserver' in window)) return;
+          var io=new IntersectionObserver(function(es){
+            es.forEach(function(e){ if(e.isIntersecting && !fired[sel]){ fired[sel]=true; cb(); io.disconnect(); } });
+          }, {threshold:thr||0.35});
+          io.observe(node);
         }
-        // Melod notices you at the intro box and says hello...
-        watch('.answer-block', function(){ greeted=true; setTimeout(function(){ showNudge(GREET); }, 700); });
-        // ...then points to the process + questions as they scroll in.
-        watch('.cards', function(){ cardHinted=true; setTimeout(function(){ showNudge(CARDS); }, greeted?1600:400); });
-        // graceful fallback if nothing fired (e.g. very short viewport / no IO)
-        setTimeout(function(){ if(!greeted && !cardHinted) showNudge(GREET); }, 4500);
+
+        // Melod greets you at the intro box...
+        watch('.answer-block', function(){ setTimeout(function(){ say(GREET, 9000); }, 600); }, 0.4);
+        // ...travels to the ultrasound / day-by-day step...
+        watch('.efc', function(){ say(USS, 8000); }, 0.08);
+        // ...gets closer for the trigger + collection...
+        watch('.efc__meds', function(){ say(KEYM, 8000); }, 0.3);
+        // ...points to the question cards...
+        watch('.cards', function(){ say(CARDS, 8000); }, 0.12);
+        // ...and walks through the practical brief as a short popup sequence.
+        watch('#practical', function(){ sayMany(PRACT, 6500); }, 0.25);
+
+        // graceful fallback if IntersectionObserver is unavailable
+        setTimeout(function(){ if(!Object.keys(fired).length) say(GREET, 9000); }, 4500);
       }
 
       /* orbit + swim + shimmer trail */
