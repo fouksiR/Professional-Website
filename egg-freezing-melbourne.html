@@ -256,16 +256,27 @@
             font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 500;
             line-height: 1.2; margin-bottom: 1rem; color: var(--ink);
         }
-        .hero p.sub {
-            font-size: 1.4rem; font-weight: 500; color: #3a3340; max-width: 680px; margin: 0 auto;
-            line-height: 1.4; animation: heroFloat 6s ease-in-out infinite;
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.7rem, 5.2vw, 2.5rem); font-weight: 600;
+            letter-spacing: 0.6px; line-height: 1.22; color: var(--coral);
+            max-width: 720px; margin: 0.4rem auto 0;
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+        .hero-care {
+            font-size: 1.02rem; font-weight: 400; color: #4a4453; line-height: 1.6;
+            max-width: 600px; margin: 0.9rem auto 0;
+        }
+        .answer-sub {
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.25rem; color: var(--coral); line-height: 1.4; margin-bottom: 1rem;
         }
         @keyframes heroFloat {
             0%, 100% { transform: translate(0, 0); }
             33%      { transform: translate(-3px, -5px); }
             66%      { transform: translate(3px, 3px); }
         }
-        @media (prefers-reduced-motion: reduce) { .hero p.sub { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } }
 
         /* Step 2 storage card rendered as a photo tile (scoped to win over .efc__card) */
         .efc .efc__card--photo {
@@ -485,7 +496,9 @@
         /* Mobile */
         @media (max-width: 680px) {
             .hero h1 { font-size: 2rem; }
-            .hero p.sub { font-size: 1.12rem; }
+            .hero-tagline { font-size: 1.7rem; }
+            .hero-care { font-size: 0.98rem; }
+            .answer-sub { font-size: 1.12rem; }
             .flow { flex-direction: column; }
             .viz-row { grid-template-columns: 1fr; }
             .practical dl { grid-template-columns: 1fr; gap: 0.15rem 0; }
@@ -758,46 +771,51 @@
         }
         .pract-launch:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(223,122,106,0.7); }
 
-        #pract-stage {
-            position: fixed; inset: 0; z-index: 2147483600; display: flex;
-            align-items: center; justify-content: center; padding: 1rem;
+        /* presenter: wrapper forms no box so scrim and bubble layer independently around the moving mascot */
+        #pract-stage { display: contents; }
+        .ps-scrim {
+            position: fixed; inset: 0; z-index: 2147482000; background: rgba(46,34,58,0.4);
+            backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
             opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s;
         }
-        #pract-stage.open { opacity: 1; visibility: visible; }
-        .ps-scrim { position: absolute; inset: 0; background: rgba(46,34,58,0.42); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
-        .ps-card {
-            position: relative; width: min(440px, 92vw); background: #fff; border-radius: 24px;
-            padding: 2rem 1.9rem 1.5rem; text-align: center;
+        body.pract-on .ps-scrim { opacity: 1; visibility: visible; }
+        .ps-bubble {
+            position: fixed; left: 50%; bottom: 40vh; z-index: 2147483200;
+            width: min(420px, 88vw); background: #fff; border-radius: 22px;
+            padding: 1.7rem 1.7rem 1.3rem; text-align: center;
             box-shadow: 0 30px 80px -30px rgba(46,34,58,0.7);
-            transform: translateY(16px) scale(.96); transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+            opacity: 0; visibility: hidden;
+            transform: translateX(-50%) translateY(14px) scale(.96);
+            transition: opacity .35s ease, transform .4s cubic-bezier(.34,1.56,.64,1), visibility .35s;
         }
-        #pract-stage.open .ps-card { transform: none; }
-        .ps-close { position: absolute; top: 12px; right: 14px; border: none; background: none; font-size: 1.7rem; line-height: 1; color: #b3a9bd; cursor: pointer; }
-        .ps-close:hover { color: var(--purple); }
-        .ps-egg { width: 84px; height: 84px; margin: 0 auto 0.5rem; }
-        .ps-egg svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 8px 16px rgba(120,70,80,0.28)); }
-        #pract-stage.open .ps-egg { animation: psFlyIn .62s cubic-bezier(.34,1.56,.64,1); }
-        @keyframes psFlyIn { from { transform: translate(38vw, 40vh) scale(.35); opacity: 0; } to { transform: none; opacity: 1; } }
-        .ps-breathe { transform-box: fill-box; transform-origin: center; animation: psBreathe 4.4s ease-in-out infinite; }
-        @keyframes psBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-        .ps-k { display: block; font-size: 0.74rem; letter-spacing: 2px; text-transform: uppercase; color: var(--lilac); font-weight: 700; margin-bottom: 0.5rem; }
+        body.pract-on .ps-bubble { opacity: 1; visibility: visible; transform: translateX(-50%); }
+        .ps-bubble::after {
+            content: ""; position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%);
+            border: 13px solid transparent; border-top-color: #fff; border-bottom: 0;
+            filter: drop-shadow(0 6px 4px rgba(46,34,58,0.12));
+        }
+        .ps-close { position: absolute; top: 10px; right: 13px; border: none; background: none; font-size: 1.6rem; line-height: 1; color: #b3a9bd; cursor: pointer; }
+        .ps-close:hover { color: var(--coral); }
+        .ps-k { display: block; font-size: 0.74rem; letter-spacing: 2px; text-transform: uppercase; color: var(--coral); font-weight: 700; margin-bottom: 0.5rem; }
         .ps-t {
-            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.4; color: var(--ink);
-            min-height: 4.4em; display: flex; align-items: center; justify-content: center; margin: 0 auto; max-width: 34ch;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.38rem; line-height: 1.4; color: var(--ink);
+            min-height: 4.2em; display: flex; align-items: center; justify-content: center; margin: 0 auto; max-width: 34ch;
         }
         .ps-t.is-anim { animation: psRise .45s ease; }
         @keyframes psRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         .ps-dots { display: flex; gap: 7px; justify-content: center; margin: 0.9rem 0 0.3rem; }
-        .ps-dot { width: 8px; height: 8px; border-radius: 50%; background: #e3dcef; transition: .3s; cursor: pointer; border: none; padding: 0; }
-        .ps-dot.on { background: var(--lilac); transform: scale(1.3); }
+        .ps-dot { width: 8px; height: 8px; border-radius: 50%; background: #ecd9d4; transition: .3s; cursor: pointer; border: none; padding: 0; }
+        .ps-dot.on { background: var(--coral); transform: scale(1.3); }
         .ps-nav { display: flex; justify-content: center; gap: 0.6rem; margin-top: 0.5rem; }
-        .ps-btn { border: 1px solid rgba(223,122,106,0.3); background: #faf9fc; color: var(--lilac); border-radius: 22px; padding: 0.5rem 1.4rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: .25s; }
-        .ps-btn:hover { background: var(--lilac); color: #fff; border-color: transparent; }
+        .ps-btn { border: 1px solid rgba(223,122,106,0.3); background: #fff7f4; color: var(--coral); border-radius: 22px; padding: 0.5rem 1.4rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: .25s; }
+        .ps-btn:hover { background: var(--coral); color: #fff; border-color: transparent; }
         .ps-btn:disabled { opacity: .4; cursor: default; }
         .ps-prev.hide { display: none; }
-        .ps-fine { font-size: 0.72rem; color: #9a93a4; margin-top: 1rem; line-height: 1.4; }
-        /* hide the corner mascot while the presenter is on stage */
-        body.stage-open #mw-root { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+        .ps-fine { font-size: 0.72rem; color: #9a93a4; margin-top: 0.9rem; line-height: 1.4; }
+        /* the real mascot glides to centre during the presentation */
+        #mw-fab { transition: transform .7s cubic-bezier(.34,1.4,.5,1); }
+        body.pract-on #mw-fab { z-index: 2147483000; }
+        body.pract-on #mw-nudge { display: none; }
 
         /* "random start" highlight (candid, warm, no left bar) */
         .random-start {
@@ -819,10 +837,15 @@
                 rgba(255,247,244,0.66) 38%,
                 rgba(255,247,244,0) 100%);
         }
-        @media (max-width: 480px) { .ps-t { font-size: 1.28rem; min-height: 5em; } .ps-card { padding: 1.8rem 1.3rem 1.3rem; } }
+        body.pract-on .bottom-fade { opacity: 0; transition: opacity .3s; }
+        @media (max-width: 480px) {
+            .ps-t { font-size: 1.26rem; min-height: 4.8em; }
+            .ps-bubble { bottom: 44vh; padding: 1.5rem 1.3rem 1.2rem; }
+        }
         @media (prefers-reduced-motion: reduce) {
-            #pract-stage.open .ps-egg { animation: none; }
-            .ps-breathe { animation: none; } .ps-t.is-anim { animation: none; } .ps-card { transition: none; }
+            #mw-fab { transition: none; }
+            .ps-t.is-anim { animation: none; }
+            .ps-bubble { transition: opacity .2s; }
         }
     </style>
 </head>
@@ -840,7 +863,8 @@
         <div class="hero-inner">
             <p class="hero-eyebrow">Egg Freezing &nbsp;|&nbsp; Melbourne</p>
             <h1>Egg Freezing in Melbourne</h1>
-            <p class="sub">What it is, how many eggs you actually need, and how often they get used. The honest version.</p>
+            <p class="hero-tagline">Your future is yours to shape &mdash; we're here to offer you time.</p>
+            <p class="hero-care">Egg freezing is a gentle step toward preserving possibilities, and we'll guide you with compassion, clarity, and care&mdash;every step of the way.</p>
             <div class="byline">
                 <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks, fertility specialist, Melbourne">
                 <span><strong>Dr Yuval Fouks</strong>, Fertility Specialist and Reproductive Endocrinologist, Melbourne.</span>
@@ -853,6 +877,7 @@
         <!-- intro answer block: keeps a crawlable, speakable definition above the cards -->
         <div class="answer-block">
             <h2 class="section-title">Egg Freezing</h2>
+            <p class="answer-sub">What it is, how many eggs you actually need, and how often they get used. The honest version.</p>
             <p class="lede">Egg freezing offers the opportunity to preserve fertility and keep future reproductive options open.</p>
             <p>In my practice, I provide personalised, evidence-based care throughout the process, from the initial consultation and fertility assessment through to stimulation planning, egg collection, and long-term storage advice.</p>
             <p>The aim is to make the process clear, supportive, and medically tailored to your circumstances, whether you are considering egg freezing for personal, medical, or timing-related reasons.</p>
@@ -1638,31 +1663,11 @@
     })();
     </script>
 
-    <!-- ===== Practical presenter: Melod comes to centre and walks through it ===== -->
-    <div id="pract-stage" aria-hidden="true">
+    <!-- ===== Practical presenter: the real Melod mascot glides to centre and speaks ===== -->
+    <div id="pract-stage">
       <div class="ps-scrim" data-ps-close></div>
-      <div class="ps-card" role="dialog" aria-modal="true" aria-label="Practical, in brief">
+      <div class="ps-bubble" role="dialog" aria-modal="true" aria-label="Practical, in brief">
         <button class="ps-close" type="button" aria-label="Close" data-ps-close>&times;</button>
-        <div class="ps-egg" aria-hidden="true">
-          <svg viewBox="0 0 100 100">
-            <defs>
-              <radialGradient id="psBody" cx="36%" cy="31%" r="72%">
-                <stop offset="0%" stop-color="#ffffff"/><stop offset="16%" stop-color="#fff2ee"/>
-                <stop offset="42%" stop-color="#fdd2cf"/><stop offset="70%" stop-color="#f6aaa9"/>
-                <stop offset="88%" stop-color="#ee9298"/><stop offset="100%" stop-color="#df7d8a"/>
-              </radialGradient>
-            </defs>
-            <ellipse cx="50" cy="92" rx="22" ry="5" fill="#7a5b66" opacity=".16"/>
-            <g class="ps-breathe">
-              <circle cx="50" cy="48" r="33" fill="url(#psBody)"/>
-              <ellipse cx="38" cy="33" rx="10" ry="7" fill="#ffffff" opacity=".55"/>
-              <ellipse cx="34" cy="56" rx="6" ry="4" fill="#f78f8f" opacity=".5"/>
-              <ellipse cx="66" cy="56" rx="6" ry="4" fill="#f78f8f" opacity=".5"/>
-              <g fill="#5b4a52"><ellipse cx="42" cy="48" rx="2.7" ry="3.4"/><ellipse cx="58" cy="48" rx="2.7" ry="3.4"/></g>
-              <path d="M44 57 q6 5.5 12 0" fill="none" stroke="#5b4a52" stroke-width="2.4" stroke-linecap="round"/>
-            </g>
-          </svg>
-        </div>
         <span class="ps-k" id="ps-k"></span>
         <p class="ps-t" id="ps-t" aria-live="polite"></p>
         <div class="ps-dots" id="ps-dots"></div>
@@ -1719,16 +1724,28 @@
       }
       function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
 
+      function moveMascotToCentre(){
+        var fab=document.getElementById('mw-fab'); if(!fab) return;
+        var r=fab.getBoundingClientRect();
+        var fcx=r.left+r.width/2, fcy=r.top+r.height/2;
+        var tx=Math.round(window.innerWidth/2 - fcx);
+        var ty=Math.round(window.innerHeight*0.62 - fcy);
+        fab.style.transform='translate('+tx+'px,'+ty+'px) scale(1.12)';
+      }
+      function resetMascot(){
+        var fab=document.getElementById('mw-fab'); if(fab) fab.style.transform='';
+      }
       function openStage(){
+        if(document.body.classList.contains('pract-on')) return;
         i=0; render();
-        stage.classList.add('open'); stage.setAttribute('aria-hidden','false');
-        document.body.classList.add('stage-open');
-        if(!reduce) startAuto();
+        document.body.classList.add('pract-on');         // suppresses corner nudges + fade
+        moveMascotToCentre();                              // the mascot glides to the middle
+        if(!reduce) setTimeout(startAuto, 500);            // start talking once it arrives
       }
       function closeStage(){
         stopAuto();
-        stage.classList.remove('open'); stage.setAttribute('aria-hidden','true');
-        document.body.classList.remove('stage-open');
+        document.body.classList.remove('pract-on');
+        resetMascot();                                     // glides back to its corner
       }
 
       nextB.addEventListener('click',function(){
@@ -1737,13 +1754,15 @@
       prevB.addEventListener('click',function(){ go(i-1,true); });
       stage.querySelectorAll('[data-ps-close]').forEach(function(el){ el.addEventListener('click',closeStage); });
       document.addEventListener('keydown',function(e){
-        if(!stage.classList.contains('open')) return;
+        if(!document.body.classList.contains('pract-on')) return;
         if(e.key==='Escape') closeStage();
         if(e.key==='ArrowRight') go(i+1,true);
         if(e.key==='ArrowLeft') go(i-1,true);
       });
-      // pause auto-advance while interacting
-      stage.querySelector('.ps-card').addEventListener('mouseenter', stopAuto);
+      window.addEventListener('resize',function(){ if(document.body.classList.contains('pract-on')) moveMascotToCentre(); });
+      // pause auto-advance while interacting with the bubble
+      var bubble=stage.querySelector('.ps-bubble');
+      if(bubble) bubble.addEventListener('mouseenter', stopAuto);
 
       // manual launch button
       var launch=document.getElementById('pract-launch');
@@ -1948,7 +1967,7 @@
       function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
       function finishBubble(){ hideNudge(); clearTimeout(hideTimer); setTimeout(function(){ busy=false; pump(); }, 450); }
       function pump(){
-        if(busy || nudged || !queue.length || panel.classList.contains('open') || document.body.classList.contains('stage-open')) return;
+        if(busy || nudged || !queue.length || panel.classList.contains('open') || document.body.classList.contains('pract-on')) return;
         busy=true;
         var item=queue.shift();
         nudge.innerHTML=item.html;
