@@ -174,22 +174,24 @@
         html { scroll-behavior: smooth; }
 
         /* Page background: women collage illustration (high-resolution).
-           Light wash kept low so the illustration stays vivid; text sits on
-           translucent white panels for legibility. */
+           Painted as a fixed full-viewport layer so it crops to the figures on
+           mobile too. (background-attachment:fixed mis-sizes the image against the
+           tall page on phones, which made it read as flat pink.) */
         html { background: #FFE6E0; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             color: #2c2c2c;
             line-height: 1.7;
-            background:
-                linear-gradient(rgba(255, 248, 245, 0.26), rgba(255, 248, 245, 0.26)),
-                url('images/women-collage.png') center top / cover no-repeat fixed,
-                #FFE6E0;
+            background: transparent;
             min-height: 100vh;
         }
-        @media (max-width: 680px) {
-            body { background-attachment: scroll; }
+        body::before {
+            content: ""; position: fixed; inset: 0; z-index: -1;
+            background:
+                linear-gradient(rgba(255, 248, 245, 0.22), rgba(255, 248, 245, 0.22)),
+                url('images/women-collage.png') center center / cover no-repeat;
+            background-color: #FFE6E0;
         }
 
         /* Brand tokens. Warm sand = site accent; purple = data + your research; green = positive notes */
