@@ -496,12 +496,16 @@
         .bottom-cta a.secondary:hover { background: var(--sand); color: #fff; }
 
         .page-footer {
-            max-width: 860px; margin: 0 auto 2rem; padding: 1.25rem 1.5rem;
-            background: rgba(255, 252, 251, 0.86);
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            border-radius: 16px;
-            text-align: center; font-size: 0.75rem; color: #6e6e6e; line-height: 1.6;
+            background: #36332f; color: #cfc9c1; text-align: center;
+            padding: 3rem 1.4rem 2.6rem; margin: 3rem 0 0; line-height: 1.6;
         }
+        .page-footer .pf-name { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; color: #fff; margin: 0 0 1.1rem; letter-spacing: 0.5px; }
+        .page-footer .pf-links { display: flex; gap: 1.8rem; justify-content: center; flex-wrap: wrap; margin: 0; }
+        .page-footer .pf-links a { color: #cfc9c1; text-decoration: none; font-size: 0.92rem; letter-spacing: 0.02em; transition: color .2s; }
+        .page-footer .pf-links a:hover { color: #fff; }
+        .page-footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.14); max-width: 1100px; margin: 1.6rem auto; }
+        .page-footer .pf-disc { max-width: 880px; margin: 0 auto 0.9rem; font-size: 0.82rem; line-height: 1.65; color: #a59f97; }
+        .page-footer .pf-copy { font-size: 0.85rem; color: #cfc9c1; margin: 1.2rem 0 0; }
 
         /* Mobile */
         @media (max-width: 680px) {
@@ -1348,6 +1352,7 @@
                                   <p class="viz-source">With 20 eggs frozen, the chance of a baby falls from about 90% at 34 to 37% at 42. Source: Goldman RH et al., Human Reproduction, 2017.</p>
                               </div>
                           </div>
+              <p style="margin:1.2rem 0 0;padding:.9rem 1.1rem;border-radius:14px;background:linear-gradient(135deg,rgba(107,91,149,.1),rgba(223,122,106,.1));border:1px solid rgba(107,91,149,.22);font-size:.92rem;line-height:1.55;color:#5a5462;"><strong style="color:#4a3a63;">A gentle note:</strong> these charts are model-based estimates and simulations, a rough guide to the trends, not a prediction for any one person. Your own outlook depends on many individual factors, and we work through what they mean for you together at your consultation.</p>
               <p class="pull">This is why I encourage younger patients not to wait, and why I am cautious about over-promising to patients who start later.</p>
 
                           <!-- VISUAL 2c: interactive estimator, shares the model behind the egg-freezing calculator -->
@@ -1423,7 +1428,7 @@
               <p class="qcard__answer">Many women never return to use their frozen eggs, often because they later conceive naturally or with fresh IVF treatment. Egg freezing is primarily about preserving future reproductive options. Return rates are low in the first several years and rise with longer follow-up.</p>
               <div class="viz-card viz">
                               <div class="viz-title">Return to use frozen eggs, by cohort</div>
-                              <svg viewBox="0 0 700 300" role="img" aria-label="Return to use frozen eggs rises with follow-up time: 5.7 percent at 5 to 7 years (SART-CORS 2025) climbing to 38.1 percent at 10 to 15 years (Blakemore and Grifo 2021); medical or oncofertility return stays about 4.5 to 8 percent.">
+                              <svg viewBox="0 0 700 300" role="img" aria-label="Return to use frozen eggs rises with follow-up time: 5.7 percent at 5 to 7 years (SART-CORS 2025) climbing to 38.1 percent at 10 to 15 years (Blakemore and Grifo 2021); pooled across studies the average return rate is about 11.1 percent; medical or oncofertility return stays about 4.5 to 8 percent.">
                                   <defs>
                                       <marker id="up" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                           <path d="M2 1L8 5L2 9" fill="none" stroke="#4a6741" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1438,6 +1443,9 @@
                                   </g>
                                   <rect x="110" y="210" width="530" height="17.5" fill="#d8d0bb" opacity="0.5"/>
                                   <text x="420" y="223" font-family="Montserrat" font-size="11" font-weight="600" fill="#7a6f55">Medical / oncofertility, 4.5 to 8%</text>
+                                  <rect x="110" y="171" width="530" height="37" fill="#6b5b95" opacity="0.1"/>
+                                  <line x1="110" y1="194.5" x2="640" y2="194.5" stroke="#6b5b95" stroke-width="1.6" stroke-dasharray="6 5" opacity="0.85"/>
+                                  <text x="636" y="189" text-anchor="end" font-family="Montserrat" font-size="11" font-weight="600" fill="#6b5b95">Pooled across studies: 11.1% (&#177;4.7%)</text>
                                   <line x1="230" y1="221.5" x2="560" y2="59.5" stroke="#4a6741" stroke-width="3" marker-end="url(#up)"/>
                                   <circle cx="230" cy="221.5" r="6" fill="#4a6741" stroke="#fff" stroke-width="2"/>
                                   <circle cx="560" cy="59.5" r="6" fill="#4a6741" stroke="#fff" stroke-width="2"/>
@@ -1448,7 +1456,7 @@
                                   <text x="560" y="272" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="500" fill="#2c2c2c">10 to 15 yr</text>
                                   <text x="560" y="286" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#8a8a8a">Blakemore &amp; Grifo 2021</text>
                               </svg>
-                              <p class="viz-source">Follow-up time is the whole story here. Within the first few years return is low, but in a cohort followed 10 to 15 years, nearly 4 in 10 had come back. Medical (cancer) freezing also behaves differently from social freezing. Sources: SART-CORS cohort, 2025; Blakemore &amp; Grifo, Fertility and Sterility, 2021.</p>
+                              <p class="viz-source">Follow-up time is the whole story here. Within the first few years return is low, but in a cohort followed 10 to 15 years, nearly 4 in 10 had come back. Pooled across planned egg-freezing studies, the average return rate is about 11.1% (Hirsch et al., Human Reproduction Update, 2024). Medical (cancer) freezing also behaves differently from social freezing. Sources: SART-CORS cohort, 2025; Blakemore &amp; Grifo, Fertility and Sterility, 2021.</p>
                           </div>
               <div class="callout">
                               <h4>Who actually returns?</h4>
@@ -1763,6 +1771,7 @@
                 <li>Fouks Y, Bortoletto P, Chang J, Penzias A, Vaughan D, Sakkas D. Looking into the future: a machine learning powered prediction model for oocyte return rates after cryopreservation. <em>Reprod Biomed Online.</em> 2024;50(1):104432. doi:10.1016/j.rbmo.2024.104432</li>
                 <li>Meyers AJ, Fouks Y, Bortoletto P, Penzias AS, Sakkas D, Vaughan DA. Low return to care rates amongst women who underwent oocyte cryopreservation for oncological indications: a SART data analysis. <em>Fertil Steril.</em> 2025;125(3):527-529. doi:10.1016/j.fertnstert.2025.09.038</li>
                 <li>Blakemore JK, Grifo JA, DeVore SM, Hodes-Wertz B, Berkeley AS. Planned oocyte cryopreservation 10-15-year follow-up: return rates and cycle outcomes. <em>Fertil Steril.</em> 2021;115(6):1511-1520. doi:10.1016/j.fertnstert.2021.01.011</li>
+                <li>Hirsch A, Hirsh Raccah B, Rotem R, Hyman JH, Ben-Ami I, Tsafrir A. Planned oocyte cryopreservation: a systematic review and meta-regression analysis. <em>Hum Reprod Update.</em> 2024;30(5):558-568. doi:10.1093/humupd/dmae009</li>
                 <li>Lee MB, et al. Elective fertility preservation: a national database study on trends in oocyte cryopreservation and oocyte utilization over a 5- to 7-year follow-up period. <em>Am J Obstet Gynecol.</em> 2025. <!-- TODO: confirm full citation --></li>
             </ol>
         </section>
@@ -1780,7 +1789,16 @@
     </div>
 
     <footer class="page-footer">
-        <p>The information on this page is general in nature and is not a substitute for personalised medical advice from a registered specialist. Always speak with a fertility specialist about your individual circumstances before making treatment decisions.</p>
+        <p class="pf-name">Dr. Yuval Fouks</p>
+        <nav class="pf-links">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms">Terms &amp; Conditions</a>
+        </nav>
+        <hr>
+        <p class="pf-disc">* This website offers health information and is provided for educational purposes only. This is not intended to be a substitute for professional medical advice, diagnosis or treatment. Always speak with your physician or other healthcare provider before taking any medication or supplement, changing your diet/lifestyle or using any treatment for a medical concern.</p>
+        <p class="pf-disc">Do not disregard professional medical advice or delay in seeking medical care because of something you have read on this website or other media forms.</p>
+        <hr>
+        <p class="pf-copy">&copy; 2026 Dr. Yuval Fouks. All rights reserved.</p>
     </footer>
 
 <script>
