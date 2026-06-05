@@ -874,6 +874,61 @@
 </head>
 <body>
 
+    <!-- ========== LOADING SPLASH (blue warms into the page) ========== -->
+    <style>
+      html, body { overflow-x: hidden; }
+      #splash{
+        position:fixed; inset:0; z-index:2147483647;
+        display:flex; align-items:center; justify-content:center; text-align:center;
+        background:linear-gradient(160deg,#27445f 0%,#335a5e 55%,#3f655c 100%);
+        animation:splashHide .7s ease 1.95s forwards;
+      }
+      #splash .splash__warm{
+        position:absolute; inset:0;
+        background:linear-gradient(160deg,#fde7df 0%,#f8d9d0 52%,#f3cdce 100%);
+        opacity:0; animation:splashWarmIn 1s ease .95s forwards;
+      }
+      #splash .splash__txt{ position:relative; z-index:2; padding:0 1.3rem; animation:splashTxt 2s ease forwards; }
+      #splash .splash__k{
+        font-family:'Montserrat',sans-serif; letter-spacing:.3em; text-transform:uppercase;
+        font-size:.78rem; font-weight:600; color:rgba(255,255,255,.82); margin:0 0 1rem;
+      }
+      #splash .splash__h{
+        font-family:'Cormorant Garamond',serif; font-weight:600;
+        font-size:clamp(2rem,6vw,3.4rem); line-height:1.15; color:#fff; margin:0;
+        text-shadow:0 2px 24px rgba(0,0,0,.28);
+      }
+      @keyframes splashWarmIn{ to{ opacity:1; } }
+      @keyframes splashTxt{
+        0%{opacity:0; transform:translateY(12px);}
+        12%{opacity:1; transform:translateY(0);}
+        62%{opacity:1; transform:translateY(0);}
+        82%{opacity:0; transform:translateY(-6px);}
+        100%{opacity:0;}
+      }
+      @keyframes splashHide{ to{ opacity:0; visibility:hidden; } }
+
+      /* scroll-reveal: boxes slide in from the sides toward centre */
+      .reveal{ opacity:0; transition:opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); will-change:opacity, transform; }
+      .reveal--left{ transform:translateX(-58px); }
+      .reveal--right{ transform:translateX(58px); }
+      .reveal.is-visible{ opacity:1; transform:none; }
+
+      @media (prefers-reduced-motion: reduce){
+        #splash{ animation:splashHide .3s ease .2s forwards; }
+        #splash .splash__warm, #splash .splash__txt{ animation:none; }
+        .reveal{ opacity:1 !important; transform:none !important; transition:none; }
+      }
+    </style>
+    <div id="splash" aria-hidden="true">
+      <div class="splash__warm"></div>
+      <div class="splash__txt">
+        <p class="splash__k">Egg Freezing in Melbourne</p>
+        <p class="splash__h">Your future is yours to shape</p>
+      </div>
+    </div>
+
+
 <nav class="top-bar">
         <div class="top-bar-inner">
             <a href="/" class="logo">Dr. Yuval Fouks</a>
@@ -2131,5 +2186,27 @@
     </script>
     <!-- MELOD-AI LAUNCHER END -->
 
+    <script>
+      /* remove splash after it finishes (cleanup; CSS already hides it) */
+      (function(){
+        var s=document.getElementById('splash'); if(!s) return;
+        var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+        setTimeout(function(){ if(s&&s.parentNode) s.parentNode.removeChild(s); }, reduce?700:3000);
+      })();
+
+      /* scroll-reveal: alternate boxes slide in from left / right toward centre */
+      (function(){
+        if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+        var sel='.answer-block, .efc, .qcard, #practical, .pubs, .profile, .refs, .final-cta';
+        var nodes=[].slice.call(document.querySelectorAll(sel));
+        if(!nodes.length) return;
+        nodes.forEach(function(n,i){ n.classList.add('reveal', i%2 ? 'reveal--right' : 'reveal--left'); });
+        if(!('IntersectionObserver' in window)){ nodes.forEach(function(n){ n.classList.add('is-visible'); }); return; }
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+        }, { threshold:0.12, rootMargin:'0px 0px -7% 0px' });
+        nodes.forEach(function(n){ io.observe(n); });
+      })();
+    </script>
 </body>
 </html>
