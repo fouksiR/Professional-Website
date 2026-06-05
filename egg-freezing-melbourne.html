@@ -1496,21 +1496,39 @@
 
         <!-- ========== PRACTICAL ========== -->
         <section class="block" id="practical">
+            <style>
+              .pflow{list-style:none;margin:1.4rem 0 0;padding:0;position:relative;}
+              .pflow::before{content:"";position:absolute;left:13px;top:6px;bottom:22px;width:2px;background:linear-gradient(var(--coral),#f0b9ad);border-radius:2px;}
+              .pflow li{position:relative;padding:0 0 1.5rem 46px;}
+              .pflow li:last-child{padding-bottom:0;}
+              .pflow__dot{position:absolute;left:5px;top:2px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--coral);box-shadow:0 0 0 4px rgba(223,122,106,.12);}
+              .pflow__k{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.32rem;color:var(--plum-deep,#3a2e4f);margin:0 0 .18rem;line-height:1.15;}
+              .pflow__t{margin:0;font-size:.98rem;line-height:1.6;color:var(--ink,#2b2b30);font-weight:300;}
+              .askmelod{display:flex;align-items:center;gap:1rem;margin-top:1.9rem;padding:1.1rem 1.25rem;border-radius:18px;background:linear-gradient(135deg,rgba(223,122,106,.12),rgba(240,165,143,.18));border:1px solid rgba(223,122,106,.3);}
+              .askmelod__txt{flex:1 1 auto;}
+              .askmelod__h{margin:0 0 .15rem;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:var(--plum-deep,#3a2e4f);line-height:1.2;}
+              .askmelod__p{margin:0;font-size:.9rem;line-height:1.5;color:#5a5462;}
+              .askmelod__btn{flex:0 0 auto;border:none;cursor:pointer;background:var(--coral);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.86rem;letter-spacing:.02em;padding:.72rem 1.25rem;border-radius:999px;box-shadow:0 10px 24px -10px rgba(223,122,106,.85);transition:transform .2s,box-shadow .2s;}
+              .askmelod__btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(223,122,106,.95);}
+              @media(max-width:560px){ .askmelod{flex-direction:column;align-items:flex-start;} .askmelod__btn{align-self:stretch;text-align:center;} }
+            </style>
             <h2 class="section-title">Practical, in brief</h2>
-            <p class="section-lead" style="margin-bottom:0.5rem;">The quick version, walked through by Melod.</p>
-            <button class="pract-launch" type="button" id="pract-launch">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-                Hear the quick version
-            </button>
-            <!-- accessible &amp; crawlable source of truth; also feeds the popup sequence -->
-            <ul class="sr-only" id="pract-data">
-                <li><b>Time.</b> About two weeks from the first injection to retrieval.</li>
-                <li><b>Flexible start.</b> We can begin at almost any point in your cycle, a random start, so you don't have to wait for a particular day.</li>
-                <li><b>The procedure.</b> Day case, light sedation, home the same morning.</li>
-                <li><b>How many cycles.</b> Depends on your age and what we collect; the chart above sets the target.</li>
-                <li><b>Cost and Medicare.</b> Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</li>
-                <li><b>Storage.</b> Eggs do not age while frozen; storage fees apply per year.</li>
-            </ul>
+            <p class="section-lead">The quick version, step by step.</p>
+            <ol class="pflow">
+                <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Time</h3><p class="pflow__t">About two weeks from the first injection to retrieval.</p></li>
+                <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Flexible start</h3><p class="pflow__t">We can begin at almost any point in your cycle, a random start, so you don't have to wait for a particular day.</p></li>
+                <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">The procedure</h3><p class="pflow__t">A day case under light sedation. Most people are home the same morning.</p></li>
+                <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">How many cycles</h3><p class="pflow__t">Depends on your age and what we collect. The chart above sets the target.</p></li>
+                <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Cost and Medicare</h3><p class="pflow__t">Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</p></li>
+                <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Storage</h3><p class="pflow__t">Eggs do not age while frozen. Storage fees apply per year.</p></li>
+            </ol>
+            <div class="askmelod">
+                <div class="askmelod__txt">
+                    <p class="askmelod__h">Still have a question?</p>
+                    <p class="askmelod__p">MelodAi can answer using international fertility guidelines, anonymously and instantly.</p>
+                </div>
+                <button class="askmelod__btn" type="button" id="askMelodBtn">Ask MelodAi</button>
+            </div>
         </section>
 
         <!-- ========== ABOUT DR YUVAL FOUKS ========== -->
@@ -1544,7 +1562,7 @@
               .pubs__arrow:hover{border-color:var(--coral);transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(160,70,70,.5);}
               .pubs__track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 2px 14px;margin:0 -2px;}
               .pubs__track::-webkit-scrollbar{display:none;}
-              .pubs__card{scroll-snap-align:start;flex:0 0 auto;width:min(86vw,320px);min-height:344px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:.55rem;text-decoration:none;color:#fff;background-color:#2a2630;background-size:cover;background-position:center top;background-repeat:no-repeat;border:1px solid rgba(0,0,0,.12);border-radius:20px;padding:1.2rem 1.2rem 1.15rem;box-shadow:0 16px 40px -24px rgba(74,58,99,.5);transition:transform .22s ease,box-shadow .22s ease;}
+              .pubs__card{scroll-snap-align:start;flex:0 0 auto;width:min(76vw,268px);min-height:300px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:.55rem;text-decoration:none;color:#fff;background-color:#2a2630;background-size:cover;background-position:center top;background-repeat:no-repeat;border:1px solid rgba(0,0,0,.12);border-radius:20px;padding:1.2rem 1.2rem 1.15rem;box-shadow:0 16px 40px -24px rgba(74,58,99,.5);transition:transform .22s ease,box-shadow .22s ease;}
               .pubs__card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(to bottom, rgba(14,12,18,0) 0%, rgba(14,12,18,.04) 30%, rgba(14,12,18,.5) 60%, rgba(14,12,18,.9) 100%);}
               .pubs__card>*{position:relative;z-index:1;}
               .pubs__card:hover{transform:translateY(-4px);box-shadow:0 28px 56px -22px rgba(74,58,99,.55);}
@@ -1555,7 +1573,7 @@
               .pubs__src{display:flex;flex-direction:column;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:600;color:#fff;line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,.65);}
               .pubs__src small{font-weight:500;font-size:.68rem;color:rgba(255,255,255,.82);letter-spacing:.02em;margin-top:2px;}
               .pubs__tag{align-self:flex-start;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#fff;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.28rem .6rem;backdrop-filter:blur(2px);}
-              .pubs__title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.34rem;line-height:1.22;color:#fff;margin:0;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+              .pubs__title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.2rem;line-height:1.22;color:#fff;margin:0;text-shadow:0 2px 14px rgba(0,0,0,.7);}
               .pubs__read{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;color:#ffd7cc;margin-top:.15rem;text-shadow:0 1px 8px rgba(0,0,0,.6);}
               .pubs__card:hover .pubs__read{text-decoration:underline;}
               .pubs__badge.jama{color:#4a3a63;}
@@ -1812,126 +1830,10 @@
     })();
     </script>
 
-    <!-- ===== Practical presenter: the real Melod mascot glides to centre and speaks ===== -->
-    <div id="pract-stage">
-      <div class="ps-scrim" data-ps-close></div>
-      <div class="ps-bubble" role="dialog" aria-modal="true" aria-label="Practical, in brief">
-        <button class="ps-close" type="button" aria-label="Close" data-ps-close>&times;</button>
-        <span class="ps-k" id="ps-k"></span>
-        <p class="ps-t" id="ps-t" aria-live="polite"></p>
-        <div class="ps-dots" id="ps-dots"></div>
-        <div class="ps-nav">
-          <button class="ps-btn ps-prev hide" type="button" id="ps-prev">Back</button>
-          <button class="ps-btn ps-next" type="button" id="ps-next">Next</button>
-        </div>
-        <p class="ps-fine">General information, not a substitute for personalised medical advice.</p>
-      </div>
-    </div>
-    <script>
-    (function(){
-      var stage=document.getElementById('pract-stage');
-      var data=document.getElementById('pract-data');
-      if(!stage||!data) return;
-      // build points from the crawlable source list
-      var points=[].slice.call(data.querySelectorAll('li')).map(function(li){
-        var b=li.querySelector('b');
-        var k=b?b.textContent.replace(/\.\s*$/,''):'';
-        var t=li.textContent.replace(b?b.textContent:'','').trim();
-        return {k:k, t:t};
-      });
-      var kEl=document.getElementById('ps-k'), tEl=document.getElementById('ps-t');
-      var dotsEl=document.getElementById('ps-dots');
-      var prevB=document.getElementById('ps-prev'), nextB=document.getElementById('ps-next');
-      var i=0, timer=null, opened=false;
-      points.forEach(function(_,idx){
-        var d=document.createElement('button'); d.className='ps-dot'; d.type='button';
-        d.setAttribute('aria-label','Point '+(idx+1));
-        d.addEventListener('click',function(){ go(idx,true); });
-        dotsEl.appendChild(d);
-      });
-      var dots=[].slice.call(dotsEl.children);
-      var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-      function render(){
-        var p=points[i];
-        kEl.textContent=p.k;
-        tEl.textContent=p.t;
-        if(!reduce){ tEl.classList.remove('is-anim'); void tEl.offsetWidth; tEl.classList.add('is-anim'); }
-        dots.forEach(function(d,k){ d.classList.toggle('on',k===i); });
-        prevB.classList.toggle('hide', i===0);
-        nextB.textContent = (i===points.length-1) ? 'Done' : 'Next';
-      }
-      function go(n, user){
-        i=Math.max(0,Math.min(points.length-1,n)); render();
-        if(user) stopAuto();
-      }
-      function startAuto(){
-        stopAuto();
-        timer=setInterval(function(){
-          if(i<points.length-1){ go(i+1,false); } else { stopAuto(); }
-        }, 4800);
-      }
-      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
-
-      function moveMascotToCentre(){
-        var fab=document.getElementById('mw-fab'); if(!fab) return;
-        var r=fab.getBoundingClientRect();
-        var fcx=r.left+r.width/2, fcy=r.top+r.height/2;
-        var tx=Math.round(window.innerWidth/2 - fcx);
-        var ty=Math.round(window.innerHeight*0.62 - fcy);
-        fab.style.transform='translate('+tx+'px,'+ty+'px) scale(1.12)';
-      }
-      function resetMascot(){
-        var fab=document.getElementById('mw-fab'); if(fab) fab.style.transform='';
-      }
-      function openStage(){
-        if(document.body.classList.contains('pract-on')) return;
-        i=0; render();
-        document.body.classList.add('pract-on');         // suppresses corner nudges + fade
-        moveMascotToCentre();                              // the mascot glides to the middle
-        if(!reduce) setTimeout(startAuto, 500);            // start talking once it arrives
-      }
-      function closeStage(){
-        stopAuto();
-        document.body.classList.remove('pract-on');
-        resetMascot();                                     // glides back to its corner
-      }
-
-      nextB.addEventListener('click',function(){
-        if(i===points.length-1){ closeStage(); } else { go(i+1,true); }
-      });
-      prevB.addEventListener('click',function(){ go(i-1,true); });
-      stage.querySelectorAll('[data-ps-close]').forEach(function(el){ el.addEventListener('click',closeStage); });
-      document.addEventListener('keydown',function(e){
-        if(!document.body.classList.contains('pract-on')) return;
-        if(e.key==='Escape') closeStage();
-        if(e.key==='ArrowRight') go(i+1,true);
-        if(e.key==='ArrowLeft') go(i-1,true);
-      });
-      window.addEventListener('resize',function(){ if(document.body.classList.contains('pract-on')) moveMascotToCentre(); });
-      // pause auto-advance while interacting with the bubble
-      var bubble=stage.querySelector('.ps-bubble');
-      if(bubble) bubble.addEventListener('mouseenter', stopAuto);
-
-      // manual launch button
-      var launch=document.getElementById('pract-launch');
-      if(launch) launch.addEventListener('click', openStage);
-
-      // auto-open once when the practical section scrolls into view
-      var sec=document.getElementById('practical');
-      if(sec && 'IntersectionObserver' in window){
-        var io=new IntersectionObserver(function(es){
-          es.forEach(function(e){ if(e.isIntersecting && !opened){ opened=true; setTimeout(openStage,350); io.disconnect(); } });
-        }, {threshold:0.5});
-        io.observe(sec);
-      }
-    })();
-    </script>
-
     <!-- MELOD-AI LAUNCHER START
          Set MW_WIDGET_URL below to your hosted melod-public-ask.html. -->
     <div id="mw-root" aria-live="polite">
-      <button id="mw-fab" class="mw-fab" aria-label="Ask Melod·AI" aria-expanded="false">
+      <button id="mw-fab" class="mw-fab" aria-label="Ask MelodAi" aria-expanded="false">
         <span class="mw-stage" id="mw-stage">
           <svg class="mw-trail" id="mw-trail" aria-hidden="true">
             <defs><filter id="mwTrailBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="0.7"/></filter></defs>
@@ -1989,20 +1891,20 @@
         </span>
       </button>
 
-      <div id="mw-nudge" class="mw-nudge" role="button" tabindex="0" aria-label="Ask Melod·AI anything">
-        Hi, I'm Melod, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class="mw-nudge-fine">Support, not a substitute for medical care.</span>
+      <div id="mw-nudge" class="mw-nudge" role="button" tabindex="0" aria-label="Ask MelodAi anything">
+        Hi, I'm MelodAi, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class="mw-nudge-fine">Support, not a substitute for medical care.</span>
       </div>
 
-      <div id="mw-panel" class="mw-panel" role="dialog" aria-label="Ask Melod·AI" aria-hidden="true">
+      <div id="mw-panel" class="mw-panel" role="dialog" aria-label="Ask MelodAi" aria-hidden="true">
         <div class="mw-bar">
           <span class="mw-ava" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="10" fill="#f6aaa9"/><circle cx="9" cy="11" r="1.4" fill="#5b4a52"/><circle cx="15" cy="11" r="1.4" fill="#5b4a52"/><path d="M9 14 q3 2.4 6 0" stroke="#5b4a52" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg></span>
           <span class="mw-bartext">
-            <span class="mw-bar-title">Ask Melod·AI</span>
+            <span class="mw-bar-title">Ask MelodAi</span>
             <span class="mw-bar-sub">Evidence-based · anonymous · instant</span>
           </span>
           <button id="mw-close" class="mw-close" aria-label="Close">&times;</button>
         </div>
-        <iframe id="mw-frame" class="mw-frame" title="Ask Melod·AI" loading="lazy"
+        <iframe id="mw-frame" class="mw-frame" title="Ask MelodAi" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
@@ -2019,6 +1921,8 @@
       .mw-egg{position:absolute;left:50%;top:50%;width:72px;height:72px;transform:translate(-50%,-50%);
         transition:transform .25s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 6px 14px rgba(120,70,80,.28))}
       .mw-fab:hover .mw-egg{transform:translate(-50%,-50%) scale(1.07)}
+      .mw-fab.is-glow .mw-egg{animation:mwGlowPulse 1.7s ease-in-out 3}
+      @keyframes mwGlowPulse{0%,100%{filter:drop-shadow(0 6px 14px rgba(120,70,80,.28))}50%{filter:drop-shadow(0 0 22px rgba(223,122,106,.95)) drop-shadow(0 6px 16px rgba(120,70,80,.3))}}
       .mw-egg .mw-breathe{transform-box:fill-box;transform-origin:center;animation:mwBreathe 4.6s ease-in-out infinite}
       @keyframes mwBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
       .mw-eyes{transform-box:fill-box;transform-origin:center;animation:mwBlink 5.4s infinite}
@@ -2100,18 +2004,22 @@
         fab.setAttribute('aria-expanded','false');
       }
       function bounce(){ stage.classList.remove('bounce'); void stage.offsetWidth; stage.classList.add('bounce'); }
+      function fabGlow(){ fab.classList.add('is-glow'); setTimeout(function(){ fab.classList.remove('is-glow'); }, 5400); }
       stage.addEventListener('animationend',function(){ stage.classList.remove('bounce'); });
 
       fab.addEventListener('click',function(){ bounce(); panel.classList.contains('open')?close():open(); });
+      var askBtn=document.getElementById('askMelodBtn');
+      if(askBtn) askBtn.addEventListener('click',function(){ bounce(); fab.classList.remove('is-glow'); open(); });
       closeB.addEventListener('click',close);
       document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 
       var nudge=document.getElementById('mw-nudge');
       var nudged=false, hideTimer=null, busy=false, queue=[];
-      var GREET="Hi, I'm Melod, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class=\"mw-nudge-fine\">Support, not a substitute for medical care.</span>";
+      var GREET="Hi, I'm MelodAi, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class=\"mw-nudge-fine\">Support, not a substitute for medical care.</span>";
       var USS="This part is the heart of it, about <strong>10 to 12 days</strong> of quick ultrasound check-ins and daily injections at home.";
       var KEYM="Two key moments coming up: a <strong>trigger injection</strong> to ripen the eggs, then <strong>egg collection</strong>, a short, minor surgical procedure.";
       var CARDS="There's a step-by-step process and the questions patients ask most just below.<br><strong>Tap a card to flip it open.</strong>";
+      var ASK="Still have a question? I can answer using <strong>international guidelines</strong>, anonymously and instantly.";
       var shownAt=0;
       function hideNudge(){ if(nudge) nudge.classList.remove('show'); }
       function finishBubble(){ hideNudge(); clearTimeout(hideTimer); setTimeout(function(){ busy=false; pump(); }, 450); }
@@ -2147,7 +2055,7 @@
           io.observe(node);
         }
 
-        // Melod greets you at the intro box...
+        // MelodAi greets you at the intro box...
         watch('.answer-block', function(){ setTimeout(function(){ say(GREET, 5500); }, 600); }, 0.4);
         // ...travels to the ultrasound / day-by-day step...
         watch('.efc', function(){ say(USS, 5200); }, 0.08);
@@ -2155,6 +2063,8 @@
         watch('.efc__meds', function(){ say(KEYM, 5200); }, 0.3);
         // ...points to the question cards.
         watch('.cards', function(){ say(CARDS, 5000); }, 0.12);
+        // ...then offers to answer anything at the practical brief (mascot glows).
+        watch('#practical', function(){ fabGlow(); say(ASK, 6000); }, 0.3);
         // (the practical brief is handled by the centred presenter below)
 
         // graceful fallback if IntersectionObserver is unavailable
