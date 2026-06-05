@@ -189,7 +189,7 @@
         body::before {
             content: ""; position: fixed; inset: 0; z-index: -1;
             background:
-                linear-gradient(rgba(255, 248, 245, 0.22), rgba(255, 248, 245, 0.22)),
+                linear-gradient(rgba(255, 248, 245, 0.08), rgba(255, 248, 245, 0.08)),
                 url('images/women-collage.png') center center / cover no-repeat;
             background-color: #FFE6E0;
         }
@@ -243,14 +243,15 @@
         }
         .hero-inner {
             max-width: 760px; margin: 0 auto;
-            background: rgba(255, 252, 251, 0.86);
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            border-radius: 18px; padding: 1.75rem 1.5rem;
-            box-shadow: 0 18px 50px -22px rgba(74, 58, 99, 0.28);
+            background: rgba(255, 250, 248, 0.5);
+            backdrop-filter: blur(16px) saturate(1.1); -webkit-backdrop-filter: blur(16px) saturate(1.1);
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 24px; padding: 1.9rem 1.6rem;
+            box-shadow: 0 20px 56px -26px rgba(74, 58, 99, 0.3);
         }
         .hero-eyebrow {
             font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
-            color: var(--sand); margin-bottom: 1.25rem; font-weight: 500;
+            color: var(--coral); margin-bottom: 1.25rem; font-weight: 600;
         }
         .hero h1 {
             font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 500;
@@ -326,7 +327,7 @@
         /* Layout container */
         .wrap {
             max-width: 880px; margin: 2rem auto; padding: 1.5rem 5% 2.5rem;
-            background: rgba(255, 252, 251, 0.88);
+            background: rgba(255, 252, 251, 0.8);
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
             border-radius: 22px;
             box-shadow: 0 22px 60px -28px rgba(74, 58, 99, 0.26);
@@ -334,8 +335,12 @@
         section.block { margin: 3.5rem auto; }
 
         h2.section-title {
-            font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500;
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600;
             color: var(--ink); margin-bottom: 0.4rem; line-height: 1.25;
+        }
+        h2.section-title::after {
+            content: ""; display: block; width: 44px; height: 3px; border-radius: 3px;
+            margin-top: 0.6rem; background: linear-gradient(90deg, var(--coral), #f0a58f);
         }
         .section-lead { font-size: 1.02rem; color: #3a3a3a; margin-bottom: 1.75rem; }
 
@@ -699,6 +704,8 @@
             box-shadow: 0 20px 56px -24px rgba(53,42,74,0.7);
             display: grid; grid-template-columns: 0.6fr 1fr; align-items: stretch;
         }
+        .final-cta--solo { grid-template-columns: 1fr; max-width: 720px; }
+        .final-cta--solo .final-cta__body { text-align: center; padding: 2.8rem 2.2rem; }
         .final-cta__media { position: relative; min-height: 260px; }
         .final-cta__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
         .final-cta__media::after {
@@ -1526,24 +1533,152 @@
             </div>
         </section>
 
+        <!-- ========== PUBLICATIONS & PRESS CAROUSEL ========== -->
+        <section class="block pubs">
+            <style>
+              .pubs__eyebrow{font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--coral);font-weight:600;margin-bottom:.5rem;}
+              .pubs__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:.4rem 0 1.1rem;}
+              .pubs__hint{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute,#8a8390);font-weight:500;}
+              .pubs__nav{display:flex;gap:8px;}
+              .pubs__arrow{width:42px;height:42px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:var(--coral);font-size:1.5rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:.2s;}
+              .pubs__arrow:hover{border-color:var(--coral);transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(160,70,70,.5);}
+              .pubs__track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 2px 14px;margin:0 -2px;}
+              .pubs__track::-webkit-scrollbar{display:none;}
+              .pubs__card{scroll-snap-align:start;flex:0 0 auto;width:min(86vw,320px);min-height:344px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:.55rem;text-decoration:none;color:#fff;background-color:#2a2630;background-size:cover;background-position:center top;background-repeat:no-repeat;border:1px solid rgba(0,0,0,.12);border-radius:20px;padding:1.2rem 1.2rem 1.15rem;box-shadow:0 16px 40px -24px rgba(74,58,99,.5);transition:transform .22s ease,box-shadow .22s ease;}
+              .pubs__card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(to bottom, rgba(14,12,18,0) 0%, rgba(14,12,18,.04) 30%, rgba(14,12,18,.5) 60%, rgba(14,12,18,.9) 100%);}
+              .pubs__card>*{position:relative;z-index:1;}
+              .pubs__card:hover{transform:translateY(-4px);box-shadow:0 28px 56px -22px rgba(74,58,99,.55);}
+              .pubs__card--logo{background-size:72%;background-position:center 30%;}
+              .pubs__top{display:flex;align-items:center;gap:.6rem;}
+              .pubs__badge{flex:0 0 auto;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.94)!important;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+              .pubs__badge svg{width:20px;height:20px;}
+              .pubs__src{display:flex;flex-direction:column;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:600;color:#fff;line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,.65);}
+              .pubs__src small{font-weight:500;font-size:.68rem;color:rgba(255,255,255,.82);letter-spacing:.02em;margin-top:2px;}
+              .pubs__tag{align-self:flex-start;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#fff;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.28rem .6rem;backdrop-filter:blur(2px);}
+              .pubs__title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.34rem;line-height:1.22;color:#fff;margin:0;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+              .pubs__read{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;color:#ffd7cc;margin-top:.15rem;text-shadow:0 1px 8px rgba(0,0,0,.6);}
+              .pubs__card:hover .pubs__read{text-decoration:underline;}
+              .pubs__badge.jama{color:#4a3a63;}
+              .pubs__badge.rbmo{color:#8a7038;}
+              .pubs__badge.fs{color:#c1573f;}
+              .pubs__badge.repsci{color:#6f5c97;}
+              .pubs__badge.globe{color:#2b2b30;}
+              @media(max-width:680px){ .pubs__hint{display:none;} }
+            </style>
+
+            <p class="pubs__eyebrow">Research &amp; press</p>
+            <h2 class="section-title">Selected work by Dr Fouks</h2>
+            <p class="section-lead">Peer-reviewed research and media on egg freezing and fertility preservation, for both medical and non-medical reasons.</p>
+
+            <div class="pubs__bar">
+                <span class="pubs__hint">Swipe, or use the arrows</span>
+                <div class="pubs__nav">
+                    <button class="pubs__arrow" type="button" data-dir="-1" aria-label="Previous publications">&#8249;</button>
+                    <button class="pubs__arrow" type="button" data-dir="1" aria-label="More publications">&#8250;</button>
+                </div>
+            </div>
+
+            <div class="pubs__track" id="pubsTrack">
+                <a class="pubs__card pubs__card--logo" style="background-image:url('images/cover-jama.png');background-color:#f2784f;" href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2813453" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge jama" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 8.5h2M9.5 12h5M9.5 15.5h5"/></svg></span>
+                        <span class="pubs__src">JAMA Network Open<small>2024</small></span>
+                    </div>
+                    <span class="pubs__tag">Planned egg freezing</span>
+                    <h3 class="pubs__title">Utilization of cryopreserved oocytes in patients with poor ovarian response after planned oocyte cryopreservation</h3>
+                    <span class="pubs__read">Read on JAMA Network Open &#8594;</span>
+                </a>
+
+                <a class="pubs__card" style="background-image:url('images/cover-rbmo-2024.jpg');" href="https://www.sciencedirect.com/science/article/abs/pii/S1472648324006217" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge rbmo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 8.5h2M9.5 12h5M9.5 15.5h5"/></svg></span>
+                        <span class="pubs__src">Reproductive BioMedicine Online<small>2024</small></span>
+                    </div>
+                    <span class="pubs__tag">Machine learning</span>
+                    <h3 class="pubs__title">A machine-learning prediction model for oocyte return rates after cryopreservation</h3>
+                    <span class="pubs__read">Read on ScienceDirect &#8594;</span>
+                </a>
+
+                <a class="pubs__card" style="background-image:url('images/cover-fs.jpg');" href="https://linkinghub.elsevier.com/retrieve/pii/S0015-0282(25)01951-X" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge fs" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 8.5h2M9.5 12h5M9.5 15.5h5"/></svg></span>
+                        <span class="pubs__src">Fertility &amp; Sterility<small>2025</small></span>
+                    </div>
+                    <span class="pubs__tag">Oncofertility</span>
+                    <h3 class="pubs__title">Low return-to-care rates among women who froze eggs for oncological indications</h3>
+                    <span class="pubs__read">Read on Fertility &amp; Sterility &#8594;</span>
+                </a>
+
+                <a class="pubs__card" style="background-image:url('images/cover-reprosci.jpg');" href="https://link.springer.com/article/10.1007/s43032-023-01180-5" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge repsci" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 8.5h2M9.5 12h5M9.5 15.5h5"/></svg></span>
+                        <span class="pubs__src">Reproductive Sciences<small>2023</small></span>
+                    </div>
+                    <span class="pubs__tag">Endometriosis</span>
+                    <h3 class="pubs__title">Fertility preservation in endometriosis: does patient symptomatology affect the ovarian response?</h3>
+                    <span class="pubs__read">Read on SpringerLink &#8594;</span>
+                </a>
+
+                <a class="pubs__card" style="background-image:url('images/cover-rbmo-2021.jpg');" href="https://linkinghub.elsevier.com/retrieve/pii/S1472-6483(21)00350-3" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge rbmo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 8.5h2M9.5 12h5M9.5 15.5h5"/></svg></span>
+                        <span class="pubs__src">Reproductive BioMedicine Online<small>2021</small></span>
+                    </div>
+                    <span class="pubs__tag">Medical preservation</span>
+                    <h3 class="pubs__title">Fertility preservation and PGT-M in women with FAP-associated desmoid tumours</h3>
+                    <span class="pubs__read">Read on ScienceDirect &#8594;</span>
+                </a>
+
+                <a class="pubs__card" style="background-image:url('images/cover-rbmo-2020.jpg');" href="https://www.rbmojournal.com/article/S1472-6483(20)30386-2/abstract" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge rbmo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 8.5h2M9.5 12h5M9.5 15.5h5"/></svg></span>
+                        <span class="pubs__src">Reproductive BioMedicine Online<small>2020</small></span>
+                    </div>
+                    <span class="pubs__tag">Paediatric oncofertility</span>
+                    <h3 class="pubs__title">In-vitro maturation of oocytes recovered during fertility preservation in pre-pubertal girls</h3>
+                    <span class="pubs__read">Read on RBMO &#8594;</span>
+                </a>
+
+                <a class="pubs__card pubs__card--logo" style="background-image:url('images/cover-globe.png');background-color:#ffffff;" href="https://www.bostonglobe.com/2024/02/06/magazine/the-elusive-promise-of-egg-freezing/" target="_blank" rel="noopener">
+                    <div class="pubs__top">
+                        <span class="pubs__badge globe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H5a1 1 0 0 1-1-1z"/><path d="M17 8h3v9a2 2 0 0 1-2 2"/><path d="M7 8h7M7 11h7M7 14h4"/></svg></span>
+                        <span class="pubs__src">The Boston Globe<small>2024</small></span>
+                    </div>
+                    <span class="pubs__tag">In the media</span>
+                    <h3 class="pubs__title">The elusive promise of egg freezing</h3>
+                    <span class="pubs__read">Read the magazine feature &#8594;</span>
+                </a>
+            </div>
+        </section>
+
+        <script>
+          (function(){
+            var t=document.getElementById('pubsTrack'); if(!t) return;
+            document.querySelectorAll('.pubs__arrow').forEach(function(b){
+              b.addEventListener('click',function(){
+                var card=t.querySelector('.pubs__card');
+                var step=card?card.getBoundingClientRect().width+18:320;
+                t.scrollBy({left:(parseInt(b.getAttribute('data-dir'),10)||1)*step,behavior:'smooth'});
+              });
+            });
+          })();
+        </script>
+
 <section class="block refs">
             <h2>References</h2>
             <ol>
                 <li>Goldman RH, Racowsky C, Farland LV, Munn&eacute; S, Ribustello L, Fox JH. Predicting the likelihood of live birth for elective oocyte cryopreservation: a counseling tool for physicians and patients. <em>Hum Reprod.</em> 2017;32(4):853-859. doi:10.1093/humrep/dex008</li>
                 <li>Cobo A, Garc&iacute;a-Velasco JA, Coello A, et al. Oocyte vitrification as an efficient option for elective fertility preservation. <em>Fertil Steril.</em> 2016;105(3):755-764. doi:10.1016/j.fertnstert.2015.11.027</li>
                 <li>Fouks Y, Sakkas D, Bortoletto PE, Penzias AS, Seidler EA, Vaughan DA. Utilization of cryopreserved oocytes in patients with poor ovarian response after planned oocyte cryopreservation. <em>JAMA Netw Open.</em> 2024;7(1):e2349722. doi:10.1001/jamanetworkopen.2023.49722</li>
-                <li>Fouks Y, Bortoletto P, Chang J, Penzias A, Vaughan D, Sakkas D. Looking into the future: a machine learning powered prediction model for oocyte return rates after cryopreservation. <em>Reprod Biomed Online.</em> 2025;50(2):104405.</li>
-                <li>Meyers AJ, Fouks Y, Bortoletto P, Penzias AS, Sakkas D, Vaughan DA. Low return to care rates amongst women who underwent oocyte cryopreservation for oncological indications: a SART data analysis. <em>Fertil Steril.</em> 2025;125(3):527-529. <!-- TODO: confirm DOI --></li>
+                <li>Fouks Y, Bortoletto P, Chang J, Penzias A, Vaughan D, Sakkas D. Looking into the future: a machine learning powered prediction model for oocyte return rates after cryopreservation. <em>Reprod Biomed Online.</em> 2024;50(1):104432. doi:10.1016/j.rbmo.2024.104432</li>
+                <li>Meyers AJ, Fouks Y, Bortoletto P, Penzias AS, Sakkas D, Vaughan DA. Low return to care rates amongst women who underwent oocyte cryopreservation for oncological indications: a SART data analysis. <em>Fertil Steril.</em> 2025;125(3):527-529. doi:10.1016/j.fertnstert.2025.09.038</li>
                 <li>Blakemore JK, Grifo JA, DeVore SM, Hodes-Wertz B, Berkeley AS. Planned oocyte cryopreservation 10-15-year follow-up: return rates and cycle outcomes. <em>Fertil Steril.</em> 2021;115(6):1511-1520. doi:10.1016/j.fertnstert.2021.01.011</li>
                 <li>Lee MB, et al. Elective fertility preservation: a national database study on trends in oocyte cryopreservation and oocyte utilization over a 5- to 7-year follow-up period. <em>Am J Obstet Gynecol.</em> 2025. <!-- TODO: confirm full citation --></li>
             </ol>
         </section>
 
         <!-- ========== FINAL CTA BANNER ========== -->
-        <section class="final-cta">
-            <div class="final-cta__media">
-                <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks">
-            </div>
+        <section class="final-cta final-cta--solo">
             <div class="final-cta__body">
                 <h2>Considering Egg Freezing?</h2>
                 <p>Receive a personalised assessment of your ovarian reserve, expected egg numbers, and future fertility options.</p>
