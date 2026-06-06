@@ -2215,10 +2215,14 @@
         opacity: 0; visibility: hidden; pointer-events: none;
         transition: opacity .45s ease, visibility .45s ease;
       }
+      /* The MelodAi greeting bubble is gated by visibility so its own
+         .show fade still drives opacity once it is revealed. */
+      .mw-nudge { visibility: hidden; }
       body.show-fabs .mw-fab,
       body.show-fabs .bottom-fade {
         opacity: 1; visibility: visible; pointer-events: auto;
       }
+      body.show-fabs .mw-nudge { visibility: visible; }
     </style>
 
     <script>
