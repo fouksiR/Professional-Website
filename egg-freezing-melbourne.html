@@ -254,6 +254,15 @@
             position: relative; overflow: hidden; isolation: isolate;
             background: #f8f7f5;
             padding: 3rem 5% 5.5rem; text-align: left;
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center;
+            animation: heroCollapse 1.2s cubic-bezier(.4, 0, .2, 1) 2.6s forwards;
+        }
+        /* Opens full-height, holds ~2.6s, then settles to ~half so the
+           women-collage and the content below come into view without scrolling. */
+        @keyframes heroCollapse {
+            from { min-height: 100vh; }
+            to   { min-height: 50vh; }
         }
         /* Oocyte clip spanning the full hero, softened so it reads as atmosphere */
         .hero__bg {
@@ -318,7 +327,7 @@
             0%, 100% { color: #c14d37; }
             50%      { color: #cf5a40; }
         }
-        @media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } .hero__bg { display: none; } }
+        @media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } .hero__bg { display: none; } .hero { animation: none; min-height: 50vh; } }
 
         /* Step 2 storage card rendered as a photo tile (scoped to win over .efc__card) */
         .efc .efc__card--photo {
