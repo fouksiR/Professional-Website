@@ -224,13 +224,27 @@
 
         /* Nav */
         .top-bar {
-            background: rgba(248, 247, 245, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
-            border-bottom: 1px solid rgba(44, 44, 44, 0.1);
             position: sticky; top: 0; z-index: 100;
+            overflow: hidden;
+            background-color: #f8f7f5;
+            padding: 1rem 5%;
+            min-height: 130px; display: flex; align-items: center;
+            border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+        }
+        /* oocyte clip as the top-bar background: fills the bar height, centred.
+           Where the 16:9 clip is narrower than the bar, the #f8f7f5 base shows through. */
+        .top-bar__bgvid {
+            position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+            height: 100%; width: auto; max-width: none; z-index: 0;
+            pointer-events: none; object-fit: cover;
+        }
+        /* light scrim so the logo and link stay legible over the clip */
+        .top-bar::after {
+            content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: rgba(248, 247, 245, 0.42);
         }
         .top-bar-inner {
+            position: relative; z-index: 2; width: 100%;
             max-width: 1200px; margin: 0 auto;
             display: flex; justify-content: space-between; align-items: center;
         }
@@ -250,25 +264,10 @@
 
         /* Hero sits on the pink page */
         .hero {
-            position: relative; overflow: hidden;
-            background-color: #FFE6E0;
-            padding: 5.5rem 5% 5rem; text-align: center;
-            min-height: 480px; display: flex; align-items: center; justify-content: center;
-        }
-        /* oocyte clip as the hero background: fills the band height, centred.
-           Where the 16:9 clip is narrower than the band, the #FFE6E0 base shows through. */
-        .hero__bgvid {
-            position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
-            height: 100%; width: auto; max-width: none; z-index: 0;
-            pointer-events: none; object-fit: cover;
-        }
-        /* soft vignette so the clip edges melt into the surrounding pink */
-        .hero::after {
-            content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-            background: radial-gradient(ellipse 70% 80% at center, rgba(255,230,224,0) 42%, rgba(255,230,224,0.6) 100%);
+            background: transparent;
+            padding: 3.5rem 5% 2.5rem; text-align: center;
         }
         .hero-inner {
-            position: relative; z-index: 1;
             max-width: 760px; margin: 0 auto;
             background: rgba(255, 250, 248, 0.62);
             backdrop-filter: blur(16px) saturate(1.1); -webkit-backdrop-filter: blur(16px) saturate(1.1);
@@ -787,8 +786,8 @@
 
         /* ===== Mobile: wider, lighter, less dense ===== */
         @media (max-width: 680px) {
-            .top-bar { padding: 0.85rem 4%; }
-            .hero { padding: 3rem 3% 2.75rem; min-height: 360px; }
+            .top-bar { padding: 0.85rem 4%; min-height: 92px; }
+            .hero { padding: 2.25rem 3% 1.25rem; }
             .hero-inner { padding: 1.4rem 1.15rem; border-radius: 16px; }
             .hero h1 { font-size: 2.15rem; }
             /* let the content column use almost the full screen width */
@@ -972,6 +971,9 @@
 
 
 <nav class="top-bar">
+        <video class="top-bar__bgvid" autoplay muted loop playsinline preload="metadata" poster="hero-oocytes-poster.jpg" aria-hidden="true">
+            <source src="hero-oocytes.mp4" type="video/mp4">
+        </video>
         <div class="top-bar-inner">
             <a href="/" class="logo">Dr. Yuval Fouks</a>
             <a href="/" class="back-link">&larr; Back to Home</a>
@@ -980,9 +982,6 @@
 
     <!-- ========== HERO ========== -->
     <section class="hero">
-        <video class="hero__bgvid" autoplay muted loop playsinline preload="metadata" poster="hero-oocytes-poster.jpg" aria-hidden="true">
-            <source src="hero-oocytes.mp4" type="video/mp4">
-        </video>
         <div class="hero-inner">
             <p class="hero-eyebrow">Egg Freezing &nbsp;|&nbsp; Melbourne</p>
             <h1>Egg Freezing in Melbourne</h1>
