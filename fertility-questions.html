@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-kluTwuwfY39aZLuEhzfjv.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -1288,5 +1294,47 @@
 <!-- MELOD-AI LAUNCHER END -->
 </body>.
        Set MW_WIDGET_URL below to your hosted melod-public-ask.html. -->
-  </body>
+    <!-- Plausible engagement instrumentation -->
+  <script>
+  (function () {
+    var page = location.pathname;
+
+    // Tagged clicks: flip cards, CTAs, widgets (anything with data-track)
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-track]');
+      if (!el) return;
+      plausible('Click', { props: {
+        item: el.getAttribute('data-track'),
+        type: el.getAttribute('data-track-type') || 'generic',
+        page: page
+      }});
+    }, true);
+
+    // FAQ accordions: auto-track every <details> open by its id, no tagging needed
+    document.addEventListener('toggle', function (e) {
+      var d = e.target;
+      if (d.tagName === 'DETAILS' && d.open) {
+        var s = d.querySelector('summary');
+        plausible('FAQ Open', { props: {
+          item: d.id || (s ? s.textContent.trim().slice(0, 60) : 'untitled'),
+          page: page
+        }});
+      }
+    }, true);
+
+    // Scroll depth milestones, fired once each per visit
+    var hit = {};
+    window.addEventListener('scroll', function () {
+      if (!document.body) return;
+      var pct = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
+      [25, 50, 75, 100].forEach(function (m) {
+        if (pct >= m && !hit[m]) {
+          hit[m] = true;
+          plausible('Scroll', { props: { depth: m + '%', page: page } });
+        }
+      });
+    }, { passive: true });
+  })();
+  </script>
+</body>
 </html>

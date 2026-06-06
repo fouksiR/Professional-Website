@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-kluTwuwfY39aZLuEhzfjv.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -988,7 +994,7 @@
         <!-- ========== INTERACTIVE QUESTION CARDS ========== -->
         <div class="cards">
         <article class="qcard" id="card1">
-          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card1-body">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card1-body" data-track="ef-card-process" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">1</span>
               <span class="qcard__q">What actually happens during egg freezing?</span>
@@ -1315,7 +1321,7 @@
           </div>
         </article>
         <article class="qcard" id="card2">
-          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card2-body">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card2-body" data-track="ef-card-how-many" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">2</span>
               <span class="qcard__q">How many eggs do I need?</span>
@@ -1376,7 +1382,7 @@
           </div>
         </article>
         <article class="qcard" id="card3">
-          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card3-body">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card3-body" data-track="ef-card-eggs-by-age" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">3</span>
               <span class="qcard__q">How many eggs are recommended at my age?</span>
@@ -1427,7 +1433,7 @@
           </div>
         </article>
         <article class="qcard" id="card4">
-          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card4-body">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card4-body" data-track="ef-card-will-use" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">4</span>
               <span class="qcard__q">Will I ever use my frozen eggs?</span>
@@ -1483,7 +1489,7 @@
           </div>
         </article>
         <article class="qcard" id="card5">
-          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card5-body">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card5-body" data-track="ef-card-small-number" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">5</span>
               <span class="qcard__q">What if I only freeze a small number of eggs?</span>
@@ -1561,7 +1567,7 @@
           </div>
         </article>
         <article class="qcard" id="card6">
-          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card6-body">
+          <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card6-body" data-track="ef-card-who" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">6</span>
               <span class="qcard__q">Who should consider egg freezing?</span>
@@ -1635,7 +1641,7 @@
                     <p class="profile__eyebrow">Your specialist</p>
                     <h2>Meet Dr Yuval Fouks</h2>
                     <p>Dr Yuval Fouks is a fertility specialist at Melbourne IVF and The Royal Women's Hospital. He combines clinical expertise with research experience from leading international fertility centres, including Harvard University and Boston IVF.</p>
-                    <a class="profile__cta" href="/#contact">Book a Consultation</a>
+                    <a class="profile__cta" href="/#contact" data-track="ef-cta-book-profile" data-track-type="cta">Book a Consultation</a>
                     <div class="links">
                         <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Fouks+Y" target="_blank" rel="noopener">Publications on PubMed</a>
                         <!-- TODO: real URLs -->
@@ -1837,7 +1843,7 @@
             <div class="final-cta__body">
                 <h2>Considering Egg Freezing?</h2>
                 <p>Receive a personalised assessment of your ovarian reserve, expected egg numbers, and future fertility options.</p>
-                <a class="primary" href="/#contact">Book Consultation</a>
+                <a class="primary" href="/#contact" data-track="ef-cta-book-primary" data-track-type="cta">Book Consultation</a>
                 <a class="ghost" href="/#contact">Contact Us</a>
             </div>
         </section>
@@ -2283,5 +2289,47 @@
         nodes.forEach(function(n){ io.observe(n); });
       })();
     </script>
+  <!-- Plausible engagement instrumentation -->
+  <script>
+  (function () {
+    var page = location.pathname;
+
+    // Tagged clicks: flip cards, CTAs, widgets (anything with data-track)
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-track]');
+      if (!el) return;
+      plausible('Click', { props: {
+        item: el.getAttribute('data-track'),
+        type: el.getAttribute('data-track-type') || 'generic',
+        page: page
+      }});
+    }, true);
+
+    // FAQ accordions: auto-track every <details> open by its id, no tagging needed
+    document.addEventListener('toggle', function (e) {
+      var d = e.target;
+      if (d.tagName === 'DETAILS' && d.open) {
+        var s = d.querySelector('summary');
+        plausible('FAQ Open', { props: {
+          item: d.id || (s ? s.textContent.trim().slice(0, 60) : 'untitled'),
+          page: page
+        }});
+      }
+    }, true);
+
+    // Scroll depth milestones, fired once each per visit
+    var hit = {};
+    window.addEventListener('scroll', function () {
+      if (!document.body) return;
+      var pct = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
+      [25, 50, 75, 100].forEach(function (m) {
+        if (pct >= m && !hit[m]) {
+          hit[m] = true;
+          plausible('Scroll', { props: { depth: m + '%', page: page } });
+        }
+      });
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
