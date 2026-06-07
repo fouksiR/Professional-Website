@@ -2094,6 +2094,7 @@
               <filter id="mwGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
             </defs>
             <ellipse cx="50" cy="93" rx="24" ry="5" fill="#7a5b66" opacity=".16" filter="url(#mwSoft)"/>
+            <g class="mw-flop">
             <circle cx="50" cy="48" r="46" fill="url(#mwBloom)" filter="url(#mwGlow)"/>
             <circle cx="50" cy="48" r="36" fill="none" stroke="#ffd2c4" stroke-width="5" stroke-dasharray="2 3.4" opacity=".5" filter="url(#mwSoft)"/>
             <g fill="#ffffff">
@@ -2116,7 +2117,9 @@
               </g>
               <path d="M44 57 q6 5.5 12 0" fill="none" stroke="#43323b" stroke-width="2.4" stroke-linecap="round"/>
             </g>
+            </g>
           </svg>
+          <span class="mw-swarm" id="mw-swarm" aria-hidden="true"></span>
           <svg class="mw-sperm" id="mw-sperm" viewBox="0 0 48 32" aria-hidden="true">
             <defs>
               <radialGradient id="mwHead" cx="40%" cy="36%" r="65%">
@@ -2131,6 +2134,59 @@
           </svg>
         </span>
       </button>
+
+      <style>
+        /* corner mascot upgraded to match the full version: orbiting swarm + flip-flop */
+        #mw-trail, #mw-sperm { display:none; }   /* retire the single legacy sperm */
+        .mw-flop{transform-box:view-box;transform-origin:50px 48px;
+                 animation:mwFlop 9.5s ease-in-out infinite}
+        @keyframes mwFlop{0%,52%{transform:rotate(0)}59%{transform:rotate(-11deg)}
+          66%{transform:rotate(9deg)}73%{transform:rotate(-6deg)}80%{transform:rotate(3deg)}87%,100%{transform:rotate(0)}}
+        .mw-swarm{position:absolute;inset:0;z-index:1;display:block;pointer-events:none}
+        .mw-orbit{position:absolute;left:50%;top:50%;display:block;
+                  animation:mwOrbit var(--dur) linear infinite;
+                  animation-direction:var(--dir);animation-delay:var(--delay)}
+        @keyframes mwOrbit{to{transform:rotate(360deg)}}
+        .mw-sp{position:absolute;display:block;width:var(--size);height:auto;overflow:visible;
+               transform:translate(-50%,-50%) translateX(var(--r)) rotate(var(--face));
+               filter:drop-shadow(0 1px 3px rgba(30,95,98,.4))}
+        .mw-sp svg{display:block;width:100%;height:auto;overflow:visible}
+        .mw-sp .mw-tw{transform-box:fill-box;transform-origin:86% 50%;
+                      animation:mwWig var(--wig) ease-in-out infinite;animation-delay:var(--wdelay)}
+        @keyframes mwWig{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(11deg)}}
+        @media (prefers-reduced-motion:reduce){ .mw-flop,.mw-orbit,.mw-sp .mw-tw{animation:none} }
+      </style>
+      <script>
+        (function(){
+          var swarm = document.getElementById('mw-swarm');
+          if(!swarm) return;
+          function sp(){
+            return '<svg viewBox="0 0 58 28" aria-hidden="true">' +
+              '<g class="mw-tw">' +
+              '<path d="M46 14 C 36 2, 30 26, 20 14 C 13 5, 8 22, 3 14" fill="none" stroke="#1f8f96" stroke-width="3.6" stroke-linecap="round" opacity=".35"/>' +
+              '<path d="M46 14 C 36 2, 30 26, 20 14 C 13 5, 8 22, 3 14" fill="none" stroke="#2fa3aa" stroke-width="2.2" stroke-linecap="round"/>' +
+              '</g>' +
+              '<ellipse cx="47" cy="14" rx="8.6" ry="6.9" fill="#bdeef0" stroke="#1f8f96" stroke-width="1.2"/>' +
+              '<circle cx="49.8" cy="11.2" r="2" fill="#fff"/></svg>';
+          }
+          var conf = [
+            {r:32, dur:7.5,  dir:'normal',  size:18, wig:.42, face:'96deg'},
+            {r:39, dur:10.0, dir:'reverse', size:15, wig:.5,  face:'-84deg'},
+            {r:35, dur:8.6,  dir:'normal',  size:17, wig:.46, face:'96deg'},
+            {r:42, dur:12.0, dir:'reverse', size:14, wig:.54, face:'-84deg'}
+          ];
+          conf.forEach(function(c){
+            var o = document.createElement('span'); o.className='mw-orbit';
+            o.style.setProperty('--dur',c.dur+'s'); o.style.setProperty('--dir',c.dir);
+            o.style.setProperty('--delay',(-Math.random()*c.dur).toFixed(2)+'s');
+            var s = document.createElement('span'); s.className='mw-sp';
+            s.style.setProperty('--r',c.r+'px'); s.style.setProperty('--size',c.size+'px');
+            s.style.setProperty('--face',c.face); s.style.setProperty('--wig',c.wig+'s');
+            s.style.setProperty('--wdelay',(-Math.random()*c.wig).toFixed(2)+'s');
+            s.innerHTML = sp(); o.appendChild(s); swarm.appendChild(o);
+          });
+        })();
+      </script>
 
       <div id="mw-nudge" class="mw-nudge" role="button" tabindex="0" aria-label="Ask MelodAi anything">
         Hi, I'm MelodAi, I can answer your egg-freezing questions right here.<br><strong>Evidence-based, anonymous, instant.</strong><br><span class="mw-nudge-fine">Support, not a substitute for medical care.</span>
