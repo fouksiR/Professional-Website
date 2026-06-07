@@ -1680,9 +1680,6 @@
                 <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Cost and Medicare</h3><p class="pflow__t">Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</p></li>
                 <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Storage</h3><p class="pflow__t">Eggs do not age while frozen. Storage fees apply per year.</p></li>
             </ol>
-            <div style="text-align:center;margin-top:1.6rem">
-              <div data-melodai-mascot data-scale="0.62"></div>
-            </div>
             <div class="askmelod">
                 <div class="askmelod__txt">
                     <p class="askmelod__h">Still have a question?</p>
@@ -2133,6 +2130,7 @@
             <circle cx="42.4" cy="13.4" r="1.7" fill="#ffffff"/>
           </svg>
         </span>
+        <span class="mw-name" aria-hidden="true">Melod<i>Ai</i></span>
       </button>
 
       <style>
@@ -2173,7 +2171,9 @@
             {r:32, dur:7.5,  dir:'normal',  size:18, wig:.42, face:'96deg'},
             {r:39, dur:10.0, dir:'reverse', size:15, wig:.5,  face:'-84deg'},
             {r:35, dur:8.6,  dir:'normal',  size:17, wig:.46, face:'96deg'},
-            {r:42, dur:12.0, dir:'reverse', size:14, wig:.54, face:'-84deg'}
+            {r:42, dur:12.0, dir:'reverse', size:14, wig:.54, face:'-84deg'},
+            {r:30, dur:9.2,  dir:'reverse', size:16, wig:.48, face:'-84deg'},
+            {r:44, dur:11.0, dir:'normal',  size:13, wig:.56, face:'96deg'}
           ];
           conf.forEach(function(c){
             var o = document.createElement('span'); o.className='mw-orbit';
@@ -2189,8 +2189,8 @@
           var corona = document.getElementById('mw-corona');
           if(corona){
             var NS='http://www.w3.org/2000/svg';
-            var rings=[{R:36.5,n:42,rx:[4.2,5.8],ry:[1.7,2.4],op:[.58,.85]},
-                       {R:40,n:34,rx:[3.2,4.6],ry:[1.4,2.0],op:[.32,.58]}];
+            var rings=[{R:36.5,n:42,rx:[4.6,6.4],ry:[1.8,2.6],op:[.74,.96]},
+                       {R:40,n:34,rx:[3.6,5.2],ry:[1.5,2.2],op:[.46,.72]}];
             rings.forEach(function(rg){
               for(var i=0;i<rg.n;i++){
                 var a=(i/rg.n)*Math.PI*2+Math.random()*0.06, jr=rg.R+(Math.random()*1.6-0.8);
@@ -2272,9 +2272,10 @@
 
       /* --- v2 polish --- */
       .mw-fab{bottom:30px}
-      .mw-fab::before{content:"";position:absolute;left:50%;top:50%;width:80px;height:80px;
-        transform:translate(-50%,-50%);border-radius:50%;background:#fffdfb;
-        box-shadow:0 10px 26px -6px rgba(43,51,64,.45),0 0 0 1px rgba(74,103,65,.08);z-index:0}
+      .mw-fab::before{content:"";position:absolute;left:50%;top:50%;width:120px;height:120px;
+        transform:translate(-50%,-50%);border-radius:50%;
+        background:radial-gradient(circle, rgba(255,190,176,.42) 0%, rgba(255,190,176,.16) 46%, rgba(255,190,176,0) 70%);
+        z-index:0}
       .mw-stage,.mw-trail{z-index:1}
       .mw-nudge{position:fixed;right:26px;bottom:128px;max-width:248px;background:#fff;color:#3d5636;
         font-family:Inter,system-ui,sans-serif;font-size:13px;line-height:1.45;padding:12px 15px;
@@ -2296,7 +2297,7 @@
       .mw-panel{bottom:132px;width:404px}
       @media(max-width:480px){
         .mw-nudge{right:18px;bottom:108px;max-width:200px}
-        .mw-fab::before{width:70px;height:70px}
+        .mw-fab::before{width:104px;height:104px}
       }
       /* Keep the floating controls out of the landing view; they fade in
          only after the visitor scrolls past the hero (class added by JS). */
@@ -2312,6 +2313,34 @@
         opacity: 1; visibility: visible; pointer-events: auto;
       }
       body.show-fabs .mw-nudge { visibility: visible; }
+
+      /* --- corner mascot enlarged to the full version + periodic name --- */
+      .mw-fab{ transform:scale(1.42); transform-origin:100% 100%; right:26px; }
+      .mw-name{
+        position:absolute; left:50%; bottom:86px; transform:translateX(-50%);
+        font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:19px;
+        line-height:1; color:#34273f; white-space:nowrap; pointer-events:none; letter-spacing:.01em;
+        text-shadow:0 1px 9px rgba(255,255,255,.96),0 1px 2px rgba(255,255,255,.92);
+        opacity:0; animation:mwName 9.5s ease-in-out infinite;
+      }
+      .mw-name i{ font-style:normal;
+        background:linear-gradient(120deg,#e0654f,#c8455a);
+        -webkit-background-clip:text; background-clip:text; color:transparent; }
+      @keyframes mwName{
+        0%,6%   { opacity:0; transform:translateX(-50%) translateY(5px); }
+        15%,40% { opacity:1; transform:translateX(-50%) translateY(0); }
+        50%,100%{ opacity:0; transform:translateX(-50%) translateY(5px); }
+      }
+      /* lift the chat panel and greeting so they sit above the larger launcher */
+      .mw-panel{ bottom:176px; }
+      .mw-nudge{ bottom:172px; }
+      @media(max-width:480px){
+        .mw-fab{ transform:scale(1.2); transform-origin:100% 100%; right:18px; }
+        .mw-panel{ bottom:150px; }
+        .mw-nudge{ bottom:146px; }
+        .mw-name{ font-size:17px; bottom:82px; }
+      }
+      @media (prefers-reduced-motion:reduce){ .mw-name{ animation:none; opacity:1; } }
     </style>
 
     <script>
