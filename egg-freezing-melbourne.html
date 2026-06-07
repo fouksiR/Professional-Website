@@ -1654,13 +1654,14 @@
         <!-- ========== PRACTICAL ========== -->
         <section class="block" id="practical">
             <style>
-              .pflow{list-style:none;margin:1.4rem 0 0;padding:0;position:relative;}
-              .pflow::before{content:"";position:absolute;left:13px;top:6px;bottom:22px;width:2px;background:linear-gradient(var(--coral),#f0b9ad);border-radius:2px;}
-              .pflow li{position:relative;padding:0 0 1.5rem 46px;}
+              .pflow{list-style:none;margin:1.6rem 0 0;padding:0;position:relative;counter-reset:pf;}
+              .pflow::before{content:"";position:absolute;left:15px;top:12px;bottom:20px;width:1px;background:linear-gradient(rgba(223,122,106,.5),rgba(223,122,106,.1));}
+              .pflow li{position:relative;padding:0 0 1.7rem 52px;counter-increment:pf;}
               .pflow li:last-child{padding-bottom:0;}
-              .pflow__dot{position:absolute;left:5px;top:2px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--coral);box-shadow:0 0 0 4px rgba(223,122,106,.12);}
-              .pflow__k{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.32rem;color:var(--plum-deep,#3a2e4f);margin:0 0 .18rem;line-height:1.15;}
-              .pflow__t{margin:0;font-size:.98rem;line-height:1.6;color:var(--ink,#2b2b30);font-weight:300;}
+              .pflow__dot{position:absolute;left:0;top:-1px;width:31px;height:31px;border-radius:50%;background:#fff;border:1.5px solid rgba(223,122,106,.55);display:flex;align-items:center;justify-content:center;}
+              .pflow__dot::before{content:counter(pf);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.8rem;color:var(--coral);}
+              .pflow__k{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.2rem;color:var(--plum-deep,#3a2e4f);margin:.12rem 0 .25rem;line-height:1.2;}
+              .pflow__t{margin:0;font-size:.95rem;line-height:1.62;color:#5a5560;font-weight:300;}
               .askmelod{display:flex;align-items:center;gap:1rem;margin-top:1.9rem;padding:1.1rem 1.25rem;border-radius:18px;background:linear-gradient(135deg,rgba(223,122,106,.12),rgba(240,165,143,.18));border:1px solid rgba(223,122,106,.3);}
               .askmelod__txt{flex:1 1 auto;}
               .askmelod__h{margin:0 0 .15rem;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:var(--plum-deep,#3a2e4f);line-height:1.2;}
@@ -1679,6 +1680,9 @@
                 <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Cost and Medicare</h3><p class="pflow__t">Planned (social) egg freezing is generally not Medicare-rebatable and is an out-of-pocket cost, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. Exact costs are confirmed at consultation.</p></li>
                 <li><span class="pflow__dot" aria-hidden="true"></span><h3 class="pflow__k">Storage</h3><p class="pflow__t">Eggs do not age while frozen. Storage fees apply per year.</p></li>
             </ol>
+            <div style="text-align:center;margin-top:1.6rem">
+              <div data-melodai-mascot data-scale="0.62"></div>
+            </div>
             <div class="askmelod">
                 <div class="askmelod__txt">
                     <p class="askmelod__h">Still have a question?</p>
@@ -2422,5 +2426,6 @@
     }, { passive: true });
   })();
   </script>
+    <script src="/widgets/melodai-mascot.js" defer></script>
 </body>
 </html>
