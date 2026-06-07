@@ -86,10 +86,10 @@
     .brand-sub{display:block;margin-top:.45rem;font-family:'Montserrat',sans-serif;font-weight:500;
       font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:#9a7d84}
     @keyframes nameReveal{
-      0%,53%{opacity:0;transform:translateX(-50%) translateY(10px)}
-      63%{opacity:1;transform:translateX(-50%) translateY(0)}
-      79%{opacity:1;transform:translateX(-50%) translateY(0)}
-      90%,100%{opacity:0;transform:translateX(-50%) translateY(10px)}}
+      0%,28%{opacity:0;transform:translateX(-50%) translateY(10px)}
+      40%{opacity:1;transform:translateX(-50%) translateY(0)}
+      82%{opacity:1;transform:translateX(-50%) translateY(0)}
+      92%,100%{opacity:0;transform:translateX(-50%) translateY(10px)}}
 
     @media (prefers-reduced-motion:reduce){*{animation:none!important}.brand{opacity:1}}
   `;
@@ -136,7 +136,7 @@
           </defs>
           <ellipse cx="50" cy="94" rx="25" ry="5" fill="#6e3a47" opacity=".2" filter="url(#soft)"/>
           <circle cx="50" cy="48" r="47" fill="url(#bloom)" filter="url(#glow)"/>
-          <g id="corona" filter="url(#coronaSoft)"></g>
+          <g id="corona"></g>
           <g fill="#ffffff">
             <path class="spark s1" d="M50 3 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z"/>
             <path class="spark s2" d="M87 25 l1.1 3.2 3.2 1.1 -3.2 1.1 -1.1 3.2 -1.1 -3.2 -3.2 -1.1 3.2 -1.1z"/>
@@ -213,8 +213,8 @@
     if (corona) {
       var NS = 'http://www.w3.org/2000/svg';
       var rings = [
-        {R:36.5, n:42, rx:[4.2,5.8], ry:[1.7,2.4], op:[.58,.85]},
-        {R:40.0, n:34, rx:[3.2,4.6], ry:[1.4,2.0], op:[.32,.58]}
+        {R:37.5, n:44, rx:[4.6,6.6], ry:[1.7,2.5], op:[.62,.92]},
+        {R:41.5, n:36, rx:[3.6,5.2], ry:[1.4,2.1], op:[.36,.62]}
       ];
       rings.forEach(function (rg) {
         for (var i = 0; i < rg.n; i++) {
