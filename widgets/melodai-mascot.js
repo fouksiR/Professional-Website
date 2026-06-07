@@ -32,7 +32,7 @@
     .mascot{position:relative;width:430px;height:480px;line-height:normal;
             font-family:'Montserrat',system-ui,sans-serif;
             --coral:#e0654f;--coral-deep:#c8455a;--plum-deep:#34273f;--teal:#2fa3aa;
-            --cycle:8.5s;--flop:9.5s}
+            --cycle:7.5s;--flop:9.5s}
     .dust{position:absolute;border-radius:50%;filter:blur(1px);opacity:.5;pointer-events:none;animation:drift 14s ease-in-out infinite}
     @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
     .core{position:absolute;left:0;top:0;width:430px;height:372px}
@@ -132,10 +132,11 @@
             </linearGradient>
             <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.6"/></filter>
             <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
+            <filter id="coronaSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="0.55"/></filter>
           </defs>
           <ellipse cx="50" cy="94" rx="25" ry="5" fill="#6e3a47" opacity=".2" filter="url(#soft)"/>
           <circle cx="50" cy="48" r="47" fill="url(#bloom)" filter="url(#glow)"/>
-          <g id="corona" filter="url(#soft)"></g>
+          <g id="corona" filter="url(#coronaSoft)"></g>
           <g fill="#ffffff">
             <path class="spark s1" d="M50 3 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z"/>
             <path class="spark s2" d="M87 25 l1.1 3.2 3.2 1.1 -3.2 1.1 -1.1 3.2 -1.1 -3.2 -3.2 -1.1 3.2 -1.1z"/>
@@ -210,22 +211,30 @@
 
     var corona = root.getElementById('corona');
     if (corona) {
-      var NS = 'http://www.w3.org/2000/svg', N = 40, R = 36;
-      for (var i = 0; i < N; i++) {
-        var a = (i / N) * Math.PI * 2;
-        var jr = R + (Math.random() * 2 - 1);
-        var x = 50 + Math.cos(a) * jr, y = 48 + Math.sin(a) * jr;
-        var deg = a * 180 / Math.PI;
-        var cell = document.createElementNS(NS, 'ellipse');
-        cell.setAttribute('cx', x.toFixed(2));
-        cell.setAttribute('cy', y.toFixed(2));
-        cell.setAttribute('rx', (3.4 + Math.random() * 1.5).toFixed(2));
-        cell.setAttribute('ry', (1.9 + Math.random() * 0.8).toFixed(2));
-        cell.setAttribute('transform', 'rotate(' + deg.toFixed(1) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + ')');
-        cell.setAttribute('fill', '#ffd2c4');
-        cell.setAttribute('opacity', (0.3 + Math.random() * 0.18).toFixed(2));
-        corona.appendChild(cell);
-      }
+      var NS = 'http://www.w3.org/2000/svg';
+      var rings = [
+        {R:36.5, n:42, rx:[4.2,5.8], ry:[1.7,2.4], op:[.58,.85]},
+        {R:40.0, n:34, rx:[3.2,4.6], ry:[1.4,2.0], op:[.32,.58]}
+      ];
+      rings.forEach(function (rg) {
+        for (var i = 0; i < rg.n; i++) {
+          var a = (i / rg.n) * Math.PI * 2 + Math.random() * 0.06;
+          var jr = rg.R + (Math.random() * 1.6 - 0.8);
+          var x = 50 + Math.cos(a) * jr, y = 48 + Math.sin(a) * jr;
+          var deg = a * 180 / Math.PI;
+          var cell = document.createElementNS(NS, 'ellipse');
+          cell.setAttribute('cx', x.toFixed(2));
+          cell.setAttribute('cy', y.toFixed(2));
+          cell.setAttribute('rx', (rg.rx[0] + Math.random() * (rg.rx[1]-rg.rx[0])).toFixed(2));
+          cell.setAttribute('ry', (rg.ry[0] + Math.random() * (rg.ry[1]-rg.ry[0])).toFixed(2));
+          cell.setAttribute('transform', 'rotate(' + deg.toFixed(1) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + ')');
+          cell.setAttribute('fill', '#ffe6d8');
+          cell.setAttribute('stroke', '#f0b6a2');
+          cell.setAttribute('stroke-width', '0.35');
+          cell.setAttribute('opacity', (rg.op[0] + Math.random() * (rg.op[1]-rg.op[0])).toFixed(2));
+          corona.appendChild(cell);
+        }
+      });
     }
   }
 
