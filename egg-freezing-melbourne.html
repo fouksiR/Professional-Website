@@ -941,48 +941,8 @@
 </head>
 <body>
 
-    <!-- ========== LOADING SPLASH (blue warms into the page) ========== -->
     <style>
       html, body { overflow-x: hidden; }
-      #splash{
-        position:fixed; inset:0; z-index:2147483647;
-        display:flex; align-items:center; justify-content:center; text-align:center;
-        background:linear-gradient(160deg,#27445f 0%,#335a5e 55%,#3f655c 100%);
-        animation:splashHide .65s ease 4.7s forwards;
-      }
-      #splash .splash__warm{
-        position:absolute; inset:0;
-        background:linear-gradient(160deg,#fde7df 0%,#f8d9d0 52%,#f3cdce 100%);
-        opacity:0; animation:splashWarmIn .85s ease .6s forwards;
-      }
-      #splash .splash__txt{ position:relative; z-index:2; padding:0 1.3rem; color:#fff; animation:splashTxt 5s ease forwards; }
-      #splash .splash__k{
-        font-family:'Montserrat',sans-serif; letter-spacing:.3em; text-transform:uppercase;
-        font-size:.78rem; font-weight:600; color:#fff; opacity:.9; margin:0 0 1rem;
-        text-shadow:0 1px 6px rgba(0,0,0,.45);
-      }
-      #splash .splash__h{
-        font-family:'Cormorant Garamond',serif; font-weight:700;
-        font-size:clamp(2.6rem,8.5vw,4.8rem); line-height:1.12; margin:0;
-        color:#1e90ff; animation:splashFlicker 1.5s linear infinite;
-        text-shadow:0 2px 16px rgba(0,0,0,.32);
-      }
-      @keyframes splashWarmIn{ to{ opacity:1; } }
-      @keyframes splashTxt{
-        0%{   opacity:0; transform:translateY(12px); }
-        5%{   opacity:1; transform:translateY(0); }
-        92%{  opacity:1; transform:translateY(0); }
-        100%{ opacity:0; transform:translateY(-6px); }
-      }
-      @keyframes splashFlicker{
-        0%   { color:#1e90ff; }   /* azure */
-        20%  { color:#ff2b2b; }   /* bright red */
-        40%  { color:#13c2b2; }   /* teal */
-        60%  { color:#ffb02e; }   /* gold */
-        80%  { color:#c850ff; }   /* violet */
-        100% { color:#1e90ff; }
-      }
-      @keyframes splashHide{ to{ opacity:0; visibility:hidden; } }
 
       /* scroll-reveal: boxes slide in from the sides toward centre */
       .reveal{ opacity:0; transition:opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); will-change:opacity, transform; }
@@ -991,20 +951,9 @@
       .reveal.is-visible{ opacity:1; transform:none; }
 
       @media (prefers-reduced-motion: reduce){
-        #splash{ animation:splashHide .3s ease .2s forwards; }
-        #splash .splash__warm{ animation:none; opacity:1; }
-        #splash .splash__txt{ animation:none; opacity:1; }
-        #splash .splash__h{ animation:none; color:#1e90ff; }
         .reveal{ opacity:1 !important; transform:none !important; transition:none; }
       }
     </style>
-    <div id="splash" aria-hidden="true">
-      <div class="splash__warm"></div>
-      <div class="splash__txt">
-        <p class="splash__k">Egg Freezing in Melbourne</p>
-        <p class="splash__h">Your future is yours to shape</p>
-      </div>
-    </div>
 
 
 <nav class="top-bar">
@@ -1016,18 +965,14 @@
 
     <!-- ========== HERO ========== -->
     <section class="hero">
-        <video class="hero__bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-            <source src="hero-oocytes.mp4" type="video/mp4">
-        </video>
+        <img class="hero__bg" src="hero-eggs.jpg" alt="" aria-hidden="true">
         <div class="hero__wash" aria-hidden="true"></div>
         <div class="hero-inner">
-            <p class="hero-eyebrow">Egg Freezing &nbsp;|&nbsp; Melbourne</p>
             <h1>Egg Freezing in Melbourne</h1>
             <p class="hero-tagline">Your future is yours to shape, we're here to offer you time.</p>
             <p class="hero-care">Egg freezing is a gentle step toward preserving possibilities, and we'll guide you with compassion, clarity, and care, every step of the way.</p>
             <div class="byline">
                 <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks, fertility specialist, Melbourne">
-                <span><strong>Dr Yuval Fouks</strong>, Fertility Specialist and Reproductive Endocrinologist, Melbourne.</span>
             </div>
         </div>
     </section>
@@ -2484,13 +2429,6 @@
     <!-- MELOD-AI LAUNCHER END -->
 
     <script>
-      /* remove splash after it finishes (cleanup; CSS already hides it) */
-      (function(){
-        var s=document.getElementById('splash'); if(!s) return;
-        var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-        setTimeout(function(){ if(s&&s.parentNode) s.parentNode.removeChild(s); }, reduce?700:5700);
-      })();
-
       /* scroll-reveal: alternate boxes slide in from left / right toward centre */
       (function(){
         if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
