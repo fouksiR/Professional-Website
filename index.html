@@ -1280,13 +1280,16 @@
         .service-card {
             background-color: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
-            padding: 3rem;
+            padding: 2rem 2.25rem;
             border-radius: 8px;
             transition: all 0.3s;
             border: 1px solid rgba(44, 44, 44, 0.1);
             position: relative;
             overflow: hidden;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 260px;
             text-decoration: none;
             color: inherit;
             cursor: pointer;
@@ -1318,7 +1321,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(252, 250, 245, 0.78);
+            background: linear-gradient(to top,
+                rgba(250, 247, 240, 0.95) 0%,
+                rgba(250, 247, 240, 0.86) 26%,
+                rgba(250, 247, 240, 0.45) 50%,
+                rgba(250, 247, 240, 0.08) 72%,
+                rgba(250, 247, 240, 0) 88%);
             z-index: 1;
         }
 
@@ -2293,7 +2301,8 @@
             }
 
             .service-card {
-                padding: 2rem;
+                padding: 1.5rem 1.75rem;
+                min-height: 200px;
             }
         }
 
