@@ -519,6 +519,7 @@
             color: #2c2c2c;
             text-decoration: none;
             letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -888,6 +889,7 @@
         .hero-text {
             position: relative;
             z-index: 2;
+            margin-top: 3rem;
             will-change: transform, opacity;
             transition: transform 0.1s ease-out, opacity 0.1s ease-out;
             opacity: 0;
@@ -1023,6 +1025,8 @@
         .about-section {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             padding: 6rem 5%;
             position: relative;
@@ -1109,6 +1113,48 @@
         }
         .about-circle img {
             object-position: center 18%;
+        }
+
+        /* Story visual image (replaces the three-circle stack) */
+        .about-story-visual {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(44, 44, 44, 0.18);
+            position: relative;
+            z-index: 10;
+        }
+        .about-story-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Small portrait at the bottom of the My Story section */
+        .about-portrait-bottom {
+            display: flex;
+            justify-content: center;
+            margin: 4rem auto 0;
+            position: relative;
+            z-index: 2;
+        }
+        .about-portrait-bottom .about-circle-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #e5e0d8;
+            box-shadow: 0 0 0 8px rgba(216, 209, 198, 0.35),
+                        0 8px 28px rgba(44, 44, 44, 0.10);
+        }
+        .about-portrait-bottom .about-circle-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 18%;
+            display: block;
         }
 
         .about-content {
@@ -2017,6 +2063,35 @@
             }
         }
 
+        /* The full one-row desktop nav only fits comfortably at wide widths.
+           Below 1280px, switch to the hamburger menu so nothing clips. */
+        @media (min-width: 769px) and (max-width: 1279px) {
+            .hamburger {
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: relative !important;
+            }
+            nav {
+                opacity: 1 !important;
+                animation: none !important;
+                background-color: rgba(248, 247, 245, 0.95) !important;
+                backdrop-filter: blur(10px) !important;
+            }
+            nav .nav-container > .nav-links,
+            nav .nav-container > ul.nav-links,
+            nav #desktop-nav {
+                display: none !important;
+            }
+            .mobile-menu-overlay {
+                display: block !important;
+            }
+            .nav-container {
+                justify-content: space-between !important;
+                display: flex !important;
+            }
+        }
+
         @media (max-width: 768px) {
             /* FORCE SHOW HAMBURGER - ULTRA AGGRESSIVE */
             .hamburger {
@@ -2147,6 +2222,21 @@
             }
             .about-circle:hover {
                 transform: none;
+            }
+
+            .about-story-visual {
+                max-width: 260px;
+                border-radius: 14px;
+                margin: 0 auto 1rem;
+            }
+            .about-portrait-bottom {
+                margin-top: 2.5rem;
+            }
+            .about-portrait-bottom .about-circle-photo {
+                width: 115px;
+                height: 115px;
+                box-shadow: 0 0 0 5px rgba(216, 209, 198, 0.35),
+                            0 4px 14px rgba(44, 44, 44, 0.08);
             }
 
             .circular-bg {
@@ -2320,10 +2410,29 @@
             display: flex;
             list-style: none;
             align-items: center;
-            gap: 1.8rem;
+            gap: 0.85rem;
             margin: 0;
             padding: 0;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+        }
+
+        /* Keep the whole bar on one row: slightly more compact links */
+        #desktop-nav.nav-links a {
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+        }
+        #desktop-nav .social-icons {
+            gap: 0.9rem;
+        }
+        #desktop-nav .social-icons svg {
+            width: 20px;
+            height: 20px;
+        }
+        #desktop-nav.nav-links a.nav-highlight,
+        #desktop-nav.nav-links a.nav-egg {
+            font-size: 0.7rem;
+            padding-left: 0.85rem;
+            padding-right: 0.85rem;
         }
 
         .nav-links li {
@@ -2536,9 +2645,6 @@
         <div class="hero-container">
             <div class="hero-text">
                 <h1>Dr Yuval Fouks, Fertility Specialist, Melbourne</h1>
-                <div class="hero-tagline">
-                    Reproductive Endocrinology and Infertility
-                </div>
                 <p class="hero-description">
                     A fertility journey is deeply personal. You deserve care that is thoughtful, precise, and grounded in the best available evidence. As a Melbourne fertility specialist and clinician-researcher, I combine advanced reproductive medicine with truly individualized, patient-centred care for IVF, egg freezing, endometriosis-related infertility, and complex reproductive endocrinology.
                 </p>
@@ -2567,20 +2673,8 @@
     <section id="about" class="about-section">
         <div class="about-container">
             <div class="about-image-container">
-                <div class="about-image-stack">
-                    <div class="about-circle">
-                        <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks portrait">
-                    </div>
-                    <div class="about-circle">
-                        <video autoplay loop muted playsinline preload="metadata" aria-hidden="true">
-                            <source src="IMG_9665.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="about-circle">
-                        <video autoplay loop muted playsinline preload="metadata" aria-hidden="true">
-                            <source src="Media1.mp4" type="video/mp4">
-                        </video>
-                    </div>
+                <div class="about-story-visual">
+                    <img src="story-spheres.jpg" alt="Abstract illustration of clustered cells">
                 </div>
             </div>
 
@@ -2632,6 +2726,13 @@
                         <strong>I currently consult at Melbourne IVF and the Public Fertility Service at The Royal Women's Hospital.</strong>
                     </p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Portrait at the bottom of My Story -->
+        <div class="about-portrait-bottom">
+            <div class="about-circle-photo">
+                <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks portrait">
             </div>
         </div>
         
