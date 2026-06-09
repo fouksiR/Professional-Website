@@ -632,7 +632,7 @@
             /* once open, drop the paired image so the answer leads, full width */
             .qcard.is-open .qcard__media { display: none; }
             .qcard__reveal > div { max-width: 100%; }
-            .qcard__inner { overflow-wrap: anywhere; }
+            .qcard__inner { overflow-wrap: anywhere; overflow-x: clip; }
             .qcard__inner img,
             .qcard__inner svg,
             .qcard__inner canvas,
@@ -721,7 +721,7 @@
         }
 
         /* the answer drawer: grid-rows trick = clip-free, full natural height, stays in DOM */
-        .qcard__reveal { grid-area: reveal; display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
+        .qcard__reveal { grid-area: reveal; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
         .qcard.is-open .qcard__reveal { grid-template-rows: 1fr; }
         .qcard__reveal > div { overflow: hidden; min-height: 0; max-width: 940px; margin-inline: auto; }
         .qcard__inner {
