@@ -622,11 +622,18 @@
             .cards { width: auto; margin-left: auto; transform: none; }
             .cards .qcard,
             .cards .qcard:nth-child(even) {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(0, 1fr);
                 grid-template-areas: "media" "tile" "reveal";
             }
             .qcard__media { min-height: 230px; max-height: 300px; margin-bottom: 0.4rem; }
+            /* once open, drop the paired image so the answer leads, full width */
+            .qcard.is-open .qcard__media { display: none; }
             .qcard__reveal > div { max-width: 100%; }
+            .qcard__inner { overflow-wrap: anywhere; }
+            .qcard__inner img,
+            .qcard__inner svg,
+            .qcard__inner canvas,
+            .qcard__inner video { max-width: 100%; }
         }
         /* the flipping question tile */
         .qcard__flip {
@@ -1180,7 +1187,7 @@
                                 .efc__after{order:8;}
                                 .efc__note{order:9;}
                                 /* compact, fixed-height scan so it stays on screen while you step */
-                                .efc__scope{max-width:440px;margin:0 auto;}
+                                .efc__scope{max-width:100%;margin:0 auto;}
                                 .efc__screen{max-height:208px;}
                                 .efc__vid{height:208px;width:100%;object-fit:cover;}
                                 .efc__cap{margin-top:.5rem;}
@@ -1617,69 +1624,6 @@
           </div>
         </article>
         </div>
-
-        <!-- ========== PRACTICAL ========== -->
-        <section class="block" id="practical">
-            <style>
-              .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:.9rem;margin:1.6rem 0 0;}
-              .pcell{background:rgba(255,255,255,0.92);border:1px solid rgba(223,122,106,.18);border-radius:16px;padding:1.25rem 1.3rem;box-shadow:0 6px 22px -14px rgba(53,42,74,.3);transition:transform .2s,box-shadow .2s;}
-              .pcell:hover{transform:translateY(-3px);box-shadow:0 16px 34px -16px rgba(53,42,74,.34);}
-              .pcell--wide{grid-column:1 / -1;}
-              .pcell__ic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(223,122,106,.14),rgba(240,165,143,.2));margin-bottom:.7rem;}
-              .pcell__ic svg{width:18px;height:18px;stroke:var(--coral);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
-              .pcell__k{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.22rem;color:var(--plum-deep,#3a2e4f);margin:0 0 .3rem;line-height:1.2;}
-              .pcell__t{margin:0;font-size:.93rem;line-height:1.62;color:#5a5560;font-weight:300;}
-              .pnote{grid-column:1 / -1;margin:.2rem 0 0;padding:1rem 1.2rem;border-radius:16px;background:linear-gradient(135deg,rgba(107,91,149,.1),rgba(223,122,106,.1));border:1px solid rgba(107,91,149,.22);font-size:.93rem;line-height:1.6;color:#5a5462;}
-              .pnote strong{color:#4a3a63;}
-              .askmelod{display:flex;align-items:center;gap:1rem;margin-top:1.9rem;padding:1.1rem 1.25rem;border-radius:18px;background:linear-gradient(135deg,rgba(223,122,106,.12),rgba(240,165,143,.18));border:1px solid rgba(223,122,106,.3);}
-              .askmelod__txt{flex:1 1 auto;}
-              .askmelod__h{margin:0 0 .15rem;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:var(--plum-deep,#3a2e4f);line-height:1.2;}
-              .askmelod__p{margin:0;font-size:.9rem;line-height:1.5;color:#5a5462;}
-              .askmelod__btn{flex:0 0 auto;border:none;cursor:pointer;background:var(--coral);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.86rem;letter-spacing:.02em;padding:.72rem 1.25rem;border-radius:999px;box-shadow:0 10px 24px -10px rgba(223,122,106,.85);transition:transform .2s,box-shadow .2s;}
-              .askmelod__btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(223,122,106,.95);}
-              @media(max-width:560px){ .askmelod{flex-direction:column;align-items:flex-start;} .askmelod__btn{align-self:stretch;text-align:center;} }
-            </style>
-            <div class="pgrid">
-              <div class="pcell">
-                <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-                <h3 class="pcell__k">Time</h3>
-                <p class="pcell__t">About two weeks from the first injection to the egg collection. We map out the timing with you, so you always know what comes next.</p>
-              </div>
-              <div class="pcell">
-                <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg></span>
-                <h3 class="pcell__k">Flexible start</h3>
-                <p class="pcell__t">In most cases we can begin at almost any point in your cycle, a random start, so there is no need to wait for a particular day.</p>
-              </div>
-              <div class="pcell">
-                <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
-                <h3 class="pcell__k">The procedure</h3>
-                <p class="pcell__t">The egg collection is a short day procedure under light sedation. Most people rest at home the same morning.</p>
-              </div>
-              <div class="pcell">
-                <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6"/><path d="M17.6 13.6a5 5 0 0 1 3 5.4"/></svg></span>
-                <h3 class="pcell__k">Your own number</h3>
-                <p class="pcell__t">This is very personal. How many eggs suit you, and whether one cycle is enough, depends on your age and what matters to you. There is no fixed quota; we work it out together and talk through the options at your consultation.</p>
-              </div>
-              <div class="pcell pcell--wide">
-                <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></span>
-                <h3 class="pcell__k">Cost and Medicare</h3>
-                <p class="pcell__t">Planned (social) egg freezing is generally an out of pocket cost and is not Medicare rebatable, with an annual storage fee. Egg freezing for a medical reason, such as before cancer treatment, may attract Medicare and PBS support. We confirm the exact costs with you at consultation.</p>
-              </div>
-              <div class="pcell">
-                <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M3.8 7.1l16.4 9.8"/><path d="M20.2 7.1 3.8 16.9"/></svg></span>
-                <h3 class="pcell__k">Storage</h3>
-                <p class="pcell__t">Eggs do not age while they are in storage, so there is no time pressure once they are frozen. A storage fee applies each year.</p>
-              </div>
-              <p class="pnote"><strong>Every plan is personal.</strong> Whatever your situation, there is usually more than one path, and nothing here is set in stone. We go through it together at your consultation and tailor each step to you.</p>
-            </div>
-            <div class="askmelod">
-                <div class="askmelod__txt">
-                    <p class="askmelod__h">Still have a question?</p>
-                    <p class="askmelod__p">MelodAi can answer using international fertility guidelines, anonymously and instantly.</p>
-                </div>
-                <button class="askmelod__btn" type="button" id="askMelodBtn">Ask MelodAi</button>
-            </div>
-        </section>
 
         <!-- ========== ABOUT DR YUVAL FOUKS ========== -->
         <section class="block">
