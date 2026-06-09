@@ -200,10 +200,7 @@
         }
         body::before {
             content: ""; position: fixed; inset: 0; z-index: -1;
-            background:
-                linear-gradient(rgba(255, 248, 245, 0.08), rgba(255, 248, 245, 0.08)),
-                url('images/women-collage.png') center center / cover no-repeat;
-            background-color: #FFE6E0;
+            background-color: #fcf8f4;
         }
 
         /* Brand tokens. Warm sand = site accent; purple = data + your research; green = positive notes */
@@ -591,14 +588,39 @@
         }
 
         /* ============ FLIP-CARD EXPERIENCE ============ */
-        .cards { display: flex; flex-direction: column; gap: 1.4rem; margin: 2.5rem auto 0; }
+        .cards { display: flex; flex-direction: column; gap: clamp(2.2rem, 5vw, 3.4rem); margin: 2.5rem auto 0; }
+        /* paired image sits beside the question tile; the answer drawer spans full width below */
+        .qcard__media {
+            grid-area: media; align-self: stretch; min-height: 100%;
+            border-radius: 22px; overflow: hidden;
+            box-shadow: 0 14px 36px -22px rgba(53,42,74,0.5);
+            border: 1px solid rgba(53,42,74,0.08);
+        }
+        .qcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        @media (max-width: 760px) {
+            .qcard, .cards .qcard:nth-child(even) {
+                grid-template-columns: 1fr;
+                grid-template-areas: "media" "tile" "reveal";
+            }
+            .qcard__media { min-height: 200px; max-height: 250px; margin-bottom: 0.2rem; }
+        }
         .qcard {
             position: relative; border-radius: 24px;
             perspective: 1700px;
             scroll-margin-top: 90px;
+            display: grid;
+            grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+            grid-template-areas: "media tile" "reveal reveal";
+            column-gap: clamp(1rem, 3vw, 2.2rem);
+            align-items: stretch;
+        }
+        .cards .qcard:nth-child(even) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+            grid-template-areas: "tile media" "reveal reveal";
         }
         /* the flipping question tile */
         .qcard__flip {
+            grid-area: tile;
             position: relative; width: 100%; border: none; padding: 0; cursor: pointer;
             background: none; text-align: left; font-family: inherit;
             transform-style: preserve-3d; transition: transform .62s cubic-bezier(.22,.61,.36,1);
@@ -606,11 +628,7 @@
         }
         .qcard.is-open .qcard__flip { transform: rotateX(180deg); }
         /* stacked-card hint behind each card: telegraphs there is a back to flip to */
-        .qcard::before {
-            content: ""; position: absolute; left: 12px; right: 12px; bottom: -7px; height: 36px;
-            border-radius: 22px; background: #ffffff; opacity: 0.5;
-            box-shadow: 0 12px 26px -18px rgba(53,42,74,0.5); z-index: 0; transition: opacity .3s;
-        }
+        .qcard::before { display: none; }
         .qcard.is-open::before { opacity: 0; }
 
         .qcard__face {
@@ -619,27 +637,16 @@
             min-height: 172px; padding: 1.7rem 1.9rem; border-radius: 24px;
         }
         .qcard__face--front {
-            background-image:
-                linear-gradient(150deg, rgba(20,14,24,0.30) 0%, rgba(20,14,24,0.5) 55%, rgba(20,14,24,0.74) 100%),
-                url('images/women-collage.png');
-            background-size: 100% 100%, 340%;
-            background-repeat: no-repeat, no-repeat;
-            background-position: center, 50% 40%;
-            border: 1px solid rgba(255,255,255,0.22);
-            box-shadow: 0 14px 36px -20px rgba(53,42,74,0.42);
+            background: #ffffff;
+            border: 1px solid rgba(53,42,74,0.10);
+            box-shadow: 0 14px 36px -22px rgba(53,42,74,0.45);
             transition: box-shadow .3s, border-color .3s;
         }
-        /* each card reveals a different slice of the page collage */
-        .cards .qcard:nth-child(1) .qcard__face--front { background-position: center, 6% 30%; }
-        .cards .qcard:nth-child(2) .qcard__face--front { background-position: center, 30% 64%; }
-        .cards .qcard:nth-child(3) .qcard__face--front { background-position: center, 54% 20%; }
-        .cards .qcard:nth-child(4) .qcard__face--front { background-position: center, 80% 58%; }
-        .cards .qcard:nth-child(5) .qcard__face--front { background-position: center, 100% 34%; }
-        .cards .qcard:nth-child(6) .qcard__face--front { background-position: center, 42% 90%; }
-        .qcard__face--front .qcard__q { color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.62); }
+        .qcard__face--front .qcard__q { color: var(--ink); }
+        .qcard__face--front .qcard__num { color: var(--coral); text-shadow: none; }
         .qcard__face--front .qcard__flipcue {
-            background: rgba(255,255,255,0.2); color: #fff;
-            border: 1px solid rgba(255,255,255,0.34); backdrop-filter: blur(2px);
+            background: rgba(223,122,106,0.1); color: var(--lilac);
+            border: 1px solid transparent;
         }
         .qcard:not(.is-open) .qcard__flip:hover .qcard__face--front {
             box-shadow: 0 22px 50px -22px rgba(223,122,106,0.5); border-color: rgba(223,122,106,0.32);
@@ -655,7 +662,7 @@
             font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700;
             line-height: 1; letter-spacing: 0.5px;
         }
-        .qcard__face--front .qcard__num { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,0.55); }
+        .qcard__face--front .qcard__num { color: var(--coral); text-shadow: none; }
         .qcard__face--back .qcard__num { color: rgba(255,255,255,0.92); }
         .qcard__q {
             display: block; font-family: 'Cormorant Garamond', serif; font-weight: 700;
@@ -694,7 +701,7 @@
         }
 
         /* the answer drawer: grid-rows trick = clip-free, full natural height, stays in DOM */
-        .qcard__reveal { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
+        .qcard__reveal { grid-area: reveal; display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
         .qcard.is-open .qcard__reveal { grid-template-rows: 1fr; }
         .qcard__reveal > div { overflow: hidden; min-height: 0; }
         .qcard__inner {
@@ -1004,6 +1011,7 @@
         <!-- ========== INTERACTIVE QUESTION CARDS ========== -->
         <div class="cards">
         <article class="qcard" id="card1">
+          <div class="qcard__media"><img src="images/ef-1.jpg" alt="Soft overlapping circles in pink and purple tones" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card1-body" data-track="ef-card-process" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">1</span>
@@ -1331,6 +1339,7 @@
           </div>
         </article>
         <article class="qcard" id="card2">
+          <div class="qcard__media"><img src="images/ef-2.jpg" alt="Iridescent translucent spheres on a pale background" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card2-body" data-track="ef-card-how-many" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">2</span>
@@ -1392,6 +1401,7 @@
           </div>
         </article>
         <article class="qcard" id="card3">
+          <div class="qcard__media"><img src="images/ef-3.jpg" alt="Aerial view of a green field with yard markers twenty, thirty and forty" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card3-body" data-track="ef-card-eggs-by-age" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">3</span>
@@ -1443,6 +1453,7 @@
           </div>
         </article>
         <article class="qcard" id="card4">
+          <div class="qcard__media"><img src="images/ef-4.jpg" alt="A halved pomegranate above almonds arranged with drawn tails" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card4-body" data-track="ef-card-will-use" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">4</span>
@@ -1499,6 +1510,7 @@
           </div>
         </article>
         <article class="qcard" id="card5">
+          <div class="qcard__media"><img src="images/ef-5.jpg" alt="Two brown eggs on a white surface" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card5-body" data-track="ef-card-small-number" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">5</span>
@@ -1577,6 +1589,7 @@
           </div>
         </article>
         <article class="qcard" id="card6">
+          <div class="qcard__media"><img src="images/ef-6.jpg" alt="A young oak seedling sprouting from an acorn in a glass vase" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card6-body" data-track="ef-card-who" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
               <span class="qcard__num">6</span>
