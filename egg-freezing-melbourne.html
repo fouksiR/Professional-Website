@@ -617,6 +617,9 @@
             grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
             grid-template-areas: "tile media" "reveal reveal";
         }
+        /* Grid/flex children default to min-width:auto, which lets the wide timeline force
+           the answer wider than the screen and clip the text. Make them shrink to the track. */
+        .qcard > *, .qcard__reveal > * { min-width: 0; }
         /* Mobile: stack image over tile over answer, full width, stable margins */
         @media (max-width: 760px) {
             .cards { width: auto; margin-left: auto; transform: none; }
