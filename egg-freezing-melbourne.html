@@ -87,7 +87,7 @@
           "name": "How many eggs do I need to freeze?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Egg freezing is a numbers game. Not every frozen egg will survive thawing, fertilise, develop into an embryo, or result in a live birth, so the total number of eggs frozen matters. The likelihood of a future live birth generally increases as more eggs are stored."
+            "text": "Egg freezing is not only a numbers game, as it is often portrayed. Not every frozen egg will survive thawing, fertilise, develop into an embryo, or result in a live birth, so the total number of eggs frozen matters. The likelihood of a future live birth generally increases as more eggs are stored."
           }
         },
         {
@@ -95,7 +95,7 @@
           "name": "How many eggs are recommended at my age?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Age has a major impact on egg quality, so the older you are, the more eggs it may take to reach the same future chance of pregnancy. At 34 about 10 mature eggs reach roughly a 75 percent chance of at least one baby, but by 42 it takes around 61."
+            "text": "Age influences egg quality, so the earlier you freeze, the fewer eggs it tends to take to reach the same future chance, an encouraging reason not to wait. Around 34, about 10 mature eggs are associated with roughly a 75 percent chance of at least one baby; by 42 it can take closer to 61. Whatever your age, freezing now preserves options that time would otherwise narrow."
           }
         },
         {
@@ -103,7 +103,7 @@
           "name": "Will I ever use my frozen eggs?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Many women never return to use their frozen eggs, often because they later conceive naturally or with fresh IVF treatment. Egg freezing is primarily about preserving future reproductive options. Return rates are low in the first several years and rise with longer follow-up."
+            "text": "Whether someone will return to use their frozen eggs is very hard to predict, in large part because it is difficult to estimate a person's chance of conceiving naturally without actually trying. Egg freezing is primarily about keeping future reproductive options open. It is worth discussing your situation with a fertility specialist if you are not ready for children yet, are weighing career or life circumstances, have endometriosis or a family history of early menopause, or are planning fertility preservation before cancer treatment or ovarian surgery."
           }
         },
         {
@@ -300,9 +300,9 @@
         .hero-tagline {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(1.7rem, 5.2vw, 2.5rem); font-weight: 700;
-            letter-spacing: 0.4px; line-height: 1.22; color: #c14d37;
+            letter-spacing: 0.4px; line-height: 1.22; color: #fc2544;
             max-width: 26ch; margin: 0.5rem 0 0;
-            text-shadow: 0 1px 2px rgba(255,252,250,0.7), 0 2px 16px rgba(120,40,30,0.18);
+            text-shadow: 0 1px 2px rgba(255,252,250,0.7), 0 2px 16px rgba(150,20,45,0.20);
             animation: heroPulse 4.8s ease-in-out infinite, heroGlow 9s ease-in-out infinite;
             will-change: transform, color;
         }
@@ -323,8 +323,8 @@
             50%      { transform: scale(1.018); opacity: 1; }
         }
         @keyframes heroGlow {
-            0%, 100% { color: #c14d37; }
-            50%      { color: #cf5a40; }
+            0%, 100% { color: #fc2544; }
+            50%      { color: #e61e40; }
         }
         @media (prefers-reduced-motion: reduce) { .hero-tagline { animation: none; } .hero { transition: none; min-height: 50vh; } }
 
@@ -966,6 +966,45 @@
             font-weight: 700; color: var(--coral); margin-right: 0.55rem;
         }
 
+        /* level-of-detail toggle on the first question card */
+        .lod {
+            display: inline-flex; gap: 4px; padding: 4px;
+            background: rgba(223,122,106,0.08); border: 1px solid rgba(223,122,106,0.22);
+            border-radius: 999px; margin: 0.2rem 0 1.2rem;
+        }
+        .lod__btn {
+            border: none; cursor: pointer; background: transparent; color: #6a5f55;
+            font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.4px; padding: 0.5rem 1.05rem; border-radius: 999px;
+            transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .lod__btn:hover { color: var(--coral); }
+        .lod__btn[aria-selected="true"] {
+            background: linear-gradient(135deg, var(--lilac), var(--lilac-2)); color: #fff;
+            box-shadow: 0 4px 14px -6px rgba(223,122,106,0.7);
+        }
+        .lod-pane[hidden] { display: none; }
+        .lod-steps { list-style: none; counter-reset: lod; margin: 0; padding: 0; }
+        .lod-steps > li {
+            position: relative; counter-increment: lod;
+            padding: 0 0 1.15rem 3rem; margin: 0;
+        }
+        .lod-steps > li:not(:last-child) { border-left: 1px solid rgba(223,122,106,0.25); }
+        .lod-steps > li::before {
+            content: counter(lod); position: absolute; left: -16px; top: 0;
+            width: 32px; height: 32px; border-radius: 50%;
+            display: grid; place-items: center;
+            background: linear-gradient(135deg, var(--lilac), var(--lilac-2)); color: #fff;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600;
+            box-shadow: 0 4px 12px -5px rgba(223,122,106,0.7);
+        }
+        .lod-steps h4 {
+            font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.28rem;
+            color: var(--purple); margin: 0.2rem 0 0.35rem; line-height: 1.15;
+        }
+        .lod-steps p { font-size: 0.96rem; color: #3a3a3a; line-height: 1.6; margin: 0; }
+        .lod-pane--detail .efc { margin-top: 1.6rem; }
+
         /* soft fade so the floating Let's-talk button + mascot separate from text behind them */
         .bottom-fade {
             position: fixed; left: 0; right: 0; bottom: 0; height: 130px; z-index: 95;
@@ -1018,7 +1057,6 @@
         <div class="hero-inner">
             <h1>Egg Freezing in Melbourne</h1>
             <p class="hero-tagline">Your future is yours to shape, we're here to offer you time.</p>
-            <p class="hero-care">Egg freezing is a gentle step toward preserving possibilities, and we'll guide you with compassion, clarity, and care, every step of the way.</p>
         </div>
     </section>
 
@@ -1053,6 +1091,11 @@
           <div class="qcard__reveal" id="card1-body" role="region" aria-label="What actually happens during egg freezing?">
             <div><div class="qcard__inner">
               <p class="qcard__answer lede">Egg freezing pauses the clock on a set of your eggs at today's age, roughly two weeks, start to finish.</p>
+              <div class="lod" role="tablist" aria-label="Level of detail">
+                <button class="lod__btn" role="tab" id="lod-brief-tab" aria-controls="lod-brief" aria-selected="true" data-lod="brief">In brief</button>
+                <button class="lod__btn" role="tab" id="lod-detail-tab" aria-controls="lod-detail" aria-selected="false" data-lod="detail">I'm into the details</button>
+              </div>
+              <div class="lod-pane lod-pane--brief" id="lod-brief" role="tabpanel" aria-labelledby="lod-brief-tab">
               <ul class="qcard__steps">
                 <li>Initial consultation and fertility assessment</li>
                 <li>Approximately 10 to 12 days of hormone stimulation</li>
@@ -1061,6 +1104,26 @@
                 <li>Egg freezing using vitrification technology</li>
               </ul>
               <p class="random-start"><span class="random-start__tag">Flexible start</span>You don't have to wait for a particular day of your cycle. With a <strong>random start</strong>, stimulation can begin at almost any point, useful when timing matters or you want to start right away.</p>
+              </div>
+              <div class="lod-pane lod-pane--detail" id="lod-detail" role="tabpanel" aria-labelledby="lod-detail-tab" hidden>
+                <ol class="lod-steps">
+                  <li>
+                    <h4>Ovarian stimulation</h4>
+                    <p>Your cycle begins with hormone injections to stimulate the development of multiple follicles. Three types of medication are typically used: follicle-stimulating hormones, ovulation-suppressing medication, and a trigger injection. Monitoring ultrasounds guide the process throughout.</p>
+                  </li>
+                  <li>
+                    <h4>Egg collection</h4>
+                    <p>Egg collection is performed under sedation using transvaginal ultrasound aspiration. All up, this procedure takes around 20 to 30 minutes.</p>
+                  </li>
+                  <li>
+                    <h4>Egg assessment</h4>
+                    <p>Once collected, your eggs are examined by an embryologist to select the mature, healthy eggs that are suitable for freezing.</p>
+                  </li>
+                  <li>
+                    <h4>Vitrification</h4>
+                    <p>The suitable eggs are rapidly vitrified and stored in liquid nitrogen, where they can remain indefinitely until you're ready to use them.</p>
+                  </li>
+                </ol>
               <section class="efc" tabindex="0" aria-label="Interactive egg freezing cycle">
                             <style>
                               @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
@@ -1361,6 +1424,23 @@
                             })();
                             </script>
                           </section>
+              </div>
+              <script>
+              (function(){
+                var card = document.getElementById('card1-body');
+                if(!card) return;
+                var tabs = card.querySelectorAll('.lod__btn');
+                var panes = { brief: card.querySelector('#lod-brief'), detail: card.querySelector('#lod-detail') };
+                tabs.forEach(function(t){
+                  t.addEventListener('click', function(){
+                    var mode = t.getAttribute('data-lod');
+                    tabs.forEach(function(x){ x.setAttribute('aria-selected', x===t ? 'true' : 'false'); });
+                    panes.brief.hidden = (mode !== 'brief');
+                    panes.detail.hidden = (mode !== 'detail');
+                  });
+                });
+              })();
+              </script>
             </div></div>
           </div>
         </article>
@@ -1378,7 +1458,7 @@
           </button>
           <div class="qcard__reveal" id="card2-body" role="region" aria-label="How many eggs do I need?">
             <div><div class="qcard__inner">
-              <p class="qcard__answer">Egg freezing is a numbers game. Not every frozen egg will survive thawing, fertilise, develop into an embryo, or result in a live birth, so the total number of eggs frozen matters. The likelihood of a future live birth generally increases as more eggs are stored.</p>
+              <p class="qcard__answer">Egg freezing is not only a numbers game, as it is often portrayed. Not every frozen egg will survive thawing, fertilise, develop into an embryo, or result in a live birth, so the total number of eggs frozen matters. The likelihood of a future live birth generally increases as more eggs are stored.</p>
               <div class="viz-row">
                               <!-- VISUAL 2 primary: eggs-by-age pictograph -->
                               <div class="viz-card viz">
@@ -1438,7 +1518,7 @@
           </button>
           <div class="qcard__reveal" id="card3-body" role="region" aria-label="How many eggs are recommended at my age?">
             <div><div class="qcard__inner">
-              <p class="qcard__answer">Age has a major impact on egg quality, so the older you are, the more eggs it may take to reach the same future chance of pregnancy. At 34 about 10 mature eggs reach roughly a 75 percent chance of at least one baby, but by 42 it takes around 61.</p>
+              <p class="qcard__answer">Age influences egg quality, so the earlier you freeze, the fewer eggs it tends to take to reach the same future chance, an encouraging reason not to wait. Around 34, about 10 mature eggs are associated with roughly a 75 percent chance of at least one baby; by 42 it can take closer to 61. Whatever your age, freezing now preserves options that time would otherwise narrow.</p>
               <div class="viz-card estimator">
                               <div class="est-head">
                                   <span class="est-q">Estimate your own number. Pick your age:</span>
@@ -1488,7 +1568,16 @@
           </button>
           <div class="qcard__reveal" id="card4-body" role="region" aria-label="Will I ever use my frozen eggs?">
             <div><div class="qcard__inner">
-              <p class="qcard__answer">Many women never return to use their frozen eggs, often because they later conceive naturally or with fresh IVF treatment. Egg freezing is primarily about preserving future reproductive options. Return rates are low in the first several years and rise with longer follow-up.</p>
+              <p class="qcard__answer">Whether someone will return to use their frozen eggs is very hard to predict, in large part because it is difficult to estimate a person's chance of conceiving naturally without actually trying. Egg freezing is primarily about keeping future reproductive options open. If any of the following apply to you, it is worth discussing your situation with a fertility specialist:</p>
+              <ul class="qcard__steps">
+                <li>Not ready for children yet</li>
+                <li>Career or life circumstances</li>
+                <li>Endometriosis</li>
+                <li>Family history of early menopause</li>
+                <li>Before cancer treatment</li>
+                <li>Before ovarian surgery</li>
+                <li>Other fertility preservation indications</li>
+              </ul>
               <div class="viz-card viz">
                               <div class="viz-title">Return to use frozen eggs, by cohort</div>
                               <svg viewBox="0 0 700 300" role="img" aria-label="Return to use frozen eggs rises with follow-up time: 5.7 percent at 5 to 7 years (SART-CORS 2025) climbing to 38.1 percent at 10 to 15 years (Blakemore and Grifo 2021); pooled across studies the average return rate is about 11.1 percent; medical or oncofertility return stays about 4.5 to 8 percent.">
