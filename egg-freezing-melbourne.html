@@ -724,6 +724,13 @@
         .qcard__reveal { grid-area: reveal; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
         .qcard.is-open .qcard__reveal { grid-template-rows: 1fr; }
         .qcard__reveal > div { overflow: hidden; min-height: 0; max-width: 940px; margin-inline: auto; }
+        /* Mobile: this wrapper must lock to the reveal track, not the 940px desktop cap,
+           or the wide timeline drags it (and all the text) off-screen. */
+        @media (max-width: 760px) {
+            .qcard__reveal > div { width: 100%; max-width: 100%; }
+            .qcard__inner { max-width: 100%; }
+            .efc__track-wrap { min-width: 0; }
+        }
         .qcard__inner {
             margin-top: 0.85rem; padding: 1.75rem 1.6rem 1.9rem;
             background: rgba(255,255,255,0.94); border: 1px solid rgba(223,122,106,0.16);
