@@ -424,6 +424,15 @@
             font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
             line-height: 1.4; color: var(--ink); margin-bottom: 0.6rem; font-weight: 500;
         }
+        .answer-block .spark {
+            font-weight: 600;
+            background: linear-gradient(100deg, var(--coral) 0%, #d99a5b 45%, var(--purple-2) 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            background-size: 220% auto; animation: sparkShine 6s linear infinite;
+        }
+        @keyframes sparkShine { to { background-position: 220% center; } }
+        @media (prefers-reduced-motion: reduce) { .answer-block .spark { animation: none; } }
 
         /* Card surface used by visuals */
         .viz-card {
@@ -1066,10 +1075,11 @@
         <div class="answer-block">
             <h2 class="section-title">Egg Freezing</h2>
             <p class="answer-sub">What it is, how many eggs you actually need, and how often they get used. The honest version.</p>
-            <p class="lede">Egg freezing offers the opportunity to preserve fertility and keep future reproductive options open.</p>
-            <p>In my practice, I provide personalised, evidence-based care throughout the process, from the initial consultation and fertility assessment through to stimulation planning, egg collection, and long-term storage advice.</p>
+            <p class="lede">Egg freezing is one of the most important decisions you may make about your future family planning, often well before it feels relevant.</p>
+            <p>This page is designed to be a truly resourceful tool for you, built to support your empowerment, control, and knowledge throughout the process, from the initial consultation and fertility assessment through to stimulation planning, egg collection, and long-term storage advice.</p>
             <p>The aim is to make the process clear, supportive, and medically tailored to your circumstances, whether you are considering egg freezing for personal, medical, or timing-related reasons.</p>
-            <p>You will be guided through each step with a focus on safety, realistic expectations, and helping you make an informed decision about your reproductive future.</p>
+            <p>You will be guided through each step with a focus on safety, your expectations, and helping you make an informed decision about your reproductive future.</p>
+            <p><span class="spark">MelodAi</span>, in the lower right, is a smart virtual tool that can help with any questions you have along the way. It does not replace your care provider, and I am only a click away to support you through egg freezing.</p>
         </div>
 
         <p class="section-lead" style="margin-top:2rem;text-align:center;">These are the questions people actually ask, in the order they usually come up. <strong>Tap a card to flip it open.</strong></p>
