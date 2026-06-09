@@ -588,39 +588,46 @@
         }
 
         /* ============ FLIP-CARD EXPERIENCE ============ */
-        .cards { display: flex; flex-direction: column; gap: clamp(2.2rem, 5vw, 3.4rem); margin: 2.5rem auto 0; }
+        .cards {
+            display: flex; flex-direction: column; gap: clamp(3rem, 7vw, 5rem);
+            margin: 3rem auto 0;
+            width: min(1120px, 92vw);
+            margin-left: 50%; transform: translateX(-50%);
+        }
         /* paired image sits beside the question tile; the answer drawer spans full width below */
         .qcard__media {
-            grid-area: media; align-self: stretch; min-height: 100%;
+            grid-area: media; align-self: stretch;
+            min-height: clamp(300px, 34vw, 460px);
             border-radius: 22px; overflow: hidden;
-            box-shadow: 0 14px 36px -22px rgba(53,42,74,0.5);
+            box-shadow: 0 22px 50px -26px rgba(53,42,74,0.55);
             border: 1px solid rgba(53,42,74,0.08);
         }
         .qcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
         @media (max-width: 760px) {
+            .cards { width: auto; margin-left: auto; transform: none; }
             .qcard, .cards .qcard:nth-child(even) {
                 grid-template-columns: 1fr;
                 grid-template-areas: "media" "tile" "reveal";
             }
-            .qcard__media { min-height: 200px; max-height: 250px; margin-bottom: 0.2rem; }
+            .qcard__media { min-height: 230px; max-height: 300px; margin-bottom: 0.4rem; }
         }
         .qcard {
             position: relative; border-radius: 24px;
             perspective: 1700px;
             scroll-margin-top: 90px;
             display: grid;
-            grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
             grid-template-areas: "media tile" "reveal reveal";
-            column-gap: clamp(1rem, 3vw, 2.2rem);
+            column-gap: clamp(1.4rem, 4vw, 3rem);
             align-items: stretch;
         }
         .cards .qcard:nth-child(even) {
-            grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
             grid-template-areas: "tile media" "reveal reveal";
         }
         /* the flipping question tile */
         .qcard__flip {
-            grid-area: tile;
+            grid-area: tile; height: 100%;
             position: relative; width: 100%; border: none; padding: 0; cursor: pointer;
             background: none; text-align: left; font-family: inherit;
             transform-style: preserve-3d; transition: transform .62s cubic-bezier(.22,.61,.36,1);
@@ -633,8 +640,8 @@
 
         .qcard__face {
             position: relative; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-            display: flex; flex-direction: column; justify-content: center; gap: 0.95rem;
-            min-height: 172px; padding: 1.7rem 1.9rem; border-radius: 24px;
+            display: flex; flex-direction: column; justify-content: center; gap: 1.3rem;
+            min-height: 172px; height: 100%; padding: 2.4rem 2.4rem; border-radius: 24px;
         }
         .qcard__face--front {
             background: #ffffff;
@@ -659,14 +666,14 @@
         }
         .qcard__num {
             flex: 0 0 auto; align-self: flex-start;
-            font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700;
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3vw, 3rem); font-weight: 700;
             line-height: 1; letter-spacing: 0.5px;
         }
         .qcard__face--front .qcard__num { color: var(--coral); text-shadow: none; }
         .qcard__face--back .qcard__num { color: rgba(255,255,255,0.92); }
         .qcard__q {
             display: block; font-family: 'Cormorant Garamond', serif; font-weight: 700;
-            font-size: clamp(1.65rem, 5vw, 2.2rem); line-height: 1.12; color: var(--ink); letter-spacing: 0.2px;
+            font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.12; color: var(--ink); letter-spacing: 0.2px;
         }
         .qcard__face--back .qcard__q { color: #fff; text-shadow: 0 1px 10px rgba(150,55,55,0.35); }
 
@@ -703,7 +710,7 @@
         /* the answer drawer: grid-rows trick = clip-free, full natural height, stays in DOM */
         .qcard__reveal { grid-area: reveal; display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,.61,.36,1); }
         .qcard.is-open .qcard__reveal { grid-template-rows: 1fr; }
-        .qcard__reveal > div { overflow: hidden; min-height: 0; }
+        .qcard__reveal > div { overflow: hidden; min-height: 0; max-width: 940px; margin-inline: auto; }
         .qcard__inner {
             margin-top: 0.85rem; padding: 1.75rem 1.6rem 1.9rem;
             background: rgba(255,255,255,0.94); border: 1px solid rgba(223,122,106,0.16);
