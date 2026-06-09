@@ -603,14 +603,6 @@
             border: 1px solid rgba(53,42,74,0.08);
         }
         .qcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        @media (max-width: 760px) {
-            .cards { width: auto; margin-left: auto; transform: none; }
-            .qcard, .cards .qcard:nth-child(even) {
-                grid-template-columns: 1fr;
-                grid-template-areas: "media" "tile" "reveal";
-            }
-            .qcard__media { min-height: 230px; max-height: 300px; margin-bottom: 0.4rem; }
-        }
         .qcard {
             position: relative; border-radius: 24px;
             perspective: 1700px;
@@ -624,6 +616,17 @@
         .cards .qcard:nth-child(even) {
             grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
             grid-template-areas: "tile media" "reveal reveal";
+        }
+        /* Mobile: stack image over tile over answer, full width, stable margins */
+        @media (max-width: 760px) {
+            .cards { width: auto; margin-left: auto; transform: none; }
+            .cards .qcard,
+            .cards .qcard:nth-child(even) {
+                grid-template-columns: 1fr;
+                grid-template-areas: "media" "tile" "reveal";
+            }
+            .qcard__media { min-height: 230px; max-height: 300px; margin-bottom: 0.4rem; }
+            .qcard__reveal > div { max-width: 100%; }
         }
         /* the flipping question tile */
         .qcard__flip {
@@ -844,12 +847,13 @@
         /* ===== Mobile: wider, lighter, less dense ===== */
         @media (max-width: 680px) {
             .top-bar { padding: 0.85rem 4%; }
-            .hero { padding: 1.6rem 4% 3rem; }
+            .hero { padding: 1.6rem 4% 3rem; min-height: 62vh; }
+            .hero.is-settled { min-height: 62vh; }
             .hero-inner { padding: 0; border-radius: 0; }
             .hero h1 { font-size: clamp(2.2rem, 9vw, 2.9rem); }
-            /* full-bleed fruit on mobile, veiled so the stacked text stays readable */
+            /* show the magenta rind on the left of the photo, not just the seeded centre */
             .hero__bg {
-                left: 0; right: 0; width: 100%; object-position: 68% center;
+                left: 0; right: 0; width: 100%; height: 100%; object-position: 8% center;
                 -webkit-mask-image: none; mask-image: none;
             }
             .hero__wash {
@@ -1021,12 +1025,10 @@
           <div class="qcard__media"><img src="images/ef-1.jpg" alt="Soft overlapping circles in pink and purple tones" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card1-body" data-track="ef-card-process" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
-              <span class="qcard__num">1</span>
               <span class="qcard__q">What actually happens during egg freezing?</span>
               <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to see the process</span>
             </span>
             <span class="qcard__face qcard__face--back" aria-hidden="true">
-              <span class="qcard__num">1</span>
               <span class="qcard__q">What actually happens during egg freezing?</span>
               <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
             </span>
@@ -1349,12 +1351,10 @@
           <div class="qcard__media"><img src="images/ef-2.jpg" alt="Iridescent translucent spheres on a pale background" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card2-body" data-track="ef-card-how-many" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
-              <span class="qcard__num">2</span>
               <span class="qcard__q">How many eggs do I need?</span>
               <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to reveal the numbers</span>
             </span>
             <span class="qcard__face qcard__face--back" aria-hidden="true">
-              <span class="qcard__num">2</span>
               <span class="qcard__q">How many eggs do I need?</span>
               <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
             </span>
@@ -1411,12 +1411,10 @@
           <div class="qcard__media"><img src="images/ef-3.jpg" alt="Aerial view of a green field with yard markers twenty, thirty and forty" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card3-body" data-track="ef-card-eggs-by-age" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
-              <span class="qcard__num">3</span>
               <span class="qcard__q">How many eggs are recommended at my age?</span>
               <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip for your age estimate</span>
             </span>
             <span class="qcard__face qcard__face--back" aria-hidden="true">
-              <span class="qcard__num">3</span>
               <span class="qcard__q">How many eggs are recommended at my age?</span>
               <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
             </span>
@@ -1463,12 +1461,10 @@
           <div class="qcard__media"><img src="images/ef-4.jpg" alt="A halved pomegranate above almonds arranged with drawn tails" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card4-body" data-track="ef-card-will-use" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
-              <span class="qcard__num">4</span>
               <span class="qcard__q">Will I ever use my frozen eggs?</span>
               <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to see the evidence</span>
             </span>
             <span class="qcard__face qcard__face--back" aria-hidden="true">
-              <span class="qcard__num">4</span>
               <span class="qcard__q">Will I ever use my frozen eggs?</span>
               <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
             </span>
@@ -1520,12 +1516,10 @@
           <div class="qcard__media"><img src="images/ef-5.jpg" alt="Two brown eggs on a white surface" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card5-body" data-track="ef-card-small-number" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
-              <span class="qcard__num">5</span>
               <span class="qcard__q">What if I only freeze a small number of eggs?</span>
               <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to reveal</span>
             </span>
             <span class="qcard__face qcard__face--back" aria-hidden="true">
-              <span class="qcard__num">5</span>
               <span class="qcard__q">What if I only freeze a small number of eggs?</span>
               <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
             </span>
@@ -1599,12 +1593,10 @@
           <div class="qcard__media"><img src="images/ef-6.jpg" alt="A young oak seedling sprouting from an acorn in a glass vase" loading="lazy" decoding="async"></div>
           <button class="qcard__flip" type="button" aria-expanded="false" aria-controls="card6-body" data-track="ef-card-who" data-track-type="flip-card">
             <span class="qcard__face qcard__face--front">
-              <span class="qcard__num">6</span>
               <span class="qcard__q">Who should consider egg freezing?</span>
               <span class="qcard__flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a8 8 0 0 1 13-2l2 2"/><path d="M21 17a8 8 0 0 1-13 2l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg> Flip to reveal</span>
             </span>
             <span class="qcard__face qcard__face--back" aria-hidden="true">
-              <span class="qcard__num">6</span>
               <span class="qcard__q">Who should consider egg freezing?</span>
               <span class="qcard__backcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg> Tap to close</span>
             </span>
@@ -1647,8 +1639,6 @@
               .askmelod__btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(223,122,106,.95);}
               @media(max-width:560px){ .askmelod{flex-direction:column;align-items:flex-start;} .askmelod__btn{align-self:stretch;text-align:center;} }
             </style>
-            <h2 class="section-title">Practical, in brief</h2>
-            <p class="section-lead">A clear overview of what to expect. We talk through every part of it with you, at your own pace, at your consultation.</p>
             <div class="pgrid">
               <div class="pcell">
                 <span class="pcell__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
