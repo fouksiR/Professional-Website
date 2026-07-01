@@ -773,6 +773,42 @@
             }
             .category-header { margin-bottom: 1.4rem; padding-bottom: 1rem; }
         }
+
+        /* ===== Cluster lead: image beside header, alternating sides ===== */
+        .category-header {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+            grid-template-rows: auto auto;
+            column-gap: clamp(1.4rem, 4vw, 2.6rem);
+            align-content: center;
+        }
+        .category-lead__media {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            align-self: stretch;
+            min-height: clamp(220px, 26vw, 340px);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(139, 115, 85, 0.18);
+            box-shadow: 0 16px 44px -18px rgba(45, 36, 36, 0.42);
+        }
+        .category-lead__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .category-header h2 { grid-column: 2; grid-row: 1; }
+        .category-header p  { grid-column: 2; grid-row: 2; }
+        .category-header.lead-right .category-lead__media { grid-column: 2; grid-row: 1 / 3; }
+        .category-header.lead-right h2,
+        .category-header.lead-right p { grid-column: 1; }
+        @media (max-width: 768px) {
+            .category-header,
+            .category-header.lead-right { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+            .category-header .category-lead__media,
+            .category-header.lead-right .category-lead__media {
+                grid-column: 1; grid-row: 1;
+                min-height: 190px; max-height: 240px; margin-bottom: 0.9rem;
+            }
+            .category-header h2,  .category-header.lead-right h2 { grid-column: 1; grid-row: 2; }
+            .category-header p,   .category-header.lead-right p  { grid-column: 1; grid-row: 3; }
+        }
     </style>
 </head>
 <body>
@@ -808,6 +844,7 @@
     <!-- ===================== CATEGORY 1: GETTING STARTED ===================== -->
     <section id="getting-started" class="category-section">
         <div class="category-header">
+            <div class="category-lead__media"><img src="how_to_start.jpg" alt="Person writing in a notebook beside a cup of pencils and brushes" loading="lazy" decoding="async"></div>
             <h2>Getting Started</h2>
             <p>When to see a fertility specialist, what to expect at the first appointment, and how Medicare fits in.</p>
         </div>
@@ -851,7 +888,8 @@
 
     <!-- ===================== CATEGORY 2: AMH & OVARIAN RESERVE ===================== -->
     <section id="ovarian-reserve" class="category-section">
-        <div class="category-header">
+        <div class="category-header lead-right">
+            <div class="category-lead__media"><img src="AMH___Ovarian_Reserve.jpg" alt="Painted mural of a woman's face in profile" loading="lazy" decoding="async"></div>
             <h2>AMH &amp; Ovarian Reserve</h2>
             <p>What AMH actually measures, how to interpret your result, and what to do if your reserve is lower than expected.</p>
         </div>
@@ -896,6 +934,7 @@
     <!-- ===================== CATEGORY 3: EGG FREEZING ===================== -->
     <section id="egg-freezing" class="category-section">
         <div class="category-header">
+            <div class="category-lead__media"><img src="Egg_freeze.jpg" alt="Set of four softly tinted portrait prints on a page" loading="lazy" decoding="async"></div>
             <h2>Egg Freezing</h2>
             <p>When to consider it, how many eggs to bank, what success rates actually look like, and what it costs in Melbourne.</p>
         </div>
@@ -950,7 +989,8 @@
 
     <!-- ===================== CATEGORY 4: IVF & ICSI ===================== -->
     <section id="ivf-icsi" class="category-section">
-        <div class="category-header">
+        <div class="category-header lead-right">
+            <div class="category-lead__media"><img src="IVF_ICSI.jpg" alt="Green leaves against a pale blue sky" loading="lazy" decoding="async"></div>
             <h2>IVF &amp; ICSI</h2>
             <p>How the cycle works, what success rates actually mean for your situation, and what affects outcomes.</p>
         </div>
@@ -985,6 +1025,7 @@
     <!-- ===================== CATEGORY 5: ENDOMETRIOSIS ===================== -->
     <section id="endometriosis" class="category-section">
         <div class="category-header">
+            <div class="category-lead__media"><img src="endometriosis-q.jpg" alt="Purple discs scattered across a yellow background" loading="lazy" decoding="async"></div>
             <h2>Endometriosis &amp; Fertility</h2>
             <p>When to operate, when to skip surgery, and how endometriosis actually affects IVF outcomes.</p>
         </div>
