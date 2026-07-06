@@ -64,6 +64,16 @@
   .answer-card.crisis .ans-h,.answer-card.crisis .ans strong{color:#7f1d1d}
   .answer-card.crisis .ans-h::before{background:#c0736a}
   .answer-card.crisis .ans-list li::marker{color:#c0736a}
+  /* ── Evidence-strength badge (answer area only; charts untouched) ── */
+  .ev{margin:1rem 0 .1rem;padding-top:.85rem;border-top:1px solid #f0ece3}
+  .ev-row{display:flex;align-items:center;gap:.55rem}
+  .ev-bar{display:inline-flex;gap:3px;flex:0 0 auto;cursor:default}
+  .ev-seg{width:22px;height:6px;border-radius:3px;background:#e7e3d8}
+  .ev-label{font-size:.82rem;font-weight:600;letter-spacing:.01em}
+  .ev-blurb{font-size:.75rem;color:#8a8a80;margin:.3rem 0 0;line-height:1.45}
+  .ev-b3 .ev-seg.on{background:#4a6741}.ev-b3 .ev-label{color:#3d5636}
+  .ev-b2 .ev-seg.on{background:#c8a45e}.ev-b2 .ev-label{color:#9a7b2e}
+  .ev-b1 .ev-seg.on{background:#d9a679}.ev-b1 .ev-label{color:#b07636}
   .thinking{font-size:.85rem;color:#8a9685;font-style:italic;padding:.25rem 0}
   .src{text-align:center;font-size:.7rem;color:#9a9a90;margin-top:1.75rem;line-height:1.5}
   .ft-widget{background:#fff;border:1px solid #ece9e2;border-radius:14px;margin:.75rem 0 0;overflow:hidden}
@@ -159,6 +169,18 @@ function formatText(s){
   }
   flushList();
   return out.join('');
+}
+
+// ═══ EVIDENCE-STRENGTH BADGE — renders the confidence band from /public/ask (answer area only) ═══
+function renderStrength(s){
+  if(!s || typeof s.band!=='number') return null;
+  var b=Math.max(1,Math.min(3,s.band|0));
+  var w=document.createElement('div'); w.className='ev ev-b'+b;
+  var segs='';for(var i=1;i<=3;i++){segs+='<span class="ev-seg'+(i<=b?' on':'')+'"></span>';}
+  w.innerHTML='<div class="ev-row"><span class="ev-bar" title="'+escHtml(s.caption||'')+'">'+segs+'</span>'
+    +'<span class="ev-label">'+escHtml(s.label||'')+'</span></div>'
+    +(s.blurb?'<div class="ev-blurb">'+escHtml(s.blurb)+'</div>':'');
+  return w;
 }
 
 // ═══ CHART DISPATCHER — maps endpoint chart keys to renderers ═══
@@ -352,11 +374,12 @@ async function ask(text){
   block.scrollIntoView({behavior:'smooth',block:'start'});
   try{
     const r=await fetch(API_BASE+'/public/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
-    let text2='', crisis=false, charts=[];
+    let text2='', crisis=false, charts=[], strength=null;
     if(r.status===429){const e=await r.json().catch(()=>({})); text2=e.message||'Please try again later.';}
-    else{const d=await r.json(); text2=d.response||'Sorry, please try again.'; crisis=!!d.crisis; charts=Array.isArray(d.charts)?d.charts:[];}
+    else{const d=await r.json(); text2=d.response||'Sorry, please try again.'; crisis=!!d.crisis; charts=Array.isArray(d.charts)?d.charts:[]; strength=d.evidence_strength||null;}
     if(crisis) card.classList.add('crisis');
     card.innerHTML='<div class="ans">'+formatText(text2)+'</div>';
+    if(strength){try{var _sb=renderStrength(strength); if(_sb) card.appendChild(_sb);}catch(e){}}
     if(!crisis){
       autoCharts(message,text2).forEach(function(k){ if(charts.indexOf(k)<0) charts.push(k); });
       charts=charts.slice(0,3);
