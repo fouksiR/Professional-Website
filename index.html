@@ -1165,6 +1165,31 @@
             display: block;
         }
 
+        /* Video at the bottom of the My Story section */
+        .about-video-bottom {
+            display: flex;
+            justify-content: center;
+            margin: 4rem auto 0;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        .about-video-frame {
+            width: 100%;
+            max-width: 760px;
+            aspect-ratio: 16 / 9;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(44, 44, 44, 0.18);
+            background: #e5e0d8;
+        }
+        .about-video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
         .about-content {
             padding: 2rem 0;
         }
@@ -2750,10 +2775,15 @@
             </div>
         </div>
 
-        <!-- Portrait at the bottom of My Story -->
-        <div class="about-portrait-bottom">
-            <div class="about-circle-photo">
-                <img src="Yuval%20Fouks-48%20(2).jpg" alt="Dr Yuval Fouks portrait">
+        <!-- Video at the bottom of My Story -->
+        <div class="about-video-bottom">
+            <div class="about-video-frame">
+                <iframe
+                    src="https://www.youtube.com/embed/cA35HtaWw_w?start=0&end=55&rel=0"
+                    title="Dr Yuval Fouks introduction video"
+                    loading="lazy"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
             </div>
         </div>
         
