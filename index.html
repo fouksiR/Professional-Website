@@ -2779,9 +2779,9 @@
         <div class="about-video-bottom">
             <div class="about-video-frame">
                 <iframe
-                    src="https://www.youtube.com/embed/cA35HtaWw_w?start=0&end=55&rel=0"
+                    id="aboutIntroVideo"
+                    src="https://www.youtube.com/embed/cA35HtaWw_w?start=0&end=55&rel=0&enablejsapi=1"
                     title="Dr Yuval Fouks introduction video"
-                    loading="lazy"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
@@ -3195,6 +3195,36 @@
         }
       });
     }, { passive: true });
+  })();
+  </script>
+  <script>
+  (function () {
+    var STOP_AT = 55;
+    var timer = null;
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady = function () {
+      var player = new YT.Player('aboutIntroVideo', {
+        events: {
+          onStateChange: function (e) {
+            if (e.data === YT.PlayerState.PLAYING) {
+              if (timer) clearInterval(timer);
+              timer = setInterval(function () {
+                if (player.getCurrentTime() >= STOP_AT) {
+                  player.pauseVideo();
+                  clearInterval(timer);
+                  timer = null;
+                }
+              }, 250);
+            } else if (timer) {
+              clearInterval(timer);
+              timer = null;
+            }
+          }
+        }
+      });
+    };
   })();
   </script>
 </body>
