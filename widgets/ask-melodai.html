@@ -35,11 +35,18 @@
     font-size:.9rem;font-weight:500;cursor:pointer;transition:opacity .2s}
   .search-button:hover{opacity:.88}
   .search-button:disabled{opacity:.5;cursor:default}
-  .quick-searches{display:flex;gap:.6rem;flex-wrap:wrap}
-  .quick-search{padding:.45rem .9rem;background:#f8f7f5;border:1.5px solid #e8e8e8;border-radius:10px;
-    font-size:.82rem;color:#666;cursor:pointer;transition:all .2s}
-  .quick-search:hover{border-color:#4a6741;background:#f0f7ef;color:#2c2c2c}
-  .disclaimer{margin:1.1rem 0 0;font-size:.74rem;color:#9a9a90;line-height:1.5;text-align:center}
+  .search-sub{font-size:.95rem;color:#7a7a72;margin:-.55rem 0 1.35rem;line-height:1.5}
+  .quick-searches{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+  .quick-search{display:flex;align-items:center;padding:.95rem 1.15rem;background:#fbfaf8;
+    border:1.5px solid #e8e4db;border-radius:13px;font-size:.93rem;font-weight:500;color:#3a3a34;
+    cursor:pointer;transition:border-color .18s,background .18s,transform .18s,box-shadow .18s;line-height:1.35}
+  .quick-search:hover{border-color:var(--green);background:#f4f8f2;transform:translateY(-1px);
+    box-shadow:0 6px 16px -10px rgba(61,86,54,.5)}
+  .disclaimer{margin:1.25rem 0 0;font-size:.68rem;color:#b3b3ab;line-height:1.45;text-align:center}
+  .disclaimer summary{cursor:pointer;list-style:none;color:#b3b3ab}
+  .disclaimer summary::-webkit-details-marker{display:none}
+  .disclaimer summary:hover{color:#8f8f88}
+  .disclaimer .dc-full{margin:.45rem auto 0;max-width:52ch;color:#a8a8a0}
   .answers{margin-top:1.75rem;display:flex;flex-direction:column;gap:1.25rem}
   .qa{animation:rise .25s ease}
   @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -67,6 +74,9 @@
   /* ── Evidence-strength badge (answer area only; charts untouched) ── */
   .ev{margin:1rem 0 .1rem;padding-top:.85rem;border-top:1px solid #f0ece3}
   .ev-row{display:flex;align-items:center;gap:.55rem}
+  summary.ev-row{cursor:pointer;list-style:none}
+  summary.ev-row::-webkit-details-marker{display:none}
+  details.ev[open] .ev-why{color:#6f6f66;border-color:#ddd7cb}
   .ev-bar{display:inline-flex;gap:3px;flex:0 0 auto;cursor:default}
   .ev-seg{width:22px;height:6px;border-radius:3px;background:#e7e3d8}
   .ev-label{font-size:.82rem;font-weight:600;letter-spacing:.01em}
@@ -74,7 +84,39 @@
   .ev-b3 .ev-seg.on{background:#4a6741}.ev-b3 .ev-label{color:#3d5636}
   .ev-b2 .ev-seg.on{background:#c8a45e}.ev-b2 .ev-label{color:#9a7b2e}
   .ev-b1 .ev-seg.on{background:#d9a679}.ev-b1 .ev-label{color:#b07636}
+  /* ── Short-answer lead (presentation only — no words added or changed) ── */
+  .ans-lead{font-size:1.17rem;line-height:1.6;color:#25251f;font-weight:500;margin:0 0 1.05rem;
+    padding-bottom:1rem;border-bottom:1px solid #f2eee6}
+  .answer-card.crisis .ans-lead{color:#7f1d1d;border-bottom-color:#eccdc6}
+  /* ── Evidence: graphical band + sources + collapsible detail ── */
+  .ev-dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;display:inline-block}
+  .ev-b3 .ev-dot{background:#4a6741}.ev-b2 .ev-dot{background:#c8a45e}.ev-b1 .ev-dot{background:#6f8fa8}
+  .ev-b1 .ev-seg.on{background:#6f8fa8}.ev-b1 .ev-label{color:#4f6d84}
+  .ev-why{margin-left:auto;font-size:.72rem;color:#a5a59c;cursor:pointer;list-style:none;
+    border:1px solid #ece8df;border-radius:20px;padding:.18rem .6rem;transition:all .18s;white-space:nowrap}
+  .ev-why::-webkit-details-marker{display:none}
+  .ev-why:hover{color:#6f6f66;border-color:#ddd7cb}
+  .ev-src{display:flex;flex-wrap:wrap;gap:.35rem;margin:.6rem 0 0}
+  .ev-src span{font-size:.7rem;font-weight:600;letter-spacing:.02em;color:#4f6a47;
+    background:#f1f6ef;border:1px solid #e0ebdd;border-radius:20px;padding:.2rem .6rem}
+  /* ── Follow-up chains ── */
+  .fu{margin:1.15rem 0 0;padding-top:1rem;border-top:1px solid #f2eee6}
+  .fu-t{font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:#a5a59c;
+    font-weight:600;margin:0 0 .6rem}
+  .fu-list{display:flex;flex-wrap:wrap;gap:.45rem}
+  .fu-q{font-size:.85rem;color:#3d5636;background:#f6f9f5;border:1px solid #e2ece0;border-radius:20px;
+    padding:.42rem .85rem;cursor:pointer;transition:all .18s;line-height:1.3}
+  .fu-q:hover{background:#eaf2e7;border-color:#c3d8bd;transform:translateY(-1px)}
+  /* ── Staged loading ── */
   .thinking{font-size:.85rem;color:#8a9685;font-style:italic;padding:.25rem 0}
+  .load-stage{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:#7d8c78;
+    padding:.3rem 0;animation:fadeStage .3s ease}
+  @keyframes fadeStage{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+  .load-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:0 0 auto;
+    animation:pulseDot 1.15s ease-in-out infinite}
+  @keyframes pulseDot{0%,100%{opacity:.28;transform:scale(.78)}50%{opacity:1;transform:scale(1)}}
+  .load-done{color:#b0b0a8}
+  .load-done .load-dot{background:#cfd6cc;animation:none;opacity:1;transform:none}
   .src{text-align:center;font-size:.7rem;color:#9a9a90;margin-top:1.75rem;line-height:1.5}
   .ft-widget{background:#fff;border:1px solid #ece9e2;border-radius:14px;margin:.75rem 0 0;overflow:hidden}
   .ft-widget-title{display:flex;align-items:center;gap:6px;font-family:'Cormorant Garamond',serif;font-weight:600;color:#2c2c2c;padding:12px 16px 2px;font-size:1.05rem}
@@ -86,6 +128,8 @@
     .hero h1{font-size:1.9rem}
     .search-card{padding:1.6rem 1.25rem}
     .search-input{padding:1rem 1.25rem}
+    .quick-searches{grid-template-columns:1fr}
+    .ans-lead{font-size:1.09rem}
     .search-button{position:static;transform:none;width:100%;margin-top:.6rem;border-radius:10px}
   }
 </style>
@@ -112,22 +156,24 @@
 
   <div class="search-card">
     <span class="search-label">Evidence-based</span>
-    <h2 class="search-title">How can I help?</h2>
+    <h2 class="search-title">Ask any fertility question.</h2>
+    <p class="search-sub">Evidence-based answers, explained simply.</p>
     <div class="search-container">
       <input type="text" class="search-input" id="q" autocomplete="off"
-             placeholder="Ask about success rates, add-ons, the IVF process…">
+             placeholder="Ask anything about fertility…">
       <button class="search-button" id="send">Ask</button>
     </div>
     <div class="quick-searches" id="chips">
-      <span class="quick-search">Is PGT-A worth paying for?</span>
-      <span class="quick-search">What are my chances at 38?</span>
-      <span class="quick-search">What is IVF, step by step?</span>
-      <span class="quick-search">Does acupuncture help IVF?</span>
+      <span class="quick-search" data-q="I'm 38. Is it too late?">I'm 38. Is it too late?</span>
+      <span class="quick-search" data-q="Should I freeze my eggs now?">Should I freeze my eggs now?</span>
+      <span class="quick-search" data-q="Why did my embryo stop growing?">Why did my embryo stop growing?</span>
+      <span class="quick-search" data-q="My AMH is low. What does it actually mean?">My AMH is low. What does it actually mean?</span>
     </div>
-    <div class="disclaimer">
-      General information only — not medical advice, and Melod·AI does not know your history.
-      Always talk to your own fertility specialist. In crisis? Call Lifeline 13 11 14 (AU) or 000.
-    </div>
+    <details class="disclaimer">
+      <summary>General information only — not medical advice. Read more</summary>
+      <div class="dc-full">Melod·AI does not know your history. Always talk to your own fertility
+      specialist about your situation. In crisis? Call Lifeline 13 11 14 (AU) or 000.</div>
+    </details>
   </div>
 
   <div class="answers" id="answers"></div>
@@ -156,16 +202,23 @@ function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function formatText(s){
   var esc=escHtml(String(s)).replace(/\r\n?/g,'\n');
   function inline(t){return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');}
-  var lines=esc.split('\n'), out=[], listBuf=[];
+  var lines=esc.split('\n'), out=[], listBuf=[], leadDone=false;
+  // Styling only: the FIRST paragraph is shown larger as the "short answer".
+  // Words are never added, removed, reordered or rewritten.
+  function para(t){
+    var cls='ans-p';
+    if(!leadDone){ leadDone=true; if(t.replace(/<[^>]+>/g,'').length<=300) cls='ans-p ans-lead'; }
+    return '<p class="'+cls+'">'+t+'</p>';
+  }
   function flushList(){ if(listBuf.length){ out.push('<ul class="ans-list">'+listBuf.join('')+'</ul>'); listBuf=[]; } }
   for(var i=0;i<lines.length;i++){
     var ln=lines[i].trim();
     if(!ln){ flushList(); continue; }
     var h=ln.match(/^\*\*(.+?):\*\*\s*(.*)$/);          // "**Label:** rest…"  → sub-heading
-    if(h){ flushList(); out.push('<div class="ans-h">'+inline(h[1])+':</div>'); if(h[2]) out.push('<p class="ans-p">'+inline(h[2])+'</p>'); continue; }
+    if(h){ flushList(); out.push('<div class="ans-h">'+inline(h[1])+':</div>'); if(h[2]) out.push(para(inline(h[2]))); continue; }
     var b=ln.match(/^[-•*]\s+(.*)$/);                    // "- item"  → list item
     if(b){ listBuf.push('<li>'+inline(b[1])+'</li>'); continue; }
-    flushList(); out.push('<p class="ans-p">'+inline(ln)+'</p>');
+    flushList(); out.push(para(inline(ln)));
   }
   flushList();
   return out.join('');
@@ -177,9 +230,23 @@ function renderStrength(s){
   var b=Math.max(1,Math.min(3,s.band|0));
   var w=document.createElement('div'); w.className='ev ev-b'+b;
   var segs='';for(var i=1;i<=3;i++){segs+='<span class="ev-seg'+(i<=b?' on':'')+'"></span>';}
-  w.innerHTML='<div class="ev-row"><span class="ev-bar" title="'+escHtml(s.caption||'')+'">'+segs+'</span>'
-    +'<span class="ev-label">'+escHtml(s.label||'')+'</span></div>'
-    +(s.blurb?'<div class="ev-blurb">'+escHtml(s.blurb)+'</div>':'');
+  var row='<span class="ev-dot"></span>'
+    +'<span class="ev-bar" title="'+escHtml(s.caption||'')+'">'+segs+'</span>'
+    +'<span class="ev-label">'+escHtml(s.label||'')+'</span>';
+  // Source chips render ONLY from what the backend actually matched. Never invented.
+  var src=Array.isArray(s.sources)?s.sources.filter(function(x){return x&&typeof x==='string'}):[];
+  var chips='';
+  if(src.length){
+    var c='';src.slice(0,4).forEach(function(x){c+='<span>&#10003; '+escHtml(x)+'</span>'});
+    chips='<div class="ev-src">'+c+'</div>';
+  }
+  if(s.blurb){
+    var d=document.createElement('details'); d.className='ev ev-b'+b;
+    d.innerHTML='<summary class="ev-row">'+row+'<span class="ev-why">Why?</span></summary>'
+      +'<div class="ev-blurb">'+escHtml(s.blurb)+'</div>'+chips;
+    return d;
+  }
+  w.innerHTML='<div class="ev-row">'+row+'</div>'+chips;
   return w;
 }
 
@@ -205,14 +272,14 @@ function autoCharts(query,answer){
     [/egg freez|oocyte|freeze (my |her |your )?eggs|social freez|freezing eggs|preserv/,'egg_freeze_table'],
     [/cumulative|how many cycles|more than one cycle|second cycle|multiple cycles|keep trying|persist|worth continuing/,'cumulative'],
     [/\bfresh\b|frozen embryo|frozen transfer|fresh or frozen|fresh vs|\bfet\b|vitrif|thaw/,'fresh_vs_frozen'],
-    [/chance|success|odds|likelihood|by age|at \d\d\b|live birth/,'age_outcomes'],
+    [/chance|success|odds|likelihood|by age|at \d\d\b|live birth|(?:i'?m|i am|aged?|turning)\s*(?:3[0-9]|4[0-9])\b|too late/,'age_outcomes'],
     [/cause|why.*infertil|unexplained|diagnos|reason we|reason for/,'causes'],
     [/healthy|baby outcome|birthweight|preterm|multiple birth|is ivf safe|safe for/,'baby_outcomes'],
     [/trend|improv|over time|better now|getting better|year on year/,'trends'],
-    [/how common|how many people|surging|growing|popular|statistic|how many women/,'egg_freezing_stats']
+    [/how common|how many people|surging|growing in popularity|popular|statistic|how many women/,'egg_freezing_stats']
   ];
   var hits=[];
-  rules.forEach(function(r){ if(hits.length<2 && r[0].test(s) && hits.indexOf(r[1])<0) hits.push(r[1]); });
+  rules.forEach(function(r){ if(hits.length<3 && r[0].test(s) && hits.indexOf(r[1])<0) hits.push(r[1]); });
   return hits;
 }
 
@@ -362,21 +429,114 @@ function renderLowResponder(){
   return _anzardCard('Does freezing a low number make return more likely?','Return rate by ovarian response',body,'Source: Fouks Y et al., JAMA Netw Open 2024');
 }
 
+// ═══ STAGED LOADER — mirrors what the backend actually does (retrieve → grade → answer) ═══
+var LOAD_STAGES=[
+  'Searching international fertility guidelines\u2026',
+  'Comparing NICE, ESHRE and ANZARD\u2026',
+  'Writing in plain English\u2026'
+];
+function startLoader(card){
+  card.innerHTML='';
+  var wrap=document.createElement('div'); card.appendChild(wrap);
+  var i=0,timer=null;
+  function paint(){
+    var h='';
+    for(var k=0;k<=i && k<LOAD_STAGES.length;k++){
+      var done=(k<i);
+      h+='<div class="load-stage'+(done?' load-done':'')+'"><span class="load-dot"></span>'
+        +escHtml(LOAD_STAGES[k])+'</div>';
+    }
+    wrap.innerHTML=h;
+  }
+  paint();
+  timer=setInterval(function(){ if(i<LOAD_STAGES.length-1){ i++; paint(); } else { clearInterval(timer); } },950);
+  return { stop:function(){ if(timer) clearInterval(timer); } };
+}
+
+// ═══ FOLLOW-UP CHAINS — patients think in chains of questions; keep them here ═══
+var FOLLOWUPS=[
+  [/\bamh\b|ovarian reserve|antral|egg reserve|low reserve|diminished/,
+    ['Does a low AMH mean I can\u2019t conceive naturally?','Should I start IVF sooner if my AMH is low?',
+     'Do supplements like CoQ10 or DHEA improve egg quality?','How many eggs should I freeze?']],
+  [/egg freez|oocyte|freeze (my |her |your )?eggs|social freez|freezing eggs|fertility preserv/,
+    ['How many eggs do I need to freeze?','Do people actually come back to use their frozen eggs?',
+     'How long can eggs stay frozen?','What does the egg freezing process involve?']],
+  [/embryo (stop|arrest|fail)|stopped grow|blastocyst|day 5|embryo qual|embryo grad/,
+    ['What do embryo grades actually mean?','Is PGT-A worth paying for?',
+     'Could sperm DNA fragmentation be involved?','Would a different stimulation protocol help?']],
+  [/pgt|genetic test|add-?on|embryoglue|time-?lapse|assisted hatch|scratch|acupunct/,
+    ['Which IVF add-ons actually have good evidence?','Does acupuncture improve IVF success?',
+     'Is time-lapse imaging worth the extra cost?','Does endometrial scratching help?']],
+  [/sperm|male factor|semen|icsi|dna fragment|varicocele/,
+    ['Does sperm DNA fragmentation testing change treatment?','Can lifestyle changes improve sperm quality?',
+     'When is ICSI actually needed?','How is male factor infertility investigated?']],
+  [/endometrios|adenomyos/,
+    ['Does surgery for endometriosis improve IVF success?','Should I go straight to IVF with endometriosis?',
+     'Does endometriosis affect egg quality?']],
+  [/miscarr|pregnancy loss|recurrent loss/,
+    ['What tests are recommended after recurrent miscarriage?','Does PGT-A reduce miscarriage risk?',
+     'Does progesterone support help in early pregnancy?']],
+  [/unexplained|no cause|nothing wrong|all.*normal/,
+    ['Is IUI or IVF better for unexplained infertility?','How long should we keep trying naturally?',
+     'What tests should we have done first?']],
+  [/pcos|irregular|anovulat|ovulation/,
+    ['Does letrozole or clomid work better for PCOS?','Does weight loss improve fertility in PCOS?',
+     'When should PCOS move on to IVF?']],
+  [/diet|weight|bmi|smok|alcohol|caffeine|exercise|supplement|vitamin|lifestyle/,
+    ['Does weight affect IVF success?','Do supplements improve egg quality?',
+     'How much do alcohol and caffeine actually matter?']],
+  [/stress|anxious|anxiety|cope|coping|depress|emotional|support/,
+    ['Does stress actually reduce IVF success?','What support is available during treatment?',
+     'How do couples cope with repeated cycles?']],
+  [/too late|\bage\b|(?:i\u2019?m|i'?m|i am|aged?|turning)\s*(?:3[0-9]|4[0-9])\b/,
+    ['What are my chances with IVF at my age?','Should I consider freezing eggs now?',
+     'How many IVF cycles might I need?','How does age affect egg quality?']],
+  [/cost|price|expensive|medicare|rebate|afford|fund/,
+    ['How many cycles should I budget for?','Which add-ons are not worth paying for?',
+     'What affects IVF success the most?']]
+];
+var FOLLOWUP_DEFAULT=['What are my chances of success with IVF?','Which IVF add-ons actually work?',
+  'How many cycles should I plan for?','How does age affect egg quality?'];
+function pickFollowups(query,answer,asked){
+  var t=((query||'')+' '+(answer||'')).toLowerCase(), pool=[];
+  FOLLOWUPS.forEach(function(r){ if(r[0].test(t)) r[1].forEach(function(x){ if(pool.indexOf(x)<0) pool.push(x); }); });
+  FOLLOWUP_DEFAULT.forEach(function(x){ if(pool.indexOf(x)<0) pool.push(x); });
+  var norm=function(x){return x.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()};
+  var seen=(asked||[]).map(norm);
+  return pool.filter(function(x){ return seen.indexOf(norm(x))<0; }).slice(0,4);
+}
+function renderFollowups(list){
+  if(!list||!list.length) return null;
+  var w=document.createElement('div'); w.className='fu';
+  var h='<p class="fu-t">People who asked this also asked</p><div class="fu-list">';
+  list.forEach(function(x){ h+='<span class="fu-q" data-q="'+escHtml(x)+'">'+escHtml(x)+'</span>'; });
+  w.innerHTML=h+'</div>';
+  return w;
+}
+
 // ═══ ASK FLOW ═══
 let busy=false;
+var ASKED=[];                       // questions already asked, so follow-ups never repeat one
+var MIN_LOAD_MS=1100;               // stops the stage ladder flashing on fast responses
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
 async function ask(text){
   if(busy) return; const message=(text||q.value).trim(); if(!message) return;
   busy=true; send.disabled=true; q.value='';
+  ASKED.push(message);
   const block=document.createElement('div'); block.className='qa';
-  block.innerHTML='<div class="qline">'+escHtml(message)+'</div><div class="answer-card"><div class="thinking">Melod\u00b7AI is thinking\u2026</div></div>';
+  block.innerHTML='<div class="qline">'+escHtml(message)+'</div><div class="answer-card"></div>';
   answers.appendChild(block);
   const card=block.querySelector('.answer-card');
+  const loader=startLoader(card);
+  const t0=Date.now();
   block.scrollIntoView({behavior:'smooth',block:'start'});
   try{
     const r=await fetch(API_BASE+'/public/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
     let text2='', crisis=false, charts=[], strength=null;
     if(r.status===429){const e=await r.json().catch(()=>({})); text2=e.message||'Please try again later.';}
     else{const d=await r.json(); text2=d.response||'Sorry, please try again.'; crisis=!!d.crisis; charts=Array.isArray(d.charts)?d.charts:[]; strength=d.evidence_strength||null;}
+    const wait=MIN_LOAD_MS-(Date.now()-t0); if(wait>0) await sleep(wait);
+    loader.stop();
     if(crisis) card.classList.add('crisis');
     card.innerHTML='<div class="ans">'+formatText(text2)+'</div>';
     if(strength){try{var _sb=renderStrength(strength); if(_sb) card.appendChild(_sb);}catch(e){}}
@@ -385,14 +545,24 @@ async function ask(text){
       charts=charts.slice(0,3);
     } else { charts=[]; }
     charts.forEach(function(k){try{var el=renderChartKey(k); if(el) card.appendChild(el);}catch(e){}});
+    // Follow-up chain — suppressed on crisis answers, where redirecting is inappropriate.
+    if(!crisis){try{var _fu=renderFollowups(pickFollowups(message,text2,ASKED)); if(_fu) card.appendChild(_fu);}catch(e){}}
   }catch(err){
+    loader.stop();
     card.innerHTML='<div class="ans">I couldn\'t reach the service just now. Please try again in a moment \u2014 and remember this is general information, not medical advice.</div>';
   }
   busy=false; send.disabled=false; q.focus();
 }
 send.addEventListener('click',function(){ask()});
 q.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();ask();}});
-document.getElementById('chips').addEventListener('click',function(e){if(e.target.classList.contains('quick-search'))ask(e.target.textContent);});
+document.getElementById('chips').addEventListener('click',function(e){
+  var el=e.target.closest?e.target.closest('.quick-search'):null;
+  if(el) ask(el.getAttribute('data-q')||el.textContent.trim());
+});
+answers.addEventListener('click',function(e){
+  var el=e.target.closest?e.target.closest('.fu-q'):null;
+  if(el) ask(el.getAttribute('data-q')||el.textContent.trim());
+});
 </script>
 </body>
 </html>
